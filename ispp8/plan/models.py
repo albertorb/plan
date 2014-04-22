@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
+#coding-utf-8
 # Create your models here.
 
 
 class Activity(models.Model):
     MOMENTS = (("m", "morning"), ("e", "evening"), ("n", "night"),)
-    PRICE = (('f', "free"), ('n', "nonfree"),)
+    PRICE = (("f", "free"), ("n", "nonfree"),)
     name = models.CharField(max_length=40)
     latitude = models.DecimalField(max_digits=10, decimal_places=6)
     longitude = models.DecimalField(max_digits=10, decimal_places=6)
@@ -17,7 +17,7 @@ class Activity(models.Model):
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
     valoration = models.IntegerField()
-    #isFree = models.CharField(max_length=3, choices=PRICE, default='f')
+    isFree = models.CharField(max_length=3, choices=PRICE, default='f')
     isPromoted = models.BooleanField()
     objects = models.Manager()
     description = models.CharField(max_length=200)
@@ -29,27 +29,33 @@ class Activity(models.Model):
 #Changed name of user from our model to difference it from django implementation
 class OurUser(models.Model):
     djangoUser = models.OneToOneField(User)
-
-    birthday = models.DateField();
+    birthday = models.DateField()
     SEX = (("m", "Male"), ("f", "Female"),)
     image = models.ImageField(upload_to='../images/profile', blank=True)
     gender = models.CharField(max_length=1, choices=SEX)
+    friends = models.ManyToManyField("OurUser", blank="true", null="true")
+
+    def __unicode__(self):
+        return self.djangoUser.get_username()
 
 
 class Plan(models.Model):
-    title = models.CharField(max_length=30)
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
     activities = models.ManyToManyField(Activity)
     user = models.ForeignKey(OurUser)
 
-    def __unicode__(self):
-        return self.title
+
+class SharedPlan(models.Model):
+    startDate = models.DateTimeField()
+    endDate = models.DateTimeField()
+    activities = models.ManyToManyField(Activity)
+    user = models.ForeignKey(OurUser)
 
 
 class Company(models.Model):
     username = models.CharField(max_length=20)
-    password = models.CharField(('password'), max_length=128)
+    password = models.CharField('password', max_length=128)
     birthday = models.DateTimeField()
     contactName = models.CharField(max_length=20)
     contactNumber = models.CharField(max_length=20)
