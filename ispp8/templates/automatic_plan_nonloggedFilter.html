@@ -1,0 +1,174 @@
+{% extends 'master_page_nonlogged.html' %}
+{% block content %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<div class="alert alert-success alert-dismissable">Here you are! Your plan for today!
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+</div>
+
+
+<div class="row div-card-plan-whole">
+
+    {% for activity in activities %}
+
+    <div class="col-sm-6 col-md-4">
+        <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert" aria-hidden="true">
+            <strong>&times</strong>
+        </button>
+
+        <div id="" class="thumbnail div-card-plan-thumbnail"
+             style="background-image:url('{{MEDIA_URL}}{{activity.photo}}')">
+        </div>
+        <div class="text-center div-card-plan-info">
+            <h3>{{activity.name}}</h3>
+        </div>
+
+
+    </div>
+
+    {% endfor %}
+
+</div>
+<div id="map-canvas" class="google-map-canvas">
+</div>
+<div class="well-lg text-center ">
+
+    <button type="button" class=" btn btn-default button-orange-plan">Quiero este plan!</button>
+
+    <a href="#filter" class=" btn button-orange-plan" data-toggle="modal">Prefiero utilizar el filtro</a>
+</div>
+
+<style type="text/css">
+    html {
+        height: 100%
+    }
+
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0
+    }
+
+    #map-canvas {
+        height: 50%;
+        width: 50%;
+    }
+</style>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXn3jBP_WNPRZl--vp_ycQfqbX-WJFn0U&sensor=false">
+</script>
+
+<div class="modal fade" id="filter" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Filter Plan</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" style="box-shadow: #737373">
+                    <fieldset class="control-group error">
+                        <div class="control-group">
+                            <label class="control-label" for="input01">Weather
+                                <input type="text">
+                            </label>
+
+                            <div class="controls">
+                                <label class="control-label" for="select01">Location
+
+                                    <select id="select01">
+                                        <option selected>Sevilla</option>
+                                        <option>Huelva</option>
+                                        <option>Malaga</option>
+                                        <option>Cadiz</option>
+                                        <option>Jaen</option>
+                                    </select>
+
+                                </label>
+                                <label class="control-label" for="multiSelect">Sector</label>
+                                <select multiple="multiple" id="multiSelect">
+                                    <option>Monument</option>
+                                    <option>Concert</option>
+                                    <option>Local Festivity</option>
+                                    <option>Hostelry</option>
+                                    <option>Sport Events</option>
+                                    <option>Museum</option>
+                                    <option>Parks</option>
+                                    <option>Theatre</option>
+                                    <option>Cinema</option>
+                                </select>
+                                <label class="control-label" for="multiSelect">Moment</label>
+                                <select multiple="multiple" id="multiSelect1">
+                                    <option>Morning</option>
+                                    <option>Evening</option>
+                                    <option>Night</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label class="checkbox">
+                            <input type="checkbox" id="optionsCheckbox" value="option1">
+                            Typing this option will discard activities that implies a spent of money.
+                        </label>
+                        <label>
+                            <a href="../filteresult" class="btn button-orange-plan">Gimme the plan</a>
+                        </label>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // calculate route
+
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var seville = new google.maps.LatLng(37.392012, -5.983726);
+        var mapOptions = {
+            zoom: 7,
+            center: seville
+        }
+        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+        directionsDisplay.setMap(map);
+        calcRoute('{{ac1.latitude}}', '{{ac1.longitude}}', '{{ac2.latitude}}', '{{ac2.longitude}}')
+        calcRoute('{{ac2.latitude}}', '{{ac2.longitude}}', '{{ac3.latitude}}', '{{ac3.longitude}}')
+    }
+
+    function calcRoute(lat1, lon1, lat2, lon2) {
+        //var start = new google.maps.LatLng(37.334481,-5.931160);
+        //var end = new google.maps.LatLng(37.338678, -5.935896);
+
+        // parsing variables to fix semicolon problem
+        var lat1r = lat1.replace(",", ".");
+        var lon1r = lon1.replace(",", ".");
+        var lat2r = lat2.replace(",", ".");
+        var lon2r = lon2.replace(",", ".");
+        // end parsing
+
+        var start = new google.maps.LatLng(lat1r, lon1r);
+        var end = new google.maps.LatLng(lat2r, lon2r);
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+
+        directionsService.route(request, function (result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(result);
+            }
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+{% endblock %}
+
+
+

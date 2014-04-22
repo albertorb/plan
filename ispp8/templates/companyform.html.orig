@@ -1,0 +1,15 @@
+{% extends 'master_page_nonlogged.html' %}
+{% block content %}
+<<<<<<< HEAD
+=======
+        <h1>Registration as company</h1>
+>>>>>>> 70Filter
+        <form id="formulario" method="post" action="">{% csrf_token %}
+            {{formulario.as_p}}
+            <p><input type="submit" class="button-orange" value="Register"></p>
+        </form>
+<<<<<<< HEAD
+{% endblock %}
+=======
+{% endblock %}
+>>>>>>> 70Filter

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1076629766">
+    <data-source source="LOCAL" name="Django default" uuid="71d1f70d-a51c-459a-ad25-1774587384a3">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql:///ispp.db_development</jdbc-url>
+      <user-name>ispp</user-name>
+      <user-password>dfc3dfd9dfdadfda</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
