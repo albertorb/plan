@@ -158,4 +158,11 @@ def timeline(request):
     #Esto quiere decir, que debe mostrar que plan realizó recientemente, que plan votó, si compartió algún plan contigo (y que puntuación le dio)
     duser = request.user
     ouser = OurUser.objects.get(djangoUser=duser)
-    friends = ouser.friends
+    friends = ouser.friends.all()
+    data = []
+    for friend in friends:
+        planesRealizados = Plan.objects.filter(user=friend).all()
+        planesVotados = Plan.objects.filter(user=friend, voted=True).all()
+        planesCompartidos = Plan.objects.exclude(Plan__sharedTo__isnull=True).all()
+        data.append({"friend": friend, "donePlans": planesRealizados, "votedPlans": planesVotados, "sharedPlans": planesCompartidos})
+    return render_to_response('filter_plan.html', {'data': data}, context_instance=RequestContext(request))
