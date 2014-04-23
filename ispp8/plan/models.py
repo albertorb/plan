@@ -46,13 +46,6 @@ class Plan(models.Model):
     user = models.ForeignKey(OurUser)
 
 
-class SharedPlan(models.Model):
-    startDate = models.DateTimeField()
-    endDate = models.DateTimeField()
-    activities = models.ManyToManyField(Activity)
-    user = models.ForeignKey(OurUser)
-
-
 class Company(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField('password', max_length=128)
