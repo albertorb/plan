@@ -42,6 +42,7 @@ class OurUser(models.Model):
 class Plan(models.Model):
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
+    voted = models.BooleanField()
     activities = models.ManyToManyField(Activity)
     user = models.ForeignKey(OurUser, related_name='OurUser_content_type')
     sharedTo = models.ManyToManyField(OurUser, blank=True, null=False)
