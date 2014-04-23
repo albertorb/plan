@@ -164,5 +164,5 @@ def timeline(request):
         planesRealizados = Plan.objects.filter(user=friend).all()
         planesVotados = Plan.objects.filter(user=friend, voted=True).all()
         planesCompartidos = Plan.objects.exclude(Plan__sharedTo__isnull=True).all()
-        data.append([friend, planesRealizados, planesVotados, planesCompartidos])
+        data.append({'friend': friend, 'donePlans': planesRealizados, 'votedPlans': planesVotados, 'sharedPlans': planesCompartidos})
     return render_to_response('timeline.html', {'data': data}, context_instance=RequestContext(request))
