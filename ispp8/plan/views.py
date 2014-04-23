@@ -14,8 +14,6 @@ from django.contrib import auth
 import random
 
 
-
-
 def new_company(request):
     formulario = CompanyRegistrationFrom()
 
@@ -146,25 +144,18 @@ def home(request):
     return render_to_response('home.html', {'request': our,'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3}, context_instance=RequestContext(request))
 
 
-
-
-
-
 def filter_plan(request):
-
-
-
     return render_to_response('filterplan.html', context_instance=RequestContext(request))
-
-
-
-
-
-
-
 
 
 def list_plan(request):
     activities = Activity.objects.all()
     return render_to_response('filter_plan.html', {'activitiesfilt': activities}, context_instance=RequestContext(request))
 
+
+#@login_required(login_url="/login/")
+def timeline(request):
+    #Esto quiere decir, que debe mostrar que plan realizó recientemente, que plan votó, si compartió algún plan contigo (y que puntuación le dio)
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    friends = ouser.friends
