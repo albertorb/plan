@@ -7,9 +7,9 @@
     <title>EasyPlan</title>
 
     <!-- Bootstrap -->
-    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{{STATIC_URL}}css/custom.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/custom.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,8 +29,8 @@
             <a class="navbar-brand" href="#"> <img src="../static/img/logo.png"></a>
 
         </div>
-         <div class="navbar-right navbar-header" style="margin-right:5%; margin-top: 1.5%">
-            <a  href="#">es</a>|<a href="#">en</a>
+        <div class="navbar-right navbar-header" style="margin-right:5%; margin-top: 1.5%">
+            <a href="#">es</a>|<a href="#">en</a>
         </div>
         <div class="navbar-header navbar-right" style="margin-right:12%">
 
@@ -45,11 +45,7 @@
             </button>
 
 
-
-
-
         </div>
-
 
 
     </div>
@@ -63,58 +59,95 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Register form</h4>
+                <h4 class="modal-title" id="myModalLabel">New account</h4>
             </div>
-            <div class="modal-body form-signup">
-                <form id="formulario" class="form-signup" method="post" action="">{% csrf_token %}
+            <div class="modal-body">
 
-                    {{djangoform.as_p}}
-                    {{userform.as_p}}
-
-                    <div style="display: none">
-                        <input name="inORup" value="up">
+                <form class="form-signup-custom " role="form"> {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username">
                     </div>
-                    <input type="submit" class="btn button-orange" value="Register"/>
 
+                    <div class="form-group ">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                    </div>
+                    <div class="form-group ">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="form-group ">
+                        <label for="birthday">Birthday</label>
+                        <input type="date" class="form-control" id="birthday" placeholder="Birthday">
+                    </div>
+                    <div class="form-group select-custom">
+                        <label for="option1">Gender</label>
+                        <select class="form-control select-custom">
+                            <option id="option1" value="f">Female</option>
+                            <option id="option2" value="m">Male</option>
+                        </select>
+                    </div>
+
+                    <div id="profileimage" class="form-group">
+                        <label for="profileimage">Profile image</label>
+
+                    </div>
+                    <div class="help-block ">
+                        <p class="help-block text-center">By submit this form you accept our <a href="/terms">privacy &
+                            terms</a>.</p>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn button-orange">Submit</button>
+                    </div>
                 </form>
+
             </div>
 
         </div>
     </div>
 </div>
 
-<!-- Modal signup -->
+<!-- Modal signin -->
 
 <div class="modal fade" id="signinmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel2">Log in</h4>
+                <h4></h4>
+                <h4 class="modal-title text-center" id="myModalLabel2">
+                <img src="../static/img/logo.png" class="img-rounded">
+                 Log in
+                </h4>
             </div>
-            <div class="modal-body form-signup">
-                <form id="formulario2" class="form-signup" method="post" action="">{% csrf_token %}
-                    <div class="input-group">
-                        <span class="input-group-addon">@</span>
+            <div class="modal-body form-signup modal-sm center-block">
+                <form id="formulario2" class="form-signup " method="post" action="">{% csrf_token %}
+
+                    <div class="input-group col-xs-12 ">
+
                         <input id="username" type="text" name="usernamelogin" class="form-control"
                                placeholder="username">
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">*</span>
+                    <br>
+                    <div class="input-group col-xs-12">
+
                         <input id="password" type="password" name="passwordlogin" class="form-control"
                                placeholder="password">
                     </div>
-                    <div style="display: none">
+                    <div class="hidden">
                         <input name="inORup" value="in">
                     </div>
                     <div class="modal-footer">
-                        <input type=submit value="Log in" class="btn button-orange"/>
+                        <input type=submit value="Log in" class="btn button-orange center-block"/>
                     </div>
                 </form>
+
             </div>
 
         </div>
     </div>
+
 </div>
 
 {% block content %}
@@ -130,10 +163,14 @@
 
 </footer>
 
-
+<script>
+$("#profileimage").dropzone({ url: "/file/post" });
+</script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<!-- jQuery drag'n'drop dropzone-->
+<script src="{{ STATIC_URL }}js/dropzone.js"></script>
 </body>
 </html>

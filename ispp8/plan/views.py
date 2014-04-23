@@ -32,22 +32,6 @@ def new_company(request):
 
     return render_to_response('companyform.html', {'formulario': formulario}, context_instance=RequestContext(request))
 
-def userform(request):
-    prfile = OurUserRegistrationForm()
-    djg = userDjangoForm()
-    if request.method == 'POST':
-        prfile = OurUserRegistrationForm(request.POST)
-        djg = userDjangoForm(request.POST)
-        if prfile.is_valid():
-            djus = djg.save()
-            prfilex=prfile.save(commit=False)
-            prfilex.djangoUser = djus
-            prfilex.save()
-            return HttpResponseRedirect('/home')
-        else:
-            formulario = CompanyRegistrationFrom()
-
-    return render_to_response('userform.html', {'userform': prfile, 'djangoform': djg}, context_instance=RequestContext(request))
 
 
 
