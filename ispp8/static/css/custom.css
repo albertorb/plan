@@ -179,7 +179,10 @@
 .img-xs-custom {
     margin-top: 12%;
     margin-right: 10%;
-    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    max-width: 50px;
+    min-width: 50px;
 }
 
 .dropdown-login {

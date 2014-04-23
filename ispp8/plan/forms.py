@@ -2,7 +2,7 @@ __author__ = 'developer'
 #encoding:utf-8
 from django.forms import ModelForm
 from django import forms
-from plan.models import Company, User, OurUser
+from plan.models import *
 
 
 class CompanyRegistrationFrom(ModelForm):

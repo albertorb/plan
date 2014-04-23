@@ -31,10 +31,9 @@ class OurUser(models.Model):
     djangoUser = models.OneToOneField(User)
     birthday = models.DateField()
     SEX = (("m", "Male"), ("f", "Female"),)
-    image = models.ImageField(upload_to='../images/profile', blank=True)
+    image = models.ImageField(upload_to='images/profile/', blank=True)
     gender = models.CharField(max_length=1, choices=SEX)
-    friends = models.ManyToManyField("OurUser", blank="true", null="true")
-
+    friends = models.ManyToManyField("self", blank=True, null=False)
     def __unicode__(self):
         return self.djangoUser.get_username()
 

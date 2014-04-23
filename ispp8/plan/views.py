@@ -1,7 +1,8 @@
 from plan.models import *
+from plan.forms import *
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, get_object_or_404
-from plan.forms import OurUserRegistrationForm, CompanyRegistrationFrom, userDjangoForm
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
@@ -104,20 +105,17 @@ def automatic_plan(request):
 
     # automatic plan
     #activities = Activity.objects.all()
-    activities = Activity.objects.all()
-    nums = random.sample(range(1,6),5)
-    print(nums)
+    activities=Activity.objects.all()
 
-    print(nums)
     activities2=[]
-    ac1 = activities[nums[0]]
+    ac1 = activities[0]
     activities2.append(ac1)
-    ac2 = activities[nums[1]]
+    ac2 = activities[1]
     activities2.append(ac2)
-    ac3 = activities[nums[2]]
+    ac3 = activities[2]
     activities2.append(ac3)
     return render_to_response('automatic_plan_nonlogged.html',
-                              {'activities': activities2, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3, 'userform': userform,
+                              {'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3, 'userform': userform,
                                'djangoform': djangoform},
                               context_instance=RequestContext(request))
 
@@ -129,22 +127,23 @@ def logout(request):
 
 def home(request):
 
-     # automatic plan
+    # automatic plan
     #activities = Activity.objects.all()
-    activities = Activity.objects.all()
-    nums = random.sample(range(1,6),5)
-    print(nums)
+    activities=Activity.objects.all()
 
-    print(nums)
     activities2=[]
-    ac1 = activities[nums[0]]
+    ac1 = activities[0]
     activities2.append(ac1)
-    ac2 = activities[nums[1]]
+    ac2 = activities[1]
     activities2.append(ac2)
-    ac3 = activities[nums[2]]
+    ac3 = activities[2]
     activities2.append(ac3)
 
-    return render_to_response('home.html', {'activities': activities2, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3}, context_instance=RequestContext(request))
+    # user
+
+    our = get_object_or_404(OurUser,djangoUser=request.user.id)
+
+    return render_to_response('home.html', {'request': our,'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3}, context_instance=RequestContext(request))
 
 
 
