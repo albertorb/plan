@@ -12,7 +12,7 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth
 import random
-
+from django.views.decorators.http import require_http_methods
 
 
 
@@ -163,8 +163,7 @@ def filter_plan(request):
 
 
 
-
 def list_plan(request):
-    activities = Activity.objects.all()
-    return render_to_response('filter_plan.html', {'activitiesfilt': activities}, context_instance=RequestContext(request))
+    actividades= Activity.objects.filter(location=request.GET['l'])
+    return render_to_response('filter_plan.html', {'activitiesfilt': actividades}, context_instance=RequestContext(request))
 
