@@ -167,3 +167,8 @@ def list_plan(request):
     actividades= Activity.objects.filter(location=request.GET['l'])
     return render_to_response('filter_plan.html', {'activitiesfilt': actividades}, context_instance=RequestContext(request))
 
+
+def list_planregister(request):
+    our=get_object_or_404(OurUser,djangoUser=request.user.id)
+    actividades= Activity.objects.filter(location=request.GET['l'])
+    return render_to_response('filter_planlogged.html', {'request':our,'activitiesfilt': actividades}, context_instance=RequestContext(request))
