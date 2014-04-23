@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 class Activity(models.Model):
     MOMENTS = (("m", "morning"), ("e", "evening"), ("n", "night"),)
     PRICE = (("f", "free"), ("n", "nonfree"),)
+    location = models.CharField(max_length=100)
     name = models.CharField(max_length=40)
     latitude = models.DecimalField(max_digits=10, decimal_places=6)
     longitude = models.DecimalField(max_digits=10, decimal_places=6)

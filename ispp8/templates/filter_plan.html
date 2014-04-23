@@ -62,114 +62,25 @@
 <div id="contenido">
      <div class="row div-card-plan-whole">
 
-
+<div class="">
             {% for activity in activitiesfilt %}
-            <div id="plans" class="">
 
-                <div id="activity{{ forloop.counter }}" class="col-lg-2">
+            <div  class="col-sm-6 col-md-3">
+                <div id="{{ forloop.counter }}" class="activities">
                     <img src='{{MEDIA_URL}}{{activity.photo}}' style="width: 140px; height: 140px;"
-                         class="img-circle" data-src="holder.js/140x140" alt="140x140">
+                         class="img-circle thumbnail" data-src="holder.js/140x140" alt="140x140">
 
                     <h4>{{ activity.name }}</h4>
 </br></br>
 
                 </div>
-
-
-    </div>
-                {% if forloop.counter >= 3 %}
-                {% if forloop.counter == 3  %}
-                <div class="more2">
-                    <a href="plan" class="btn button-orange">More</a>
-                </div>
-
-                {% endif %}
-                {% endif %}
-                {% if forloop.counter == 1 %}
-
-                    <div class="more">
-                    <a href="plan" class="btn button-orange">More</a>
-                </div>
-
-                {% endif %}
+           </div>
 
 
             {% endfor %}
-
-
-
-
-
-
     </div>
-    <div class="filteragain ">
-
-
-<a href="#filter" class="btn button-orange-plan" style="position: absolute; bottom: 10%;left: 45% " data-toggle="modal">Filter again</a>
-
     </div>
-
-    <div class="modal fade" id="filter" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Filter Plan</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" style="box-shadow: #737373">
-                        <fieldset class="control-group error">
-                            <div class="control-group">
-                                <label class="control-label" for="input01">Weather
-                                    <input type="text">
-                                </label>
-
-                                <div class="controls">
-                                    <label class="control-label" for="select01">Location
-
-                                        <select id="select01">
-                                            <option selected>Sevilla</option>
-                                            <option>Huelva</option>
-                                            <option>Malaga</option>
-                                            <option>Cadiz</option>
-                                            <option>Jaen</option>
-                                        </select>
-
-                                    </label>
-                                    <label class="control-label" for="multiSelect">Sector</label>
-                                    <select multiple="multiple" id="multiSelect">
-                                        <option>Monument</option>
-                                        <option>Concert</option>
-                                        <option>Local Festivity</option>
-                                        <option>Hostelry</option>
-                                        <option>Sport Events</option>
-                                        <option>Museum</option>
-                                        <option>Parks</option>
-                                        <option>Theatre</option>
-                                        <option>Cinema</option>
-                                    </select>
-                                    <label class="control-label" for="multiSelect">Moment</label>
-                                    <select multiple="multiple" id="multiSelect1">
-                                        <option>Morning</option>
-                                        <option>Evening</option>
-                                        <option>Night</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <label class="checkbox">
-                                <input type="checkbox" id="optionsCheckbox" value="option1">
-                                Typing this option will discard activities that implies a spent of money.
-                            </label>
-                            <label>
-                                <a href="../filteresult" class="btn button-orange-plan">Gimme the plan</a>
-                            </label>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
-
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </div>
 <footer class="panel-footer panel-footer-custom navbar-fixed-bottom">&copy 2014 PAMAB

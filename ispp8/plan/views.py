@@ -11,8 +11,9 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth
+from django.contrib.auth.hashers import make_password, pbkdf2
 import random
-
+from django.views.decorators.http import require_http_methods
 
 def new_company(request):
     formulario = CompanyRegistrationFrom()
@@ -29,7 +30,8 @@ def new_company(request):
 
     return render_to_response('companyform.html', {'formulario': formulario}, context_instance=RequestContext(request))
 
-    return render_to_response('companyform.html', {'formulario': formulario}, context_instance=RequestContext(request))
+
+
 
 
 #@login_required(login_url="/login/")
@@ -43,24 +45,14 @@ def automatic_plan(request):
         if userform.is_valid() and djangoform.is_valid():
             print("vamos")
             #saving to database
-            user = djangoform.save()
+            userp = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
 
-            # hashing password
-
-
-            #user.set_password(djangoform.password)
-
-            ## do hash
-
-            djangoform.save() #necesario si modificamos la pass para encriptarla (a no ser que se encuentre otra forma)
-
-            # finish hashing password
 
             # Now sort out the userform instance.
             # Since we need to set the user attribute ourselves, we set commit=False.
             # This delays saving the model until we're ready to avoid integrity problems.
             profile = userform.save(commit=False)
-            profile.djangoUser = user
+            profile.djangoUser = userp
 
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
@@ -78,7 +70,7 @@ def automatic_plan(request):
 
     if request.method == 'POST' and request.POST['inORup'] == 'in':
         userName = request.POST['usernamelogin']
-        print(userName)
+
 
         hashPassword = request.POST['passwordlogin']
         print(hashPassword)
@@ -147,10 +139,9 @@ def home(request):
 def filter_plan(request):
     return render_to_response('filterplan.html', context_instance=RequestContext(request))
 
-
 def list_plan(request):
-    activities = Activity.objects.all()
-    return render_to_response('filter_plan.html', {'activitiesfilt': activities}, context_instance=RequestContext(request))
+    actividades= Activity.objects.filter(location=request.GET['l'])
+    return render_to_response('filter_plan.html', {'activitiesfilt': actividades}, context_instance=RequestContext(request))
 
 
 #@login_required(login_url="/login/")

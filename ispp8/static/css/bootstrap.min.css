@@ -1837,10 +1837,17 @@ output {
 }
 
 .form-control:focus {
+    /* mod alberto
     border-color: #66afe9;
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+    */
+    border-color: #F5D0A9;
+    background-color: #ffffff;
+    outline:0;
+    box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
+    webkit-box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
 }
 
 .form-control::-moz-placeholder {
