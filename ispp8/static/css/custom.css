@@ -347,36 +347,10 @@ box-sizing(content-box);
 
 }
 
-#activity1{
-width: 300px;
-}
-
-#activity2{
+.activities{
 width: 300px;
 
 }
-
-#activity3{
-width: 300px;
-
-}
-
-#activity6{
-width: 300px;
-}
-
-#activity4{
-width: 300px;
-
-}
-
-#activity5{
-width: 300px;
-
-}
-
-
-
 
 #flecha1{
     margin-left: -700px;
@@ -391,4 +365,16 @@ width: 300px;
 .filteragain{
     padding-left: 550px;
     padding-top: 150px;
+}
+
+#focus:hover{
+border-color: #d58512;
+outline: 0;
+outline: thin dotted \9;
+-moz-box-shadow: 0 0 8px #d58512);
+box-shadow: 0 0 8px #d58512
+}
+
+.planes{
+    border: solid;
 }
