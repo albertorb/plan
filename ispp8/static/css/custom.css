@@ -1,5 +1,9 @@
 /* master_page.html */
 
+body{
+    background-color: #f5f5f5;
+}
+
 .activecustom {
     color: darkorange;
     background-color: #ffffff;
@@ -48,8 +52,8 @@
 
 .navbar-custom {
     background-color: #ffffff;
-    border-bottom-color: darkorange;
-    border-bottom-style: solid;
+    /*border-bottom-color: darkorange;*/
+    border-bottom-style: none;
 
 }
 
