@@ -1,6 +1,7 @@
 {% extends 'master_page_logged.html' %}
 
 {% block content %}
+
 <div class="alert alert-success alert-dismissable text-center" style="margin-top: 5%">Here you are! Your plan for today!
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 </div>
@@ -36,6 +37,30 @@
     {% endfor %}
 
 </div>
+  <div class="modal fade" id="filter" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>¿Donde quieres ir?</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" style="box-shadow: #999999" action="../filteresultlogged" method="get">
+                    <div class="dropdown">Location
+                        <select name="l" class="form-control" id="focus">
+                            <option>Sevilla</option>
+                            <option>Madrid</option>
+                        </select>
+                        </div>
+                   <label>
+                       <input type="submit" class="btn button-orange-plan" value="Obtener planes">
+
+                        </label>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 <div id="map-canvas" class="google-map-canvas ">
@@ -47,6 +72,8 @@
     <a href="#filter" class=" btn button-orange-plan" data-toggle="modal">Filter to obtain another plan</a>
 
 </div>
+
+
 
 <style type="text/css">
     html {
@@ -158,70 +185,5 @@
 
     //{{forloop.counter}}
 </script>
-
-<div class="modal fade" id="filter" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4>Filter Plan</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" style="box-shadow: #737373">
-                    <fieldset class="control-group error">
-                        <div class="control-group">
-
-
-                            <div class="controls">
-                                <div>
-                                <label class="control-label" for="select01">Location
-
-                                    <select id="select01">
-                                        <option selected>Sevilla</option>
-                                        <option>Huelva</option>
-                                        <option>Malaga</option>
-                                        <option>Cadiz</option>
-                                        <option>Jaen</option>
-                                    </select>
-
-                                </label>
-                                    </div>
-                                <p> </p>
-                                <div>
-                                <label class="control-label" for="multiSelect">Sector</label>
-                                <select multiple="multiple" id="multiSelect">
-                                    <option>Monument</option>
-                                    <option>Concert</option>
-                                    <option>Local Festivity</option>
-                                    <option>Hostelry</option>
-                                    <option>Sport Events</option>
-                                    <option>Museum</option>
-                                    <option>Parks</option>
-                                    <option>Theatre</option>
-                                    <option>Cinema</option>
-                                </select>
-                                    </div>
-                                <label class="control-label" for="multiSelect">Moment</label>
-                                <select multiple="multiple" id="multiSelect1">
-                                    <option>Morning</option>
-                                    <option>Evening</option>
-                                    <option>Night</option>
-                                </select>
-                            </div>
-                        </div>
-                        <label class="checkbox">
-                            <input type="checkbox" id="optionsCheckbox" value="option1">
-                            Typing this option will discard activities that implies a spent of money.
-                        </label>
-                        <label>
-                            <a href="../filteresult" class="btn button-orange-plan">Gimme the plan</a>
-                        </label>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 {% endblock %}

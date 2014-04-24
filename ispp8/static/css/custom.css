@@ -359,7 +359,7 @@ box-sizing(content-box);
 
 .activities{
 width: 300px;
-
+padding-left: 10%;
 }
 
 #flecha1{
@@ -385,6 +385,7 @@ outline: thin dotted \9;
 box-shadow: 0 0 8px #d58512
 }
 
-.planes{
-    border: solid;
+.espacioleft{
+    margin-left: 10%;
 }
+

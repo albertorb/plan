@@ -1,0 +1,24 @@
+{% extends 'master_page_logged.html' %}
+
+{% block content %}
+
+<div id="contenido">
+     <div class="row div-card-plan-whole">
+
+                {% for activity in activitiesfilt %}
+                    <div class="thumbnail div-card-">
+                    <img src='{{MEDIA_URL}}{{activity.photo}}' style="width: 140px; height: 140px;"
+                         class="img-circle thumbnail">
+                    <h4>{{ activity.name }}</h4>
+                    </div>
+
+</br></br>
+
+
+           </div>
+            {% endfor %}
+
+    </div>
+
+
+{% endblock %}

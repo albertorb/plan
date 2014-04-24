@@ -16,13 +16,15 @@ urlpatterns = patterns('',
 
     url(r'^plan/$','plan.views.automatic_plan'),
     url(r'^home/$','plan.views.home'),
+    url(r'^filteresultlogged/$','plan.views.list_planregister'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
 
     url(r'^filterplans/$', 'plan.views.filter_plan'),
     url(r'^timeline/$', 'plan.views.timeline'),
 
     url(r'^filter/$','plan.views.filter_plan'),
-    url(r'^filteresult/$','plan.views.list_plan'),
+    url(r'^filteresult/$', 'plan.views.list_plan'),
+    url(r'^error/$', 'plan.views.error'),
 
     url(r'^user_plans/$', 'plan.views.user_plans'),
 

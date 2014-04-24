@@ -52,6 +52,7 @@ class Plan(models.Model):
         return "plan" + str(self.pk)
 
 
+
 class Company(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField('password', max_length=128)

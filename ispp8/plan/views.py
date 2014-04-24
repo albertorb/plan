@@ -70,11 +70,11 @@ def automatic_plan(request):
             else:
                 # Llevar a la vista de error
                 print('habia entrado')
-                return HttpResponseRedirect("/panic.html")
+                return HttpResponseRedirect("/error")
         else:
             # Llevar a la vista de error
 
-            return HttpResponseRedirect("/shit")
+            return HttpResponseRedirect("/error")
 
 
     #######
@@ -101,6 +101,10 @@ def automatic_plan(request):
 def logout(request):
     auth.logout(request)
     #return HttpResponseRedirect("/pagina1/pagina2")
+
+
+def error(request):
+    return render_to_response('404.html')
 
 
 def home(request):
@@ -132,6 +136,13 @@ def list_plan(request):
     return render_to_response('filter_plan.html', {'activitiesfilt': actividades}, context_instance=RequestContext(request))
 
 
+
+def list_planregister(request):
+    our=get_object_or_404(OurUser,djangoUser=request.user.id)
+    actividades= Activity.objects.filter(location=request.GET['l'])
+    return render_to_response('filter_planlogged.html', {'request':our,'activitiesfilt': actividades}, context_instance=RequestContext(request))
+
+
 #@login_required(login_url="/login/")
 def timeline(request):
     #Esto quiere decir, que debe mostrar que plan realizó recientemente, que plan votó, si compartió algún plan contigo (y que puntuación le dio)
@@ -154,7 +165,6 @@ def timeline(request):
         print('checking number of shared plans: ' + str(len(planesCompartidos)))
         data.append({'friend': friend, 'donePlans': planesRealizados, 'votedPlans': planesVotados, 'sharedPlans': planesCompartidos})
     return render_to_response('timeline.html', {'data': data}, context_instance=RequestContext(request))
-
 
 def user_plans(request):
     loguser = request.user
