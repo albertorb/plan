@@ -154,3 +154,13 @@ def timeline(request):
         print('checking number of shared plans: ' + str(len(planesCompartidos)))
         data.append({'friend': friend, 'donePlans': planesRealizados, 'votedPlans': planesVotados, 'sharedPlans': planesCompartidos})
     return render_to_response('timeline.html', {'data': data}, context_instance=RequestContext(request))
+
+
+def user_plans(request):
+    loguser = request.user
+    ouser = OurUser.objects.get(djangoUser=loguser)
+    print(ouser)
+    plans = Plan.objects.filter(user=ouser).all()
+    print(plans)
+
+    return render_to_response('user_plans.html', {'ouser':ouser, 'plans': plans}, context_instance=RequestContext(request))

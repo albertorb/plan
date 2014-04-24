@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^filter/$','plan.views.filter_plan'),
     url(r'^filteresult/$','plan.views.list_plan'),
 
+    url(r'^user_plans/$', 'plan.views.user_plans'),
 
 
     # Uncomment the next line to enable the admin:

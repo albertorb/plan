@@ -1,0 +1,42 @@
+{% extends 'master_page_logged.html' %}
+
+{% block content %}
+
+
+<div class="row div-card-plan-whole">
+
+    {% for plan in plans %}
+
+    {% for activity in plan.activities.all %}
+    <div class="col-sm-10 col-md-4">
+
+
+        <div  class="thumbnail div-card-plan-thumbnail"
+             style="background-image:url('{{MEDIA_URL}}{{activity.photo}}')">
+
+            <div  style="display: none" class="well div-card-plan-info">
+                {{plan.endDate}}
+            </div>
+
+
+        </div>
+
+
+        <div class="text-center panel div-card-plan-actiname">
+            <h4>{{activity.name}}</h4>
+        </div>
+
+
+
+
+    </div>
+    {% endfor %}
+
+
+
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
