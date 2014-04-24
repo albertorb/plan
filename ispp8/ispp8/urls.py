@@ -19,10 +19,7 @@ urlpatterns = patterns('',
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
 
     url(r'^filterplans/$', 'plan.views.filter_plan'),
-
-
-
-
+    url(r'^timeline/$', 'plan.views.timeline'),
 
     url(r'^filter/$','plan.views.filter_plan'),
     url(r'^filteresult/$','plan.views.list_plan'),
