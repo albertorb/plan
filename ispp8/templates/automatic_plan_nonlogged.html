@@ -9,7 +9,10 @@
 
     <div class="row div-card-plan-whole">
 
+        {% if activities.count > 0  %}
+
         {% for activity in activities %}
+
             {% if forloop.counter <= 3 %}
                 <div class="col-sm-6 col-md-4">
                     <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert"
@@ -36,6 +39,7 @@
                 </div>
             {% endif %}
         {% endfor %}
+    {% endif %}
 
     </div>
 

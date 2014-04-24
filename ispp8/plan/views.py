@@ -17,22 +17,6 @@ from django.views.decorators.http import require_http_methods
 
 
 
-def new_company(request):
-    formulario = CompanyRegistrationFrom()
-
-    formulario = CompanyRegistrationFrom(request.POST, request.FILES)
-
-    if request.method == 'POST':
-        formulario = CompanyRegistrationFrom(request.POST, request.FILES)
-        if formulario.is_valid():
-            formulario.save()
-            return HttpResponseRedirect('/newcompany')
-        else:
-            formulario = CompanyRegistrationFrom()
-
-    return render_to_response('companyform.html', {'formulario': formulario}, context_instance=RequestContext(request))
-
-
 
 
 
@@ -99,6 +83,8 @@ def automatic_plan(request):
     #activities = Activity.objects.all()
     activities=Activity.objects.all()
 
+
+
     activities2=[]
     ac1 = activities[0]
     activities2.append(ac1)
@@ -107,7 +93,7 @@ def automatic_plan(request):
     ac3 = activities[2]
     activities2.append(ac3)
     return render_to_response('automatic_plan_nonlogged.html',
-                              {'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3, 'userform': userform,
+                              { 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3, 'userform': userform,
                                'djangoform': djangoform},
                               context_instance=RequestContext(request))
 

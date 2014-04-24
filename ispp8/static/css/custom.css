@@ -273,6 +273,16 @@ body{
 
 }
 
+.btn-twitter{
+    background-color: #4099FF;
+    color:white;
+}
+
+.btn-twitter:hover{
+    background-color: #4090FF;
+    color:white;
+}
+
 .espacio{
     width: 100%;
     height: 40%;

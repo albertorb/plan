@@ -61,7 +61,15 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">New account</h4>
             </div>
+
             <div class="modal-body">
+                <h5 class="help-block text-center" id="myModalLabel">skip the form signing with your social accounts</h5>
+                <br>
+                <div class="form-group text-center">
+                    <div class="btn btn-primary">facebook</div>
+                    <div class="btn btn-twitter">twitter</div>
+                    <div class="btn btn-danger">Google +</div>
+                </div>
 
                 <form class="form-signup-custom " role="form"> {% csrf_token %}
                     <div class="form-group">
@@ -110,19 +118,25 @@
 
 <!-- Modal signin -->
 
-<div class="modal fade" id="signinmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div class="modal  fade" id="signinmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content ">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4></h4>
                 <h4 class="modal-title text-center" id="myModalLabel2">
-                <img src="../static/img/logo.png" class="img-rounded">
-                 Log in
+                    <img src="../static/img/logo.png" class="img-rounded">
+                    Log in
                 </h4>
             </div>
-            <div class="modal-body form-signup modal-sm center-block">
-                <form id="formulario2" class="form-signup " method="post" action="">{% csrf_token %}
+            <div class="modal-body pull-right col-lg-6">
+                <p class="help-block">You are about to discover a new way to enjoy your travels and share it with your
+                    friends. <br>A journey plan on a single click</p>
+            </div>
+            <div class="modal-body   modal-sm  form-signup  ">
+
+
+                <form id="formulario2" class="form-signup" method="post" action="">{% csrf_token %}
 
                     <div class="input-group col-xs-12 ">
 
@@ -130,22 +144,30 @@
                                placeholder="username">
                     </div>
                     <br>
+
                     <div class="input-group col-xs-12">
 
                         <input id="password" type="password" name="passwordlogin" class="form-control"
                                placeholder="password">
                     </div>
+
+
                     <div class="hidden">
                         <input name="inORup" value="in">
                     </div>
                     <div class="modal-footer">
                         <input type=submit value="Log in" class="btn button-orange center-block"/>
                     </div>
+
+
                 </form>
+
 
             </div>
 
+
         </div>
+
     </div>
 
 </div>
@@ -164,7 +186,7 @@
 </footer>
 
 <script>
-$("#profileimage").dropzone({ url: "/file/post" });
+    $("#profileimage").dropzone({ url: "/file/post" });
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
