@@ -13,20 +13,18 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    url(r'^newcompany/$','plan.views.new_company'),
+
     url(r'^plan/$','plan.views.automatic_plan'),
     url(r'^home/$','plan.views.home'),
     url(r'^filteresultlogged/$','plan.views.list_planregister'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
 
     url(r'^filterplans/$', 'plan.views.filter_plan'),
-
-
-
-
+    url(r'^timeline/$', 'plan.views.timeline'),
 
     url(r'^filter/$','plan.views.filter_plan'),
     url(r'^filteresult/$','plan.views.list_plan'),
+
 
 
     # Uncomment the next line to enable the admin:

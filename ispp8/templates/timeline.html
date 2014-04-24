@@ -1,0 +1,43 @@
+{% extends 'master_page_logged.html' %}
+{% block content %}
+    {%  for elem in data %}
+        <div><img src="{{ MEDIA_URL }}{{ elem.friend.image }}" class="img-rounded img-responsive" alt="Responsive image"></div>
+        Enjoyed:
+        <ul>
+        {% for plan in elem.donePlans %}
+            <li>
+                <div>
+                    {% for actividad in plan.activities.all %}
+                        <img src="{{ MEDIA_URL }}{{ actividad.photo }}" class="img-rounded img-responsive" alt="Responsive image">
+                    {% endfor %}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+        Shared you:
+        <ul>
+        {% for plan in elem.sharedPlans %}
+            <li>
+                <div>
+                    {% for actividad in plan.activities.all %}
+                        <img src="{{ MEDIA_URL }}{{ actividad.photo }}" class="img-rounded img-responsive" alt="Responsive image">
+                    {% endfor %}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+        Voted:
+        <ul>
+        {% for plan in elem.votedPlans %}
+            <li>
+                <div>
+                    {% for actividad in plan.activities.all %}
+                        <img src="{{ MEDIA_URL }}{{ actividad.photo }}" class="img-rounded img-responsive" alt="Responsive image">
+                        Giving a {{ actividad.valoration }}
+                    {% endfor %}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock %}

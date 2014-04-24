@@ -35,6 +35,7 @@ class OurUser(models.Model):
     image = models.ImageField(upload_to='images/profile/', blank=True)
     gender = models.CharField(max_length=1, choices=SEX)
     friends = models.ManyToManyField("self", blank=True, null=False)
+
     def __unicode__(self):
         return self.djangoUser.get_username()
 
@@ -42,8 +43,14 @@ class OurUser(models.Model):
 class Plan(models.Model):
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
+    voted = models.BooleanField()
     activities = models.ManyToManyField(Activity)
-    user = models.ForeignKey(OurUser)
+    user = models.ForeignKey(OurUser, related_name='OurUser_content_type')
+    sharedTo = models.ManyToManyField(OurUser, blank=True, null=False)
+
+    def __unicode__(self):
+        return "plan" + str(self.pk)
+
 
 
 class Company(models.Model):
@@ -70,6 +77,3 @@ class Payment(models.Model):
 
     def __unicode__(self):
         return self.amount
-
-
-
