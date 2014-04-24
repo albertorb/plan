@@ -6,16 +6,14 @@
      <div class="row div-card-plan-whole">
 
                 {% for activity in activitiesfilt %}
-                    <div class="thumbnail div-card-">
-                    <img src='{{MEDIA_URL}}{{activity.photo}}' style="width: 140px; height: 140px;"
-                         class="img-circle thumbnail">
-                    <h4>{{ activity.name }}</h4>
-                    </div>
+                        <div class="col-lg-4 row text-center">
+              <img class="img-circle" alt="140x140" src="{{MEDIA_URL}}{{activity.photo}}" style="width: 140px; height: 140px;">
+              <h4 >{{ activity.name }}</h4>
+                      </div>
+             {% if forloop.counter|divisibleby:3 %}
+                 <button class="btn button-orange-plan pull-left" >More</button>
+             {% endif %}
 
-</br></br>
-
-
-           </div>
             {% endfor %}
 
     </div>
