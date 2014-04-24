@@ -70,11 +70,11 @@ def automatic_plan(request):
             else:
                 # Llevar a la vista de error
                 print('habia entrado')
-                return HttpResponseRedirect("/panic.html")
+                return HttpResponseRedirect("/error")
         else:
             # Llevar a la vista de error
 
-            return HttpResponseRedirect("/shit")
+            return HttpResponseRedirect("/error")
 
 
     #######
@@ -101,6 +101,10 @@ def automatic_plan(request):
 def logout(request):
     auth.logout(request)
     #return HttpResponseRedirect("/pagina1/pagina2")
+
+
+def error(request):
+    return render_to_response('404.html')
 
 
 def home(request):

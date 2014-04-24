@@ -23,7 +23,8 @@ urlpatterns = patterns('',
     url(r'^timeline/$', 'plan.views.timeline'),
 
     url(r'^filter/$','plan.views.filter_plan'),
-    url(r'^filteresult/$','plan.views.list_plan'),
+    url(r'^filteresult/$', 'plan.views.list_plan'),
+    url(r'^error/$', 'plan.views.error'),
 
 
 
