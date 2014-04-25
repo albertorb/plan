@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+
+
 
 ADMINS = (
      ('Alberto', 'arincon1992@gmail.com'),
@@ -30,8 +30,8 @@ with open('../secretdjangokey.txt') as f:# # # # # # # # # # # #
     SECRET_KEY = f.read().strip()       # # Production # # # # #
                                         # # # # # # # # # # # # #
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #Development
-#DEBUG = False # Production
+#DEBUG = True #Development
+DEBUG = False # Production
 
 
 TEMPLATE_DEBUG = True
@@ -81,28 +81,17 @@ WSGI_APPLICATION = 'ispp8.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+with open('../secretdjangodatabase.txt') as f:# # # # # # # # # # # #
+    DATABASE_KEY = f.read().strip()       # # Production # # # # #
+                                        # # # # # # # # # # # # #
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'ispp.db_development',                      # Or path to database file if using sqlite3.
-        'USER': 'ispp',                      # Not used with sqlite3.
-        'PASSWORD': 'ispp',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '../djangodatabase.cnf',
+        },
     }
 }
-
-#with open('../secretdjangodatabase.txt') as f:# # # # # # # # # # # #
-#    DATABASE_KEY = f.read().strip()       # # Production # # # # #
-                                        # # # # # # # # # # # # #
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'OPTIONS': {
-#            'read_default_file': '../djangodatabase.cnf',
-#        },
-#    }
-#}
 
 
 
@@ -140,8 +129,8 @@ MEDIA_URL = 'http://127.0.0.1:8000/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '' # Development
-# STATIC_ROOT = '/var/www/plan.issp8.com/static/' # Production
+#STATIC_ROOT = '' # Development
+STATIC_ROOT = '/var/www/plan.issp8.com/static/' # Production
 
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
@@ -221,8 +210,8 @@ LOGGING = {
 }
 
 # Security options
-#CSRF_COOKIE_SECURE = True #Production # Set this to True to avoid transmitting the CSRF cookie over HTTP accidentally.
-#SESSION_COOKIE_SECURE = # Production # Set this to True to avoid transmitting the session cookie over HTTP accidentally.
+CSRF_COOKIE_SECURE = True #Production # Set this to True to avoid transmitting the CSRF cookie over HTTP accidentally.
+SESSION_COOKIE_SECURE = True # Production # Set this to True to avoid transmitting the session cookie over HTTP accidentally.
     # About security using python
         #Python Options
         #It’s strongly recommended that you invoke the Python process running your Django application using the -R option or with the
