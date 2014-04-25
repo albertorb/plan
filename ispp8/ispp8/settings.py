@@ -26,14 +26,19 @@ MANAGERS = ADMINS
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7*n#r+1vv%7b(ogo6!xui(^e@4t&ts+w=@$hzml=n3$rscbqtf'
-
+with open('../secretdjangokey.txt') as f:# # # # # # # # # # # #
+    SECRET_KEY = f.read().strip()       # # Production # # # # #
+                                        # # # # # # # # # # # # #
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True #Development
+#DEBUG = False # Production
+
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'plan.ispp8.com' # Production
+]
 
 
 # Application definition
@@ -87,6 +92,20 @@ DATABASES = {
     }
 }
 
+#with open('../secretdjangodatabase.txt') as f:# # # # # # # # # # # #
+#    DATABASE_KEY = f.read().strip()       # # Production # # # # #
+                                        # # # # # # # # # # # # #
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'OPTIONS': {
+#            'read_default_file': '../djangodatabase.cnf',
+#        },
+#    }
+#}
+
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -121,7 +140,8 @@ MEDIA_URL = 'http://127.0.0.1:8000/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '' # Development
+# STATIC_ROOT = '/var/www/plan.issp8.com/static/' # Production
 
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
@@ -167,6 +187,21 @@ TEMPLATE_DIRS = (
 # the site admins on every HTTP 500 error.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+# $$ Usage $$
+# import the logging library
+#import logging
+
+# Get an instance of a logger
+#logger = logging.getLogger(__name__)
+
+#def my_view(request, arg1, arg):
+#    ...
+#    if bad_mojo:
+        # Log an error message
+#        logger.error('Something went wrong!')
+
+#    $ $ $ $ $ $ $ $__example-code__ $ $ $ $ $ $ $ $ $ $
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -184,3 +219,27 @@ LOGGING = {
         },
     }
 }
+
+# Security options
+#CSRF_COOKIE_SECURE = True #Production # Set this to True to avoid transmitting the CSRF cookie over HTTP accidentally.
+#SESSION_COOKIE_SECURE = # Production # Set this to True to avoid transmitting the session cookie over HTTP accidentally.
+    # About security using python
+        #Python Options
+        #It’s strongly recommended that you invoke the Python process running your Django application using the -R option or with the
+        # PYTHONHASHSEED environment variable set to random.
+        #These options help protect your site from denial-of-service (DoS) attacks triggered by carefully crafted inputs.
+        # Such an attack can drastically increase CPU usage by causing worst-case performance when creating dict instances.
+        # See oCERT advisory #2011-003 for more information.
+
+
+# Optimization of performance options
+# CONN_MAX_AGE = 15 #seconds to close database connection # Production #Enabling persistent database connections can result in a nice
+                                                                        #speed-up when connecting to the database accounts for a significant
+                                                                        # part of the request processing time.
+                                    #This helps a lot on virtualized hosts with limited network performance.
+# TEMPLATE_LOADERS = django.template.loaders.filesystem.Loader # Production # Enabling the cached template loader often improves
+                                                                            # performance drastically, as it avoids compiling each template
+                                                                            # every time it needs to be rendered. See the template loaders
+                                                                            # docs for more information.
+
+
