@@ -123,9 +123,9 @@ def home(request):
 
     # user
 
-    our = get_object_or_404(OurUser,djangoUser=request.user.id)
+    our = get_object_or_404(OurUser, djangoUser=request.user.id)
 
-    return render_to_response('home.html', {'request': our,'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3}, context_instance=RequestContext(request))
+    return render_to_response('home.html', {'user': our, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3}, context_instance=RequestContext(request))
 
 
 def filter_plan(request):
@@ -140,12 +140,11 @@ def list_plan(request):
 def list_planregister(request):
     our=get_object_or_404(OurUser,djangoUser=request.user.id)
     actividades= Activity.objects.filter(location=request.GET['l'])
-    return render_to_response('filter_planlogged.html', {'request':our,'activitiesfilt': actividades}, context_instance=RequestContext(request))
+    return render_to_response('filter_planlogged.html', {'user': our, 'activitiesfilt': actividades}, context_instance=RequestContext(request))
 
 
 #@login_required(login_url="/login/")
 def timeline(request):
-    #Esto quiere decir, que debe mostrar que plan realizó recientemente, que plan votó, si compartió algún plan contigo (y que puntuación le dio)
     duser = request.user
     print('getting django user')
     print(duser)
@@ -164,13 +163,29 @@ def timeline(request):
         planesCompartidos = Plan.objects.exclude(sharedTo__isnull=True)
         print('checking number of shared plans: ' + str(len(planesCompartidos)))
         data.append({'friend': friend, 'donePlans': planesRealizados, 'votedPlans': planesVotados, 'sharedPlans': planesCompartidos})
-    return render_to_response('timeline.html', {'data': data}, context_instance=RequestContext(request))
+    return render_to_response('timeline.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
+
 
 def user_plans(request):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
     print(ouser)
-    plans = Plan.objects.filter(user=ouser).all()
+    plans = Plan.objects.filter(user=ouser, done=True).all()
     print(plans)
+    return render_to_response('user_plans.html', {'user': ouser, 'plans': plans}, context_instance=RequestContext(request))
 
-    return render_to_response('user_plans.html', {'ouser':ouser, 'plans': plans}, context_instance=RequestContext(request))
+
+def todo(request):
+    duser = request.user
+    print('getting django user')
+    print(duser)
+    ouser = OurUser.objects.get(djangoUser=duser)
+    print('getting our user')
+    if request.method == 'POST':
+        ident = request.POST.get("id")
+        Plan.objects.filter(pk=ident).update(done=True)
+        return HttpResponseRedirect("/todo")
+    else:
+        plans = Plan.objects.filter(user=ouser, done=False).all()
+        print('checking number of saved plans plans: ' + str(len(plans)))
+        return render_to_response('todo.html', {'user': ouser, 'plans': plans}, context_instance=RequestContext(request))

@@ -1,0 +1,17 @@
+{% extends 'master_page_logged.html' %}
+{% block content %}
+    {% for plan in plans %}
+        <div class="row div-card-plan-whole">
+        {% for activity in plan.activities.all %}
+            <div class="col-lg-4 row text-center">
+              <img class="img-circle" alt="140x140" src="{{MEDIA_URL}}{{activity.photo}}" style="width: 140px; height: 140px;">
+              <h4 >{{ activity.name }}</h4>
+            </div>
+        {% endfor %}
+        <form action="." method="post">{% csrf_token %}
+            <input type="hidden" name="id" value="{{ plan.pk }}">
+            <button class="btn button-orange-plan pull-left" >Done!</button>
+        </form>
+        </div>
+    {% endfor %}
+{% endblock %}

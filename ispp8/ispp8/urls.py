@@ -21,6 +21,7 @@ urlpatterns = patterns('',
 
     url(r'^filterplans/$', 'plan.views.filter_plan'),
     url(r'^timeline/$', 'plan.views.timeline'),
+    url(r'^todo/$', 'plan.views.todo'),
 
     url(r'^filter/$','plan.views.filter_plan'),
     url(r'^filteresult/$', 'plan.views.list_plan'),

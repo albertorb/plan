@@ -32,7 +32,7 @@
         <div class="btn-group-right-custom btn-group-xs">
             <button type="button" class="btn btn-default dropdown-toggle button-profile" data-toggle="dropdown">
 
-                <img src="/media/{{ request.image }}" class="img-circle img-xs-custom">
+                <img src="/media/{{ user.image }}" class="img-circle img-xs-custom">
 
             </button>
             <ul class="dropdown-menu dropdown-menu-right-custom">
@@ -47,14 +47,13 @@
 
         <div class="navbar-header navbar-right">
             <ul class="nav-tabs-custom nav nav-tabs  ">
-                <li class="activecustom"><a href="#" class="activecustom">Home</a></li>
+                <li {% if 'home' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="../home" {% if 'home' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>Home</a></li>
 
-                <li class="nonactivecustom"><a href="../timeline" class="a-nonactivecustom">Timeline</a></li>
+                <li {% if 'timeline' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="../timeline" {% if 'timeline' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>Timeline</a></li>
 
-                <li class="nonactivecustom"><a href="../user_plans" class="a-nonactivecustom">My plans</a></li>
+                <li {% if 'user_plans' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="../user_plans" {% if 'user_plans' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>My plans</a></li>
 
-                <li class="nonactivecustom"><a href="#" class="a-nonactivecustom">Favourite</a></li>
-
+                <li {% if 'todo' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="../todo" {% if 'todo' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>To Do</a></li>
 
             </ul>
         </div>

@@ -47,6 +47,7 @@ class Plan(models.Model):
     activities = models.ManyToManyField(Activity)
     user = models.ForeignKey(OurUser, related_name='OurUser_content_type')
     sharedTo = models.ManyToManyField(OurUser, blank=True, null=False)
+    done = models.BooleanField()
 
     def __unicode__(self):
         return "plan" + str(self.pk)
