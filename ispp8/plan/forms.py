@@ -3,6 +3,7 @@ __author__ = 'developer'
 from django.forms import ModelForm
 from django import forms
 from plan.models import *
+from django.contrib.auth.models import User
 
 
 class CompanyRegistrationFrom(ModelForm):

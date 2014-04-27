@@ -26,8 +26,10 @@ def automatic_plan(request):
     djangoform = userDjangoForm()
     userform = OurUserRegistrationForm()
     if request.method == 'POST' and request.POST['inORup'] == 'up':
+        print("aqui si entra")
         userform = OurUserRegistrationForm(request.POST)
         djangoform = userDjangoForm(request.POST)
+
         if userform.is_valid() and djangoform.is_valid():
             print("vamos")
             #saving to database
@@ -49,7 +51,8 @@ def automatic_plan(request):
 
             return HttpResponseRedirect('/home')
         else:
-
+            print(djangoform.errors)
+            print(userform.errors)
             djangoform = userDjangoForm()
             formulario = OurUserRegistrationForm()
     #####
@@ -74,7 +77,7 @@ def automatic_plan(request):
         else:
             # Llevar a la vista de error
 
-            return HttpResponseRedirect("/error")
+            return HttpResponseRedirect("/")
 
 
     #######
