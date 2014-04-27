@@ -2,7 +2,7 @@
 
 
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 1,
     "fields": {
       "location": "Madrid",
@@ -21,7 +21,7 @@
     }
   },
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 2,
     "fields": {
       "location": "Madrid",
@@ -40,7 +40,7 @@
     }
   },
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 3,
     "fields": {
       "location": "Madrid",
@@ -59,7 +59,7 @@
     }
   },
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 4,
     "fields": {
       "location": "Madrid",
@@ -78,7 +78,7 @@
     }
   },
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 5,
     "fields": {
       "location": "Madrid",
@@ -97,7 +97,7 @@
     }
   },
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 6,
     "fields": {
       "location": "Sevilla",
@@ -116,11 +116,11 @@
     }
   },
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 7,
     "fields": {
       "location": "Sevilla",
-      "name": "100Montaditos",
+      "name": "100 Montaditos",
       "latitude":"37.390346",
       "longitude":"-5.960231",
       "photo":"images/100monta.jpg",
@@ -135,7 +135,7 @@
     }
   },
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 8,
     "fields": {
       "location": "Sevilla",
@@ -154,7 +154,7 @@
     }
   },
   {
-    "model": "ispp8.activity",
+    "model": "plan.activity",
     "pk": 9,
     "fields": {
       "location": "Madrid",
