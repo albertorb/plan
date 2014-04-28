@@ -43,14 +43,18 @@ def automatic_plan(request):
             profile.djangoUser = userp
 
             if 'picture' in request.FILES:
-            
+
                 profile.image = request.FILES['picture']
 
-            # Now we save the UserProfile model instance.
-            profile.save()
-            print("registro ok")
-
-            return HttpResponseRedirect('/home')
+                # Now we save the UserProfile model instance.
+                profile.save()
+                print("registro ok")
+                #request.session.flush()
+                username = request.POST['username']
+                hashpassword = request.POST['password']
+                UserAccount = authenticate(username=username, password=hashpassword)
+                login(request, UserAccount)
+                return HttpResponseRedirect('/home')
         else:
             print(djangoform.errors)
             print(userform.errors)
