@@ -1,58 +1,67 @@
 {% extends 'master_page_nonlogged.html' %}
 {% block content %}
 
-    <div class="alert alert-success alert-dismissable text-center" style="margin-top: 5%">Here you are! Your plan for
-        today!
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+
+
+
+    <div class=" text-center scape-top-custom">
+
+        <button type="button" class="btn btn-primary">Food</button>
+        <button type="button" class="btn btn-danger">Love</button>
+        <button type="button" class="btn btn-warning">Sightseeing</button>
+        <button type="button" class="btn btn-success">Party</button>
+        <button type="button" class="btn btn-info">Mix</button>
+
+
     </div>
 
-    <div class="text-center">
+    <div class=" col-lg-12 alert alert-success text-center">Here you are! Your plan for today</div>
 
-            <button type="button" class="btn btn-primary">Food</button>
-            <button type="button" class="btn btn-danger">Love</button>
-            <button type="button" class="btn btn-warning">Sightseeing</button>
-            <button type="button" class="btn btn-success">Party</button>
-            <button type="button" class="btn btn-info">Mix</button>
-        </div>
 
-    <div class="row div-card-plan-whole">
 
-        {% if activities.count > 0  %}
 
-        {% for activity in activities %}
 
-            {% if forloop.counter <= 3 %}
-                <div class="col-sm-6 col-md-4">
-                    <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert"
-                            aria-hidden="true">
-                        <strong>&times</strong>
-                    </button>
 
-                    <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail"
-                         style="background-image:url('{{ MEDIA_URL }}{{ activity.photo }}')">
+    <div class="row div-card-plan-whole container center-block">
 
-                        <div id="info{{ forloop.counter }}" style="display: none" class="well div-card-plan-info">
-                            {{ activity.description }}
+
+        {% if activities.count > 0 %}
+
+            {% for activity in activities %}
+
+                {% if forloop.counter <= 3 %}
+                    <div class="col-sm-6 col-md-4">
+                        <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert"
+                                aria-hidden="true">
+                            <strong>&times</strong>
+                        </button>
+
+                        <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail"
+                             style="background-image:url('{{ MEDIA_URL }}{{ activity.photo }}')">
+
+                            <div id="info{{ forloop.counter }}" style="display: none" class="well div-card-plan-info">
+                                {{ activity.description }}
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="text-center panel div-card-plan-actiname">
+                            <h4>{{ activity.name }}</h4>
                         </div>
 
 
                     </div>
-
-
-                    <div class="text-center panel div-card-plan-actiname">
-                        <h4>{{ activity.name }}</h4>
-                    </div>
-
-
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
 
     </div>
 
 
-    <div id="map-canvas" class=" google-map-canvas ">
+    <div id="map-canvas" class=" google-map-canvas center-block">
     </div>
     <div class="well-lg text-center ">
 
@@ -76,7 +85,6 @@
         #map-canvas {
             height: 30%;
             width: 30%;
-
 
         }
 
@@ -182,14 +190,14 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" style="box-shadow: #999999" action="../filteresult" method="get">
-                    <div class="dropdown">Location
-                        <select name="l" class="form-control" id="focus">
-                            <option>Sevilla</option>
-                            <option>Madrid</option>
-                        </select>
+                        <div class="dropdown">Location
+                            <select name="l" class="form-control" id="focus">
+                                <option>Sevilla</option>
+                                <option>Madrid</option>
+                            </select>
                         </div>
-                   <label>
-                       <input type="submit" class="btn button-orange-plan" value="Obtener planes">
+                        <label>
+                            <input type="submit" class="btn button-orange-plan" value="Obtener planes">
 
                         </label>
                         </fieldset>
