@@ -55,6 +55,7 @@ body{
     /*border-bottom-color: darkorange;*/
     border-bottom-style: none;
 
+
 }
 
 .nav-tabs-custom {
@@ -87,7 +88,11 @@ body{
 
 .navbar-logo-custom {
     margin-left: 10%;
+    margin-top: -0.5%;
+}
 
+.scape-top-custom{
+    margin-top: 5%;
 }
 
 .button-orange {

@@ -19,6 +19,7 @@
     <![endif]-->
 </head>
 <body>
+<div class="row">
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation">
 
     <div class="containter-fluid">
@@ -26,10 +27,10 @@
 
         <div class="navbar-header navbar-logo-custom">
             <!-- company logo-->
-            <a class="navbar-brand" href="#"> <img src="../static/img/logo.png"></a>
+            <a class="navbar-brand" href="#"> <img src="{{ STATIC_URL }}img/logo.png"></a>
 
         </div>
-        <div class="navbar-right navbar-header" style="margin-right:5%; margin-top: 1.5%">
+        <div class="navbar-right navbar-header" style="margin-right:5%; margin-top: 1%">
             <a href="#">es</a>|<a href="#">en</a>
         </div>
         <div class="navbar-header navbar-right" style="margin-right:12%">
@@ -51,7 +52,7 @@
     </div>
 
 </nav>
-
+</div>
 <!-- Modal signup -->
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -203,10 +204,11 @@
 
 </div>
 
+<div class="scape-top-custom">
 {% block content %}
 
 {% endblock %}
-
+</div>
 
 <footer class="panel-footer panel-footer-custom">&copy 2014 PAMAB
     <a href="#">Contact</a>
