@@ -127,8 +127,11 @@ def home(request):
     # user
 
     our = get_object_or_404(OurUser, djangoUser=request.user.id)
+    loguser = request.user
+    ouser = OurUser.objects.get(djangoUser=loguser)
+    plans = Plan.objects.filter(user=ouser, done=True).all()
 
-    return render_to_response('home.html', {'user': our, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3}, context_instance=RequestContext(request))
+    return render_to_response('home.html', {'plans': plans,'user': our, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3}, context_instance=RequestContext(request))
 
 
 def filter_plan(request):

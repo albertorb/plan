@@ -73,8 +73,57 @@
 
 </div>
 
+<div class="row div-card-plan-whole">
+
+    {% for plan in plans %}
+
+    {% for activity in plan.activities.all %}
+    <div class="col-sm-10 col-md-4">
 
 
+        <div  class="thumbnail div-card-plan-thumbnail"
+             style="background-image:url('{{MEDIA_URL}}{{activity.photo}}')">
+
+            <div  style="display: none" class="well div-card-plan-info">
+                {{plan.endDate}}
+            </div>
+
+
+        </div>
+
+
+        <div class="text-center panel div-card-plan-actiname">
+            <h4>{{activity.name}}</h4>
+        </div>
+
+        <div class="text-center panel div-card-plan-vote">
+
+            <h4>Valoration: {{activity.valoration}}</h4>
+            <form method="post" action="../static/php/vote.php">
+            <button type="button" class="btn btn-default navbar-btn button-orange" onclick="javascript:aviso();">Vote
+            </button>
+        </form>
+        </div>
+
+
+
+
+    </div>
+    {% endfor %}
+
+
+
+
+    {% endfor %}
+
+</div>
+<script language="javascript">
+
+function aviso(){
+alert('La solicitud ha sido procesada --mentira--');
+}
+
+</script>
 <style type="text/css">
     html {
         height: 100%
