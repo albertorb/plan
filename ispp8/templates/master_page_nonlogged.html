@@ -77,7 +77,7 @@
                     <div id="divUsername" class="form-group has-feedback">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username"
-                               placeholder="Enter username" onblur="validateusr()">
+                               placeholder="Enter username" onblur="validateusr(false)">
                         <span id="spantick" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
                         <span id="spantickerror" class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
 
@@ -88,7 +88,7 @@
 
                     <div id="divEmail" class="form-group has-feedback">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" onblur="validatemail()"
+                        <input type="email" class="form-control" id="email" name="email" onblur="validatemail(false)"
                                placeholder="Enter email">
                         <span id="spantick1" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
                         <span id="spantickerror1"
@@ -217,41 +217,44 @@
 </footer>
 
 <script>
-    function validateusr() {
+    function validateusr(stop) {
 
         {% for elem in uservform %}
 
-            if ("{{ elem.username }}" != $("#username").val()) {
+            if (!stop) {
+                if ("{{ elem.username }}" != $("#username").val()) {
 
-                $("#divUsername").addClass("has-success");
+                    $("#divUsername").addClass("has-success");
 
-                $("#spantick").removeClass("hidden");
-                //remove if errors before
-                $("#divUsername").removeClass("has-error");
+                    $("#spantick").removeClass("hidden");
+                    //remove if errors before
+                    $("#divUsername").removeClass("has-error");
 
-                $("#spantickerror").addClass("hidden")
-                $("#alertusn").addClass("hidden");
-
-            } else if ("{{ elem.username }}" == $("#username").val()) {
-                $("#divUsername").addClass("has-error");
-
-                $("#spantickerror").removeClass("hidden");
-                //remove if success before
-                $("#divUsername").removeClass("has-success");
-
-                $("#spantick").addClass("hidden");
-                //alert
-                $("#alertusn").removeClass("hidden");
+                    $("#spantickerror").addClass("hidden")
+                    $("#alertusn").addClass("hidden");
 
 
+                } else if ("{{ elem.username }}" == $("#username").val()) {
+                    $("#divUsername").addClass("has-error");
+
+                    $("#spantickerror").removeClass("hidden");
+                    //remove if success before
+                    $("#divUsername").removeClass("has-success");
+
+                    $("#spantick").addClass("hidden");
+                    //alert
+                    $("#alertusn").removeClass("hidden");
+                    stop = true;
+                }
             }
 
 
         {% endfor %}
     }
 
-    function validatemail() {
+    function validatemail(stop) {
         {% for elem in uservform %}
+            if(!stop){
             if ("{{ elem.email }}" != $("#email").val()) {
 
                 $("#divEmail").addClass("has-success");
@@ -272,8 +275,8 @@
 
                 $("#spantick1").addClass("hidden");
                 $("#alertema").removeClass("hidden");
-
-            }
+                stop = true;
+            }}
         {% endfor %}
     }
 
