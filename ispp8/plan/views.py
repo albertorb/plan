@@ -43,7 +43,8 @@ def automatic_plan(request):
             profile.djangoUser = userp
 
             if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
+            
+                profile.image = request.FILES['picture']
 
             # Now we save the UserProfile model instance.
             profile.save()
@@ -95,9 +96,12 @@ def automatic_plan(request):
     activities2.append(ac2)
     ac3 = activities[2]
     activities2.append(ac3)
+
+    #validation
+    uservform = User.objects.all()
     return render_to_response('automatic_plan_nonlogged.html',
                               { 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3, 'userform': userform,
-                               'djangoform': djangoform},
+                               'djangoform': djangoform, 'uservform':uservform},
                               context_instance=RequestContext(request))
 
 
@@ -109,7 +113,7 @@ def logout(request):
 def error(request):
     return render_to_response('404.html')
 
-
+@login_required(login_url='/plan/')
 def home(request):
 
     # automatic plan
@@ -142,14 +146,14 @@ def list_plan(request):
     return render_to_response('filter_plan.html', {'activitiesfilt': actividades}, context_instance=RequestContext(request))
 
 
-
+@login_required(login_url='/plan/')
 def list_planregister(request):
     our=get_object_or_404(OurUser,djangoUser=request.user.id)
     actividades= Activity.objects.filter(location=request.GET['l'])
     return render_to_response('filter_planlogged.html', {'user': our, 'activitiesfilt': actividades}, context_instance=RequestContext(request))
 
 
-#@login_required(login_url="/login/")
+@login_required(login_url='/plan/')
 def timeline(request):
     duser = request.user
     print('getting django user')
@@ -180,7 +184,7 @@ def user_plans(request):
     print(plans)
     return render_to_response('user_plans.html', {'user': ouser, 'plans': plans}, context_instance=RequestContext(request))
 
-
+@login_required(login_url='/plan/')
 def todo(request):
     duser = request.user
     print('getting django user')

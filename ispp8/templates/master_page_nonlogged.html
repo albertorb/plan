@@ -73,19 +73,44 @@
                     <div class="btn btn-danger">Google +</div>
                 </div>
 
-                <form class="form-signup-custom " role="form" method="post"> {% csrf_token %}
-                    <div class="form-group">
+                <form class="form-signup-custom " role="form" enctype="multipart/form-data" method="post"> {% csrf_token %}
+                    <div id="divUsername" class="form-group has-feedback">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                        <input type="text" class="form-control" id="username" name="username"
+                               placeholder="Enter username" onblur="validateusr(false)">
+                        <span id="spantick" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
+                        <span id="spantickerror" class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
+
+                        <div id="alertusn" class="hidden alert alert-danger">Sorry, username in use. Please try another
+                            one
+                        </div>
                     </div>
 
-                    <div class="form-group ">
+                    <div id="divEmail" class="form-group has-feedback">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                        <input type="email" class="form-control" id="email" name="email" onblur="validatemail(false)"
+                               placeholder="Enter email">
+                        <span id="spantick1" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
+                        <span id="spantickerror1"
+                              class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
+
+                        <div id="alertema" class="hidden alert alert-danger">Sorry, email in use. Please try another
+                            one
+                        </div>
                     </div>
                     <div class="form-group ">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password"
+                               placeholder="Password" onkeyup="passWeakness()">
+
+                        <div class="progress">
+                            <div id="progressBar" class="progress-bar active" role="progressbar" aria-valuenow="0"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+
+                            </div>
+                        </div>
+
                     </div>
                     <div class="form-group ">
                         <label for="birthday">Birthday</label>
@@ -101,11 +126,11 @@
 
                     <div id="profileimage" class="form-group">
                         <label for="profileimage">Profile image</label>
-                        <input id="profileimage" type="file" placeholder="Drop here">
+                        <input id="picture" name="picture" type="file" >
                     </div>
                     <div class="help-block ">
-                        <p class="help-block text-center">By submit this form you accept our <a href="/terms">privacy &
-                            terms</a>.</p>
+                        <p class="help-block text-center">By submit this form you accept our <a href="/terms">terms &
+                            cons</a>.</p>
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn button-orange">Submit</button>
@@ -192,7 +217,124 @@
 </footer>
 
 <script>
-    $("#profileimage").dropzone({ url: "/file/post" });
+    function validateusr(stop) {
+
+        {% for elem in uservform %}
+
+            if (!stop) {
+                if ("{{ elem.username }}" != $("#username").val()) {
+
+                    $("#divUsername").addClass("has-success");
+
+                    $("#spantick").removeClass("hidden");
+                    //remove if errors before
+                    $("#divUsername").removeClass("has-error");
+
+                    $("#spantickerror").addClass("hidden")
+                    $("#alertusn").addClass("hidden");
+
+
+                } else if ("{{ elem.username }}" == $("#username").val()) {
+                    $("#divUsername").addClass("has-error");
+
+                    $("#spantickerror").removeClass("hidden");
+                    //remove if success before
+                    $("#divUsername").removeClass("has-success");
+
+                    $("#spantick").addClass("hidden");
+                    //alert
+                    $("#alertusn").removeClass("hidden");
+                    stop = true;
+                }
+            }
+
+
+        {% endfor %}
+    }
+
+    function validatemail(stop) {
+        {% for elem in uservform %}
+            if(!stop){
+            if ("{{ elem.email }}" != $("#email").val()) {
+
+                $("#divEmail").addClass("has-success");
+
+                $("#spantick1").removeClass("hidden");
+                //remove if errors before
+                $("#divEmail").removeClass("has-error");
+
+                $("#spantickerror1").addClass("hidden");
+                $("#alertema").addClass("hidden");
+
+            } else {
+                $("#divEmail").addClass("has-error");
+
+                $("#spantickerror1").removeClass("hidden");
+                //remove if success before
+                $("#divEmail").removeClass("has-success");
+
+                $("#spantick1").addClass("hidden");
+                $("#alertema").removeClass("hidden");
+                stop = true;
+            }}
+        {% endfor %}
+    }
+
+    function passWeakness() {
+        var twoUpper = new RegExp('(?=.*[A-Z].*[A-Z])');
+        var oneSpecial = new RegExp('(?=.*[!@#$&*])');
+        var hasTwoDigits = new RegExp('(?=.*[0-9].*[0-9])');
+        var threeLower = new RegExp('(?=.*[a-z].*[a-z].*[a-z])');
+        var length8 = new RegExp('.{8}');
+        var valeur = 0;
+
+        $('.progress-bar').css('width', valeur + '%').attr('aria-valuenow', valeur);
+
+        if ($("#password").val().match(twoUpper)) {
+
+            valeur += 20;
+            $('.progress-bar').css('width', valeur + '%').attr('aria-valuenow', valeur);
+
+
+        }
+        if ($("#password").val().match(oneSpecial)) {
+            valeur += 20;
+            $('.progress-bar').css('width', valeur + '%').attr('aria-valuenow', valeur);
+        }
+        if ($("#password").val().match(hasTwoDigits)) {
+            valeur += 20;
+            $('.progress-bar').css('width', valeur + '%').attr('aria-valuenow', valeur);
+        }
+        if ($("#password").val().match(length8)) {
+            valeur += 20;
+            $('.progress-bar').css('width', valeur + '%').attr('aria-valuenow', valeur);
+        }
+        if ($("#password").val().match(threeLower)) {
+            valeur += 20;
+            $('.progress-bar').css('width', valeur + '%').attr('aria-valuenow', valeur);
+        }
+
+
+        if (0 < valeur) {
+            $('.progress-bar').addClass('progress-bar-danger');
+            $('.progress-bar').removeClass('progress-bar-warning');
+            $('.progress-bar').removeClass('progress-bar-success');
+            $('.progress-bar').html("Weak password");
+
+        }
+        if (40 < valeur) {
+            $('.progress-bar').addClass('progress-bar-warning');
+            $('.progress-bar').removeClass('progress-bar-success');
+            $('.progress-bar').removeClass('progress-bar-danger');
+            $('.progress-bar').html("Medium password");
+        }
+        if (valeur > 60) {
+            $('.progress-bar').addClass('progress-bar-success');
+            $('.progress-bar').removeClass('progress-bar-danger');
+            $('.progress-bar').removeClass('progress-bar-warning');
+            $('.progress-bar').html("Strong password");
+        }
+    }
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
