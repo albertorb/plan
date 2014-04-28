@@ -43,7 +43,8 @@ def automatic_plan(request):
             profile.djangoUser = userp
 
             if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
+            
+                profile.image = request.FILES['picture']
 
             # Now we save the UserProfile model instance.
             profile.save()
