@@ -26,7 +26,7 @@ body{
 }
 
 #btnsignin,#btnsignup{
-    color: darkorange;
+    color: orange;
 }
 
 #internaz>a{
@@ -145,6 +145,7 @@ body{
 
 .panel-footer-custom {
     background-color: #f0ad4e;
+    margin-top:10%;
     bottom:0;
     color: #ffffff;
 }
@@ -281,8 +282,7 @@ body{
     background-size: cover;
     min-height: 270px;
     max-height: 270px;
-    margin-left:10%;
-    margin-right:10%;
+
 }
 
 .div-card-plan-thumbnail:hover {
@@ -319,7 +319,7 @@ body{
 }
 
 .div-card-plan-whole {
-    margin-top: 5%;
+
 }
 
 .button-orange-plan {
