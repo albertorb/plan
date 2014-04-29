@@ -25,6 +25,14 @@ body{
 
 }
 
+#btnsignin,#btnsignup{
+    color: darkorange;
+}
+
+#internaz>a{
+    color:white;
+}
+
 
 .activecustom:focus {
     color: white;
