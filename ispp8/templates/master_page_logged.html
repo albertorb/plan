@@ -26,16 +26,18 @@
 
         <div class="navbar-header navbar-logo-custom">
             <!-- company logo-->
-            <a class="navbar-brand" href="#"> <img src="../static/img/logo.png"></a>
+            <a class="navbar-brand" href="#"> <img src="{{ STATIC_URL }}img/logowhite.png"></a>
 
         </div>
         <div class="btn-group-right-custom btn-group-xs">
             <button type="button" class="btn btn-default dropdown-toggle button-profile" data-toggle="dropdown">
 
-                <img src="/media/{{ user.image }}" class="img-circle img-xs-custom">
+                <img src="{{ MEDIA_URL }}{{ request.user.ouruser.image }}" class="img-circle img-xs-custom">
 
             </button>
-            <ul class="dropdown-menu dropdown-menu-right-custom">
+
+            <ul class=" dropdown-menu dropdown-menu-right-custom">
+                <li class="text-center help-block"><p>Welcome {{ request.user }}!</p></li>
                 <li><a href="#">Profile</a></li>
 
                 <li class="divider"></li>

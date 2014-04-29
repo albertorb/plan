@@ -140,10 +140,16 @@ def home(request):
     our = get_object_or_404(OurUser, djangoUser=request.user.id)
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
-    plans = Plan.objects.filter(user=ouser, done=True).all()
+
+    # recently done
+    recentplans = Plan.objects.filter(user=ouser, done=True).all()
+
+
+
+
 
     return render_to_response('home.html',
-                              {'plans': plans, 'user': our, 'activities': activities, 'ac1': ac1, 'ac2': ac2,
+                              {'recentplans': recentplans, 'user': our, 'activities': activities, 'ac1': ac1, 'ac2': ac2,
                                'ac3': ac3}, context_instance=RequestContext(request))
 
 
