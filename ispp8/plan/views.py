@@ -114,7 +114,7 @@ def automatic_plan(request):
 
 def logout(request):
     auth.logout(request)
-    #return HttpResponseRedirect("/pagina1/pagina2")
+    return HttpResponseRedirect("/plan")
 
 
 def error(request):
