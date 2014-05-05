@@ -17,7 +17,8 @@ from django.views.decorators.http import require_http_methods
 
 
 
-
+def welcome(request):
+    return render_to_response('welcome.html',  context_instance=RequestContext(request))
 
 #@login_required(login_url="/login/")
 def automatic_plan(request):
@@ -141,11 +142,10 @@ def home(request):
     # user
 
     our = get_object_or_404(OurUser, djangoUser=request.user.id)
-    loguser = request.user
-    ouser = OurUser.objects.get(djangoUser=loguser)
+
 
     # recently done
-    recentplans = Plan.objects.filter(user=ouser, done=True).all()
+    recentplans = Plan.objects.filter(user=our, done=True).all()
 
 
 
