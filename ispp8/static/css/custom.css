@@ -1,6 +1,6 @@
 /* master_page.html */
 
-body{
+body {
     background-color: #eee;
     height: 100%;
 }
@@ -11,8 +11,6 @@ body{
     border-bottom-style: solid;
     border-bottom-color: #5cb85c;
 
-    
-
 }
 
 .activecustom:hover {
@@ -22,17 +20,15 @@ body{
     border-left: none;
     border-right: none;
 
-
 }
 
-#btnsignin,#btnsignup{
+#btnsignin, #btnsignup {
     color: orange;
 }
 
-#internaz>a{
-    color:white;
+#internaz > a {
+    color: white;
 }
-
 
 .activecustom:focus {
     color: white;
@@ -62,7 +58,7 @@ body{
 
 .a-nonactivecustom:hover {
     color: white;
-    border:none;
+    border: none;
 
 }
 
@@ -70,7 +66,6 @@ body{
     background-color: #f0ad4e;
     /*border-bottom-color: darkorange;*/
     border-bottom-style: none;
-
 
 }
 
@@ -100,19 +95,24 @@ body{
 
 }
 
+.navbar-logo-nonlog-custom {
+    margin-left: 10%;
+    margin-top: -0.5%;
+
+}
+
 .navbar-logo-custom {
     margin-left: 10%;
 
 }
 
-.scape-top-custom{
+.scape-top-custom {
     margin-top: 5%;
 }
 
 .button-orange {
     color: white;
     background-color: darkorange;
-
 
 }
 
@@ -123,30 +123,31 @@ body{
     border-color: darkorange;
 }
 
-.button-orange:focus{
+.button-orange:focus {
     color: darkorange;
     background-color: white;
     font-size: 110%;
-    border: 1px 1px 1px 1px ;
+    border: 1px 1px 1px 1px;
     border-color: darkorange;
 }
 
-.img-upload-custom{
+.img-upload-custom {
 
 }
 
-.select-custom{
+.select-custom {
     background-color: #ffffff;
 }
 
-.content{
+.content {
     height: 100%;
 }
 
 .panel-footer-custom {
     background-color: #f0ad4e;
-    margin-top:10%;
-    bottom:0;
+    margin-top: 10%;
+    bottom: 0;
+
     color: #ffffff;
 }
 
@@ -185,16 +186,12 @@ body{
     webkit-box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
 }
 
-
-
 .button-profile {
     border: none;
     float: right;
     background-color: #f0ad4e;
 
 }
-
-
 
 .button-profile:hover {
     background-color: #ffffff;
@@ -236,46 +233,43 @@ body{
     height: 100px;
 }
 
-.form-signup-custom>div>input:hover{
+.form-signup-custom > div > input:hover {
     border-color: #F5D0A9;
     background-color: #ffffff;
-    outline:0;
+    outline: 0;
     box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
     webkit-box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
 }
 
-.form-signup-custom>div>select:hover{
-    border-color: #F5D0A9;
-    background-color: #ffffff;
-    box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
-    webkit-box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
-}
-
-.form-signup-custom>div>input>::-moz-placeholder{
+.form-signup-custom > div > select:hover {
     border-color: #F5D0A9;
     background-color: #ffffff;
     box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
     webkit-box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
 }
 
-.form-signup-custom>div>select>:selection{
+.form-signup-custom > div > input > ::-moz-placeholder {
     border-color: #F5D0A9;
     background-color: #ffffff;
     box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
     webkit-box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
 }
 
+.form-signup-custom > div > select > :selection {
+    border-color: #F5D0A9;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
+    webkit-box-shadow: inset 0 1px 1px orange, 0 0 8px orange;
+}
 
 /* Automatic plan for non logged*/
 
 .div-card-plan-info {
-    margin-top:20%;
-    opacity:0.8;
-    filter:alpha(opacity=80); /* For IE8 and earlier */
+    margin-top: 20%;
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
 
 }
-
-
 
 .div-card-plan-thumbnail {
     background-repeat: no-repeat;
@@ -297,17 +291,17 @@ body{
 
 }
 
-.btn-twitter{
+.btn-twitter {
     background-color: #4099FF;
-    color:white;
+    color: white;
 }
 
-.btn-twitter:hover{
+.btn-twitter:hover {
     background-color: #4090FF;
-    color:white;
+    color: white;
 }
 
-.espacio{
+.espacio {
     width: 100%;
     height: 40%;
 
@@ -346,87 +340,98 @@ box-sizing(content-box);
     margin-top: 100px;
 }
 
-
-
-#contenido{
+#contenido {
     margin-top: 100px;
 
 }
 
-#plans{
+#plans {
     margin-left: 200px;
     width: 1000px;
 }
 
-
-#tarjetas{
+#tarjetas {
     width: 1000px;
 }
 
-.img{
+.img {
     margin-bottom: 10px;
 }
 
-.more{
+.more {
     float: right;
     margin-top: 5%;
 
     margin-right: 15%;
 }
 
-.more2{
+.more2 {
     float: right;
     margin-top: 20%;
     margin-right: -4%;
 
-
 }
 
-.activities{
-width: 300px;
-padding-left: 10%;
+.activities {
+    width: 300px;
+    padding-left: 10%;
 }
 
-#flecha1{
+#flecha1 {
     margin-left: -700px;
     margin-top: 25px;
 }
 
-#flecha2{
+#flecha2 {
     margin-left: 210px;
     margin-top: 35px;
 }
 
-.filteragain{
+.filteragain {
     padding-left: 550px;
     padding-top: 150px;
 }
 
-#focus:hover{
-border-color: #d58512;
-outline: 0;
-outline: thin dotted \9;
--moz-box-shadow: 0 0 8px #d58512);
-box-shadow: 0 0 8px #d58512
+#focus:hover {
+    border-color: #d58512;
+    outline: 0;
+    outline: thin dotted \9;
+    -moz-box-shadow: 0 0 8px #d58512);
+    box-shadow: 0 0 8px #d58512
 }
 
-.espacioleft{
+.espacioleft {
     margin-left: 10%;
 }
 
 /* HOME */
-.image-xs-custom{
-    min-height:70px;
+.image-xs-custom {
+    min-height: 70px;
     min-width: 90%;
-    max-height:70px;
+    max-height: 70px;
     max-width: 90%;
 
 }
 
-.thumbnail-xs-custom{
-    min-height:50%;
+.image-xxs-custom {
+    min-height: 60px;
+    min-width: 70%;
+    max-height: 60px;
+    max-width: 70%;
+
+}
+
+.image-md-custom {
+    min-height: 100px;
+    min-width: 100%;
+    max-height: 100px;
+    max-width: 100%;
+}
+
+.thumbnail-xs-custom {
+    min-height: 50%;
     min-width: 90%;
-    max-height:50%;
+    max-height: 50%;
     max-width: 90%;
 }
 
