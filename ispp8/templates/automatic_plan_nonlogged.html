@@ -3,13 +3,52 @@
 
 
 
+    <div class="scape-top-custom container text-center">
+        <div class="alert alert-warning">
+            <p>Featured plan</p>
+        </div>
+
+     {% if featured.count > 0 %}
+
+            {% for activity in featured %}
+
+                {% if forloop.counter <= 3 %}
+                    <div class="col-sm-6 col-md-4">
+                        <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert"
+                                aria-hidden="true">
+                            <strong>&times</strong>
+                        </button>
+
+                        <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail"
+                             style="background-image:url('{{ MEDIA_URL }}{{ activity.photo }}')">
+
+                            <div id="info{{ forloop.counter }}" style="display: none" class="well div-card-plan-info">
+                                {{ activity.description }}
+                            </div>
 
 
-    <div class=" text-center scape-top-custom container" style="margin-bottom: 2%;">
+                        </div>
+
+
+                        <div class="text-center panel div-card-plan-actiname">
+                            <h4>{{ activity.name }}</h4>
+                        </div>
+
+
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <div class=" text-center  container" style="margin-bottom: 2%;">
          <div class="text-center alert alert-warning">
+             <p>Don't you like what you see?</p>
             <p>Which kind plan of shall we offer you?</p>
+             <br>
 
-        <button type="button" class="btn btn-primary">Food</button>
+        <button type="button" class="btn btn-primary">Bar</button>
         <button type="button" class="btn btn-danger">Love</button>
         <button type="button" class="btn btn-warning">Sightseeing</button>
         <button type="button" class="btn btn-success">Party</button>

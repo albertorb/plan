@@ -33,6 +33,9 @@ def automatic_plan(request):
     ac3 = activities[2]
     activities2.append(ac3)
 
+    # featured
+    featured = Activity.objects.filter(isPromoted=True)
+
     #validation
     uservform = User.objects.all()
 
@@ -98,7 +101,7 @@ def automatic_plan(request):
             return render_to_response('automatic_plan_nonlogged.html',
                                       {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
                                        'userform': userform,
-                                       'djangoform': djangoform, 'uservform': uservform},
+                                       'djangoform': djangoform, 'uservform': uservform,'featured':featured[:3]} ,
                                       context_instance=RequestContext(request))
 
 
@@ -106,10 +109,10 @@ def automatic_plan(request):
 
 
     return render_to_response('automatic_plan_nonlogged.html',
-                              {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
-                               'userform': userform,
-                               'djangoform': djangoform, 'uservform': uservform},
-                              context_instance=RequestContext(request))
+                                      {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
+                                       'userform': userform,
+                                       'djangoform': djangoform, 'uservform': uservform,'featured':featured[:3]} ,
+                                      context_instance=RequestContext(request))
 
 
 def logout(request):
