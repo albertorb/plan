@@ -17,7 +17,8 @@ from django.views.decorators.http import require_http_methods
 
 
 
-
+def welcome(request):
+    return render_to_response('welcome.html',  context_instance=RequestContext(request))
 
 #@login_required(login_url="/login/")
 def automatic_plan(request):
@@ -32,6 +33,9 @@ def automatic_plan(request):
     activities2.append(ac2)
     ac3 = activities[2]
     activities2.append(ac3)
+
+    # featured
+    featured = Activity.objects.filter(isPromoted=True)
 
     #validation
     uservform = User.objects.all()
@@ -98,7 +102,7 @@ def automatic_plan(request):
             return render_to_response('automatic_plan_nonlogged.html',
                                       {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
                                        'userform': userform,
-                                       'djangoform': djangoform, 'uservform': uservform},
+                                       'djangoform': djangoform, 'uservform': uservform,'featured':featured[:3]} ,
                                       context_instance=RequestContext(request))
 
 
@@ -106,10 +110,10 @@ def automatic_plan(request):
 
 
     return render_to_response('automatic_plan_nonlogged.html',
-                              {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
-                               'userform': userform,
-                               'djangoform': djangoform, 'uservform': uservform},
-                              context_instance=RequestContext(request))
+                                      {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
+                                       'userform': userform,
+                                       'djangoform': djangoform, 'uservform': uservform,'featured':featured[:3]} ,
+                                      context_instance=RequestContext(request))
 
 
 def logout(request):
@@ -138,11 +142,10 @@ def home(request):
     # user
 
     our = get_object_or_404(OurUser, djangoUser=request.user.id)
-    loguser = request.user
-    ouser = OurUser.objects.get(djangoUser=loguser)
+
 
     # recently done
-    recentplans = Plan.objects.filter(user=ouser, done=True).all()
+    recentplans = Plan.objects.filter(user=our, done=True).all()
 
 
 
