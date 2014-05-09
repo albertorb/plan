@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^filteresultlogged/$','plan.views.list_planregister'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
     url(r'^logout/$','plan.views.logout'),
-
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^filterplans/$', 'plan.views.filter_plan'),
     url(r'^timeline/$', 'plan.views.timeline'),
     url(r'^todo/$', 'plan.views.todo'),
