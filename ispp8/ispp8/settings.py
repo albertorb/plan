@@ -213,5 +213,13 @@ SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'SCOPE': ['email', 'publish_stream'],
         'METHOD': 'js_sdk'  # instead of 'oauth2'
+    },
+    'twitter': {
+        'SCOPE': ['email', 'publish_stream'],
+        'METHOD': 'oauth2'
+    },
+    'google': {
+        'SCOPE': ['email', 'publish_stream'],
+        'METHOD': 'oauth2'
     }
 }
