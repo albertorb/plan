@@ -12,16 +12,18 @@ class Activity(models.Model):
     name = models.CharField(max_length=40)
     latitude = models.DecimalField(max_digits=10, decimal_places=6)
     longitude = models.DecimalField(max_digits=10, decimal_places=6)
-    photo = models.ImageField(upload_to='images/', verbose_name='Imagen')
-    sector = models.CharField(max_length=20)
+    photo = models.URLField()
+    sector = models.CharField(max_length=200)
     moment = models.CharField(max_length=3, choices=MOMENTS)
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
-    valoration = models.IntegerField()
+    valoration = models.FloatField()
     isFree = models.CharField(max_length=3, choices=PRICE, default='f')
     isPromoted = models.BooleanField()
     objects = models.Manager()
     description = models.CharField(max_length=200)
+    url = models.URLField()
+
 
     def __unicode__(self):
         return self.name
