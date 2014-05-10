@@ -4,52 +4,53 @@
 
 
     <div class="scape-top-custom container text-center">
-        <div class="alert alert-warning">
-            <p>Featured plan</p>
-        </div>
 
-     {% if featured.count > 0 %}
 
-            {% for activity in featured %}
+        {% if featured.count > 0 %}
+            <div class="row">
+                {% for activity in featured %}
 
-                {% if forloop.counter <= 3 %}
-                    <div class="col-sm-6 col-md-4">
-                        <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert"
-                                aria-hidden="true">
-                            <strong>&times</strong>
-                        </button>
+                    {% if forloop.counter <= 3 %}
 
-                        <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail"
-                             style="background-image:url('{{ MEDIA_URL }}{{ activity.photo }}')">
+                        <div class="col-sm-2 col-md-2">
 
-                            <div id="info{{ forloop.counter }}" style="display: none" class="well div-card-plan-info">
-                                {{ activity.description }}
+                            <div class="thumbnail">
+                                {% ifequal activity.isFree 'f' %}
+                            <span class=" text-success-custom pull-right">free</span>
+
+                                {% endifequal%}
+
+                                <span class="h6">{{ activity.name }}</span>
+                                <img class="img-md-custom col-md-14" src="{{ MEDIA_URL }}{{ activity.photo }}" alt="...">
+                                <div class="caption row">
+                                    <span class="col-xs-3 glyphicon glyphicon-plus pull-left"></span>
+                                    <span class="col-xs-3 glyphicon glyphicon-star pull-right"></span>
+                                    <span class="col-xs-3 glyphicon glyphicon-share pull-right"></span>
+
+                                </div>
+
                             </div>
 
-
                         </div>
 
-
-                        <div class="text-center panel div-card-plan-actiname">
-                            <h4>{{ activity.name }}</h4>
-                        </div>
-
-
-                    </div>
-                {% endif %}
-            {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         {% endif %}
+
 
     </div>
 
     <div class=" text-center  container" style="margin-bottom: 2%;">
-         <div class="text-center alert alert-warning">
-             <p>Don't you like what you see?</p>
-            <p>Which kind plan of shall we offer you?</p>
-             <br>
+    <div class="text-center alert alert-warning">
+        <p>Don't you like what you see?</p>
+
+        <p>Which kind plan of shall we offer you?</p>
+        <br>
 
         <button type="button" class="btn btn-primary">Bar</button>
         <button type="button" class="btn btn-danger">Love</button>
+        <button type="button" class="btn btn-default">Children</button>
         <button type="button" class="btn btn-warning">Sightseeing</button>
         <button type="button" class="btn btn-success">Party</button>
         <button type="button" class="btn btn-info">Mix</button>
@@ -58,18 +59,12 @@
     </div>
 
 
-
-
-
-
-
-
     <div class="row  container ">
-    <div class=" col-lg-12 alert alert-success text-center">
-        <p>Hey! What about that plan!?</p>
-        <button type="button" class="btn btn-warning">I want this plan</button>
-        <button type="button" class="btn btn-info" data-toggle="modal">Try a custom search </button>
-    </div>
+        <div class=" col-lg-12 alert alert-success text-center">
+            <p>Hey! What about that plan!?</p>
+            <button type="button" class="btn btn-warning">I want this plan</button>
+            <button type="button" class="btn btn-info" data-toggle="modal">Try a custom search</button>
+        </div>
 
         {% if activities.count > 0 %}
 
@@ -222,8 +217,6 @@
 
         google.maps.event.addDomListener(window, 'load', initialize);
 
-
-        //
         {{forloop.counter}}
     </script>
 
@@ -251,7 +244,7 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 {% endblock %}

@@ -1,5 +1,17 @@
 /* welcome.html */
 
+.img-md-custom{
+    max-height: 100px;
+    max-width: 140px;
+    min-height: 100px;
+    min-width: 140px;
+
+}
+
+.text-success-custom{
+    color:greenyellow;
+}
+
 .text-xs{
     font-size: small;
 }
