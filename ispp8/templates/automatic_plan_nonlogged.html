@@ -27,6 +27,7 @@
                                     <span class="col-xs-3 glyphicon glyphicon-star pull-right"></span>
                                     <span class="col-xs-3 glyphicon glyphicon-share pull-right"></span>
 
+
                                 </div>
 
                             </div>
@@ -45,7 +46,7 @@
     <div class="text-center alert alert-warning">
         <p>Don't you like what you see?</p>
 
-        <p>Which kind plan of shall we offer you?</p>
+        <p>Which kind of plan of shall we offer you?</p>
         <br>
 
         <button type="button" class="btn btn-primary">Bar</button>
@@ -91,7 +92,7 @@
                         <div class="text-center panel div-card-plan-actiname">
                             <h4>{{ activity.name }}</h4>
                         </div>
-
+                        <a class="btn btn-success" href="{% url 'activity_info' activity_id=activity.id %}">info</a>
 
                     </div>
                 {% endif %}
@@ -141,6 +142,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
     </script>
     <script type="text/javascript">
+
+
         $("#alertbye").addClass("in").fadeOut(3500);
 
         $("#thumb1").hover(function () {
