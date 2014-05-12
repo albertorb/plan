@@ -22,7 +22,24 @@ def welcome(request):
 
 def activity(request, activity_id):
     obj = get_object_or_404(Activity, id=activity_id)
-    return render_to_response('activity.html', {'activity':obj}, context_instance=RequestContext(request))
+    # checking if some friend has done this activity
+    res = []
+    print(request.user.is_authenticated())
+    if request.user.is_authenticated():
+        ourser = OurUser.objects.get(djangoUser=request.user)
+        friends = ourser.friends.all()
+
+        for friend in friends:
+            planesRealizados = Plan.objects.filter(user=friend)
+
+            for plan in planesRealizados:
+
+                    res.append(friend)
+                    print(res)
+
+
+
+    return render_to_response('activity.html', {'activity':obj, 'friendsDid':res}, context_instance=RequestContext(request))
 
 #@login_required(login_url="/login/")
 def automatic_plan(request):

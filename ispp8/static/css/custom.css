@@ -1,3 +1,44 @@
+/* activity.html */
+.text-green{
+    color:green;
+}
+
+.overlap-carousel-leftcontrol-custom{
+    position: absolute;
+    top:0%;
+}
+
+.overlap-carousel-rightcontrol-custom{
+    position: absolute;
+    top:0%;
+    right:0%
+}
+.top-separator-custom{
+    border-top-color: darkgray;
+
+}
+.right-separator-custom{
+    border-right-color: darkgray;
+}
+
+.left-separator-custom{
+    border-left-color: darkgray;
+}
+.img-lg-custom{
+    max-height: 250px;
+    max-width: 290px;
+    min-height: 250px;
+    min-width: 290px;
+
+}
+
+.img-xxs-custom{
+    max-height: 30px;
+    max-width: 40px;
+    min-height: 30px;
+    min-width: 40px;
+
+}
 /* welcome.html */
 
 .img-md-custom{
@@ -5,8 +46,8 @@
     max-width: 140px;
     min-height: 100px;
     min-width: 140px;
-
 }
+
 
 .text-success-custom{
     color:greenyellow;
