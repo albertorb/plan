@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 
     url(r'^plan$','plan.views.automatic_plan'),
     url(r'^activity/(?P<activity_id>\w+)/$','plan.views.activity', name='activity_info'),
+    url(r'^plan/(?P<activity_id>\w+)/(?P<activity_id2>\w+)/(?P<activity_id3>\w+)/$','plan.views.getPlan', name='plan_info'),
     url(r'^home$','plan.views.home'),
     url(r'^filteresultlogged/$','plan.views.list_planregister'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),

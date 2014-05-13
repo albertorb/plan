@@ -2,7 +2,8 @@ from plan.models import *
 from plan.forms import *
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, get_object_or_404
-
+from datetime import datetime
+from django.utils import formats
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
@@ -15,6 +16,24 @@ import random
 from django.views.decorators.http import require_http_methods
 
 
+
+def getPlan(request, activity_id,activity_id2,activity_id3):
+    act = get_object_or_404(Activity, id=activity_id)
+    act2 = get_object_or_404(Activity, id=activity_id2)
+    act3 = get_object_or_404(Activity, id=activity_id3)
+    planform = PlanForm()
+    plan = planform.save(commit = False)
+    plan.voted = False
+    plan.done = False
+    plan.startDate = act.startDate
+    plan.endDate = act3.endDate
+    plan.user = request.user.ouruser
+    plan.save()
+    plan.activities = [act,act2,act3]
+
+
+
+    return render_to_response('plan.html', {'plan':plan},context_instance=RequestContext(request))
 
 
 def welcome(request):

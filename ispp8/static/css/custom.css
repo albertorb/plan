@@ -1,3 +1,11 @@
+/* plan.html */
+.img-lg{
+    max-height: 50px;
+    max-width: 100px;
+    min-height: 100px;
+    min-width: 120px;
+}
+
 /* todo.html */
 
 .overlap-wishTitle-custom {
