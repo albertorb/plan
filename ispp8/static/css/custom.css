@@ -1,3 +1,14 @@
+/* todo.html */
+
+.overlap-wish-custom{
+    position:absolute;
+    bottom:0%;
+    color:#ffffff;
+    margin:0%;
+}
+
+
+
 /* activity.html */
 .text-green{
     color:green;
@@ -256,15 +267,17 @@ body {
 }
 
 .panel-footer-custom {
-    background-color: #f0ad4e;
+    position:absolute;
+    width: 100%;
+    background-color: #eee;
     margin-top: 10%;
-    bottom: 0;
-    color: #ffffff;
+    bottom: 0%;
+    color: #000000;
 }
 
 .panel-footer-custom > a {
     margin-left: 5%;
-    color: #ffffff;
+    color: darkorange;
 
 }
 
