@@ -327,8 +327,8 @@ body {
     position: absolute;
     width: 100%;
     background-color: #eee;
-    margin-top: 10%;
-    bottom: 0%;
+    margin-top: 0%;
+    bottom: -100%;
     color: #000000;
 }
 
