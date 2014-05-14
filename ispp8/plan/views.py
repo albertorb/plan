@@ -219,14 +219,18 @@ def timeline(request):
     return render_to_response('timeline.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
 
 
+@login_required(login_url='/plan/')
 def user_plans(request):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
     print(ouser)
-    plans = Plan.objects.filter(user=ouser, done=True).all()
-    print(plans)
-    return render_to_response('user_plans.html', {'user': ouser, 'plans': plans},
-                              context_instance=RequestContext(request))
+    if request.method == 'POST':
+        ident = request.POST.get("id")
+        plan = Plan.objects.filter(pk=ident).get()
+    else:
+        plans = Plan.objects.filter(user=ouser).all()
+        friends = ouser.friends.all()
+        return render_to_response('user_plans.html', {'user': ouser, 'plans': plans, 'friends': friends}, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan/')
