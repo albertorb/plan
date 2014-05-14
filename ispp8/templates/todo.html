@@ -5,7 +5,7 @@
         <h1 class="text-darkorange"> Wishlist</h1>
         {% for plan in plans %}
             {% for activity in plan.activities.all %}
-                <div class="col-sm-2 col-md-2">
+                <div class="col-md-4">
 
                     <div class="">
                         {% ifequal activity.isFree 'f' %}
@@ -32,7 +32,20 @@
 
             {% endfor %}
         {% endfor %}
-
+        <div class="container center-block ">
+            <ul class="pagination">
+                <form method="get">
+                    <ul class="pager">
+                        {% if plans.has_previous %}
+                            <li><a href="?page={{ plans.previous_page_number }}">Previous</a></li>
+                        {% endif %}
+                        {% if plans.has_next %}
+                            <li><a href="?page={{ plans.next_page_number }}">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </form>
+            </ul>
+        </div>
     </div>
 
 

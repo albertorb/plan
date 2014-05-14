@@ -7,7 +7,7 @@ from django.utils import formats
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth
@@ -250,6 +250,7 @@ def user_plans(request):
 
 @login_required(login_url='/plan/')
 def todo(request):
+
     duser = request.user
     print('getting django user')
     print(duser)
@@ -261,6 +262,14 @@ def todo(request):
         return HttpResponseRedirect("/todo")
     else:
         plans = Plan.objects.filter(user=ouser, done=False).all()
-        print('checking number of saved plans plans: ' + str(len(plans)))
-        return render_to_response('todo.html', {'user': ouser, 'plans': plans},
+        paginator = Paginator(plans,2)
+
+        page = request.GET.get('page')
+        try:
+            objs = paginator.page(page)
+        except PageNotAnInteger:
+            objs = paginator.page(1)
+        except EmptyPage:
+            objs = paginator.page(paginator.num_pages)
+        return render_to_response('todo.html', {'user': ouser, 'plans': objs},
                                   context_instance=RequestContext(request))
