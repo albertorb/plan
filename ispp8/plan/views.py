@@ -260,7 +260,7 @@ def todo(request):
     if request.method == 'POST':
         ident = request.POST.get("id")
         Plan.objects.filter(pk=ident).update(done=True)
-        return HttpResponseRedirect("/todo")
+        return HttpResponseRedirect("../todo")
     else:
         plans = Plan.objects.filter(user=ouser, done=False).all()
         print('checking number of saved plans plans: ' + str(len(plans)))

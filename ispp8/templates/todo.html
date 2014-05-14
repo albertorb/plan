@@ -1,5 +1,6 @@
 {% extends 'master_page_logged.html' %}
 {% block content %}
+    <div class="content center-block container scape-top-custom row">
     {% for plan in plans %}
         <div class="row div-card-plan-whole">
         {% for activity in plan.activities.all %}
@@ -8,10 +9,11 @@
               <h4 >{{ activity.name }}</h4>
             </div>
         {% endfor %}
-        <form action="." method="post">{% csrf_token %}
+        <form action="" method="post">{% csrf_token %}
             <input type="hidden" name="id" value="{{ plan.pk }}">
-            <button class="btn button-orange-plan pull-left" >Done!</button>
+            <button type="submit" class="btn button-orange-plan pull-left" >Done!</button>
         </form>
+        </div>
         </div>
     {% endfor %}
 {% endblock %}
