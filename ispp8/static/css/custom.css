@@ -1,9 +1,40 @@
 /* plan.html */
-.img-lg{
+.img-lg {
     max-height: 50px;
     max-width: 100px;
     min-height: 100px;
     min-width: 120px;
+}
+
+.glyphicon-topright {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+
+.glyphicon-topright2 {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+}
+
+.glyphicon-topright:hover {
+    color: #f0ad4e;
+}
+
+.glyphicon-topright2:hover {
+    color: #f0ad4e;
+}
+
+.img-export {
+    max-height: 150px;
+    max-width: 200px;
+    min-height: 150px;
+    min-width: 200px;
+}
+
+.text-default {
+    color: #f0ad4e;
 }
 
 /* todo.html */
@@ -26,7 +57,7 @@
     color: #ffffff;
 }
 
-.overlap-wish-custom > a :hover{
+.overlap-wish-custom > a :hover {
     color: orange;
 }
 
@@ -303,7 +334,7 @@ body {
 
 .panel-footer-custom > a {
     margin-left: 5%;
-    color: darkorange;
+    color: #f0ad4e;
 
 }
 
@@ -413,6 +444,28 @@ body {
 }
 
 /* Automatic plan for non logged*/
+
+.overlap-carousel-leftcontrollg-custom {
+    position: absolute;
+    top: 50%;
+    left: 4%;
+}
+
+.overlap-carousel-rightcontrollg-custom {
+    position: absolute;
+    top: 50%;
+    right: 4%
+}
+
+.carousel-img-custom {
+    max-height: 45%;
+    min-width: 100%;
+}
+
+.carousel-whitelg-custom {
+    background-color: white;
+    min-width: 100%;
+}
 
 .div-card-plan-info {
     margin-top: 20%;
