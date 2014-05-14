@@ -223,14 +223,31 @@ def timeline(request):
 def user_plans(request):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
-    print(ouser)
     if request.method == 'POST':
-        ident = request.POST.get("id")
+        ident = request.POST.get("plan")
         plan = Plan.objects.filter(pk=ident).get()
+        shareTo = []
+        for toadd in request.POST['user']:
+            shareTo.append(OurUser.objects.get(pk=int(toadd)))
+        for p in shareTo:
+            plan.sharedTo.add(p)
+        return HttpResponseRedirect("../user_plans")
     else:
         plans = Plan.objects.filter(user=ouser).all()
         friends = ouser.friends.all()
-        return render_to_response('user_plans.html', {'user': ouser, 'plans': plans, 'friends': friends}, context_instance=RequestContext(request))
+        data = []
+        for plan in plans:
+            sharedTo = plan.sharedTo.all()
+            toShare = []
+            share = True
+            for friend in friends:
+                for s in sharedTo:
+                    if s == friend:
+                        share = False
+                if share:
+                    toShare.append(friend)
+            data.append({'plan': plan, 'sharedTo': sharedTo, 'toShare': toShare})
+        return render_to_response('user_plans.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan/')

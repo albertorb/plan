@@ -4,13 +4,13 @@
 
 <div class="content center-block container scape-top-custom row">
 <div class="row div-card-plan-whole">
-    {% for plan in plans %}
+    {% for elem in data %}
         <div class="container">
-        {% for activity in plan.activities.all %}
-        <div class="col-sm-10 col-md-4 {% if plan.done == True %} bg-success {% else %} bg-warning {% endif %}">
+        {% for activity in elem.plan.activities.all %}
+        <div class="col-sm-10 col-md-4 {% if elem.plan.done == True %} bg-success {% else %} bg-warning {% endif %}">
             <div  class="thumbnail div-card-plan-thumbnail" style="background-image:url('{{MEDIA_URL}}{{activity.photo}}')">
                 <div  style="display: none" class="well div-card-plan-info">
-                    {{plan.endDate}}
+                    {{activity.description}}
                 </div>
             </div>
             <div class="text-center panel div-card-plan-actiname">
@@ -20,40 +20,38 @@
         {% endfor %}
             <div class="text-center panel div-card-plan-actiname">
                 <h4>This plan has been shared to:<br></h4>
-                {% for person in plan.sharedTo.all %}
+                {% for person in elem.sharedTo %}
+                    <img src="{{ MEDIA_URL }}{{ person.image }}" class="img-xs-custom img-rounded">
                     {{ person.djangoUser }}<br>
                 {% empty %}
                     Nobody! Share it now?<br>
                 {% endfor %}
-            <input type="hidden" name="id" value="{{ plan.pk }}">
             <!-- Button trigger modal -->
-            <button class="btn button-orange-plan" data-toggle="modal" data-target="#myModal">Share</button>
+            <button class="btn button-orange-plan" data-toggle="modal" data-target="#myModal{{ elem.plan.pk }}">Share</button>
             <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="myModal{{ elem.plan.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="myModalLabel">Share this plan</h4>
                       </div>
-                        {% for friend in friends %}
-                            {% if friend not in plan.sharedTo %}
-                                {{ friend.djangoUser }}<br>
-                            {% endif %}
-                        {% empty %}
-                            <p>You have no friends yet.</p>
-                        {% endfor %}
-                      <div class="modal-body">
-                          <form class="form-horizontal" role="form" action="." method="post">{% csrf_token %}
-                            <div class="form-group">
+                    <form class="form-horizontal" action="" method="post">{% csrf_token %}
+                    <div class="modal-body">
+                        <input type="hidden" name="plan" value="{{ elem.plan.pk }}">
 
-                            </div>
-                          </form>
-                      </div>
+                        {% for friend in elem.toShare %}
+                            <img src="{{ MEDIA_URL }}{{ friend.image }}" class="img-xs-custom img-rounded">
+                            <label>{{ friend.djangoUser }} <input type="checkbox" name="user" value="{{ friend.pk }}"></label><br>
+                        {% empty %}
+                            <p>You have no more friends to share this plan.</p>
+                        {% endfor %}
+                    </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Share</button>
                       </div>
+                    </form>
                     </div>
                   </div>
                 </div>
