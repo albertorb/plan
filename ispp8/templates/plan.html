@@ -3,6 +3,17 @@
 
 
     <div class="row container center-block scape-top-custom">
+        <div class="panel">
+            {% for activity in plan.activities.all %}
+               <a href=""> <img src="{{ MEDIA_URL }}{{ activity.photo }}"></a>
+            {% endfor %}
+
+        </div>
+
+
+
+
+
     {% for activity in plan.activities.all %}
 
             <div class="col-md-4">
