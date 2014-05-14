@@ -230,7 +230,7 @@ def filter_activities(request):
                 results.append(activities)
             else:
                 results = list(set(results) & set(activities))
-        if len(results) == 0:
+        if not(location & sector & moment & sDate & eDate & val & isFree & isPromoted):
             results.append(Activity.objects.all())
         print(results)
         return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
@@ -301,8 +301,9 @@ def filter_activities_registered(request):
                 results.append(activities)
             else:
                 results = list(set(results) & set(activities))
-        if len(results) == 0:
+        if not(location & sector & moment & sDate & eDate & val & isFree & isPromoted):
             results.append(Activity.objects.all())
+        print(results)
         return render_to_response('customplanloged.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
     if request.method == 'POST' and 'custom' in request.POST:
         activities = []
