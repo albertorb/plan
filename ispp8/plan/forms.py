@@ -23,3 +23,7 @@ class OurUserRegistrationForm(ModelForm):
     class Meta:
         model = OurUser
         fields = ('birthday', 'gender', 'image')
+
+class PlanForm(ModelForm):
+    class Meta:
+        model=Plan

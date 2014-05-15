@@ -94,7 +94,7 @@
                 <a href="{% url 'plan_info' activity_id=ac1.id activity_id2=ac2.id activity_id3=ac3.id %}">
                     <button type="button" class="btn btn-warning">I want this plan</button>
                 </a>
-                <button type="button" class="btn btn-info" data-toggle="modal">Try a custom search</button>
+                <a href="../filter" class="btn btn-info" data-toggle="modal">Try a custom search</a>
             </div>
 
             {% if activities.count > 0 %}

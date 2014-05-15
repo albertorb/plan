@@ -251,7 +251,7 @@ def filter_activities(request):
                 results.append(activities)
             else:
                 results = list(set(results) & set(activities))
-        if not(location & sector & moment & sDate & eDate & val & isFree & isPromoted):
+        if not(location and sector and moment and sDate and eDate and val and isFree and isPromoted):
             results.append(Activity.objects.all())
         print(results)
         return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
@@ -322,7 +322,7 @@ def filter_activities_registered(request):
                 results.append(activities)
             else:
                 results = list(set(results) & set(activities))
-        if not(location & sector & moment & sDate & eDate & val & isFree & isPromoted):
+        if not(location and sector and moment and sDate and eDate and val and isFree and isPromoted):
             results.append(Activity.objects.all())
         print(results)
         return render_to_response('customplanloged.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
