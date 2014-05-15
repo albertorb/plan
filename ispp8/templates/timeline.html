@@ -1,91 +1,35 @@
 {% extends 'master_page_logged.html' %}
 {% block content %}
     <div class="content center-block container scape-top-custom row">
-        {% for elem in data %}
-            {% for plan in elem.donePlans %}
-                <div class="col-md-3  ">
-                        <a class=" pull-left " href="#"><img class="image-xxs-custom img-circle" src="
-                                {{ MEDIA_URL }}{{ elem.friend.image }}"></a>
+<div class="row div-card-plan-whole">
+    {% for elem in data %}
+        <div class="container">
+        {% for plan in elem.donePlans %}
+            <div class="panel div-card-plan-actiname">
+            <div class="text-center"><b>This plan has been done by your friend: {{ plan.user.djangoUser }}</b>
+             <img class="img-circle" style="max-width:50px;min-width: 50px;" src="{{MEDIA_URL}}{{plan.user.image}}">    </div>
 
-
-
-
-                    </div>
-                <div class="col-md-6 triangle-isosceles left  row container ">
-
-
-
-
-                <div class=" row ">
-                {% for activity in plan.activities.all %}
-                        <div class="col-sm-3 col-md-4 ">
-                    <div class="thumbnail " style="background-color: #F5D0A9; border-color:#F5D0A9">
-
-                        <img class="image-xs-custom" src="{{ MEDIA_URL }}{{ activity.photo }}">
-                        <div class="caption text-center">
-                            <h5>{{ activity.name }}</h5>
-
-                        </div>
-
-
-                    </div>
-
+            </div>
+        {% for activity in plan.activities.all %}
+            <div class="col-sm-10 col-md-4">
+        
+            <div  class="thumbnail div-card-plan-thumbnail" style="background-image:url('{{MEDIA_URL}}{{activity.photo}}')">
+                <div  style="display: none" class="well div-card-plan-info">
+                    {{activity.description}}
                 </div>
-                    {% endfor %}
-                </div>
-                </div>
-            {% endfor %}
-
+            </div>
+            <div class="text-center panel div-card-plan-actiname">
+                <h4>{{activity.name}}</h4>
+            </div>
+        </div>
         {% endfor %}
 
-    </div>
-    <div class="hidden content center-block container row">
-        {% for elem in data %}
-            <div><img src="{{ MEDIA_URL }}{{ elem.friend.image }}" class="image-xs-custom img-rounded img-responsive"
-                      alt="Responsive image"></div>
-            <!-- Enjoyed -->
-            <ul>
-                {% for plan in elem.donePlans %}
-                    <div class="row">
-                    <div class="col">
-                        {% for actividad in plan.activities.all %}
-                            <img src="{{ MEDIA_URL }}{{ actividad.photo }}"
-                                 class="img-xs-custom img-rounded img-responsive"
-                                 alt="Responsive image">
-                        {% endfor %}
-                    </div>
-                    </li>
-                {% endfor %}
-            </ul>
-            Shared you:
-            <ul>
-                {% for plan in elem.sharedPlans %}
-                    <li>
-                        <div>
-                            {% for actividad in plan.activities.all %}
-                                <img src="{{ MEDIA_URL }}{{ actividad.photo }}"
-                                     class="img-xs-custom img-rounded img-responsive"
-                                     alt="Responsive image">
-                            {% endfor %}
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-            Voted:
-            <ul>
-                {% for plan in elem.votedPlans %}
-                    <li>
-                        <div>
-                            {% for actividad in plan.activities.all %}
-                                <img src="{{ MEDIA_URL }}{{ actividad.photo }}"
-                                     class="img-xs-custom img-rounded img-responsive"
-                                     alt="Responsive image">
-                                Giving a {{ actividad.valoration }}
-                            {% endfor %}
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+            </div>
         {% endfor %}
-    </div>
+
+    {% endfor %}
+</div>
+
+</div>
+
 {% endblock %}

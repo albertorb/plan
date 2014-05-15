@@ -3,7 +3,30 @@
 <div id="div1" class="scape-top-custom container text-center">
     {% for activity in results %}
         {% for a in activity %}
-            {{ a.name }} <br>
+                                   <div class="col-sm-6 col-md-4">
+                            <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert"
+                                    aria-hidden="true">
+                                <strong>&times</strong>
+                            </button>
+
+                            <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail"
+                                 style="background-image:url('{{ MEDIA_URL }}{{ a.photo }}')">
+
+                                <div id="info{{ forloop.counter }}" style="display: none"
+                                     class="well div-card-plan-info">
+                                    {{ a.description }}
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="text-center panel div-card-plan-actiname">
+                                <h4>{{ a.name }}</h4>
+                            </div>
+
+                        </div>
+
         {% endfor %}
     {% endfor %}
 </div>
