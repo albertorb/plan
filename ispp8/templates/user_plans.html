@@ -7,7 +7,7 @@
     {% for elem in data %}
         <div class="container">
         {% for activity in elem.plan.activities.all %}
-        <div class="col-sm-10 col-md-4 {% if elem.plan.done == True %} bg-success {% else %} bg-warning {% endif %}">
+        <div class="col-sm-10 col-md-4">
             <div  class="thumbnail div-card-plan-thumbnail" style="background-image:url('{{MEDIA_URL}}{{activity.photo}}')">
                 <div  style="display: none" class="well div-card-plan-info">
                     {{activity.description}}
