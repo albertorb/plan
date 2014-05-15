@@ -13,6 +13,7 @@ from django.contrib import auth
 from django.contrib.auth.hashers import make_password, pbkdf2
 import random
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.forms import UserCreationForm
 
 
 
@@ -245,3 +246,13 @@ def todo(request):
         print('checking number of saved plans plans: ' + str(len(plans)))
         return render_to_response('todo.html', {'user': ouser, 'plans': plans},
                                   context_instance=RequestContext(request))
+
+def register_company(request):
+    if request.method=='POST':
+        formulario=CompanyForm(request.POST)
+        if formulario.is_valid:
+            new_company = formulario.save()
+            return HttpResponseRedirect('/')
+        else:
+            formulario = CompanyForm()
+        render_to_response(request, 'register_company.html', {'formulario':formulario})

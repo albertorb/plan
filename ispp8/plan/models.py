@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 
 #coding-utf-8
 # Create your models here.
@@ -67,6 +68,11 @@ class Company(models.Model):
 
     def __unicode__(self):
         return self.companyName
+
+class CompanyForm(ModelForm):
+
+    class Meta:
+        model = Company
 
 
 class Payment(models.Model):

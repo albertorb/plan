@@ -31,6 +31,10 @@ urlpatterns = patterns('',
 
     url(r'^user_plans$', 'plan.views.user_plans'),
 
+    #REVISAR URLS
+    url(r'register_company$','register_company' ),
+    url(r'^add/$', 'views.register_company', name='cadd'),
+
 
     # Uncomment the next line to enable the admin:
     url(r'^admin', include(admin.site.urls)),
