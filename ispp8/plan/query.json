@@ -82,10 +82,10 @@
     "pk": 5,
     "fields": {
       "location": "Madrid",
-      "name": "Basílica san francisco el grande",
+      "name": "Basilica san francisco el grande",
       "latitude":"40.410695",
       "longitude":"-3.714692",
-      "photo":"images/Basílica_de_San_Francisco_el_Grande_Madrid_04.jpg",
+      "photo":"images/Basilica_de_San_Francisco_el_Grande_Madrid_04.jpg",
       "sector":"Monument",
       "moment":"e",
       "startDate":"2014-04-23 15:01:26",
@@ -111,7 +111,7 @@
       "endDate":"2014-04-23 17:04:05",
       "valoration":"0",
       "isFree":"f",
-      "isPromoted":"0",
+      "isPromoted":"1",
       "description":"Visit Maria Luisa Park"
     }
   },
@@ -130,7 +130,7 @@
       "endDate":"2014-04-23 20:00:00",
       "valoration":"0",
       "isFree":"n",
-      "isPromoted":"0",
+      "isPromoted":"1",
       "description":"Eat in 100 montaditos"
     }
   },

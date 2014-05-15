@@ -1,0 +1,10 @@
+{% extends 'master_page_nonlogged.html' %}
+{% block content %}
+<div id="div1" class="scape-top-custom container text-center">
+    {% for activity in results %}
+        {% for a in activity %}
+            {{ a.name }} <br>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}

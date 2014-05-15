@@ -1,19 +1,53 @@
 {% extends 'master_page_logged.html' %}
 {% block content %}
-    <div class="content center-block container scape-top-custom row">
-    {% for plan in plans %}
-        <div class="row div-card-plan-whole">
-        {% for activity in plan.activities.all %}
-            <div class="col-lg-4 row text-center">
-              <img class="img-circle" alt="140x140" src="{{MEDIA_URL}}{{activity.photo}}" style="width: 140px; height: 140px;">
-              <h4 >{{ activity.name }}</h4>
-            </div>
+
+    <div class=" row scape-top-custom container center-block">
+        <h1 class="text-darkorange"> Wishlist</h1>
+        {% for plan in plans %}
+            {% for activity in plan.activities.all %}
+                <div class="col-md-4">
+
+                    <div class="">
+                        {% ifequal activity.isFree 'f' %}
+
+
+                        {% endifequal %}
+
+                        <div class="">
+                            <span>{{ activity.name }}</span>
+                        </div>
+                        <a href="{% url 'activity_info' activity_id=activity.id %}"> <img
+                                class="img-rounded img-md-custom col-md-14" src="{{ MEDIA_URL }}{{ activity.photo }}"
+                                alt="..."></a>
+
+                        <div class="overlap-wish-custom">
+                            <a href=""> <span class="col-xs-3 glyphicon glyphicon-plus pull-left"></span> </a>
+                            <a href=""> <span class="col-xs-3 glyphicon glyphicon-star pull-right"></span></a>
+                            <a href=""> <span class="col-xs-3 glyphicon glyphicon-share pull-right"></span></a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
         {% endfor %}
-        <form action="" method="post">{% csrf_token %}
-            <input type="hidden" name="id" value="{{ plan.pk }}">
-            <button type="submit" class="btn button-orange-plan pull-left" >Done!</button>
-        </form>
+        <div class="container center-block ">
+            <ul class="pagination">
+                <form method="get">
+                    <ul class="pager">
+                        {% if plans.has_previous %}
+                            <li><a href="?page={{ plans.previous_page_number }}">Previous</a></li>
+                        {% endif %}
+                        {% if plans.has_next %}
+                            <li><a href="?page={{ plans.next_page_number }}">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </form>
+            </ul>
         </div>
-        </div>
-    {% endfor %}
+    </div>
+
+
+
 {% endblock %}

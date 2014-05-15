@@ -1,30 +1,96 @@
+/* plan.html */
+.img-lg {
+    max-height: 50px;
+    max-width: 100px;
+    min-height: 100px;
+    min-width: 120px;
+}
+
+.glyphicon-topright {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+
+.glyphicon-topright2 {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+}
+
+.glyphicon-topright:hover {
+    color: #f0ad4e;
+}
+
+.glyphicon-topright2:hover {
+    color: #f0ad4e;
+}
+
+.img-export {
+    max-height: 150px;
+    max-width: 200px;
+    min-height: 150px;
+    min-width: 200px;
+}
+
+.text-default {
+    color: #f0ad4e;
+}
+
+/* todo.html */
+
+.overlap-wishTitle-custom {
+    position: absolute;
+    top: 3%;
+    color: #ffffff;
+    margin: 0%;
+}
+
+.overlap-wish-custom {
+    position: absolute;
+    bottom: 3%;
+    color: #ffffff;
+    margin: 0%;
+}
+
+.overlap-wish-custom > a {
+    color: #ffffff;
+}
+
+.overlap-wish-custom > a :hover {
+    color: orange;
+}
+
 /* activity.html */
-.text-green{
-    color:green;
+.text-green {
+    color: green;
 }
 
-.overlap-carousel-leftcontrol-custom{
+.overlap-carousel-leftcontrol-custom {
     position: absolute;
-    top:0%;
+    top: 0%;
 }
 
-.overlap-carousel-rightcontrol-custom{
+.overlap-carousel-rightcontrol-custom {
     position: absolute;
-    top:0%;
-    right:0%
+    top: 0%;
+    right: 0%
 }
-.top-separator-custom{
+
+.top-separator-custom {
     border-top-color: darkgray;
 
 }
-.right-separator-custom{
+
+.right-separator-custom {
     border-right-color: darkgray;
 }
 
-.left-separator-custom{
+.left-separator-custom {
     border-left-color: darkgray;
 }
-.img-lg-custom{
+
+.img-lg-custom {
     max-height: 250px;
     max-width: 290px;
     min-height: 250px;
@@ -32,43 +98,47 @@
 
 }
 
-.img-xxs-custom{
+.img-xxs-custom {
     max-height: 30px;
     max-width: 40px;
     min-height: 30px;
     min-width: 40px;
 
 }
+
 /* welcome.html */
 
-.img-md-custom{
+.img-md-custom {
     max-height: 100px;
     max-width: 140px;
     min-height: 100px;
     min-width: 140px;
 }
 
-
-.text-success-custom{
-    color:greenyellow;
+.text-success-custom {
+    color: greenyellow;
 }
 
-.text-xs{
+.text-xs {
     font-size: small;
 }
-.text-lg{
+
+.text-lg {
     font-size: x-large;
 }
-.text-darkorange{
+
+.text-darkorange {
     color: darkorange;
 }
 
-.escape-top-welcome-custom{
+.escape-top-welcome-custom {
     margin-top: 1%;
 }
-.left-margin-login-custom{
+
+.left-margin-login-custom {
     margin-right: 5%;
 }
+
 .transparent {
     opacity: 0.8;
     filter: alpha(opacity=80); /* For IE8 and earlier */
@@ -80,7 +150,7 @@
 
 .overlap-nexus-custom {
     position: absolute; /* reposition logo from the natural layout*/
-    left:10%;
+    left: 10%;
     top: 20%;
     width: 300px;
     height: 200px;
@@ -89,26 +159,24 @@
 
 .overlap-panel-custom {
     position: absolute; /* reposition logo from the natural layout*/
-    left:45%;
+    left: 45%;
     top: 40%;
     z-index: 2;
 }
 
-.bottom-custom{
+.bottom-custom {
     bottom: 0;
     position: absolute;
 }
 
-.text-orange{
-    color:orange;
+.text-orange {
+    color: orange;
 }
 
-.footer-welcome-custom{
-    margin-top:40%;
+.footer-welcome-custom {
+    margin-top: 40%;
 
 }
-
-
 
 /* master_page.html */
 
@@ -219,7 +287,7 @@ body {
 }
 
 .scape-top-custom {
-    margin-top: 5%;
+    margin-top: 7%;
 }
 
 .button-orange {
@@ -256,15 +324,17 @@ body {
 }
 
 .panel-footer-custom {
-    background-color: #f0ad4e;
-    margin-top: 10%;
-    bottom: 0;
-    color: #ffffff;
+    position: absolute;
+    width: 100%;
+    background-color: #eee;
+    margin-top: 0%;
+    bottom: -100%;
+    color: #000000;
 }
 
 .panel-footer-custom > a {
     margin-left: 5%;
-    color: #ffffff;
+    color: #f0ad4e;
 
 }
 
@@ -374,6 +444,28 @@ body {
 }
 
 /* Automatic plan for non logged*/
+
+.overlap-carousel-leftcontrollg-custom {
+    position: absolute;
+    top: 50%;
+    left: 4%;
+}
+
+.overlap-carousel-rightcontrollg-custom {
+    position: absolute;
+    top: 50%;
+    right: 4%
+}
+
+.carousel-img-custom {
+    max-height: 45%;
+    min-width: 100%;
+}
+
+.carousel-whitelg-custom {
+    background-color: white;
+    min-width: 100%;
+}
 
 .div-card-plan-info {
     margin-top: 20%;
