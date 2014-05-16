@@ -1,0 +1,31 @@
+{% extends 'master_page_logged.html' %}
+{% block content %}
+<div class="">
+<div class="panel div-card-plan-thumbnail pull-left">
+<h3>Friend List</h3>
+    {% for elem in friends %}
+        <div class="div-card-plan-thumbnail">
+          <img src="{{ MEDIA_URL }}{{ elem.image }}" class="img-circle img-xs-custom pull-left">
+          <div class="name">{{ elem.djangoUser }}</div>
+          <div>Register in:{{ elem.birthday }}</div>
+          <a href="{% url 'delete_friend'  id_friend=elem.id %}" class="btn btn-danger">Delete Friendship</a>
+          <a href="#" class="btn btn-success">Info</a>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="panel div-card-plan-thumbnail pull-right">
+    <h3>All people</h3>
+    {% for user in all %}
+        <div>
+        <img src="{{ MEDIA_URL }}{{ user.image }}" class="img-circle image-xs-custom">
+        </div>
+        <div>Username:{{ user.djangoUser }}</div>
+        <a href="#" class="btn button-orange">Add friend</a>
+
+    {% endfor %}
+</div>
+
+</div>
+
+{% endblock %}

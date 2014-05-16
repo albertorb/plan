@@ -422,3 +422,32 @@ def todo(request):
             objs = paginator.page(paginator.num_pages)
         return render_to_response('todo.html', {'user': ouser, 'plans': objs},
                                   context_instance=RequestContext(request))
+
+
+@login_required(login_url='/plan/')
+def friends(request):
+    duser=request.user
+    print(duser)
+    ouser=OurUser.objects.get(djangoUser=duser)
+    friends = ouser.friends.all()
+    all=OurUser.objects.all()
+    print(friends)
+    print(all)
+    for elem in friends:
+        print(elem.djangoUser)
+        print(elem.image)
+    return render_to_response('friends.html',{'user':ouser,'friends':friends,'all':all},context_instance=RequestContext(request))
+
+
+@login_required(login_url='/plan/')
+def deletefriend(request,id_friend):
+    userlogged=OurUser.objects.get(djangoUser=request.user)
+    print(userlogged)
+    friends=userlogged.friends.all()
+    all=OurUser.objects.all()
+    userfriend=OurUser.objects.get(id=id_friend)
+    print(userfriend)
+    for a in friends:
+      if a == userfriend:
+           a.delete()
+    return render_to_response('friends.html',{"user":userlogged,'friends':friends,'all':all},context_instance=RequestContext(request))
