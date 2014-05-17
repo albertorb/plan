@@ -449,5 +449,15 @@ def deletefriend(request,id_friend):
     print(userfriend)
     for a in friends:
       if a == userfriend:
-           a.delete()
+           userlogged.friends.remove(a)
+    return render_to_response('friends.html',{"user":userlogged,'friends':friends,'all':all},context_instance=RequestContext(request))
+
+@login_required(login_url='/plan/')
+def addfriend(request,id_friend):
+    userlogged=OurUser.objects.get(djangoUser=request.user)
+    friends=userlogged.friends.all()
+    all=OurUser.objects.all()
+    userfriend=OurUser.objects.get(id=id_friend)
+    if userfriend not in friends:
+        userlogged.friends.add(userfriend)
     return render_to_response('friends.html',{"user":userlogged,'friends':friends,'all':all},context_instance=RequestContext(request))

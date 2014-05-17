@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^user_plans$', 'plan.views.user_plans'),
     url(r'^friends$','plan.views.friends'),
     url(r'^deletefriend/(?P<id_friend>\w+)/$','plan.views.deletefriend', name='delete_friend'),
+    url(r'^addfriend/(?P<id_friend>\w+)/$','plan.views.addfriend', name='add_friend'),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin', include(admin.site.urls)),
