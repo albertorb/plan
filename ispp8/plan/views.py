@@ -201,58 +201,29 @@ def filter_activities(request):
         location = request.POST.get('location', False)
         sector = request.POST.get('sector', False)
         moment = request.POST.get('moment', False)
-        sDate = request.POST.get('startDate', False)
-        eDate = request.POST.get('endDate', False)
+        sDate = request.POST.get('sDate', False)
+        eDate = request.POST.get('eDate', False)
         val = request.POST.get('valoration', False)
         isFree = request.POST.get('isFree', False)
         isPromoted = request.POST.get('isPromoted', False)
 
-        if location:
-            activities = Activity.objects.filter(location__icontains=location)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if sector:
-            activities = Activity.objects.filter(sector__icontains=sector)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if moment:
-            activities = Activity.objects.filter(moment=moment)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if sDate and eDate:
-            fsdate = time.strptime(sDate, '%b %d %Y %I:%M%p')
-            fedate = time.strptime(eDate, '%b %d %Y %I:%M%p')
-            activities = Activity.objects.filter(drop_off__gte=fsdate, pick_up__lte=fedate)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if val:
-            activities = Activity.objects.filter(valoration__gt=val)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if isFree:
-            activities = Activity.objects.filter(isFree=isFree)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if isPromoted:
-            activities = Activity.objects.filter(isPromoted=isPromoted)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if not(location and sector and moment and sDate and eDate and val and isFree and isPromoted):
-            results.append(Activity.objects.all())
+        for a in Activity.objects.all():
+            if location and a.location == location:
+                results.append(a)
+            if sector and a.sector == sector:
+                results.append(a)
+            if moment and a.moment == moment:
+                results.append(a)
+            if sDate and eDate and sDate <= a.startDate and eDate >= a.endDate:
+                results.append(a)
+            if val and a.valoration >= val:
+                results.append(a)
+            if isFree and a.isFree == isFree:
+                results.append(a)
+            if isPromoted and a.isPromoted == isPromoted:
+                results.append(a)
+            if not location and not sector and not moment and not sDate and not eDate and not val and not isFree and not isPromoted:
+                results.append(a)
         print(results)
         return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
     else:
@@ -266,64 +237,35 @@ def filter_activities_registered(request):
     ouser = OurUser.objects.get(djangoUser=duser)
 
     print('iniciando filtrado')
-    if request.method == 'POST' and 'filter' in request.POST:
+    if request.method == 'POST':
         print('realizando filtrado')
         results = []
         location = request.POST.get('location', False)
         sector = request.POST.get('sector', False)
         moment = request.POST.get('moment', False)
-        sDate = request.POST.get('startDate', False)
-        eDate = request.POST.get('endDate', False)
+        sDate = request.POST.get('sDate', False)
+        eDate = request.POST.get('eDate', False)
         val = request.POST.get('valoration', False)
         isFree = request.POST.get('isFree', False)
         isPromoted = request.POST.get('isPromoted', False)
 
-        if location:
-            activities = Activity.objects.filter(location__icontains=location)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if sector:
-            activities = Activity.objects.filter(sector__icontains=sector)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if moment:
-            activities = Activity.objects.filter(moment=moment)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if sDate and eDate:
-            fsdate = time.strptime(sDate, '%b %d %Y %I:%M%p')
-            fedate = time.strptime(eDate, '%b %d %Y %I:%M%p')
-            activities = Activity.objects.filter(drop_off__gte=fsdate, pick_up__lte=fedate)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if val:
-            activities = Activity.objects.filter(valoration__gt=val)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if isFree:
-            activities = Activity.objects.filter(isFree=isFree)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if isPromoted:
-            activities = Activity.objects.filter(isPromoted=isPromoted)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if not(location and sector and moment and sDate and eDate and val and isFree and isPromoted):
-            results.append(Activity.objects.all())
+        for a in Activity.objects.all():
+            if location and a.location == location:
+                results.append(a)
+            if sector and a.sector == sector:
+                results.append(a)
+            if moment and a.moment == moment:
+                results.append(a)
+            if sDate and eDate and sDate <= a.startDate and eDate >= a.endDate:
+                results.append(a)
+            if val and a.valoration >= val:
+                results.append(a)
+            if isFree and a.isFree == isFree:
+                results.append(a)
+            if isPromoted and a.isPromoted == isPromoted:
+                results.append(a)
+            if not location and not sector and not moment and not sDate and not eDate and not val and not isFree and not isPromoted:
+                results.append(a)
         print(results)
         return render_to_response('customplanloged.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
     if request.method == 'POST' and 'custom' in request.POST:

@@ -1,8 +1,7 @@
 {% extends 'master_page_nonlogged.html' %}
 {% block content %}
 <div id="div1" class="scape-top-custom container text-center">
-    {% for activity in results %}
-        {% for a in activity %}
+    {% for a in results %}
                                    <div class="col-sm-6 col-md-4">
                             <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert"
                                     aria-hidden="true">
@@ -26,8 +25,8 @@
                             </div>
 
                         </div>
-
-        {% endfor %}
+    {% empty %}
+        <h3>Sorry, there are no activities matching your preferences.</h3>
     {% endfor %}
 </div>
 {% endblock %}
