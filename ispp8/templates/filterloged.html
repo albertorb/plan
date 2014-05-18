@@ -5,6 +5,7 @@
     <h1>Customize your plan</h1>
     <comment>Please, fulfill the following fields in order to offer the bests activities. Leave blank the fields that you don't want to use.</comment>
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
+        <input type="hidden" name="filter" value="filter">
         <div class="form-group">
             <label>Location: </label> <input type="text" name="location" class="form-control" placeholder="City to search in"><br>
         </div>

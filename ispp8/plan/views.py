@@ -237,7 +237,7 @@ def filter_activities_registered(request):
     ouser = OurUser.objects.get(djangoUser=duser)
 
     print('iniciando filtrado')
-    if request.method == 'POST':
+    if request.method == 'POST' and 'filter' in request.POST:
         print('realizando filtrado')
         results = []
         location = request.POST.get('location', False)
@@ -269,16 +269,20 @@ def filter_activities_registered(request):
         print(results)
         return render_to_response('customplanloged.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
     if request.method == 'POST' and 'custom' in request.POST:
+        print('empezando el guardado')
         activities = []
+        print(request.POST)
         for key, value in request.POST.items():
             if request.POST[key].isdigit():
+                print('sacando actividad')
                 activities.append(Activity.objects.get(pk=int(value)))
-        startDate = time.ctime()
-        endDate = time.strptime('Jun 1 2050  1:33PM', '%b %d %Y %I:%M%p')
+        startDate = '2000-09-01T13:20:30+03:00'
+        endDate = '3000-09-01T13:20:30+03:00'
+        print('guardando plan')
         plan = Plan.objects.create(startDate=startDate, endDate=endDate, voted=False, user=ouser, done=False)
         for a in activities:
-            plan.add(a)
-        return HttpResponseRedirect("/todo")
+            plan.activities.add(a)
+        return HttpResponseRedirect("../todo")
     else:
         print('seleccionando parametros')
         return render_to_response('filterloged.html', {'user': ouser}, context_instance=RequestContext(request))
