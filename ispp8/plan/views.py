@@ -345,7 +345,6 @@ def user_plans(request):
 
 @login_required(login_url='/plan/')
 def todo(request):
-
     duser = request.user
     print('getting django user')
     print(duser)
@@ -357,7 +356,7 @@ def todo(request):
         return HttpResponseRedirect("../todo")
     else:
         plans = Plan.objects.filter(user=ouser, done=False).all()
-        paginator = Paginator(plans,2)
+        paginator = Paginator(plans, 2)
 
         page = request.GET.get('page')
         try:
@@ -367,4 +366,21 @@ def todo(request):
         except EmptyPage:
             objs = paginator.page(paginator.num_pages)
         return render_to_response('todo.html', {'user': ouser, 'plans': objs},
+                                  context_instance=RequestContext(request))
+
+
+@login_required(login_url='/plan/')
+def modify_plan(request, plan_id):
+    plan = Plan.objects.get(pk=plan_id)
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST' and 'customize' in request.POST:
+        dostuff
+    if request.method == 'POST' and 'remove' in request.POST:
+        #plan.activities.remove()
+    if request.method == 'POST' and 'delete' in request.POST:
+        plan.delete()
+        return HttpResponseRedirect("../user_plans")
+    else:
+        return render_to_response('mod_plan.html', {'user': ouser, 'plan': plan},
                                   context_instance=RequestContext(request))
