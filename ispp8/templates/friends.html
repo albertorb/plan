@@ -4,30 +4,34 @@
 <div class=" pull-left">
 <h3>Friend List</h3>
     {% for elem in friends %}
-        <div class="panel div-card-plan-quit">
+        <form method="post" class="form-horizontal">{% csrf_token %}
+        <div class="panel ">
+            <input type="hidden" name="friend" value="{{ elem.id }}">
           <img src="{{ MEDIA_URL }}{{ elem.image }}" class="img-circle img-xs-custom pull-left">
-          <div class="name">{{ elem.djangoUser }}</div>
+          <div>{{ elem.djangoUser }}</div>
           <div>Register in:{{ elem.birthday }}</div>
-          <a href="{% url 'delete_friend'  id_friend=elem.id %}" class="btn btn-danger">Delete Friendship</a>
+          <input type="submit" name="borrar" class="btn btn-danger" value="Delete Friendship" />
           <a href="#" class="btn btn-success">Info</a>
         </div>
+        </form>
     {% endfor %}
 </div>
 
 <div class="pull-right">
     <h3>All people</h3>
     {% for usr in all %}
-        <div class="panel div-card-plan-quit">
-
-        <div>
+        <form method="post" class="form-horizontal">{% csrf_token %}
+        <div class="panel">
         {% if usr != user and usr not in friends %}
-        <img src="{{ MEDIA_URL }}{{ usr.image }}" class="img-circle image-xxs-custom">
-        </div>
-        <div>Username:{{ usr.djangoUser }}</div>
-        <a href="{% url 'add_friend'  id_friend=usr.id %}" class="btn btn-success">Add friend</a>
-
+        <input type="hidden" name="friend" value="{{ usr.id }}">
+        <img src="{{ MEDIA_URL }}{{ usr.image }}" class="img-circle img-xs-custom pull-left">
+        <div >Username:{{ usr.djangoUser }}</div>
+        <div>Register in:{{ elem.birthday }}</div>
+        <input type="submit" name="añadir" class="btn btn-primary" value="Add friend" />
+        <a href="#" class="btn btn-success">Info</a>
         {% endif %}
-        </div>
+         </div>
+        </form>
     {% endfor %}
 
 </div>

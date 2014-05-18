@@ -433,31 +433,19 @@ def friends(request):
     all=OurUser.objects.all()
     print(friends)
     print(all)
-    for elem in friends:
-        print(elem.djangoUser)
-        print(elem.image)
+    print(request.method)
+    if request.method == 'POST':
+        if 'borrar' in request.POST :
+            idfriend=request.POST.get('friend')
+            userfriend=OurUser.objects.get(id=idfriend)
+            if userfriend in friends:
+                ouser.friends.remove(userfriend)
+                return HttpResponseRedirect("../friends")
+        if 'añadir' in request.POST :
+            idfriend=request.POST.get('friend')
+            userfriend=OurUser.objects.get(id=idfriend)
+            if userfriend not in friends:
+                ouser.friends.add(userfriend)
+                return HttpResponseRedirect("../friends")
     return render_to_response('friends.html',{'user':ouser,'friends':friends,'all':all},context_instance=RequestContext(request))
 
-
-@login_required(login_url='/plan/')
-def deletefriend(request,id_friend):
-    userlogged=OurUser.objects.get(djangoUser=request.user)
-    print(userlogged)
-    friends=userlogged.friends.all()
-    all=OurUser.objects.all()
-    userfriend=OurUser.objects.get(id=id_friend)
-    print(userfriend)
-    for a in friends:
-      if a == userfriend:
-           userlogged.friends.remove(a)
-    return render_to_response('friends.html',{"user":userlogged,'friends':friends,'all':all},context_instance=RequestContext(request))
-
-@login_required(login_url='/plan/')
-def addfriend(request,id_friend):
-    userlogged=OurUser.objects.get(djangoUser=request.user)
-    friends=userlogged.friends.all()
-    all=OurUser.objects.all()
-    userfriend=OurUser.objects.get(id=id_friend)
-    if userfriend not in friends:
-        userlogged.friends.add(userfriend)
-    return render_to_response('friends.html',{"user":userlogged,'friends':friends,'all':all},context_instance=RequestContext(request))
