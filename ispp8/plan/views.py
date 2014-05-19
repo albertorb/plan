@@ -45,23 +45,28 @@ def welcome(request):
 def activity(request, activity_id):
     obj = get_object_or_404(Activity, id=activity_id)
     comments = Comment.objects.filter(activity=obj)
-    print(comments)
-    # checking if some friend has done this activity
-    res = []
-    print(request.user.is_authenticated())
-    if request.user.is_authenticated():
+    if request.method == 'POST' and request.user.is_authenticated():
+        texto = request.POST['comment']
         ourser = OurUser.objects.get(djangoUser=request.user)
-        friends = ourser.friends.all()
+        Comment.objects.create(text=texto, activity=obj, user=ourser)
+        return HttpResponseRedirect("/activity/"+str(activity_id)+'/')
+    else:
+        # checking if some friend has done this activity
+        res = []
+        print(request.user.is_authenticated())
+        if request.user.is_authenticated():
+            ourser = OurUser.objects.get(djangoUser=request.user)
+            friends = ourser.friends.all()
 
-        for friend in friends:
-            planesRealizados = Plan.objects.filter(user=friend)
+            for friend in friends:
+                planesRealizados = Plan.objects.filter(user=friend)
 
-            for plan in planesRealizados:
+                for plan in planesRealizados:
 
-                    res.append(friend)
-                    print(res)
-        return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments, 'user': ourser}, context_instance=RequestContext(request))
-    return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments}, context_instance=RequestContext(request))
+                        res.append(friend)
+                        print(res)
+            return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments, 'user': ourser}, context_instance=RequestContext(request))
+        return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments}, context_instance=RequestContext(request))
 
 
 #@login_required(login_url="/login/")
@@ -403,19 +408,6 @@ def add_activities_to_given_plan(request, plan_id):
         return HttpResponseRedirect("/user_plans")
     else:
         return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan}, context_instance=RequestContext(request))
-
-
-@login_required(login_url='/plan')
-def comment(request, activity_id):
-    activity = Activity.objects.get(pk=activity_id)
-    duser = request.user
-    ouser = OurUser.objects.get(djangoUser=duser)
-    if request.method == 'POST':
-        texto = request.POST['comment']
-        Comment.objects.create(text=texto, activity=activity, user=ouser)
-        return HttpResponseRedirect("/activity/"+str(activity_id)+'/')
-    else:
-        return render_to_response('comment.html', {'user': ouser, 'activity': activity}, context_instance=RequestContext(request))
 
 
 #funcion extra para no repetir codigo
