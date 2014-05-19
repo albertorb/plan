@@ -28,7 +28,7 @@
                 {% endfor %}
             <!-- Button trigger modal -->
             <button class="btn button-orange-plan" data-toggle="modal" data-target="#myModal{{ elem.plan.pk }}">Share</button>
-            <a href="../mod_plan/{{ elem.plan.pk }}/"><button class="btn button-orange-plan">Edit</button></a>
+            <a href="/mod_plan/{{ elem.plan.pk }}/"><button class="btn button-orange-plan">Edit</button></a>
             <!-- Modal -->
                 <div class="modal fade" id="myModal{{ elem.plan.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">

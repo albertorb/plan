@@ -49,13 +49,13 @@
 
         <div class="navbar-header navbar-right">
             <ul class="nav-tabs-custom nav nav-tabs  ">
-                <li {% if 'home' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="../home" {% if 'home' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>Home</a></li>
+                <li {% if 'home' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="/home" {% if 'home' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>Home</a></li>
 
-                <li {% if 'timeline' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="../timeline" {% if 'timeline' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>Timeline</a></li>
+                <li {% if 'timeline' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="/timeline" {% if 'timeline' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>Timeline</a></li>
 
-                <li {% if 'user_plans' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="../user_plans" {% if 'user_plans' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>My plans</a></li>
+                <li {% if 'user_plans' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="/user_plans" {% if 'user_plans' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>My plans</a></li>
 
-                <li {% if 'todo' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="../todo" {% if 'todo' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>To Do</a></li>
+                <li {% if 'todo' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="/todo" {% if 'todo' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>To Do</a></li>
 
             </ul>
         </div>

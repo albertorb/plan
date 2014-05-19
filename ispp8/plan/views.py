@@ -212,7 +212,7 @@ def filter_activities(request):
         return render_to_response('filter.html', context_instance=RequestContext(request))
 
 
-@login_required(login_url='../plan')
+@login_required(login_url='/plan')
 def filter_activities_registered(request):
     duser = request.user
     ouser = OurUser.objects.get(djangoUser=duser)
@@ -251,7 +251,7 @@ def filter_activities_registered(request):
         return render_to_response('filterloged.html', {'user': ouser}, context_instance=RequestContext(request))
 
 
-@login_required(login_url='../plan')
+@login_required(login_url='/plan')
 def timeline(request):
     duser = request.user
     print('getting django user')
@@ -275,7 +275,7 @@ def timeline(request):
     return render_to_response('timeline.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
 
 
-@login_required(login_url='../plan')
+@login_required(login_url='/plan')
 def user_plans(request):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
@@ -306,7 +306,7 @@ def user_plans(request):
         return render_to_response('user_plans.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
 
 
-@login_required(login_url='../plan')
+@login_required(login_url='/plan')
 def todo(request):
     duser = request.user
     print('getting django user')
@@ -332,7 +332,7 @@ def todo(request):
                                   context_instance=RequestContext(request))
 
 
-@login_required(login_url='../plan')
+@login_required(login_url='/plan')
 def modify_plan(request, plan_id):
     plan = Plan.objects.get(pk=plan_id)
     duser = request.user
@@ -351,8 +351,29 @@ def modify_plan(request, plan_id):
                                   context_instance=RequestContext(request))
 
 
-def add_acivities_to_given_plan(request):
-    return render_to_response('add_activities.html', context_instance=RequestContext(request))
+def add_activities_to_given_plan(request, plan_id):
+    plan = Plan.objects.get(pk=plan_id)
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST' and 'filter' in request.POST:
+        location = request.POST.get('location', False)
+        sector = request.POST.get('sector', False)
+        moment = request.POST.get('moment', False)
+        sDate = request.POST.get('sDate', False)
+        eDate = request.POST.get('eDate', False)
+        val = request.POST.get('valoration', False)
+        isFree = request.POST.get('isFree', False)
+        isPromoted = request.POST.get('isPromoted', False)
+        results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
+        return render_to_response('add_activities.html', {'user': ouser, 'plan': plan, 'results': results}, context_instance=RequestContext(request))
+    if request.method == 'POST' and 'add' in request.POST:
+        for key, value in request.POST.items():
+            if request.POST[key].isdigit():
+                act = Activity.objects.get(pk=int(value))
+                plan.activities.add(act)
+        return HttpResponseRedirect("/user_plans")
+    else:
+        return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan}, context_instance=RequestContext(request))
 
 
 #funcion extra para no repetir codigo
