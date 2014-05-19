@@ -16,7 +16,7 @@
                         <div class="">
                             <span>{{ activity.name }}</span>
                         </div>
-                        <a href="{% url 'activity_info_logged' activity_id=activity.id %}"> <img
+                        <a href="{% url 'activity_info' activity_id=activity.id %}"> <img
                                 class="img-rounded img-md-custom col-md-14" src="{{ MEDIA_URL }}{{ activity.photo }}"
                                 alt="..."></a>
 
