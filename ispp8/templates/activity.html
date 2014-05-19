@@ -34,21 +34,15 @@
                 <!-- Indicators -->
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                    <div class="item active">
-                        <p class="h5 text-center">Estupendo lugar!</p>
+                    {% for comment in comments.all %}
+                    <div class="{% if forloop.counter0 == 0 %}item active{% else %}item{% endif %}">
+                        <p class="h5 text-center">{{ comment.text }}</p>
                         <div class="h6 caption text-center">
-                            Luis, Badalona
+                            {{ comment.user.djangoUser }}
                         </div>
                     </div>
-                    <div class="item">
-                        <p class="h5 text-center">Sinceramente el lugar podría mejorar estéticamente</p>
-                        <div class="h6 caption text-center">
-                            María, Mérida
-                        </div>
-
-                    </div>
-
-
+                    {% endfor %}
+                </div>
                 </div>
 
                 <!-- Controls -->
@@ -59,8 +53,9 @@
                     <span class="glyphicon text-darkorange glyphicon-chevron-right"></span>
                 </a>
             </div>
-
-
+            {% if user %}
+                <a href="/comment/{{ activity.pk }}/" ><button class="button-orange btn">Comment</button></a>
+            {% endif %}
         </div>
     </div>
 
