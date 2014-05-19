@@ -1,13 +1,12 @@
 {% extends 'master_page_logged.html' %}
 {% block content %}
-<div id="div1" class="scape-top-custom container text-center">
-    {% if results %}
-        <comment>Please select the activities for your plan:</comment>
-        <form class="form-horizontal" action="" method="post">{% csrf_token %}
-                <input type="hidden" name="custom" value="custom">
+<div class="content center-block container scape-top-custom row">
+    <h3>Choose the activities to remove, delete the whole plan or customize it!</h3>
+    <form class="form-horizontal" action="" method="post">{% csrf_token %}
+                <input type="hidden" name="remove" value="remove">
                 <div class="form-group">
-            {% for activity in results %}
-                <div class="col-sm-6 col-md-4">
+        {% for activity in plan.activities.all %}
+        <div class="col-sm-6 col-md-4">
                     <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert" aria-hidden="true">
                         <strong>&times</strong>
                     </button>
@@ -21,14 +20,20 @@
                         <h4>{{ a.name }}</h4>
                     </div>
                 </div>
-    {% endfor %}
+        {% endfor %}
                 </div>
     <div class="form-group">
-        <input type="submit" name="custom" value="Save Plan">
+        <input type="submit" name="remove" value="Remove">
     </div>
     </form>
-</div>
-    {% else %}
-        <h3>Sorry, there are no activities matching your preferences.</h3>
-    {% endif %}
+
+    <form class="form-horizontal" action="" method="post">{% csrf_token %}
+                <input type="hidden" name="delete" value="delete">
+        <div class="form-group">
+        <input type="submit" name="custom" value="Delete Plan">
+    </div>
+    </form>
+    <a href="/addto_plan/{{ plan.pk }}/"><button class="btn button-orange-plan">Add Activities</button></a>
+    </div>
+
 {% endblock %}

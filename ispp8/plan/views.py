@@ -180,14 +180,14 @@ def automatic_plan(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect("/plan")
+    return HttpResponseRedirect("../plan")
 
 
 def error(request):
     return render_to_response('404.html')
 
 
-@login_required(login_url='/plan/')
+@login_required(login_url='../plan')
 def home(request):
     # automatic plan
     #activities = Activity.objects.all()
@@ -217,70 +217,22 @@ def filter_activities(request):
     print('iniciando filtrado')
     if request.method == 'POST':
         print('realizando filtrado')
-        results = []
         location = request.POST.get('location', False)
         sector = request.POST.get('sector', False)
         moment = request.POST.get('moment', False)
-        sDate = request.POST.get('startDate', False)
-        eDate = request.POST.get('endDate', False)
+        sDate = request.POST.get('sDate', False)
+        eDate = request.POST.get('eDate', False)
         val = request.POST.get('valoration', False)
         isFree = request.POST.get('isFree', False)
         isPromoted = request.POST.get('isPromoted', False)
-
-        if location:
-            activities = Activity.objects.filter(location__icontains=location)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if sector:
-            activities = Activity.objects.filter(sector__icontains=sector)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if moment:
-            activities = Activity.objects.filter(moment=moment)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if sDate and eDate:
-            fsdate = time.strptime(sDate, '%b %d %Y %I:%M%p')
-            fedate = time.strptime(eDate, '%b %d %Y %I:%M%p')
-            activities = Activity.objects.filter(drop_off__gte=fsdate, pick_up__lte=fedate)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if val:
-            activities = Activity.objects.filter(valoration__gt=val)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if isFree:
-            activities = Activity.objects.filter(isFree=isFree)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if isPromoted:
-            activities = Activity.objects.filter(isPromoted=isPromoted)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if not(location and sector and moment and sDate and eDate and val and isFree and isPromoted):
-            results.append(Activity.objects.all())
-        print(results)
+        results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
         return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
     else:
         print('seleccionando parametros')
         return render_to_response('filter.html', context_instance=RequestContext(request))
 
 
-@login_required(login_url='/plan/')
+@login_required(login_url='/plan')
 def filter_activities_registered(request):
     duser = request.user
     ouser = OurUser.objects.get(djangoUser=duser)
@@ -288,81 +240,38 @@ def filter_activities_registered(request):
     print('iniciando filtrado')
     if request.method == 'POST' and 'filter' in request.POST:
         print('realizando filtrado')
-        results = []
         location = request.POST.get('location', False)
         sector = request.POST.get('sector', False)
         moment = request.POST.get('moment', False)
-        sDate = request.POST.get('startDate', False)
-        eDate = request.POST.get('endDate', False)
+        sDate = request.POST.get('sDate', False)
+        eDate = request.POST.get('eDate', False)
         val = request.POST.get('valoration', False)
         isFree = request.POST.get('isFree', False)
         isPromoted = request.POST.get('isPromoted', False)
-
-        if location:
-            activities = Activity.objects.filter(location__icontains=location)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if sector:
-            activities = Activity.objects.filter(sector__icontains=sector)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if moment:
-            activities = Activity.objects.filter(moment=moment)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if sDate and eDate:
-            fsdate = time.strptime(sDate, '%b %d %Y %I:%M%p')
-            fedate = time.strptime(eDate, '%b %d %Y %I:%M%p')
-            activities = Activity.objects.filter(drop_off__gte=fsdate, pick_up__lte=fedate)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if val:
-            activities = Activity.objects.filter(valoration__gt=val)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if isFree:
-            activities = Activity.objects.filter(isFree=isFree)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if isPromoted:
-            activities = Activity.objects.filter(isPromoted=isPromoted)
-            if len(results) == 0:
-                results.append(activities)
-            else:
-                results = list(set(results) & set(activities))
-        if not(location and sector and moment and sDate and eDate and val and isFree and isPromoted):
-            results.append(Activity.objects.all())
+        results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
         print(results)
         return render_to_response('customplanloged.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
     if request.method == 'POST' and 'custom' in request.POST:
+        print('empezando el guardado')
         activities = []
+        print(request.POST)
         for key, value in request.POST.items():
             if request.POST[key].isdigit():
+                print('sacando actividad')
                 activities.append(Activity.objects.get(pk=int(value)))
-        startDate = time.ctime()
-        endDate = time.strptime('Jun 1 2050  1:33PM', '%b %d %Y %I:%M%p')
+        startDate = '2000-09-01T13:20:30+03:00'
+        endDate = '3000-09-01T13:20:30+03:00'
+        print('guardando plan')
         plan = Plan.objects.create(startDate=startDate, endDate=endDate, voted=False, user=ouser, done=False)
         for a in activities:
-            plan.add(a)
-        return HttpResponseRedirect("/todo")
+            plan.activities.add(a)
+        return HttpResponseRedirect("../todo")
     else:
         print('seleccionando parametros')
         return render_to_response('filterloged.html', {'user': ouser}, context_instance=RequestContext(request))
 
 
-@login_required(login_url='/plan/')
+@login_required(login_url='/plan')
 def timeline(request):
     duser = request.user
     print('getting django user')
@@ -386,7 +295,7 @@ def timeline(request):
     return render_to_response('timeline.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
 
 
-@login_required(login_url='/plan/')
+@login_required(login_url='/plan')
 def user_plans(request):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
@@ -417,9 +326,8 @@ def user_plans(request):
         return render_to_response('user_plans.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
 
 
-@login_required(login_url='/plan/')
+@login_required(login_url='/plan')
 def todo(request):
-
     duser = request.user
     print('getting django user')
     print(duser)
@@ -431,7 +339,7 @@ def todo(request):
         return HttpResponseRedirect("../todo")
     else:
         plans = Plan.objects.filter(user=ouser, done=False).all()
-        paginator = Paginator(plans,2)
+        paginator = Paginator(plans, 2)
 
         page = request.GET.get('page')
         try:
@@ -468,4 +376,71 @@ def friends(request):
                 ouser.friends.add(userfriend)
                 return HttpResponseRedirect("../friends")
     return render_to_response('friends.html',{'user':ouser,'friends':friends,'all':all},context_instance=RequestContext(request))
+
+
+@login_required(login_url='/plan')
+def modify_plan(request, plan_id):
+    plan = Plan.objects.get(pk=plan_id)
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST' and 'remove' in request.POST:
+        for key, value in request.POST.items():
+            if request.POST[key].isdigit():
+                act = Activity.objects.get(pk=int(value))
+                plan.activities.remove(act)
+        return HttpResponseRedirect("/mod_plan/"+str(plan_id)+'/')
+    if request.method == 'POST' and 'delete' in request.POST:
+        plan.delete()
+        return HttpResponseRedirect("/user_plans")
+    else:
+        return render_to_response('mod_plan.html', {'user': ouser, 'plan': plan},
+                                  context_instance=RequestContext(request))
+
+
+def add_activities_to_given_plan(request, plan_id):
+    plan = Plan.objects.get(pk=plan_id)
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST' and 'filter' in request.POST:
+        location = request.POST.get('location', False)
+        sector = request.POST.get('sector', False)
+        moment = request.POST.get('moment', False)
+        sDate = request.POST.get('sDate', False)
+        eDate = request.POST.get('eDate', False)
+        val = request.POST.get('valoration', False)
+        isFree = request.POST.get('isFree', False)
+        isPromoted = request.POST.get('isPromoted', False)
+        results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
+        return render_to_response('add_activities.html', {'user': ouser, 'plan': plan, 'results': results}, context_instance=RequestContext(request))
+    if request.method == 'POST' and 'add' in request.POST:
+        for key, value in request.POST.items():
+            if request.POST[key].isdigit():
+                act = Activity.objects.get(pk=int(value))
+                plan.activities.add(act)
+        return HttpResponseRedirect("/user_plans")
+    else:
+        return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan}, context_instance=RequestContext(request))
+
+
+#funcion extra para no repetir codigo
+def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted):
+    results = []
+    for a in Activity.objects.all():
+        if location and a.location == location:
+            results.append(a)
+        if sector and a.sector == sector:
+            results.append(a)
+        if moment and a.moment == moment:
+            results.append(a)
+        if sDate and eDate and sDate <= a.startDate and eDate >= a.endDate:
+            results.append(a)
+        if val and a.valoration >= val:
+            results.append(a)
+        if isFree and a.isFree == isFree:
+            results.append(a)
+        if isPromoted and a.isPromoted == isPromoted:
+            results.append(a)
+        if not location and not sector and not moment and not sDate and not eDate and not val and not isFree and not isPromoted:
+            results.append(a)
+    return results
 

@@ -2,9 +2,9 @@
 {% block content %}
 <div id="div1" class="scape-top-custom container text-center">
     {% if results %}
-        <comment>Please select the activities for your plan:</comment>
+        <comment>Please select the activities to add:</comment>
         <form class="form-horizontal" action="" method="post">{% csrf_token %}
-                <input type="hidden" name="custom" value="custom">
+                <input type="hidden" name="add" value="add">
                 <div class="form-group">
             {% for activity in results %}
                 <div class="col-sm-6 col-md-4">
@@ -24,7 +24,7 @@
     {% endfor %}
                 </div>
     <div class="form-group">
-        <input type="submit" name="custom" value="Save Plan">
+        <input type="submit" name="custom" value="Add To Plan">
     </div>
     </form>
 </div>
