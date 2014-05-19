@@ -24,9 +24,10 @@ urlpatterns = patterns('',
     url(r'^todo$', 'plan.views.todo'),
     url(r'^error$', 'plan.views.error'),
     url(r'^user_plans$', 'plan.views.user_plans'),
+    url(r'^friends$','plan.views.friends'),
     url(r'^mod_plan/(?P<plan_id>\d+)/$', 'plan.views.modify_plan'),
     url(r'^addto_plan/(?P<plan_id>\d+)/$', 'plan.views.add_activities_to_given_plan'),
-
+    url(r'^comment/(?P<activity_id>\d+)/$', 'plan.views.comment'),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin', include(admin.site.urls)),

@@ -41,26 +41,33 @@ def getPlan(request, activity_id,activity_id2,activity_id3):
 def welcome(request):
     return render_to_response('welcome.html',  context_instance=RequestContext(request))
 
+
 def activity(request, activity_id):
     obj = get_object_or_404(Activity, id=activity_id)
-    # checking if some friend has done this activity
-    res = []
-    print(request.user.is_authenticated())
-    if request.user.is_authenticated():
+    comments = Comment.objects.filter(activity=obj)
+    if request.method == 'POST' and request.user.is_authenticated():
+        texto = request.POST['comment']
         ourser = OurUser.objects.get(djangoUser=request.user)
-        friends = ourser.friends.all()
+        Comment.objects.create(text=texto, activity=obj, user=ourser)
+        return HttpResponseRedirect("/activity/"+str(activity_id)+'/')
+    else:
+        # checking if some friend has done this activity
+        res = []
+        print(request.user.is_authenticated())
+        if request.user.is_authenticated():
+            ourser = OurUser.objects.get(djangoUser=request.user)
+            friends = ourser.friends.all()
 
-        for friend in friends:
-            planesRealizados = Plan.objects.filter(user=friend)
+            for friend in friends:
+                planesRealizados = Plan.objects.filter(user=friend)
 
-            for plan in planesRealizados:
+                for plan in planesRealizados:
 
-                    res.append(friend)
-                    print(res)
+                        res.append(friend)
+                        print(res)
+            return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments, 'user': ourser}, context_instance=RequestContext(request))
+        return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments}, context_instance=RequestContext(request))
 
-
-
-    return render_to_response('activity.html', {'activity':obj, 'friendsDid':res}, context_instance=RequestContext(request))
 
 #@login_required(login_url="/login/")
 def automatic_plan(request):
@@ -160,14 +167,14 @@ def automatic_plan(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect("../plan")
+    return HttpResponseRedirect("/plan")
 
 
 def error(request):
     return render_to_response('404.html')
 
 
-@login_required(login_url='../plan')
+@login_required(login_url='/plan')
 def home(request):
     # automatic plan
     #activities = Activity.objects.all()
@@ -332,6 +339,32 @@ def todo(request):
                                   context_instance=RequestContext(request))
 
 
+@login_required(login_url='/plan/')
+def friends(request):
+    duser=request.user
+    print(duser)
+    ouser=OurUser.objects.get(djangoUser=duser)
+    friends = ouser.friends.all()
+    all=OurUser.objects.all()
+    print(friends)
+    print(all)
+    print(request.method)
+    if request.method == 'POST':
+        if 'borrar' in request.POST :
+            idfriend=request.POST.get('friend')
+            userfriend=OurUser.objects.get(id=idfriend)
+            if userfriend in friends:
+                ouser.friends.remove(userfriend)
+                return HttpResponseRedirect("../friends")
+        if 'añadir' in request.POST :
+            idfriend=request.POST.get('friend')
+            userfriend=OurUser.objects.get(id=idfriend)
+            if userfriend not in friends:
+                ouser.friends.add(userfriend)
+                return HttpResponseRedirect("../friends")
+    return render_to_response('friends.html',{'user':ouser,'friends':friends,'all':all},context_instance=RequestContext(request))
+
+
 @login_required(login_url='/plan')
 def modify_plan(request, plan_id):
     plan = Plan.objects.get(pk=plan_id)
@@ -351,6 +384,7 @@ def modify_plan(request, plan_id):
                                   context_instance=RequestContext(request))
 
 
+@login_required(login_url='/plan')
 def add_activities_to_given_plan(request, plan_id):
     plan = Plan.objects.get(pk=plan_id)
     duser = request.user
@@ -397,3 +431,4 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
         if not location and not sector and not moment and not sDate and not eDate and not val and not isFree and not isPromoted:
             results.append(a)
     return results
+

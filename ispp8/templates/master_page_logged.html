@@ -19,67 +19,68 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation">
-
-    <div class="containter-fluid">
-
-        <div class="navbar-header navbar-logo-custom">
-            <!-- company logo-->
-            <a class="navbar-brand" href="../home"> <img src="{{ STATIC_URL }}img/logowhite.png"></a>
-
-        </div>
-        <div class="btn-group-right-custom btn-group-xs">
-            <button type="button" class="btn btn-default dropdown-toggle button-profile" data-toggle="dropdown">
-
-                <img src="{{ MEDIA_URL }}{{ request.user.ouruser.image }}" class="img-circle img-xs-custom">
-
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
+            <img style="height: 50px;width: 50px;" src="{{ STATIC_URL }}img/logo.png">
 
-            <ul class=" dropdown-menu dropdown-menu-right-custom">
-                <li class="text-center help-block"><p>Welcome {{ request.user }}!</p></li>
-                <li><a href="#">Profile</a></li>
-
-                <li class="divider"></li>
-
-                <li><a href="/logout">Sign out</a></li>
-            </ul>
 
         </div>
 
-        <div class="navbar-header navbar-right">
-            <ul class="nav-tabs-custom nav nav-tabs  ">
-                <li {% if 'home' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="/home" {% if 'home' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>Home</a></li>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search text-darkorange"></span> </button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
 
-                <li {% if 'timeline' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="/timeline" {% if 'timeline' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>Timeline</a></li>
+                <li {% if 'home' in request.path %} class="activecustom"{% endif %}><a href="/home" {% if 'home' in request.path %} class="a-activecustom" {% else %} class="nonactive-a"{% endif %}><text>Home</text></a></li>
+                <li {% if 'timeline' in request.path %} class="activecustom"{% endif %}><a href="/timeline" {% if 'timeline' in request.path %} class="a-activecustom" {% else %} class="nonactive-a"{% endif %}><text>Timeline</text></a></li>
+                <li {% if 'todo' in request.path %} class="activecustom"{% endif %}><a href="/todo" {% if 'todo' in request.path %} class="a-activecustom" {% else %} class="nonactive-a"{% endif %}><text>Wish</text></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                            class="glyphicon glyphicon-cog"></span></a>
+                    <ul class="dropdown-menu">
 
-                <li {% if 'user_plans' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="/user_plans" {% if 'user_plans' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>My plans</a></li>
+                        <li>
 
-                <li {% if 'todo' in request.path %} class="activecustom" {% else %} class="nonactivecustom" {% endif %}><a href="/todo" {% if 'todo' in request.path %} class="activecustom" {% else %} class="a-nonactivecustom" {% endif %}>To Do</a></li>
+                            <a href="/profile">
+                                <div class="">
+                                    <img class="avatar-35 img-rounded" src="{{ MEDIA_URL }}{{ request.user.ouruser.image }}">
+                                    <b class="name">{{ request.user }}</b>
+                                    <small class="metadata">Profile</small>
+                                </div>
+                            </a>
 
+
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="/settings">Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
-
-
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input id="sb1" type="text" class="form-control form-input-header-custom "
-                       placeholder="Search">
-            </div>
-            <button id="gli" type="button" class="btn btn-default glyphicon-search-custom ">
-                <span class="glyphicon glyphicon-search "></span>
-            </button>
-
-        </form>
-
-
+        <!-- /.navbar-collapse -->
     </div>
-
+    <!-- /.container-fluid -->
 </nav>
-<script>
 
-
-</script>
+<body>
 
 
 {% block content %}

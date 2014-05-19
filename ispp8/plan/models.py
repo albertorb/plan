@@ -85,3 +85,14 @@ class Taste(models.Model):
     attribute_value = models.CharField(max_length=200)
     degree = models.FloatField()
     user = models.ForeignKey(OurUser)
+
+    def __unicode__(self):
+        return "Taste" + str(self.pk)
+
+class Comment(models.Model):
+    text = models.CharField(max_length=200)
+    activity = models.ForeignKey(Activity)
+    user = models.ForeignKey(OurUser)
+
+    def __unicode__(self):
+        return "comment" + str(self.pk)
