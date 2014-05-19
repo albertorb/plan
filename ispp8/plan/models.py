@@ -24,7 +24,6 @@ class Activity(models.Model):
     description = models.CharField(max_length=200)
     url = models.URLField()
 
-
     def __unicode__(self):
         return self.name
 
@@ -55,7 +54,6 @@ class Plan(models.Model):
         return "plan" + str(self.pk)
 
 
-
 class Company(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField('password', max_length=128)
@@ -80,3 +78,12 @@ class Payment(models.Model):
 
     def __unicode__(self):
         return self.amount
+
+
+class Comment(models.Model):
+    text = models.CharField(max_length=200)
+    activity = models.ForeignKey(Activity)
+    user = models.ForeignKey(OurUser)
+
+    def __unicode__(self):
+        return "comment" + str(self.pk)

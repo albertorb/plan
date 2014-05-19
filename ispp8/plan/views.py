@@ -44,42 +44,29 @@ def welcome(request):
 
 def activity(request, activity_id):
     obj = get_object_or_404(Activity, id=activity_id)
-    # checking if some friend has done this activity
-    res = []
-    print(request.user.is_authenticated())
-    if request.user.is_authenticated():
+    comments = Comment.objects.filter(activity=obj)
+    if request.method == 'POST' and request.user.is_authenticated():
+        texto = request.POST['comment']
         ourser = OurUser.objects.get(djangoUser=request.user)
-        friends = ourser.friends.all()
+        Comment.objects.create(text=texto, activity=obj, user=ourser)
+        return HttpResponseRedirect("/activity/"+str(activity_id)+'/')
+    else:
+        # checking if some friend has done this activity
+        res = []
+        print(request.user.is_authenticated())
+        if request.user.is_authenticated():
+            ourser = OurUser.objects.get(djangoUser=request.user)
+            friends = ourser.friends.all()
 
-        for friend in friends:
-            planesRealizados = Plan.objects.filter(user=friend)
+            for friend in friends:
+                planesRealizados = Plan.objects.filter(user=friend)
 
-            for plan in planesRealizados:
+                for plan in planesRealizados:
 
-                    res.append(friend)
-                    print(res)
-
-    return render_to_response('activity.html', {'activity':obj, 'friendsDid':res}, context_instance=RequestContext(request))
-
-@login_required(login_url='/plan/')
-def activitylogged(request, activity_id):
-    obj = get_object_or_404(Activity, id=activity_id)
-    # checking if some friend has done this activity
-    res = []
-    print(request.user.is_authenticated())
-    if request.user.is_authenticated():
-        ourser = OurUser.objects.get(djangoUser=request.user)
-        friends = ourser.friends.all()
-
-        for friend in friends:
-            planesRealizados = Plan.objects.filter(user=friend)
-
-            for plan in planesRealizados:
-
-                    res.append(friend)
-                    print(res)
-
-    return render_to_response('activitylogged.html', {'activity':obj, 'friendsDid':res}, context_instance=RequestContext(request))
+                        res.append(friend)
+                        print(res)
+            return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments, 'user': ourser}, context_instance=RequestContext(request))
+        return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments}, context_instance=RequestContext(request))
 
 
 #@login_required(login_url="/login/")
@@ -180,14 +167,14 @@ def automatic_plan(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect("../plan")
+    return HttpResponseRedirect("/plan")
 
 
 def error(request):
     return render_to_response('404.html')
 
 
-@login_required(login_url='../plan')
+@login_required(login_url='/plan')
 def home(request):
     # automatic plan
     #activities = Activity.objects.all()
@@ -397,6 +384,7 @@ def modify_plan(request, plan_id):
                                   context_instance=RequestContext(request))
 
 
+@login_required(login_url='/plan')
 def add_activities_to_given_plan(request, plan_id):
     plan = Plan.objects.get(pk=plan_id)
     duser = request.user
