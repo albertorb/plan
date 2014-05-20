@@ -638,3 +638,7 @@ box-sizing(content-box);
     max-width: 90%;
 }
 
+.quitamargen{
+    padding-top: 10%;
+
+}

@@ -161,7 +161,7 @@ def automatic_plan(request):
         else:
             # Login incorrecto
             loginw = True
-            return render_to_response('automatic_plan_nonlogged.html',
+            return render_to_response('automatic_plan_nonlogged2.html',
                                       {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
                                        'userform': userform,
                                        'djangoform': djangoform, 'uservform': uservform,'featured':featured[:3]} ,
@@ -171,7 +171,7 @@ def automatic_plan(request):
     #######
 
 
-    return render_to_response('automatic_plan_nonlogged.html',
+    return render_to_response('automatic_plan_nonlogged2.html',
                                       {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
                                        'userform': userform,
                                        'djangoform': djangoform, 'uservform': uservform,'featured':featured[:3]} ,
