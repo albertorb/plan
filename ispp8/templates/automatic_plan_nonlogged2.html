@@ -1,0 +1,81 @@
+{% extends 'master_page_nonlogged.html' %}
+{% block content %}
+
+    <div class="text-center quitamargen">
+     <div class=" col-lg-12 alert alert-success text-center" >
+                <p>Hey! What about that plan!?</p>
+     </div>
+       {% if activities.count > 0 %}
+                <div class=" col-md-9" style="display: table; position: relative">
+
+
+                       <table class="table table-responsive">
+                            <tr>
+                             {% for activity in activities %}
+                              {% if forloop.counter <= 3 %}
+                                  <td class="panel">
+                                   <div>
+                                       <a href="#">
+                                       <img class="pull-left img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}" style="height: 120px;width: 120px;"/>
+                                       </a>
+                                   </div>
+                                   <div>
+                                       <comment><b>{{ activity.name }}</b></comment>
+                                       <comment>{{ activity.description }}</comment>
+                                   </div>
+                                  </td>
+                        {% endif %}
+                        {% endfor %}
+                            </tr>
+                       </table>
+
+
+          <div class="col-md-12  text-center">
+          <br/>
+          <br/>
+          </div>
+                <a  href="{% url 'plan_info' activity_id=ac1.id activity_id2=ac2.id activity_id3=ac3.id %}">
+                    <button  type="button" class="btn btn-warning">I want this plan</button>
+                </a>
+                <a href="../filter" class="btn btn-info" data-toggle="modal">Try a custom search</a>
+                {% endif %}
+
+            </div>
+        <div class="col-md-3 pull-right" style="display: table-cell">
+    <div class="panel">
+     <h2>Featured Activities</h2>
+    {% for a in activities %}
+        {% if a.isPromoted == 1 %}
+            <ul>
+            <img  src="{{ MEDIA_URL }}{{ a.photo }}" style="width: 60px;height: 60px;" />
+            {{ a.name }}
+
+            </ul>
+        {% endif %}
+    {% endfor  %}
+     </div>
+    <div class="col-md-4">
+        <br/>
+    </div>
+    <div class="pull-right  panel ">
+            <h2>Most Rated Activities</h2>
+                {% for a1 in activities %}
+                    {% if a.valoration != 0 %}
+                        {% if forloop.counter <= 5 %}
+                     <ul class="row pull-left">
+            <img  src="{{ MEDIA_URL }}{{ a1.photo }}" style="width: 60px;height: 60px;" />
+            {{ a1.name }}
+
+            </ul>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+</div>
+
+    </div>
+
+{% endblock %}
+
+
+
