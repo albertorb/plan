@@ -413,8 +413,6 @@ def add_activities_to_given_plan(request, plan_id):
 def set_tastes(request):
     duser = request.user
     ouser = OurUser.objects.get(djangoUser=duser)
-    if request.method == 'POST':
-        
     return render_to_response('set_tastes.html', {'user': ouser}, context_instance=RequestContext(request))
 
 
@@ -424,7 +422,7 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
     for a in Activity.objects.all():
         if location and a.location == location:
             results.append(a)
-        if sector and a.sector == sector:
+        if sector and a.sector.name == sector:
             results.append(a)
         if moment and a.moment == moment:
             results.append(a)

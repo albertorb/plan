@@ -1,0 +1,8 @@
+{% extends 'master_page_nonlogged.html' %}
+{% block content %}
+    <div class="row container center-block scape-top-custom">
+        {% for e in result.all %}
+           {{ e.name }}
+    {% endfor %}
+    </div>
+{% endblock %}

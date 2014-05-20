@@ -5,6 +5,13 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+class Sector(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Activity(models.Model):
     MOMENTS = (("m", "morning"), ("e", "evening"), ("n", "night"),)
     PRICE = (("f", "free"), ("n", "nonfree"),)
@@ -13,7 +20,7 @@ class Activity(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=6)
     longitude = models.DecimalField(max_digits=10, decimal_places=6)
     photo = models.URLField()
-    sector = models.CharField(max_length=200)
+    sector = models.ForeignKey(Sector)
     moment = models.CharField(max_length=3, choices=MOMENTS)
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
