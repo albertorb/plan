@@ -28,6 +28,15 @@ class Activity(models.Model):
         return self.name
 
 
+class Taste(models.Model):
+    attribute_name = models.CharField(max_length=20)
+    attribute_value = models.CharField(max_length=200)
+    degree = models.IntegerField()
+
+    def __unicode__(self):
+        return "Taste" + str(self.pk)
+
+
 #Changed name of user from our model to difference it from django implementation
 class OurUser(models.Model):
     djangoUser = models.OneToOneField(User)
@@ -36,6 +45,7 @@ class OurUser(models.Model):
     image = models.ImageField(upload_to='images/profile/', blank=True)
     gender = models.CharField(max_length=1, choices=SEX)
     friends = models.ManyToManyField("self", blank=True, null=False)
+    tastes = models.ManyToManyField(Taste, blank=True, null=False)
 
     def __unicode__(self):
         return self.djangoUser.get_username()
@@ -79,15 +89,6 @@ class Payment(models.Model):
     def __unicode__(self):
         return self.amount
 
-
-class Taste(models.Model):
-    attribute_name = models.CharField(max_length=20)
-    attribute_value = models.CharField(max_length=200)
-    degree = models.FloatField()
-    user = models.ForeignKey(OurUser)
-
-    def __unicode__(self):
-        return "Taste" + str(self.pk)
 
 class Comment(models.Model):
     text = models.CharField(max_length=200)

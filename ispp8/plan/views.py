@@ -410,6 +410,14 @@ def add_activities_to_given_plan(request, plan_id):
         return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan}, context_instance=RequestContext(request))
 
 
+def set_tastes(request):
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST':
+        
+    return render_to_response('set_tastes.html', {'user': ouser}, context_instance=RequestContext(request))
+
+
 #funcion extra para no repetir codigo
 def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted):
     results = []
