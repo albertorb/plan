@@ -17,7 +17,6 @@ urlpatterns = patterns('',
     url(r'^plan/(?P<activity_id>\w+)/(?P<activity_id2>\w+)/(?P<activity_id3>\w+)/$','plan.views.getPlan', name='plan_info'),
     url(r'^home$','plan.views.home'),
     url(r'^filter$', 'plan.views.filter_activities'),
-    url(r'^filterloged$', 'plan.views.filter_activities_registered'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
     url(r'^logout$', 'plan.views.logout'),
     url(r'^timeline$', 'plan.views.timeline'),
@@ -27,6 +26,8 @@ urlpatterns = patterns('',
     url(r'^friends$','plan.views.friends'),
     url(r'^mod_plan/(?P<plan_id>\d+)/$', 'plan.views.modify_plan'),
     url(r'^addto_plan/(?P<plan_id>\d+)/$', 'plan.views.add_activities_to_given_plan'),
+
+
 
     # Uncomment the next line to enable the admin:
     url(r'^admin', include(admin.site.urls)),

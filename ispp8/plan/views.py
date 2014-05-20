@@ -200,62 +200,59 @@ def home(request):
                                'ac3': ac3}, context_instance=RequestContext(request))
 
 
+
 def filter_activities(request):
-    print('iniciando filtrado')
-    if request.method == 'POST':
-        print('realizando filtrado')
-        location = request.POST.get('location', False)
-        sector = request.POST.get('sector', False)
-        moment = request.POST.get('moment', False)
-        sDate = request.POST.get('sDate', False)
-        eDate = request.POST.get('eDate', False)
-        val = request.POST.get('valoration', False)
-        isFree = request.POST.get('isFree', False)
-        isPromoted = request.POST.get('isPromoted', False)
-        results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
-        return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
+    if request.user.is_authenticated():
+        duser = request.user
+        ouser = OurUser.objects.get(djangoUser=duser)
+        print('iniciando filtrado')
+        if request.method == 'POST' and 'filter' in request.POST:
+            print('realizando filtrado')
+            location = request.POST.get('location', False)
+            sector = request.POST.get('sector', False)
+            moment = request.POST.get('moment', False)
+            sDate = request.POST.get('sDate', False)
+            eDate = request.POST.get('eDate', False)
+            val = request.POST.get('valoration', False)
+            isFree = request.POST.get('isFree', False)
+            isPromoted = request.POST.get('isPromoted', False)
+            results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
+            print(results)
+            return render_to_response('customplan.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
+        if request.method == 'POST' and 'custom' in request.POST:
+            print('empezando el guardado')
+            activities = []
+            print(request.POST)
+            for key, value in request.POST.items():
+                if request.POST[key].isdigit():
+                    print('sacando actividad')
+                    activities.append(Activity.objects.get(pk=int(value)))
+            startDate = '2000-09-01T13:20:30+03:00'
+            endDate = '3000-09-01T13:20:30+03:00'
+            print('guardando plan')
+            plan = Plan.objects.create(startDate=startDate, endDate=endDate, voted=False, user=ouser, done=False)
+            for a in activities:
+                plan.activities.add(a)
+            return HttpResponseRedirect("/todo")
+        else:
+            print('seleccionando parametros')
+            return render_to_response('filter.html', {'user': ouser}, context_instance=RequestContext(request))
     else:
-        print('seleccionando parametros')
-        return render_to_response('filter.html', context_instance=RequestContext(request))
-
-
-@login_required(login_url='/plan')
-def filter_activities_registered(request):
-    duser = request.user
-    ouser = OurUser.objects.get(djangoUser=duser)
-
-    print('iniciando filtrado')
-    if request.method == 'POST' and 'filter' in request.POST:
-        print('realizando filtrado')
-        location = request.POST.get('location', False)
-        sector = request.POST.get('sector', False)
-        moment = request.POST.get('moment', False)
-        sDate = request.POST.get('sDate', False)
-        eDate = request.POST.get('eDate', False)
-        val = request.POST.get('valoration', False)
-        isFree = request.POST.get('isFree', False)
-        isPromoted = request.POST.get('isPromoted', False)
-        results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
-        print(results)
-        return render_to_response('customplanloged.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
-    if request.method == 'POST' and 'custom' in request.POST:
-        print('empezando el guardado')
-        activities = []
-        print(request.POST)
-        for key, value in request.POST.items():
-            if request.POST[key].isdigit():
-                print('sacando actividad')
-                activities.append(Activity.objects.get(pk=int(value)))
-        startDate = '2000-09-01T13:20:30+03:00'
-        endDate = '3000-09-01T13:20:30+03:00'
-        print('guardando plan')
-        plan = Plan.objects.create(startDate=startDate, endDate=endDate, voted=False, user=ouser, done=False)
-        for a in activities:
-            plan.activities.add(a)
-        return HttpResponseRedirect("../todo")
-    else:
-        print('seleccionando parametros')
-        return render_to_response('filterloged.html', {'user': ouser}, context_instance=RequestContext(request))
+        if request.method == 'POST':
+            print('realizando filtrado')
+            location = request.POST.get('location', False)
+            sector = request.POST.get('sector', False)
+            moment = request.POST.get('moment', False)
+            sDate = request.POST.get('sDate', False)
+            eDate = request.POST.get('eDate', False)
+            val = request.POST.get('valoration', False)
+            isFree = request.POST.get('isFree', False)
+            isPromoted = request.POST.get('isPromoted', False)
+            results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
+            return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
+        else:
+            print('seleccionando parametros')
+            return render_to_response('filter.html', context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')
