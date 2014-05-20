@@ -1,8 +1,16 @@
-{% extends 'master_page_nonlogged.html' %}
+{% extends 'master.html' %}
 {% block content %}
 <div id="div1" class="scape-top-custom container text-center">
+{% if results %}
+     {% if request.user.is_authenticated %}
+        <comment>Please select the activities for your plan:</comment>
+        <form class="form-horizontal" action="" method="post">{% csrf_token %}
+                <input type="hidden" name="custom" value="custom">
+                <div class="form-group">
+     {% endif %}
     {% for a in results %}
-                                   <div class="col-sm-6 col-md-4">
+
+                            <div class="col-sm-6 col-md-4">
                             <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert"
                                     aria-hidden="true">
                                 <strong>&times</strong>
@@ -10,7 +18,9 @@
 
                             <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail"
                                  style="background-image:url('{{ MEDIA_URL }}{{ a.photo }}')">
-
+                            {% if request.user.is_authenticated %}
+                                     <input type="checkbox" class="radio" name="{{ a.pk }}" value="{{ a.pk }}">
+                            {% endif %}
                                 <div id="info{{ forloop.counter }}" style="display: none"
                                      class="well div-card-plan-info">
                                     {{ a.description }}
@@ -25,8 +35,17 @@
                             </div>
 
                         </div>
-    {% empty %}
-        <h3>Sorry, there are no activities matching your preferences.</h3>
+
+
     {% endfor %}
+    {% if request.user.is_authenticated %}
+     <div class="form-group">
+        <input type="submit" name="custom" value="Save Plan">
+    </div>
+    </form>
+    {% endif %}
+    {% else %}
+           <h3>Sorry, there are no activities matching your preferences.</h3>
+    {% endif %}
 </div>
 {% endblock %}

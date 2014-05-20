@@ -1,4 +1,4 @@
-{% extends 'master_page_logged.html' %}
+{% extends 'master.html' %}
 
 {% block content %}
 
@@ -78,35 +78,8 @@
         {% endfor %}
 
     </div>
-    <div class="modal fade" id="filter" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>¿Donde quieres ir?</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" style="box-shadow: #999999" action="../filteresultlogged"
-                          method="get">
-                        <div class="dropdown">Location
-                            <select name="l" class="form-control" id="focus">
-                                <option>Sevilla</option>
-                                <option>Madrid</option>
-                            </select>
-                        </div>
-                        <label>
-                            <input type="submit" class="btn button-orange-plan" value="Obtener planes">
-
-                        </label>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
-    <div id="map-canvas" class="hidden google-map-canvas ">
-    </div>
     <div class=" well-lg text-center ">
 
 
