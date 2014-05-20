@@ -19,7 +19,7 @@ class Activity(models.Model):
     name = models.CharField(max_length=40)
     latitude = models.DecimalField(max_digits=10, decimal_places=6)
     longitude = models.DecimalField(max_digits=10, decimal_places=6)
-    photo = models.URLField()
+    photo = models.URLField(blank=True, null=False)
     sector = models.ForeignKey(Sector)
     moment = models.CharField(max_length=3, choices=MOMENTS)
     startDate = models.DateTimeField()
@@ -29,7 +29,7 @@ class Activity(models.Model):
     isPromoted = models.BooleanField()
     objects = models.Manager()
     description = models.CharField(max_length=200)
-    url = models.URLField()
+    url = models.URLField(blank=True, null=False)
 
     def __unicode__(self):
         return self.name
