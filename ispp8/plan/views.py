@@ -18,28 +18,25 @@ import random
 from django.views.decorators.http import require_http_methods
 
 
-
-def getPlan(request, activity_id,activity_id2,activity_id3):
+def getPlan(request, activity_id, activity_id2, activity_id3):
     act = get_object_or_404(Activity, id=activity_id)
     act2 = get_object_or_404(Activity, id=activity_id2)
     act3 = get_object_or_404(Activity, id=activity_id3)
     planform = PlanForm()
-    plan = planform.save(commit = False)
+    plan = planform.save(commit=False)
     plan.voted = False
     plan.done = False
     plan.startDate = act.startDate
     plan.endDate = act3.endDate
     plan.user = request.user.ouruser
     plan.save()
-    plan.activities = [act,act2,act3]
+    plan.activities = [act, act2, act3]
 
-
-
-    return render_to_response('plan.html', {'plan':plan},context_instance=RequestContext(request))
+    return render_to_response('plan.html', {'plan': plan}, context_instance=RequestContext(request))
 
 
 def welcome(request):
-    return render_to_response('welcome.html',  context_instance=RequestContext(request))
+    return render_to_response('welcome.html', context_instance=RequestContext(request))
 
 
 def activity(request, activity_id):
@@ -49,7 +46,7 @@ def activity(request, activity_id):
         texto = request.POST['comment']
         ourser = OurUser.objects.get(djangoUser=request.user)
         Comment.objects.create(text=texto, activity=obj, user=ourser)
-        return HttpResponseRedirect("/activity/"+str(activity_id)+'/')
+        return HttpResponseRedirect("/activity/" + str(activity_id) + '/')
     else:
         # checking if some friend has done this activity
         res = []
@@ -62,11 +59,46 @@ def activity(request, activity_id):
                 planesRealizados = Plan.objects.filter(user=friend)
 
                 for plan in planesRealizados:
+                    res.append(friend)
+                    print(res)
+            return render_to_response('activity.html',
+                                      {'activity': obj, 'friendsDid': res, 'comments': comments, 'user': ourser},
+                                      context_instance=RequestContext(request))
+        return render_to_response('activity.html', {'activity': obj, 'friendsDid': res, 'comments': comments},
+                                  context_instance=RequestContext(request))
 
-                        res.append(friend)
-                        print(res)
-            return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments, 'user': ourser}, context_instance=RequestContext(request))
-        return render_to_response('activity.html', {'activity':obj, 'friendsDid':res, 'comments': comments}, context_instance=RequestContext(request))
+
+def signin(request, from_path):
+    #validation
+
+    loginw = False
+
+    if request.method == 'POST':
+        userName = request.POST['usernamelogin']
+
+        hashPassword = request.POST['passwordlogin']
+        print(hashPassword)
+        UserAccount = authenticate(username=userName, password=hashPassword)
+        if UserAccount is not None:
+            if UserAccount.is_active:
+
+                login(request, UserAccount)
+                # Llevar a la vista principal
+                return HttpResponseRedirect('/'+from_path)
+            else:
+                # Cuenta no activada
+
+                return HttpResponseRedirect("/error")
+        else:
+            # Login incorrecto
+            loginw = True
+            return render_to_response('signin.html',
+                                      {'loginw': loginw},
+                                      context_instance=RequestContext(request))
+
+    return render_to_response('signin.html',
+                              {'loginw': loginw},
+                              context_instance=RequestContext(request))
 
 
 #@login_required(login_url="/login/")
@@ -148,21 +180,21 @@ def automatic_plan(request):
         else:
             # Login incorrecto
             loginw = True
-            return render_to_response('automatic_plan_nonlogged2.html',
+            return render_to_response('automatic_plan.html',
                                       {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
                                        'userform': userform,
-                                       'djangoform': djangoform, 'uservform': uservform,'featured':featured[:3]} ,
+                                       'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3]},
                                       context_instance=RequestContext(request))
 
 
     #######
 
 
-    return render_to_response('automatic_plan_nonlogged2.html',
-                                      {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
-                                       'userform': userform,
-                                       'djangoform': djangoform, 'uservform': uservform,'featured':featured[:3]} ,
-                                      context_instance=RequestContext(request))
+    return render_to_response('automatic_plan.html',
+                              {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
+                               'userform': userform,
+                               'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3]},
+                              context_instance=RequestContext(request))
 
 
 def logout(request):
@@ -196,7 +228,8 @@ def home(request):
     # recently done
     recentplans = Plan.objects.filter(user=our, done=True).all()
     return render_to_response('home.html',
-                              {'recentplans': recentplans, 'user': our, 'activities': activities, 'ac1': ac1, 'ac2': ac2,
+                              {'recentplans': recentplans, 'user': our, 'activities': activities, 'ac1': ac1,
+                               'ac2': ac2,
                                'ac3': ac3}, context_instance=RequestContext(request))
 
 
@@ -237,7 +270,8 @@ def filter_activities_registered(request):
         isPromoted = request.POST.get('isPromoted', False)
         results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
         print(results)
-        return render_to_response('customplanloged.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
+        return render_to_response('customplanloged.html', {'user': ouser, 'results': results},
+                                  context_instance=RequestContext(request))
     if request.method == 'POST' and 'custom' in request.POST:
         print('empezando el guardado')
         activities = []
@@ -310,7 +344,8 @@ def user_plans(request):
                 if share:
                     toShare.append(friend)
             data.append({'plan': plan, 'sharedTo': sharedTo, 'toShare': toShare})
-        return render_to_response('user_plans.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
+        return render_to_response('user_plans.html', {'user': ouser, 'data': data},
+                                  context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')
@@ -341,28 +376,29 @@ def todo(request):
 
 @login_required(login_url='/plan/')
 def friends(request):
-    duser=request.user
+    duser = request.user
     print(duser)
-    ouser=OurUser.objects.get(djangoUser=duser)
+    ouser = OurUser.objects.get(djangoUser=duser)
     friends = ouser.friends.all()
-    all=OurUser.objects.all()
+    all = OurUser.objects.all()
     print(friends)
     print(all)
     print(request.method)
     if request.method == 'POST':
-        if 'borrar' in request.POST :
-            idfriend=request.POST.get('friend')
-            userfriend=OurUser.objects.get(id=idfriend)
+        if 'borrar' in request.POST:
+            idfriend = request.POST.get('friend')
+            userfriend = OurUser.objects.get(id=idfriend)
             if userfriend in friends:
                 ouser.friends.remove(userfriend)
                 return HttpResponseRedirect("../friends")
-        if 'añadir' in request.POST :
-            idfriend=request.POST.get('friend')
-            userfriend=OurUser.objects.get(id=idfriend)
+        if 'añadir' in request.POST:
+            idfriend = request.POST.get('friend')
+            userfriend = OurUser.objects.get(id=idfriend)
             if userfriend not in friends:
                 ouser.friends.add(userfriend)
                 return HttpResponseRedirect("../friends")
-    return render_to_response('friends.html',{'user':ouser,'friends':friends,'all':all},context_instance=RequestContext(request))
+    return render_to_response('friends.html', {'user': ouser, 'friends': friends, 'all': all},
+                              context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')
@@ -375,7 +411,7 @@ def modify_plan(request, plan_id):
             if request.POST[key].isdigit():
                 act = Activity.objects.get(pk=int(value))
                 plan.activities.remove(act)
-        return HttpResponseRedirect("/mod_plan/"+str(plan_id)+'/')
+        return HttpResponseRedirect("/mod_plan/" + str(plan_id) + '/')
     if request.method == 'POST' and 'delete' in request.POST:
         plan.delete()
         return HttpResponseRedirect("/user_plans")
@@ -399,7 +435,8 @@ def add_activities_to_given_plan(request, plan_id):
         isFree = request.POST.get('isFree', False)
         isPromoted = request.POST.get('isPromoted', False)
         results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
-        return render_to_response('add_activities.html', {'user': ouser, 'plan': plan, 'results': results}, context_instance=RequestContext(request))
+        return render_to_response('add_activities.html', {'user': ouser, 'plan': plan, 'results': results},
+                                  context_instance=RequestContext(request))
     if request.method == 'POST' and 'add' in request.POST:
         for key, value in request.POST.items():
             if request.POST[key].isdigit():
@@ -407,7 +444,8 @@ def add_activities_to_given_plan(request, plan_id):
                 plan.activities.add(act)
         return HttpResponseRedirect("/user_plans")
     else:
-        return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan}, context_instance=RequestContext(request))
+        return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan},
+                                  context_instance=RequestContext(request))
 
 
 #funcion extra para no repetir codigo

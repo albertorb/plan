@@ -1,0 +1,55 @@
+{% extends 'master.html' %}
+
+{% block content %}
+    <div class="row container center-block scape-top-custom">
+
+        <div class="panel col-md-6">
+            <div class="panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4></h4>
+                <h4 class="modal-title text-center" id="myModalLabel2">
+                    <img src="{{ STATIC_URL }}img/logo.png" class="img-rounded">
+                    Log in
+                </h4>
+            </div>
+            <div class="panel pull-right col-lg-6">
+                <p class="help-block">You are about to discover a new way to enjoy your travels and share it with your
+                    friends. <br>A journey plan on a single click</p>
+            </div>
+            <div class=" form-signup  ">
+
+
+                <form id="formulario2" class="form-signup" method="post" action="">{% csrf_token %}
+                    <div id="wrongCredentials" class="text-center alert alert-danger hidden"> Wrong credentials</div>
+                    <div class="input-group col-xs-6 ">
+
+                        <input id="usernamex" type="text" name="usernamelogin" class="form-control"
+                               placeholder="username">
+                    </div>
+                    <br>
+
+                    <div class="input-group col-xs-6">
+
+                        <input id="passwordx" type="password" name="passwordlogin" class="form-control"
+                               placeholder="password">
+                    </div>
+
+
+                    <div class="hidden">
+                        <input name="inORup" value="in">
+                    </div>
+                    <div class="" style="padding-top: 5%">
+                        <input type=submit value="Log in" class="btn button-orange center-block"/>
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}
