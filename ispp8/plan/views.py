@@ -411,9 +411,13 @@ def add_activities_to_given_plan(request, plan_id):
 
 
 def set_tastes(request):
-    duser = request.user
-    ouser = OurUser.objects.get(djangoUser=duser)
-    return render_to_response('set_tastes.html', {'user': ouser}, context_instance=RequestContext(request))
+    #duser = request.user
+    #ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST':
+        print(request.POST)
+    else:
+        sectors = Sector.objects.all()
+        return render_to_response('set_tastes.html', {'sectors': sectors}, context_instance=RequestContext(request))
 
 
 #funcion extra para no repetir codigo
