@@ -16,6 +16,12 @@ from django.contrib import auth
 from django.contrib.auth.hashers import make_password, pbkdf2
 import random
 from django.views.decorators.http import require_http_methods
+from django.utils.translation import ugettext as _
+
+
+def prueba(request):
+    output = _("Welcome to my site.")
+    return render_to_response('prueba.html', context_instance=RequestContext(request))
 
 
 def getPlan(request, activity_id, activity_id2, activity_id3):
@@ -499,6 +505,13 @@ def add_activities_to_given_plan(request, plan_id):
                                   context_instance=RequestContext(request))
 
 
+@login_required(login_url='/plan')
+def profile(request):
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    return render_to_response('profile.html', {'user': ouser}, context_instance=RequestContext(request))
+
+
 def set_tastes(request):
     #duser = request.user
     #ouser = OurUser.objects.get(djangoUser=duser)
@@ -530,4 +543,3 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
         if not location and not sector and not moment and not sDate and not eDate and not val and not isFree and not isPromoted:
             results.append(a)
     return results
-
