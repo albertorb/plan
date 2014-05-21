@@ -101,6 +101,38 @@ def signin(request, from_path):
                               context_instance=RequestContext(request))
 
 
+def register(request):
+    djangoform = userDjangoForm()
+    userform = OurUserRegistrationForm()
+    if request.method == 'POST' and "submit" in request.POST:
+        print("entra al formulario")
+        userform = OurUserRegistrationForm(request.POST)
+        djangoform = userDjangoForm(request.POST)
+        if userform.is_valid() and djangoform.is_valid():
+            print("formularios validos")
+            #saving to database
+            userp = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+            profile = userform.save(commit=False)
+            profile.djangoUser = userp
+            if 'picture' in request.FILES:
+                profile.image = request.FILES['picture']
+
+                # Now we save the UserProfile model instance.
+                profile.save()
+                print("registro ok")
+                #request.session.flush()
+                username = request.POST['username']
+                hashpassword = request.POST['password']
+                UserAccount = authenticate(username=username, password=hashpassword)
+                login(request, UserAccount)
+                return HttpResponseRedirect('/plan')
+        else:
+            print(djangoform.errors)
+            print(userform.errors)
+            djangoform = userDjangoForm()
+    return render_to_response('register.html', context_instance=RequestContext(request))
+
+
 #@login_required(login_url="/login/")
 def automatic_plan(request):
     # automatic plan
