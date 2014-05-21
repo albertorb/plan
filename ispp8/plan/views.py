@@ -269,6 +269,22 @@ def filter_activities(request):
         else:
             print('seleccionando parametros')
             return render_to_response('filter.html', {'user': ouser}, context_instance=RequestContext(request))
+    else:
+         if request.method == 'POST':
+             print('realizando filtrado')
+             location = request.POST.get('location', False)
+             sector = request.POST.get('sector', False)
+             moment = request.POST.get('moment', False)
+             sDate = request.POST.get('sDate', False)
+             eDate = request.POST.get('eDate', False)
+             val = request.POST.get('valoration', False)
+             isFree = request.POST.get('isFree', False)
+             isPromoted = request.POST.get('isPromoted', False)
+             results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
+             return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
+         else:
+             print('seleccionando parametros')
+             return render_to_response('filter.html', context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')

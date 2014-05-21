@@ -24,7 +24,7 @@ class Activity(models.Model):
     moment = models.CharField(max_length=3, choices=MOMENTS)
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
-    valoration = models.FloatField()
+    valoration = models.IntegerField()
     isFree = models.CharField(max_length=3, choices=PRICE, default='f')
     isPromoted = models.BooleanField()
     objects = models.Manager()
