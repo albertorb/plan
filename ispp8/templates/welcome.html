@@ -34,19 +34,19 @@
     <nav class="navbar-header col-md-4 text-center "><img src="{{ STATIC_URL }}img/logo.png"><em
             class="text-darkorange text-lg"> nowasti </em></nav>
 
-    <form class="form-inline pull-right" role="form">
+    <form class="form-inline pull-right" method="post" role="form" action="/">{% csrf_token %}
         <div class="form-group">
             <label class="sr-only" for="InputEmail2">Email address</label>
-            <input type="email" class="form-control" id="InputEmail2" placeholder="Enter email">
+            <input type="text" class="form-control" id="InputName2" placeholder="Enter username" name="usernamelogin">
         </div>
         <div class="form-group">
             <label class="sr-only" for="InputPassword2">Password</label>
-            <input type="password" class="form-control" id="InputPassword2" placeholder="Password">
+            <input type="password" class="form-control" id="InputPassword2" placeholder="Password" name="passwordlogin">
         </div>
-        <a type="submit" class="btn btn-warning">Sign in</a>
+        <input type="submit" class="btn btn-warning" name="log" value="Sign in" />
 
         <div class="col-md-5 checkbox text-darkorange text-xs"><input type="checkbox"> remember me</div>
-        <div class="col-md-5 text-xs"><a class="text-darkorange" href="/newaccount">create new account </a></div>
+        <div class="col-md-5 text-xs"><a class="text-darkorange" href="/register">create new account </a></div>
 
     </form>
 </div>
@@ -111,7 +111,7 @@
                        <em class="col-md-10 pull-right"> Rate the activities you have done to give feedback</em>
                     </div>
                     <div class="row disabled text-center">
-                        <a class="btn btn-warning">free register to get all this</a>
+                        <a href="/register" class="btn btn-warning">free register to get all this</a>
                     </div>
                 </div>
             </div>

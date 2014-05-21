@@ -36,7 +36,31 @@ def getPlan(request, activity_id, activity_id2, activity_id3):
 
 
 def welcome(request):
-    return render_to_response('welcome.html', context_instance=RequestContext(request))
+    loginw = False
+    if request.method == 'POST' and "log" in request.POST:
+        print("vamos alla")
+        userName = request.POST['usernamelogin']
+        hashPassword = request.POST['passwordlogin']
+        print(hashPassword)
+        UserAccount = authenticate(username=userName, password=hashPassword)
+        if UserAccount is not None:
+            if UserAccount.is_active:
+
+                login(request, UserAccount)
+                # Llevar a la vista principal
+                return HttpResponseRedirect('/plan')
+            else:
+                # Cuenta no activada
+
+                return HttpResponseRedirect("/error")
+        else:
+            # Login incorrecto
+            loginw = True
+            return render_to_response('signin.html',
+                                      {'loginw': loginw},
+                                      context_instance=RequestContext(request))
+
+    return render_to_response('welcome.html',{}, context_instance=RequestContext(request))
 
 
 def activity(request, activity_id):
