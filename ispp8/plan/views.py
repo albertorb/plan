@@ -162,7 +162,9 @@ def automatic_plan(request):
     # automatic plan
     #activities = Activity.objects.all()
     activities = Activity.objects.all()
-
+    comments = Comment.objects.all()
+    plans = Plan.objects.all()
+    print(comments)
     activities2 = []
     ac1 = activities[0]
     activities2.append(ac1)
@@ -249,7 +251,8 @@ def automatic_plan(request):
     return render_to_response('automatic_plan.html',
                               {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
                                'userform': userform,
-                               'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3]},
+                               'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3],
+                               'comments': comments,'plans': plans},
                               context_instance=RequestContext(request))
 
 
