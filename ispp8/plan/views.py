@@ -531,3 +531,50 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
             results.append(a)
     return results
 
+
+########### ALGORYTHM ###############
+
+def algorythm(request):
+    user = request.user.ouruser
+    tastes = user.objects.all().filter()
+    aux =  Activity.objects.all() # aux to store population filtered 
+    res = []
+
+    ## init indiv
+    for elem in tastes:
+    	# this two IF are excluding those activities that user will never want
+        if elem.attribute_name == 'valoration':
+            if elem.dregee == 0:
+                aux = aux.exclude(valoration=int(elem.attribute_value))
+        if elem.attribute_name == 'sector':
+            if elem.dregee == 0:
+                aux = aux.exclude(sector=Sector.objects.get(name=elem.attribute_value))
+
+        # Creating 100 people with some restrictions
+    breakfastSet = aux.filter(sector = Sector.objects.get(name='Coffe shop'))
+    lunchSet = aux.filter(sector = Sector.objects.get(name='Restaurant')) # Must be the same as dinnerSet to avoid restaurant duplication
+    loungeSet = aux.filter(sector = Sector.objects.get(name='Lounge'))
+    activities = aux.exclude(sector = Sector.objects.get(name='Coffe shop'))
+    activities = aux.exclude(sector = Sector.objects.get(name='Restaurant'))
+    activities = aux.exclude(sector = Sector.objects.get(name='Lounge'))
+    random.shuffle(breakfastSet)
+    random.shuffle(lunchSet)
+    random.shuffle(activities)
+    random.shuffle(loungeSet)
+
+    for elem in aux:
+    	res.append(breakfastSet.pop(0)) # first activity must be breakfast
+    	res.append(activity.pop(0)) # random activity
+    	res.append(activity.pop(0)) # random activity 2
+    	res.append(lunchSet.pop(0)) # random activity
+
+
+
+
+
+
+
+
+
+    ## end init indiv
+
