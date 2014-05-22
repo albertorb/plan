@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     url(r'^addto_plan/(?P<plan_id>\d+)/$', 'plan.views.add_activities_to_given_plan'),
     url(r'^set_tastes$', 'plan.views.set_tastes'),
     url(r'^register$','plan.views.register'),
-    url(r'^prueba$','plan.views.prueba'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin', include(admin.site.urls)),

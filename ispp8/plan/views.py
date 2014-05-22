@@ -19,11 +19,6 @@ from django.views.decorators.http import require_http_methods
 from django.utils.translation import ugettext as _
 
 
-def prueba(request):
-    output = _("Welcome to my site.")
-    return render_to_response('prueba.html', context_instance=RequestContext(request))
-
-
 def getPlan(request, activity_id, activity_id2, activity_id3):
     act = get_object_or_404(Activity, id=activity_id)
     act2 = get_object_or_404(Activity, id=activity_id2)

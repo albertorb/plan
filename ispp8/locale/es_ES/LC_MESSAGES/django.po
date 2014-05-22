@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-22 01:23+0200\n"
+"POT-Creation-Date: 2014-05-22 02:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,114 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\plan\views.py:23
-msgid "Welcome to my site."
+#: .\ispp8\settings.py:196
+msgid "Spanish"
 msgstr ""
 
-#: .\templates\prueba.html:4
-msgid "This is the title."
-msgstr "Este es el titulo"
+#: .\ispp8\settings.py:197
+msgid "English"
+msgstr ""
+
+#: .\templates\master.html:46 .\templates\master.html.py:140
+msgid "Search"
+msgstr "Buscar"
+
+#: .\templates\master.html:74
+msgid "Home"
+msgstr "Principal"
+
+#: .\templates\master.html:79
+msgid "Timeline"
+msgstr "Historial"
+
+#: .\templates\master.html:84
+msgid "Wish"
+msgstr "Deseados"
+
+#: .\templates\master.html:98
+msgid "Profile"
+msgstr "Perfil"
+
+#: .\templates\master.html:105
+msgid "Settings"
+msgstr "Configuración"
+
+#: .\templates\master.html:107
+msgid "Logout"
+msgstr "Salir"
+
+#: .\templates\master.html:167
+msgid "Sign in"
+msgstr "Entrar"
+
+#: .\templates\master.html:169
+msgid "Register"
+msgstr "Registrarse"
+
+#: .\templates\master.html:205
+msgid "skip the form signing with your social accounts"
+msgstr "Saltate el formulario registrandote"
+
+#: .\templates\master.html:217
+msgid "Username"
+msgstr "Nombre de Usuario"
+
+#: .\templates\master.html:223
+msgid "Sorry, username in use. Please try another one"
+msgstr "Lo sentimos, nombre de usuario en uso. Por favor inténtalo con otro"
+
+#: .\templates\master.html:228
+msgid "Email address"
+msgstr "Correo electrónico"
+
+#: .\templates\master.html:235
+msgid "Sorry, email in use. Please try another one"
+msgstr "Lo sentimos, email en uso. Por favor inténtalo con otro"
+
+#: .\templates\master.html:239
+msgid "Password"
+msgstr "Contraseña"
+
+#: .\templates\master.html:253
+msgid "Birthday"
+msgstr "Fecha de nacimiento"
+
+#: .\templates\master.html:257
+msgid "Gender"
+msgstr "Genero"
+
+#: .\templates\master.html:259
+msgid "Female"
+msgstr "Femenino"
+
+#: .\templates\master.html:260
+msgid "Male"
+msgstr "Masculino"
+
+#: .\templates\master.html:265
+msgid "Profile image"
+msgstr "Imagen de perfil"
+
+#: .\templates\master.html:269
+msgid "By submit this form you accept our"
+msgstr "Al enviar este formulario aceptas nuestros"
+
+#: .\templates\master.html:269
+msgid "terms & cons"
+msgstr "Terminos & Condiciones"
+
+#: .\templates\master.html:300
+msgid ""
+"You are about to discover a new way to enjoy your travels and share it with "
+"your friends"
+msgstr ""
+"Estas apunto de descubrir una nueva forma de disfrutar tus viajes y compartirlos con "
+"tus amigos"
+
+#: .\templates\master.html:301
+msgid "A journey plan on a single click"
+msgstr "Un plan de viaje en un solo click"
+
+#: .\templates\master.html:307
+msgid "Wrong credentials"
+msgstr "Credenciales incorrectas"

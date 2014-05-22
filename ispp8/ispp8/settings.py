@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+from django.utils.translation import ugettext as _
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -190,3 +191,8 @@ LOGGING = {
         },
     }
 }
+
+LANGUAGES = (
+    ('es', _('Spanish')),
+    ('en', _('English')),
+)
