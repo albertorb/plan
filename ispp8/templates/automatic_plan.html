@@ -1,78 +1,151 @@
 {% extends 'master.html' %}
 {% block content %}
 
-    <div class="text-center quitamargen">
-     <div class=" col-lg-12 alert alert-success text-center" >
-                <p>Hey! What about that plan!?</p>
-     </div>
-       {% if activities.count > 0 %}
-                <div class=" col-md-9" style="display: table; position: relative">
+    <div class="quitamargen">
+        <div class="row container center-block">
+            <h4>Trending cities</h4>
+
+            <div class="col-md-10">
+                <div id="carousel-example-generic" class="carousel slide " data-ride="carousel">
+                    <!-- Indicators -->
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+
+                        {% for a in plans %}
+
+                            <div class="{% if forloop.counter0 == 0 %}item active{% else %}item{% endif %}">
+                                {% for a1 in a.activities.all %}
+                                    {% if forloop.counter == 1 %}
+                                         {% for c in comments %}
+                                {% if c.activity == a1 %}
+                                   <b class="textoderecha">" {{ c.text }} "</b>
+                                    <img class="img-circle img-comment" src="media/{{ c.user.image }}" style="max-width: 15%;max-height: 15%;" />
+                                {% endif %}
+                                {% endfor %}
+                                        <img src="{{ MEDIA_URL }}{{ a1.location }}.jpg"
+                                             style="width: 100%; max-height: 35%;"/>
+                                        <b class="textociudad">{{ a1.location|title }}</b>
+                                        <table class="table">
+                                        <tr>
+                                    {% endif %}
 
 
-                       <table class="table table-responsive">
-                            <tr>
-                             {% for activity in activities %}
-                              {% if forloop.counter <= 3 %}
-                                  <td class="panel">
-                                   <div>
-                                       <a href="{% url 'activity_info' activity_id=activity.id %}">
-                                       <img class="pull-left img-rounded" src="{{ activity.photo }}" style="height: 120px;width: 120px;"/>
-                                       </a>
-                                   </div>
-                                   <div>
-                                       <comment><b>{{ activity.name }}</b></comment>
-                                       <comment>{{ activity.description }}</comment>
-                                   </div>
-                                  </td>
-                        {% endif %}
+
+                                    <td style="max-width: 120px;">
+
+                                        <a href="{% url 'activity_info' activity_id=a1.id %}">
+                                            <img class=" img-rounded"
+                                                 src="{{ MEDIA_URL }}{{ a1.photo }}"
+                                                 style="height: 120px;width: 100%;"/>
+                                        </a>
+                                    {{ a1.name }}
+                                    </td>
+
+
+
+
+
+
+
+                                {% endfor %}
+                                </tr>
+                                </table>
+                            </div>
                         {% endfor %}
-                            </tr>
-                       </table>
-
-
-          <div class="col-md-12  text-center">
-          <br/>
-          <br/>
-          </div>
-                <a  href="{% url 'plan_info' activity_id=ac1.id activity_id2=ac2.id activity_id3=ac3.id %}">
-                    <button  type="button" class="btn btn-warning">I want this plan</button>
-                </a>
-                <a href="../filter" class="btn btn-info" data-toggle="modal">Try a custom search</a>
-                {% endif %}
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
 
             </div>
-        <div class="col-md-3 pull-right" style="display: table-cell">
-    <div class="panel">
-     <h2>Featured Activities</h2>
-    {% for a in activities %}
-        {% if a.isPromoted == 1 %}
-            <ul>
-            <img  src="{{ MEDIA_URL }}{{ a.photo }}" style="width: 60px;height: 60px;" />
-            {{ a.name }}
+        </div>
+        {% if activities.count > 0 %}
+            <div class="row container center-block">
+            <div class=" col-md-9" style="display: table; position: relative">
+            <div class=" col-lg-12 alert alert-success text-center">
+                <p>Hey! What about that plan!?</p>
+            </div>
 
-            </ul>
-        {% endif %}
-    {% endfor  %}
-     </div>
-    <div class="col-md-4">
-        <br/>
-    </div>
-    <div class="pull-right  panel ">
-            <h2>Most Rated Activities</h2>
-                {% for a1 in activities %}
-                    {% if a.valoration != 0 %}
-                        {% if forloop.counter <= 5 %}
-                     <ul class="row pull-left">
-            <img  src="{{ MEDIA_URL }}{{ a1.photo }}" style="width: 60px;height: 60px;" />
-            {{ a1.name }}
+            <table class="table table-responsive">
+                <tr>
+                    {% for activity in activities %}
 
-            </ul>
+                        {% if forloop.counter <= 3 %}
+                            <td class="panel">
+                                <div>
+                                    <a href="{% url 'activity_info' activity_id=activity.id %}">
+                                        <img class="pull-left img-rounded" src="{{ activity.photo }}"
+                                             style="height: 120px;width: 120px;"/>
+                                    </a>
+                                </div>
+                                <div>
+                                    <comment><b>{{ activity.name }}</b></comment>
+                                    <comment>{{ activity.description }}</comment>
+                                </div>
+                            </td>
+
                         {% endif %}
+
+                    {% endfor %}
+                </tr>
+
+            </table>
+
+
+            <div class="col-md-12  text-center">
+                <br/>
+                <br/>
+            </div>
+            <a href="{% url 'plan_info' activity_id=ac1.id activity_id2=ac2.id activity_id3=ac3.id %}">
+                <button type="button" class="btn btn-warning">I want this plan</button>
+            </a>
+            <a href="../filter" class="btn btn-info" data-toggle="modal">Try a custom search</a>
+        {% endif %}
+
+        </div>
+        <div class="col-md-3 pull-right">
+            <div class="panel">
+                <h2>Featured Activities</h2>
+                {% for a in activities %}
+                    {% if a.isPromoted == 1 %}
+                        <ul>
+                            <img src="{{ MEDIA_URL }}{{ a.photo }}" style="width: 60px;height: 60px;"/>
+                            {{ a.name }}
+
+                        </ul>
                     {% endif %}
                 {% endfor %}
             </div>
-</div>
 
+            <h4 class="">Most Rated Activities</h4>
+
+            <div class="  panel">
+                <table class="table">
+
+                    {% for a1 in activities %}
+                        {% if a.valoration != 0 %}
+                            {% if forloop.counter <= 5 %}
+                                <tr>
+                                    <td>
+
+                                        <img src="{{ MEDIA_URL }}{{ a1.photo }}" style="width: 60px;height: 60px;"/>
+                                        {{ a1.name }}
+
+
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+        </div>
     </div>
 
 {% endblock %}
