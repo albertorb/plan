@@ -23,17 +23,17 @@
         {% endfor %}
                 </div>
     <div class="form-group">
-        <input type="submit" name="remove" value="Remove">
+        <input type="submit" class="btn button-orange-plan" name="remove" value="Remove">
     </div>
     </form>
 
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
                 <input type="hidden" name="delete" value="delete">
         <div class="form-group">
-        <input type="submit" name="custom" value="Delete Plan">
+        <input type="submit" name="custom" class="btn button-orange" value="Delete Plan">
     </div>
     </form>
-    <a href="/addto_plan/{{ plan.pk }}/"><button class="btn button-orange-plan">Add Activities</button></a>
+    <a href="/addto_plan/{{ plan.pk }}/"><button class="btn button-orange">Add Activities</button></a>
     </div>
 
 {% endblock %}

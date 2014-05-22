@@ -15,8 +15,8 @@
                               {% if forloop.counter <= 3 %}
                                   <td class="panel">
                                    <div>
-                                       <a href="#">
-                                       <img class="pull-left img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}" style="height: 120px;width: 120px;"/>
+                                       <a href="{% url 'activity_info' activity_id=activity.id %}">
+                                       <img class="pull-left img-rounded" src="{{ activity.photo }}" style="height: 120px;width: 120px;"/>
                                        </a>
                                    </div>
                                    <div>

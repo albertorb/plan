@@ -6,8 +6,11 @@
         <h1 class="text-default text-center">Plan overview</h1>
 
         <div class="panel col-md-12">
+            <table class="table table-responsive">
 
             {% for activity in plan.activities.all %}
+                <tr>
+                <td>
                 <div class="row">
                     <div class="  col-md-2">
                         <img class="scape-top-custom img-export img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}"/>
@@ -16,7 +19,6 @@
                     <div id="address" class="col-md-4 container center-block text-center">
                         <address>
                            <p> <strong>{{ activity.name}}</strong></p>
-                         <p>  Latitude: {{activity.latitude}},Longitude: {{activity.longitude}}</p>
                           <p>  Location:{{ activity.location }}</p>
                             <abbr title="Phone">Web Page:</abbr> {{ activity.url }}
                         </address>
@@ -29,18 +31,20 @@
             </div>
 
             <span id="email" data-toggle="tooltip" data-placement="left" title="Send plan to email"
-                  class="glyphicon glyphicon-envelope glyphicon-topright"></span>
+                  class="glyphicon glyphicon-envelope glyphicon-topright" onclick="send();"></span>
             <span id="print" data-toggle="tooltip" data-placement="left" title="Print your plan"
                   class="glyphicon glyphicon-envelope glyphicon-topright2 glyphicon-print" onclick="pr();"></span>
-
+        </tr>
+        </table>
         </div>
+
 
     </div>
 
     <script>
         function pr(){
 
-            $('#print').hide();
+
             //$('#email').hide();
             //$('.img-export').hide();
             window.print();
