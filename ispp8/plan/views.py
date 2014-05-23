@@ -19,6 +19,8 @@ from django.views.decorators.http import require_http_methods
 
 
 def search(request):
+    # Es necesario ejecutar el siguiente codigo en la db para que esto funcione
+    # CREATE FULLTEXT INDEX plan_activity_name ON plan_activity(name);
     search_query = request.POST['search']
     print(len(search_query))
     res = Activity.objects.filter(name__search=search_query)
