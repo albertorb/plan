@@ -1,5 +1,5 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,27 +43,45 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search" action="/search" method="post">{% csrf_token %}
                     <div class="form-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="{% trans "Search" %}">
                     </div>
                     <button type="submit" class="btn btn-default"><span
                             class="glyphicon glyphicon-search text-darkorange"></span></button>
                 </form>
+                <!-- i18n selector -->
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                                class="glyphicon glyphicon-tags text-darkorange"></span></a>
+                        <ul class="dropdown-menu">
+                        {% for lang in LANGUAGES %}
+	                        <li>
+                                <form name="setLang{{ lang.1}}" action="/i18n/setlang/" method="POST">{% csrf_token %}
+                                    <input name="next" type="hidden" value="" />
+                                    <input type="hidden" name="language" value="{{ lang.0 }}" />
+                                    <a href="" onclick="document.setLang{{ lang.1 }}.submit(); return false;">{{ lang.1 }}</a>
+                                </form>
+                            </li>
+                        {% endfor %}
+                        </ul>
+
+
+
                 <ul class="nav navbar-nav navbar-right">
 
                     <li {% if 'home' in request.path %} class="activecustom"{% endif %}><a href="/home"
                             {% if 'home' in request.path %} class="a-activecustom" {% else %}
                                                                                            class="nonactive-a"{% endif %}>
-                        <text>Home</text>
+                        <text>{% trans "Home" %}</text>
                     </a></li>
                     <li {% if 'timeline' in request.path %} class="activecustom"{% endif %}><a href="/timeline"
                             {% if 'timeline' in request.path %} class="a-activecustom" {% else %}
                                                                                                class="nonactive-a"{% endif %}>
-                        <text>Timeline</text>
+                        <text>{% trans "Timeline" %}</text>
                     </a></li>
                     <li {% if 'todo' in request.path %} class="activecustom"{% endif %}><a href="/todo"
                             {% if 'todo' in request.path %} class="a-activecustom" {% else %}
                                                                                            class="nonactive-a"{% endif %}>
-                        <text>Wish</text>
+                        <text>{% trans "Wish" %}</text>
                     </a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
@@ -77,16 +95,16 @@
                                         <img class="avatar-35 img-rounded"
                                              src="{{ MEDIA_URL }}{{ request.user.ouruser.image }}">
                                         <b class="name">{{ request.user }}</b>
-                                        <small class="metadata">Profile</small>
+                                        <small class="metadata">{% trans "Profile" %}</small>
                                     </div>
                                 </a>
 
 
                             </li>
                             <li class="divider"></li>
-                            <li><a href="/settings">Settings</a></li>
+                            <li><a href="/settings">{% trans "Settings" %}</a></li>
                             <li class="divider"></li>
-                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/logout">{% trans "Logout" %}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -119,20 +137,36 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search" action="/search" method="post">{% csrf_token %}
                     <div class="form-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="{% trans "Search" %}">
                     </div>
                     <button type="submit" class="btn btn-default"><span
                             class="glyphicon glyphicon-search text-darkorange"></span></button>
                 </form>
+                <!-- i18n selector -->
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                                class="glyphicon glyphicon-tags text-darkorange"></span></a>
+                        <ul class="dropdown-menu">
+                        {% for lang in LANGUAGES %}
+	                        <li>
+                                <form name="setLang{{ lang.1}}" action="/i18n/setlang/" method="POST">{% csrf_token %}
+                                    <input name="next" type="hidden" value="/plan" />
+                                    <input type="hidden" name="language" value="{{ lang.0 }}" />
+                                    <a href="#" onclick="document.setLang{{ lang.1 }}.submit();return false;">{{ lang.1 }}</a>
+                                </form>
+                            </li>
+                        {% endfor %}
+                        </ul>
+
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
                                 class="glyphicon glyphicon-cog text-darkorange"></span></a>
                         <ul class="dropdown-menu">
 
-                            <li><a href="/signin">Sign in</a></li>
+                            <li><a href="/signin">{% trans "Sign in" %}</a></li>
                             <li class="divider"></li>
-                            <li><a href="/register">Register</a></li>
+                            <li><a href="/register">{% trans "Register" %}</a></li>
                             <li class="divider"></li>
 
                         </ul>
@@ -168,8 +202,7 @@
             </div>
 
             <div class="modal-body">
-                <h5 class="help-block text-center" id="myModalLabelx">skip the form signing with your social
-                    accounts</h5>
+                <h5 class="help-block text-center" id="myModalLabelx">{% trans "skip the form signing with your social accounts" %}</h5>
                 <br>
 
                 <div class="form-group text-center">
@@ -181,31 +214,29 @@
                 <form class="form-signup-custom " role="form" enctype="multipart/form-data"
                       method="post"> {% csrf_token %}
                     <div id="divUsername" class="form-group has-feedback">
-                        <label for="username">Username</label>
+                        <label for="username">{% trans "Username" %}</label>
                         <input type="text" class="form-control" id="username" name="username"
                                placeholder="Enter username" onblur="validateusr(false)">
                         <span id="spantick" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
                         <span id="spantickerror" class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
 
-                        <div id="alertusn" class="hidden alert alert-danger">Sorry, username in use. Please try another
-                            one
+                        <div id="alertusn" class="hidden alert alert-danger">{% trans "Sorry, username in use. Please try another one" %}
                         </div>
                     </div>
 
                     <div id="divEmail" class="form-group has-feedback">
-                        <label for="email">Email address</label>
+                        <label for="email">{% trans "Email address" %}</label>
                         <input type="email" class="form-control" id="email" name="email" onblur="validatemail(false)"
                                placeholder="Enter email">
                         <span id="spantick1" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
                         <span id="spantickerror1"
                               class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
 
-                        <div id="alertema" class="hidden alert alert-danger">Sorry, email in use. Please try another
-                            one
+                        <div id="alertema" class="hidden alert alert-danger">{% trans "Sorry, email in use. Please try another one" %}
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label for="password">Password</label>
+                        <label for="password">{% trans "Password" %}</label>
                         <input type="password" class="form-control" id="password" name="password"
                                placeholder="Password" onkeyup="passWeakness()">
 
@@ -219,24 +250,23 @@
 
                     </div>
                     <div class="form-group ">
-                        <label for="birthday">Birthday</label>
+                        <label for="birthday">{% trans "Birthday" %}</label>
                         <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Birthday">
                     </div>
                     <div class="form-group select-custom">
-                        <label for="option1">Gender</label>
+                        <label for="option1">{% trans "Gender" %}</label>
                         <select id="gender" name="gender" class="form-control select-custom">
-                            <option id="option1" value="f">Female</option>
-                            <option id="option2" value="m">Male</option>
+                            <option id="option1" value="f">{% trans "Female" %}</option>
+                            <option id="option2" value="m">{% trans "Male" %}</option>
                         </select>
                     </div>
 
                     <div id="profileimage" class="form-group">
-                        <label for="profileimage">Profile image</label>
+                        <label for="profileimage">{% trans "Profile image" %}</label>
                         <input id="picture" name="picture" type="file">
                     </div>
                     <div class="help-block ">
-                        <p class="help-block text-center">By submit this form you accept our <a href="/terms">terms &
-                            cons</a>.</p>
+                        <p class="help-block text-center">{% trans "By submit this form you accept our" %} <a href="/terms">{% trans "terms & cons" %}</a>.</p>
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn button-orange">Submit</button>
@@ -267,14 +297,14 @@
                 </h4>
             </div>
             <div class="modal-body pull-right col-lg-6">
-                <p class="help-block">You are about to discover a new way to enjoy your travels and share it with your
-                    friends. <br>A journey plan on a single click</p>
+                <p class="help-block">{% trans "You are about to discover a new way to enjoy your travels and share it with your friends" %}.<br>
+                    {% trans  "A journey plan on a single click" %}</p>
             </div>
             <div class="modal-body   modal-sm  form-signup  ">
 
 
                 <form id="formulario2" class="form-signup" method="post" action="">{% csrf_token %}
-                    <div id="wrongCredentials" class="text-center alert alert-danger hidden"> Wrong credentials</div>
+                    <div id="wrongCredentials" class="text-center alert alert-danger hidden"> {% trans "Wrong credentials" %}</div>
                     <div class="input-group col-xs-12 ">
 
                         <input id="usernamex" type="text" name="usernamelogin" class="form-control"

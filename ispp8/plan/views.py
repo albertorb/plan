@@ -16,6 +16,7 @@ from django.contrib import auth
 from django.contrib.auth.hashers import make_password, pbkdf2
 import random
 from django.views.decorators.http import require_http_methods
+from django.utils.translation import ugettext as _
 
 
 def search(request):
@@ -509,6 +510,13 @@ def add_activities_to_given_plan(request, plan_id):
     else:
         return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan},
                                   context_instance=RequestContext(request))
+
+
+@login_required(login_url='/plan')
+def profile(request):
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    return render_to_response('profile.html', {'user': ouser}, context_instance=RequestContext(request))
 
 
 def set_tastes(request):
