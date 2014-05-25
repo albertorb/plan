@@ -580,17 +580,17 @@ def algorythm(request):
 
     for pos in range(1):  #range(aux.count()-1):
         if breakfastSet is not None:  ## checking if user do not want breakfast
-            res.append(breakfastSet[pos])  # first activity must be breakfast
-        res.append(activities[pos + 1])  # random activity
-        res.append(activities[pos + 2])  # random activity 2
+            res.append(ActivitySorted.objects.create_activity_sorted(breakfastSet[pos],0))  # first activity must be breakfast
+        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 1],1))  # random activity
+        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 2],2))  # random activity 2
         if lunchSet is not None:
-            res.append(lunchSet[pos + 1])  # lunchtime
-        res.append(activities[pos + 3])  #random activity 3
-        res.append(activities[pos + 4])  #random activity 4
+            res.append(ActivitySorted.objects.create_activity_sorted(lunchSet[pos + 1],3))  # lunchtime
+        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 3],4))  #random activity 3
+        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 4],5))  #random activity 4
         if lunchSet is not None:
-            res.append(lunchSet[pos + 2])  # dinner time
+            res.append(ActivitySorted.objects.create_activity_sorted(lunchSet[pos + 2],6))  # dinner time
         if loungeSet is not None:
-            res.append(loungeSet[pos])
+            res.append(ActivitySorted.objects.create_activity_sorted(loungeSet[pos],7))
             ## end init indiv
 
             ## persisting plan
@@ -604,11 +604,13 @@ def algorythm(request):
         plan.user = request.user.ouruser
         plan.save()
         print(res[0].sector.name)
-        plan.activities = [res[0].id, res[1], res[2], res[3], res[4], res[5], res[6], res[7] ]
+        for elem in res:
+            plan.activities.add(elem)
+
 
 
 
     ## end persisting plan
-    return render_to_response('pruebaplan.html', {'plan': plan.activities.all().order_by("?")}, context_instance=RequestContext(request))
+    return render_to_response('pruebaplan.html', {'plan': plan}, context_instance=RequestContext(request))
 
 
