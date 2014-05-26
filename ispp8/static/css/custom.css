@@ -443,6 +443,11 @@ body {
     background-color: #ffffff;
 }
 
+.col-centered{
+    margin: 0 auto;
+    float: none;
+}
+
 .btn-group-right-custom {
     float: right;
     position: relative;
