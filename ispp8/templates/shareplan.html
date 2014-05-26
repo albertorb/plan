@@ -1,0 +1,55 @@
+{% extends 'master.html' %}
+{% block content %}
+
+
+    <div class="row container center-block scape-top-custom">
+        <h1 class="text-default text-center">Share plan</h1>
+        <p>Select the friend which you wanna share the followin plan</p>
+        <div class="panel col-md-12">
+            <table class="table table-responsive">
+            {% for a in plan.activities.all %}
+                <tr>
+                <td>
+                <div class="">
+                    <div class="  col-md-2">
+                        <img class="scape-top-custom img-export img-rounded" src="{{ MEDIA_URL }}{{ a.photo }}"/>
+                    </div>
+
+                    <div id="address" class="col-md-4 container center-block text-center">
+                        <address>
+                           <p> <strong>{{ a.name}}</strong></p>
+                          <p>  Location:{{ a.location }}</p>
+                            <abbr title="Phone">Web Page:</abbr> {{ a.url }}
+                        </address>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="well col-md-5">
+                <div id="map-canvas" class=" google-map-canvas center-block">
+                </div>
+            </div>
+
+            <span id="email" data-toggle="tooltip" data-placement="left" title="Send plan to email"
+                  class="glyphicon glyphicon-envelope glyphicon-topright" onclick="send();"></span>
+            <span id="print" data-toggle="tooltip" data-placement="left" title="Print your plan"
+                  class="glyphicon glyphicon-envelope glyphicon-topright2 glyphicon-print" onclick="pr();"></span>
+        </tr>
+        </table>
+        </div>
+    </div>
+
+    <form method="post">{% csrf_token %}
+    {% for f in user.friends.all %}
+        <div class="col-md-3 panel follow">
+        <input type="checkbox" class="radio" name="{{ activity.pk }}" value="{{ activity.pk }}">
+            <img class="img-rounded" src="{{ f.photo }}" />
+            <h3 class="username">{{ f.name }}</h3>
+
+        </div>
+    {% endfor %}
+       <div class="text-center">
+        <input type="submit" class="btn button-orange t " value="Share" />
+             </div>
+    </form>
+
+{% endblock %}

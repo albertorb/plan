@@ -29,102 +29,166 @@
     </div>
 </nav>
 -->
+<!-- small devices -->
+<div class="visible-xs">
+    <div class="padding-top-5 padding-right-25 padding-left-25">
+          <div class="alert alert-success">Download our android app for a better experience </div>
+          <div class="text-center padding-bottom-5">
+                    <img src="{{ STATIC_URL }}img/badge_android.png">
+                </div>
 
-<div class="row escape-top-welcome-custom left-margin-login-custom">
-    <nav class="navbar-header col-md-4 text-center "><img src="{{ STATIC_URL }}img/logo.png"><em
-            class="text-darkorange text-lg"> nowasti </em></nav>
+        <div class="panel col-md-8">
+            <div class="">
+                <h4 class="text-center">
+                <img src="{{ STATIC_URL }}img/logo.png" class="img-rounded">
+                Log in
+                </h4>
+            </div>
 
-    <form class="form-inline pull-right" method="post" role="form" action="/">{% csrf_token %}
-        <div class="form-group">
-            <label class="sr-only" for="InputEmail2">Email address</label>
-            <input type="text" class="form-control" id="InputName2" placeholder="Enter username" name="usernamelogin">
+            <div class="row">
+
+
+                        <div class="">
+
+
+                            <form id="formulario2" class="form-signup" method="post" action="">{% csrf_token %}
+                                <div id="wrongCredentials" class="text-center alert alert-danger hidden"> Wrong
+                                    credentials
+                                </div>
+                                <div class="input-group col-xs-6 col-centered">
+
+                                    <input id="usernamex" type="text" name="usernamelogin" class="form-control"
+                                           placeholder="username">
+                                </div>
+                                <br>
+
+                                <div class="input-group col-xs-6 col-centered">
+
+                                    <input id="passwordx" type="password" name="passwordlogin" class="form-control"
+                                           placeholder="password">
+                                </div>
+
+
+                                <div class="hidden">
+                                    <input name="inORup" value="in">
+                                </div>
+                                <div class=" padding-top-5 padding-bottom-5 text-center">
+                                    <input type=submit value="Log in" class="btn button-orange"/>
+                                    <a href="/plan" class="">Enter without log in</a>
+
+                                </div>
+
+
+                            </form>
+
+
+                        </div>
+
+
+
+
+            </div>
+
+
         </div>
-        <div class="form-group">
-            <label class="sr-only" for="InputPassword2">Password</label>
-            <input type="password" class="form-control" id="InputPassword2" placeholder="Password" name="passwordlogin">
-        </div>
-        <input type="submit" class="btn btn-warning" name="log" value="Sign in" />
+    </div>
 
-        <div class="col-md-5 checkbox text-darkorange text-xs"><input type="checkbox"> remember me</div>
-        <div class="col-md-5 text-xs"><a class="text-darkorange" href="/register">create new account </a></div>
-
-    </form>
 </div>
-<div class="col-lg-12 escape-top-welcome-custom"
-     style="background-image: url('{{ STATIC_URL }}img/welcome.jpg'); background-size:cover">
-    <div class="row">
-        <h1 class="text-center text-white-custom">Get a plan with just a click</h1>
-    </div>
-    <div class="row">
 
-    </div>
-    <div class="row text-center" style="margin-top: 4%; margin-bottom:15%">
-        <p><a href="/plan" class="btn btn-lg btn-warning" role="button">Let's start</a>
-    </div>
+<!-- end small devices -->
 
-</div>
-<div class="container">
 
-    <div class="col-sm-2"></div>
-    <div class="col-sm-2 overlap-nexus-custom">
-        <div class="">
-            <img src="{{ STATIC_URL }}img/nexus5.png">
+<div class="visible-lg visible-md visible-sm">
+    <div class="row escape-top-welcome-custom left-margin-login-custom">
+        <nav class="navbar-header col-md-4 text-center "><img src="{{ STATIC_URL }}img/logo.png"><em
+                class="text-darkorange text-lg"> nowasti </em></nav>
+
+        <form class="form-inline pull-right" method="post" role="form" action="/">{% csrf_token %}
+            <div class="form-group">
+                <label class="sr-only" for="InputEmail2">Email address</label>
+                <input type="text" class="form-control" id="InputName2" placeholder="Enter username"
+                       name="usernamelogin">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="InputPassword2">Password</label>
+                <input type="password" class="form-control" id="InputPassword2" placeholder="Password"
+                       name="passwordlogin">
+            </div>
+            <input type="submit" class="btn btn-warning" name="log" value="Sign in"/>
+
+            <div class="col-md-5 checkbox text-darkorange text-xs"><input type="checkbox"> remember me</div>
+            <div class="col-md-5 text-xs"><a class="text-darkorange" href="/register">create new account </a></div>
+
+        </form>
+    </div>
+    <div class="row escape-top-welcome-custom background-custom"
+         style="background-image: url('{{ STATIC_URL }}img/welcome.jpg'); background-size:cover;">
+        <div class="col-md-12">
+            <h1 class="text-center text-white-custom">Get a plan with just a click</h1>
         </div>
-    </div>
-    <div class="col-lg-2"></div>
-    <div class="col-lg">
-        <div class="overlap-panel-custom col-sm-4 col-md-5 ">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h3 class="text-orange">Get amazing plans and share them with your friends</h3>
+        <div class="col-md-12 text-center" style="z-index:3;">
+            <p><a href="/plan" class="btn btn-lg btn-warning" role="button">Let's start</a>
+        </div>
 
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-time"></span>
-                        </button>
-                    <em class="col-md-10 pull-right">Stop wasting hours finding lots of activities reviews</em>
-                    </div>
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon- glyphicon-hand-up"></span>
-
-                        </button>
-                        <em class="col-md-10 pull-right">Get what you want with just a click</em>
-                    </div>
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                       <em class="col-md-10 pull-right"> Try our automatic system to get plans or make your custom searching</em>
-                    </div>
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-share"></span>
-                        </button>
-                       <em class="col-md-10 pull-right"> Share what you have done to your friends</em>
-                    </div>
-
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-thumbs-up"></span>
-                        </button>
-                       <em class="col-md-10 pull-right"> Rate the activities you have done to give feedback</em>
-                    </div>
-                    <div class="row disabled text-center">
-                        <a href="/register" class="btn btn-warning">free register to get all this</a>
-                    </div>
+        <div class="col-md-5 pull-right">
+            <div class="">
+                <div>
+                    <img class="nexus-size" src="{{ STATIC_URL }}img/nexus5.png">
                 </div>
             </div>
-            <div class="col-xs-2">
-                <img src="{{ STATIC_URL }}img/badge_android.png">
-            </div>
-            <div class="row footer-welcome-custom">
-                <div class="row">
-                    <em class="col-xs-3">&copy 2014 PAMAB</em>
-                    <a class="col-xs-2" href="#">Contact</a>
-                    <a class="col-xs-2" href="#">Legal</a>
-                    <a class="col-xs-2" href="#">Developers</a>
+        </div>
+
+        <div class="" style="width: 100%; padding-top:30%; padding-left:15%;">
+
+
+            <div class=" overlap-panel-custom col-sm-4 col-md-5 ">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3 class="text-orange">Get amazing plans and share them with your friends</h3>
+
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </button>
+                            <em class="col-md-10 pull-right">Stop wasting hours finding lots of activities reviews</em>
+                        </div>
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon- glyphicon-hand-up"></span>
+
+                            </button>
+                            <em class="col-md-10 pull-right">Get what you want with just a click</em>
+                        </div>
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            <em class="col-md-10 pull-right"> Try our automatic system to get plans or make your custom
+                                searching</em>
+                        </div>
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-share"></span>
+                            </button>
+                            <em class="col-md-10 pull-right"> Share what you have done to your friends</em>
+                        </div>
+
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>
+                            </button>
+                            <em class="col-md-10 pull-right"> Rate the activities you have done to give feedback</em>
+                        </div>
+                        <div class="row disabled text-center">
+                            <a href="/register" class="btn btn-warning">free register to get all this</a>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-xs-2">
+                    <img src="{{ STATIC_URL }}img/badge_android.png">
+                </div>
+
+
             </div>
 
         </div>
@@ -132,11 +196,9 @@
     </div>
 
 </div>
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -29,6 +29,7 @@ def search(request):
 
 
 def getPlan(request, activity_id, activity_id2, activity_id3):
+    plans= Plan.objects.all()
     act = get_object_or_404(Activity, id=activity_id)
     act2 = get_object_or_404(Activity, id=activity_id2)
     act3 = get_object_or_404(Activity, id=activity_id3)
@@ -38,11 +39,23 @@ def getPlan(request, activity_id, activity_id2, activity_id3):
     plan.done = False
     plan.startDate = act.startDate
     plan.endDate = act3.endDate
-    plan.user = request.user.ouruser
-    plan.save()
-    plan.activities = [act, act2, act3]
-
+    if request.user.is_authenticated():
+        duser = request.user
+        ouser = OurUser.objects.get(djangoUser=duser)
+        for p in plans:
+            if p.user_id == ouser.id:
+                return HttpResponseRedirect('/repeatedplan')
+            else:
+                plan.user = request.user.ouruser
+                plan.save()
+                plan.activities = [act, act2, act3]
+    elif not request.user.is_authenticated():
+        return HttpResponseRedirect('/register')
     return render_to_response('plan.html', {'plan': plan}, context_instance=RequestContext(request))
+
+
+def repeatedplan(request):
+    return render_to_response('repetedplan.html',context_instance=RequestContext(request))
 
 
 def welcome(request):
@@ -398,6 +411,7 @@ def user_plans(request):
         plans = Plan.objects.filter(user=ouser).all()
         friends = ouser.friends.all()
         data = []
+        print(plans)
         for plan in plans:
             sharedTo = plan.sharedTo.all()
             toShare = []
@@ -408,9 +422,40 @@ def user_plans(request):
                         share = False
                 if share:
                     toShare.append(friend)
-            data.append({'plan': plan, 'sharedTo': sharedTo, 'toShare': toShare})
+            data.append({'plan': plan, 'sharedTo': sharedTo, 'toShare': toShare,'plans':plans})
         return render_to_response('user_plans.html', {'user': ouser, 'data': data},
                                   context_instance=RequestContext(request))
+
+
+@login_required(login_url='/plan')
+def pocketplans(request):
+    loguser = request.user
+    ouser = OurUser.objects.get(djangoUser=loguser)
+    plans=Plan.objects.all()
+    userplans=plans.filter(user_id=ouser)
+
+    return render_to_response('user_plans.html', {'user': ouser, 'userplans': userplans},
+                                  context_instance=RequestContext(request))
+
+
+def getplan(request,plan_id):
+    loguser = request.user
+    ouser = OurUser.objects.get(djangoUser=loguser)
+    plans= Plan.objects.all()
+    plan=plans.filter(id=plan_id)
+    print(plan)
+
+    return render_to_response('getplan.html',{'user': ouser, 'plan': plan},
+                                  context_instance=RequestContext(request))
+
+def shareplan(request,plan_id):
+    loguser = request.user
+    ouser = OurUser.objects.get(djangoUser=loguser)
+    plans= Plan.objects.all()
+    plan=plans.filter(id=plan_id)
+
+
+    return render_to_response('shareplan.html',{'user':ouser,'plan':plan},context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')
