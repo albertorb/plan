@@ -575,6 +575,9 @@ def set_tastes(request):
         return render_to_response('set_tastes.html', {'sectors': sectors}, context_instance=RequestContext(request))
 
 
+def preferences(request):
+    return render_to_response('preferences.html', context_instance=RequestContext(request))
+
 #funcion extra para no repetir codigo
 def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted):
     results = []
