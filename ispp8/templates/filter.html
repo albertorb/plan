@@ -1,8 +1,8 @@
-{% extends 'master.html' %}
+{% extends 'master.html' %} {% load i18n %}
 {% block content %}
 <div id="div1" class="scape-top-custom container text-center ">
     <div class="col-md-6 col-md-offset-3">
-    <h1>Customize your plan</h1>
+    <h1>{% trans 'Customize' %}</h1>
     <comment>Please, fulfill the following fields in order to offer the bests activities. Leave blank the fields that you don't want to use.</comment>
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
         {% if request.user.is_authenticated %}

@@ -16,6 +16,7 @@ from django.contrib import auth
 from django.contrib.auth.hashers import make_password, pbkdf2
 import random
 from django.views.decorators.http import require_http_methods
+from django.utils.translation import ugettext as _
 
 
 def getPlan(request, activity_id, activity_id2, activity_id3):
@@ -547,6 +548,13 @@ def add_activities_to_given_plan(request, plan_id):
                                   context_instance=RequestContext(request))
 
 
+@login_required(login_url='/plan')
+def profile(request):
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    return render_to_response('profile.html', {'user': ouser}, context_instance=RequestContext(request))
+
+
 def set_tastes(request):
     #duser = request.user
     #ouser = OurUser.objects.get(djangoUser=duser)
@@ -578,4 +586,51 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
         if not location and not sector and not moment and not sDate and not eDate and not val and not isFree and not isPromoted:
             results.append(a)
     return results
+
+
+########### ALGORYTHM ###############
+
+def algorythm(request):
+    user = request.user.ouruser
+    tastes = user.objects.all().filter()
+    aux =  Activity.objects.all() # aux to store population filtered 
+    res = []
+
+    ## init indiv
+    for elem in tastes:
+    	# this two IF are excluding those activities that user will never want
+        if elem.attribute_name == 'valoration':
+            if elem.dregee == 0:
+                aux = aux.exclude(valoration=int(elem.attribute_value))
+        if elem.attribute_name == 'sector':
+            if elem.dregee == 0:
+                aux = aux.exclude(sector=Sector.objects.get(name=elem.attribute_value))
+
+        # Creating 100 people with some restrictions
+    breakfastSet = aux.filter(sector = Sector.objects.get(name='Coffe shop'))
+    lunchSet = aux.filter(sector = Sector.objects.get(name='Restaurant')) # Must be the same as dinnerSet to avoid restaurant duplication
+    loungeSet = aux.filter(sector = Sector.objects.get(name='Lounge'))
+    activities = aux.exclude(sector = Sector.objects.get(name='Coffe shop'))
+    activities = aux.exclude(sector = Sector.objects.get(name='Restaurant'))
+    activities = aux.exclude(sector = Sector.objects.get(name='Lounge'))
+    random.shuffle(breakfastSet)
+    random.shuffle(lunchSet)
+    random.shuffle(activities)
+    random.shuffle(loungeSet)
+
+    for elem in aux:
+    	res.append(breakfastSet.pop(0)) # first activity must be breakfast
+    	res.append(activity.pop(0)) # random activity
+    	res.append(activity.pop(0)) # random activity 2
+    	res.append(lunchSet.pop(0)) # random activity
+
+
+
+
+
+
+
+
+
+    ## end init indiv
 
