@@ -83,7 +83,7 @@ def welcome(request):
                                       {'loginw': loginw},
                                       context_instance=RequestContext(request))
 
-    return render_to_response('welcome.html',{}, context_instance=RequestContext(request))
+    return render_to_response('welcome.html', {}, context_instance=RequestContext(request))
 
 
 def activity(request, activity_id):
@@ -131,7 +131,7 @@ def signin(request, from_path):
 
                 login(request, UserAccount)
                 # Llevar a la vista principal
-                return HttpResponseRedirect('/'+from_path)
+                return HttpResponseRedirect('/' + from_path)
             else:
                 # Cuenta no activada
 
@@ -275,7 +275,7 @@ def automatic_plan(request):
                               {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
                                'userform': userform,
                                'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3],
-                               'comments': comments,'plans': plans},
+                               'comments': comments, 'plans': plans},
                               context_instance=RequestContext(request))
 
 
@@ -332,7 +332,8 @@ def filter_activities(request):
             isPromoted = request.POST.get('isPromoted', False)
             results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
             print(results)
-            return render_to_response('customplan.html', {'user': ouser, 'results': results}, context_instance=RequestContext(request))
+            return render_to_response('customplan.html', {'user': ouser, 'results': results},
+                                      context_instance=RequestContext(request))
         if request.method == 'POST' and 'custom' in request.POST:
             print('empezando el guardado')
             activities = []
@@ -352,21 +353,21 @@ def filter_activities(request):
             print('seleccionando parametros')
             return render_to_response('filter.html', {'user': ouser}, context_instance=RequestContext(request))
     else:
-         if request.method == 'POST':
-             print('realizando filtrado')
-             location = request.POST.get('location', False)
-             sector = request.POST.get('sector', False)
-             moment = request.POST.get('moment', False)
-             sDate = request.POST.get('sDate', False)
-             eDate = request.POST.get('eDate', False)
-             val = request.POST.get('valoration', False)
-             isFree = request.POST.get('isFree', False)
-             isPromoted = request.POST.get('isPromoted', False)
-             results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
-             return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
-         else:
-             print('seleccionando parametros')
-             return render_to_response('filter.html', context_instance=RequestContext(request))
+        if request.method == 'POST':
+            print('realizando filtrado')
+            location = request.POST.get('location', False)
+            sector = request.POST.get('sector', False)
+            moment = request.POST.get('moment', False)
+            sDate = request.POST.get('sDate', False)
+            eDate = request.POST.get('eDate', False)
+            val = request.POST.get('valoration', False)
+            isFree = request.POST.get('isFree', False)
+            isPromoted = request.POST.get('isPromoted', False)
+            results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
+            return render_to_response('customplan.html', {'results': results}, context_instance=RequestContext(request))
+        else:
+            print('seleccionando parametros')
+            return render_to_response('filter.html', context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')
@@ -601,8 +602,8 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
 
 def algorythm(request):
     user = request.user.ouruser
-    tastes = user.objects.all().filter()
-    aux =  Activity.objects.all() # aux to store population filtered 
+    tastes = user.tastes.all()
+    aux = Activity.objects.all()  # aux to store population filtered
     res = []
 
     ## init indiv
@@ -615,31 +616,55 @@ def algorythm(request):
             if elem.dregee == 0:
                 aux = aux.exclude(sector=Sector.objects.get(name=elem.attribute_value))
 
-        # Creating 100 people with some restrictions
-    breakfastSet = aux.filter(sector = Sector.objects.get(name='Coffe shop'))
-    lunchSet = aux.filter(sector = Sector.objects.get(name='Restaurant')) # Must be the same as dinnerSet to avoid restaurant duplication
-    loungeSet = aux.filter(sector = Sector.objects.get(name='Lounge'))
-    activities = aux.exclude(sector = Sector.objects.get(name='Coffe shop'))
-    activities = aux.exclude(sector = Sector.objects.get(name='Restaurant'))
-    activities = aux.exclude(sector = Sector.objects.get(name='Lounge'))
-    random.shuffle(breakfastSet)
-    random.shuffle(lunchSet)
-    random.shuffle(activities)
-    random.shuffle(loungeSet)
+                # Creating 100 people with some restrictions
+    breakfastSet = aux.filter(sector=Sector.objects.get(name='Coffe shop'))
+    lunchSet = aux.filter(
+        sector=Sector.objects.get(name='Restaurant'))  # Must be the same as dinnerSet to avoid restaurant duplication
+    loungeSet = aux.filter(sector=Sector.objects.get(name='Lounge'))
+    activities = aux.exclude(sector=Sector.objects.get(name='Coffe shop'))
+    activities = activities.exclude(sector=Sector.objects.get(name='Restaurant'))
+    activities = activities.exclude(sector=Sector.objects.get(name='Lounge'))
+    for elem in breakfastSet:
+        print(elem.sector.name)
 
-    for elem in aux:
-        res.append(breakfastSet.pop(0)) # first activity must be breakfast
-        res.append(activity.pop(0)) # random activity
-        res.append(activity.pop(0)) # random activity 2
-        res.append(lunchSet.pop(0)) # random activity
+    #random.shuffle(breakfastSet)
+    #random.shuffle(lunchSet)
+    #random.shuffle(activities)
+    #random.shuffle(loungeSet)
+
+    for pos in range(1):  #range(aux.count()-1):
+        if breakfastSet is not None:  ## checking if user do not want breakfast
+            res.append(ActivitySorted.objects.create_activity_sorted(breakfastSet[pos],0))  # first activity must be breakfast
+        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 1],1))  # random activity
+        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 2],2))  # random activity 2
+        if lunchSet is not None:
+            res.append(ActivitySorted.objects.create_activity_sorted(lunchSet[pos + 1],3))  # lunchtime
+        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 3],4))  #random activity 3
+        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 4],5))  #random activity 4
+        if lunchSet is not None:
+            res.append(ActivitySorted.objects.create_activity_sorted(lunchSet[pos + 2],6))  # dinner time
+        if loungeSet is not None:
+            res.append(ActivitySorted.objects.create_activity_sorted(loungeSet[pos],7))
+            ## end init indiv
+
+            ## persisting plan
+        # persisting activities as plan
+        planform = PlanForm()
+        plan = planform.save(commit=False)
+        plan.voted = False
+        plan.done = False
+        plan.startDate = res[0].startDate
+        plan.endDate = res[2].endDate
+        plan.user = request.user.ouruser
+        plan.save()
+        print(res[0].sector.name)
+        for elem in res:
+            plan.activities.add(elem)
 
 
 
 
+    ## end persisting plan
+    return render_to_response('pruebaplan.html', {'plan': plan}, context_instance=RequestContext(request))
 
-
-
-
-
-    ## end init indiv
 

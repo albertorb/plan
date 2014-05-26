@@ -12,18 +12,29 @@ class Sector(models.Model):
         return self.name
 
 
+class Moment(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+#INSERT INTO `ispp.db_development`.`plan_moment` (`id`, `name`) VALUES ('1', 'morning');
+#INSERT INTO `ispp.db_development`.`plan_moment` (`id`, `name`) VALUES ('2', 'evening');
+#INSERT INTO `ispp.db_development`.`plan_moment` (`id`, `name`) VALUES ('3', 'night');
+
+
+
 class Activity(models.Model):
-    MOMENTS = (("m", "morning"), ("e", "evening"), ("n", "night"),)
     PRICE = (("f", "free"), ("n", "nonfree"),)
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=80, null=False)
     name = models.CharField(max_length=40)
     latitude = models.DecimalField(max_digits=10, decimal_places=6)
     longitude = models.DecimalField(max_digits=10, decimal_places=6)
     photo = models.CharField(max_length=150,blank=True, null=False)
     sector = models.ForeignKey(Sector)
-    moment = models.CharField(max_length=3, choices=MOMENTS)
-    startDate = models.DateTimeField()
-    endDate = models.DateTimeField()
+    moment = models.ManyToManyField(Moment)
+    startDate = models.DateTimeField(blank=True)
+    endDate = models.DateTimeField(blank=True)
     valoration = models.IntegerField()
     isFree = models.CharField(max_length=3, choices=PRICE, default='f')
     isPromoted = models.BooleanField()
@@ -33,6 +44,19 @@ class Activity(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class ActivitySortedManager(models.Manager):
+    def create_activity_sorted(self, act, pos):
+        activity = self.create(activity=act, position=pos)
+         # do something with the book
+        return activity
+
+# we need it in order to avoid Django's default sorting of model objects
+class ActivitySorted(models.Model):
+    activity = models.ManyToOneRel(Activity, null=False)
+    position = models.IntegerField()
+    objects = ActivitySortedManager
+
 
 
 class Taste(models.Model):
@@ -59,6 +83,8 @@ class OurUser(models.Model):
 
 
 class Plan(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
     voted = models.BooleanField()
