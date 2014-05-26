@@ -565,18 +565,23 @@ def profile(request):
     return render_to_response('profile.html', {'user': ouser}, context_instance=RequestContext(request))
 
 
-def set_tastes(request):
-    #duser = request.user
-    #ouser = OurUser.objects.get(djangoUser=duser)
-    if request.method == 'POST':
-        print(request.POST)
-    else:
-        sectors = Sector.objects.all()
-        return render_to_response('set_tastes.html', {'sectors': sectors}, context_instance=RequestContext(request))
-
-
 def preferences(request):
-    return render_to_response('preferences.html', context_instance=RequestContext(request))
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST' and 'preferences' in request.POST:
+        print(request.POST)
+        return HttpResponseRedirect("/preferences")
+    elif request.method == 'POST' and 'psector' in request.POST:
+        print(request.POST)
+        return HttpResponseRedirect("/preferences")
+    elif request.method == 'POST' and 'valoration' in request.POST:
+        print(request.POST)
+        return HttpResponseRedirect("/preferences")
+    else:
+        tastes = ouser.tastes
+        sectors = Sector.objects.all()
+        return render_to_response('preferences.html', {'tastes': tastes, 'sectors': sectors}, context_instance=RequestContext(request))
+
 
 #funcion extra para no repetir codigo
 def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted):

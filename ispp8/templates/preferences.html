@@ -1,24 +1,78 @@
 {% extends 'master.html' %}
 {% block content %}
     <div class="row container center-block scape-top-custom">
+    <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
         <form class="form-horizontal" action="" method="post">{% csrf_token %}
-            <h3>Please select your preference:</h3>
-        <div class="form-group">
+            <input type="hidden" name="preferences" value="preferences">
+            <h3>Please select your preferences:</h3>
+        <div class="checkbox">
             <label><input type="checkbox" class="radio checkbox-inline" name="1" value=1>Eat at the hotel</label>
         </div>
-        <div class="form-group">
+        <div class="checkbox">
             <label><input type="checkbox" class="radio checkbox-inline" name="2" value=2>Rest after eating</label>
         </div>
-        <div class="form-group">
+        <div class="checkbox">
             <label><input type="checkbox" class="radio checkbox-inline" name="3" value=3>Do not include food related activities</label>
         </div>
-        <div class="form-group">
+        <div class="checkbox">
             <label><input type="checkbox" class="radio checkbox-inline" name="4" value=4>Rest before eating</label>
         </div>
-        <div class="form-group">
+            <br>
             <input type="submit" name="set_preferences" class="button-orange btn" value="Save">
+    </form>
+    </div>
+    <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
+    <form class="form-horizontal" action="" method="post">{% csrf_token %}
+    <input type="hidden" name="psector" value="psector">
+    <h3>State a preference about a sector</h3>
+        <div class="form-group">
+        <label>Select a sector to refer your preference:</label>
+            <select class="form-control" name="sector">
+              {% for sector in sectors.all %}<option value="{{ sector.pk }}">{{ sector.name }}</option>{% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>How often do you wish to do activities from this sector:</label>
+            <div class="radio">
+              <label>
+                <input type="radio" name="degree" value=0> Never
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="degree" value=1> Rarely
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="degree" value=2> Sometimes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="degree" value=3> Often
+              </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" name="prefsector" class="button-orange btn" value="Save">
         </div>
     </form>
-    <a href="/set_tastes"><button class="button-orange btn">Set new sector preference</button></a>
+    </div>
+    <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
+    <form class="form-horizontal" action="" method="post">{% csrf_token %}
+    <input type="hidden" name="valoration" value="valoration">
+        <h3>State a minimal valoration for your activities:</h3>
+        <div class="form-group">
+            <label>Minimal valoration: <input type="number" class="form-control" placeholder="0.0" name="minvaloration"></label>
+        </div>
+        <div class="form-group">
+            <label>Max valoration: <input type="number" class="form-control" placeholder="0.0" name="maxvaloration"></label>
+        </div>
+    <div class="form-group">
+            <input type="submit" name="val" class="button-orange btn" value="Save">
+        </div>
+    </form>
+    </div>
     </div>
 {% endblock %}
