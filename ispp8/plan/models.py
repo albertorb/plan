@@ -53,9 +53,9 @@ class ActivitySortedManager(models.Manager):
 
 # we need it in order to avoid Django's default sorting of model objects
 class ActivitySorted(models.Model):
-    activity = models.ManyToOneRel(Activity, null=False)
+    activity = models.ManyToManyField(Activity, null=False)
     position = models.IntegerField()
-    objects = ActivitySortedManager
+    objects = ActivitySortedManager()
 
 
 
