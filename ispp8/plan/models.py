@@ -53,9 +53,9 @@ class ActivitySortedManager(models.Manager):
 
 # we need it in order to avoid Django's default sorting of model objects
 class ActivitySorted(models.Model):
-    activity = models.ManyToOneRel(Activity, null=False)
+    activity = models.ManyToManyField(Activity, null=False)
     position = models.IntegerField()
-    objects = ActivitySortedManager
+    objects = ActivitySortedManager()
 
 
 
@@ -84,7 +84,7 @@ class OurUser(models.Model):
 
 class Plan(models.Model):
     name = models.CharField(max_length=90, null=True)
-    location= models.CharField(max_length=90, null=True)
+    location = models.CharField(max_length=90, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     startDate = models.DateTimeField()
