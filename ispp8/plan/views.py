@@ -19,6 +19,15 @@ from django.views.decorators.http import require_http_methods
 from django.utils.translation import ugettext as _
 
 
+def search(request):
+    # Es necesario ejecutar el siguiente codigo en la db para que esto funcione
+    # CREATE FULLTEXT INDEX plan_activity_name ON plan_activity(name);
+    search_query = request.POST['search']
+    print(len(search_query))
+    res = Activity.objects.filter(name__search=search_query)
+    return render_to_response('search_result.html', {'res': res}, context_instance=RequestContext(request))
+
+
 def getPlan(request, activity_id, activity_id2, activity_id3):
     plans= Plan.objects.all()
     act = get_object_or_404(Activity, id=activity_id)
@@ -598,7 +607,7 @@ def algorythm(request):
 
     ## init indiv
     for elem in tastes:
-    	# this two IF are excluding those activities that user will never want
+        # this two IF are excluding those activities that user will never want
         if elem.attribute_name == 'valoration':
             if elem.dregee == 0:
                 aux = aux.exclude(valoration=int(elem.attribute_value))
@@ -619,10 +628,10 @@ def algorythm(request):
     random.shuffle(loungeSet)
 
     for elem in aux:
-    	res.append(breakfastSet.pop(0)) # first activity must be breakfast
-    	res.append(activity.pop(0)) # random activity
-    	res.append(activity.pop(0)) # random activity 2
-    	res.append(lunchSet.pop(0)) # random activity
+        res.append(breakfastSet.pop(0)) # first activity must be breakfast
+        res.append(activity.pop(0)) # random activity
+        res.append(activity.pop(0)) # random activity 2
+        res.append(lunchSet.pop(0)) # random activity
 
 
 
