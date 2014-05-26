@@ -132,7 +132,7 @@
 }
 
 .escape-top-welcome-custom {
-    margin-top: 1%;
+    padding-top: 1%;
 }
 
 .left-margin-login-custom {
@@ -148,15 +148,18 @@
     color: #ffffff;
 }
 
-.overlap-nexus-custom {
-    width: 300px;
-    height: 200px;
-    z-index: 2;
+.background-custom {
+    height:400px;
+}
+
+.nexus-size{
+    height:550px;
 }
 
 .overlap-panel-custom {
     position: absolute; /* reposition logo from the natural layout*/
-    left: 45%;
+    padding-left: 0%;
+
     top: 40%;
     z-index: 2;
 }

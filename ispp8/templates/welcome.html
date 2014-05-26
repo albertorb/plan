@@ -43,102 +43,94 @@
             <label class="sr-only" for="InputPassword2">Password</label>
             <input type="password" class="form-control" id="InputPassword2" placeholder="Password" name="passwordlogin">
         </div>
-        <input type="submit" class="btn btn-warning" name="log" value="Sign in" />
+        <input type="submit" class="btn btn-warning" name="log" value="Sign in"/>
 
         <div class="col-md-5 checkbox text-darkorange text-xs"><input type="checkbox"> remember me</div>
         <div class="col-md-5 text-xs"><a class="text-darkorange" href="/register">create new account </a></div>
 
     </form>
 </div>
-<div class="col-lg-12 escape-top-welcome-custom"
+<div class="row escape-top-welcome-custom background-custom"
      style="background-image: url('{{ STATIC_URL }}img/welcome.jpg'); background-size:cover;">
-    <div class="row">
+    <div class="col-md-12">
         <h1 class="text-center text-white-custom">Get a plan with just a click</h1>
     </div>
-    <div class="row">
-     <div class=" overlap-nexus-custom ">
-        <div class="" style="padding-left: 30%;padding-top: 45%">
-            <img src="{{ STATIC_URL }}img/nexus5.png">
-        </div>
-    </div>
-    </div>
-    <div class="row text-center" style="margin-top: 4%; margin-bottom:15%">
+    <div class="col-md-12 text-center" style="z-index:3;">
         <p><a href="/plan" class="btn btn-lg btn-warning" role="button">Let's start</a>
     </div>
 
-</div>
+    <div class="col-md-5 pull-right">
+        <div class="">
+            <div>
+                <img class="nexus-size" src="{{ STATIC_URL }}img/nexus5.png">
+            </div>
+        </div>
+    </div>
 
-<div style="position: absolute; left: 15%;width: 100%; bottom: 50%">
+    <div class="" style="width: 100%; padding-top:30%; padding-left:15%;">
 
 
 
+            <div class=" overlap-panel-custom col-sm-4 col-md-5 ">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3 class="text-orange">Get amazing plans and share them with your friends</h3>
 
-    <div class="col-lg-2"></div>
-    <div class="col-lg">
-        <div class="overlap-panel-custom col-sm-4 col-md-5 ">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h3 class="text-orange">Get amazing plans and share them with your friends</h3>
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </button>
+                            <em class="col-md-10 pull-right">Stop wasting hours finding lots of activities reviews</em>
+                        </div>
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon- glyphicon-hand-up"></span>
 
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-time"></span>
-                        </button>
-                    <em class="col-md-10 pull-right">Stop wasting hours finding lots of activities reviews</em>
-                    </div>
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon- glyphicon-hand-up"></span>
+                            </button>
+                            <em class="col-md-10 pull-right">Get what you want with just a click</em>
+                        </div>
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            <em class="col-md-10 pull-right"> Try our automatic system to get plans or make your custom
+                                searching</em>
+                        </div>
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-share"></span>
+                            </button>
+                            <em class="col-md-10 pull-right"> Share what you have done to your friends</em>
+                        </div>
 
-                        </button>
-                        <em class="col-md-10 pull-right">Get what you want with just a click</em>
-                    </div>
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                       <em class="col-md-10 pull-right"> Try our automatic system to get plans or make your custom searching</em>
-                    </div>
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-share"></span>
-                        </button>
-                       <em class="col-md-10 pull-right"> Share what you have done to your friends</em>
-                    </div>
-
-                    <div class="row disabled center-block">
-                        <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-thumbs-up"></span>
-                        </button>
-                       <em class="col-md-10 pull-right"> Rate the activities you have done to give feedback</em>
-                    </div>
-                    <div class="row disabled text-center">
-                        <a href="/register" class="btn btn-warning">free register to get all this</a>
+                        <div class="row disabled center-block">
+                            <button type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>
+                            </button>
+                            <em class="col-md-10 pull-right"> Rate the activities you have done to give feedback</em>
+                        </div>
+                        <div class="row disabled text-center">
+                            <a href="/register" class="btn btn-warning">free register to get all this</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-2">
-                <img src="{{ STATIC_URL }}img/badge_android.png">
-            </div>
-            <div class="row footer-welcome-custom">
-                <div class="row">
-                    <em class="col-xs-3">&copy 2014 PAMAB</em>
-                    <a class="col-xs-2" href="#">Contact</a>
-                    <a class="col-xs-2" href="#">Legal</a>
-                    <a class="col-xs-2" href="#">Developers</a>
+                <div class="col-xs-2">
+                    <img src="{{ STATIC_URL }}img/badge_android.png">
                 </div>
-            </div>
+
+
+
+
 
         </div>
 
     </div>
 
-</div>
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 </body>
 </html>
