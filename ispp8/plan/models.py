@@ -90,7 +90,7 @@ class Plan(models.Model):
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
     voted = models.BooleanField()
-    activities = models.ManyToManyField(Activity)
+    activities = models.ManyToManyField(ActivitySorted)
     user = models.ForeignKey(OurUser, related_name='OurUser_content_type')
     sharedTo = models.ManyToManyField(OurUser, blank=True, null=False)
     done = models.BooleanField()
