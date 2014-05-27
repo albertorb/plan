@@ -629,11 +629,11 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
 
 
 def term(request):
-    return render_to_response('terms.html',context_instance=RequestContext(request))
+    return render_to_response('terms.html', context_instance=RequestContext(request))
 
 
 def contact(request):
-    return render_to_response('contact.html',context_instance=RequestContext(request))
+    return render_to_response('contact.html', context_instance=RequestContext(request))
 
 
 ########### ALGORYTHM ###############
