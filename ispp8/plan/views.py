@@ -594,15 +594,38 @@ def profile(request):
     ouser = OurUser.objects.get(djangoUser=duser)
     return render_to_response('profile.html', {'user': ouser}, context_instance=RequestContext(request))
 
-
-def set_tastes(request):
-    #duser = request.user
-    #ouser = OurUser.objects.get(djangoUser=duser)
-    if request.method == 'POST':
-        print(request.POST)
+@login_required(login_url='/plan')
+def preferences(request):
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST' and 'preferences' in request.POST:
+        #a la espera de saber como se deberian guardar estas preferencias
+        print('pushed dummy button')
+        return HttpResponseRedirect("/preferences")
+    elif request.method == 'POST' and 'psector' in request.POST:
+        attribute_name = 'sector'
+        attribute_value = Sector.objects.get(pk=request.POST['sector']).name
+        degree = request.POST['degree']
+        taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
+        ouser.tastes.add(taste)
+        return HttpResponseRedirect("/preferences")
+    elif request.method == 'POST' and 'valoration' in request.POST:
+        attribute_name = 'valoration'
+        if request.POST['minvaloration'] != '':
+            attribute_value = request.POST['minvaloration']
+            degree = 3
+            taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
+            ouser.tastes.add(taste)
+        if request.POST['maxvaloration'] != '':
+            attribute_value = request.POST['maxvaloration']
+            degree = 3
+            taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
+            ouser.tastes.add(taste)
+        return HttpResponseRedirect("/preferences")
     else:
+        tastes = ouser.tastes
         sectors = Sector.objects.all()
-        return render_to_response('set_tastes.html', {'sectors': sectors}, context_instance=RequestContext(request))
+        return render_to_response('preferences.html', {'tastes': tastes, 'sectors': sectors}, context_instance=RequestContext(request))
 
 
 #funcion extra para no repetir codigo
