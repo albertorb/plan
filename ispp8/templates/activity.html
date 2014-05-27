@@ -9,13 +9,14 @@
 
         </div>
 
-        <div class="panel col-md-6 bottom-separator-custom">
+        <div class="panel col-md-6 bottom-separator-custom" id="thumb">
             <h4 class="text-darkorange">{{ activity.name|title }}</h4> <span class="h6"><a
                 href="">{{ activity.location }}</a>  / <a href="">{{ activity.sector }}</a></span>
+            <a class="hidden" id="info">{{ activity.description }}</a>
         </div>
         <div class="col-xs-1"></div>
         <div class=" panel col-xs-1 ">
-            <h3 class="text-green">{{ activity.valoration }} <span class="h6 text-green">/ 10</span></h3>
+            <h3 class="text-green">{{ activity.valoration }} <span class="h6 text-green">/ 5</span></h3>
         </div>
 
         <div class="panel col-md-4 top-separator-custom">
@@ -107,13 +108,21 @@
         function initialize() {
             var mapOptions = {
                 zoom: 8,
-                center: new google.maps.LatLng(-34.397, 150.644)
+                center: new google.maps.LatLng({{ activity.latitude }}, {{ activity.longitude }})
             };
             map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
+
+    $(".alert").addClass("in").fadeOut(3500);
+    $("#thumb").hover(function(){
+        $("#info").css("display","block");
+         }, function () {
+            $("#info1").css("display", "none");
+        });
+
     </script>
 
 {% endblock %}
