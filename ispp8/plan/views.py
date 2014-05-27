@@ -727,5 +727,3 @@ def algorythm(request):
 
     ## end persisting plan
     return render_to_response('pruebaplan.html', {'plan': plan}, context_instance=RequestContext(request))
-
-
