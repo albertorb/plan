@@ -3,23 +3,21 @@
 <div class=" scape-top-custom row ">
 
 <div class=" row container center-block ">
-<h3>Follower List</h3>
-    {% for elem in friends %}
+<h3>All registered users</h3>
+    {% for elem in allusers %}
+        {% if elem != user and elem not in friends %}
         <form method="post" class="form-horizontal">{% csrf_token %}
         <div class="panel col-md-2 follow text-center" style="margin-left: 5%;margin-right: 5%">
             <input type="hidden" name="friend" value="{{ elem.id }}">
           <img src="{{ MEDIA_URL }}{{ elem.image }}" class="img-circle img-xs-custom  ">
           <div>{{ elem.djangoUser }}</div>
           <div>Register in:{{ elem.birthday }}</div>
-          <input type="submit" name="borrar" class="btn btn-danger" value="Unfollow" />
-          <a href="#" class="btn btn-success">Info</a>
+          <input type="submit" name="añadir" class="btn btn-success" value="Follow" />
         </div>
         </form>
+        {% endif %}
     {% endfor %}
 </div>
 
 </div>
-       <a class="btn button-orange-plan" style="margin-left: 10%" href="/addfriend">
-        Follow People
-    </a>
 {% endblock %}

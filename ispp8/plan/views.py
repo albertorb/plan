@@ -433,19 +433,28 @@ def pocketplans(request):
     ouser = OurUser.objects.get(djangoUser=loguser)
     plans=Plan.objects.all()
     userplans=plans.filter(user_id=ouser)
+    friends= ouser.friends.all()
+    if request.method == 'POST' and 'share' in request.POST:
+        ident = request.POST.get("plan")
+        plan = Plan.objects.filter(pk=ident).get()
+        shareTo = []
+        for toadd in request.POST['user']:
+            shareTo.append(OurUser.objects.get(pk=int(toadd)))
+        for p in shareTo:
+            if p not in plan.sharedTo.all():
+                plan.sharedTo.add(p)
+        return HttpResponseRedirect("../user_plans")
 
-    return render_to_response('user_plans.html', {'user': ouser, 'userplans': userplans},
+    return render_to_response('user_plans.html', {'user': ouser, 'userplans': userplans,'friends':friends},
                                   context_instance=RequestContext(request))
 
 
-def getplan(request,plan_id):
+def planinfo(request, plan_id):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
-    plans= Plan.objects.all()
-    plan=plans.filter(id=plan_id)
-    print(plan)
+    plan = Plan.objects.get(id=plan_id)
 
-    return render_to_response('getplan.html',{'user': ouser, 'plan': plan},
+    return render_to_response('planinfo.html',{'user': ouser, 'plan': plan},
                                   context_instance=RequestContext(request))
 
 def shareplan(request,plan_id):
@@ -509,6 +518,27 @@ def friends(request):
                 return HttpResponseRedirect("../friends")
     return render_to_response('friends.html', {'user': ouser, 'friends': friends, 'all': all},
                               context_instance=RequestContext(request))
+
+
+def addfriend(request):
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    allusers=OurUser.objects.all()
+    friends = ouser.friends.all()
+    notfriends=[]
+    for a in allusers:
+        if a not in friends:
+            notfriends.append(a)
+    if 'añadir' in request.POST:
+            idfriend = request.POST.get('friend')
+            userfriend = OurUser.objects.get(id=idfriend)
+            if userfriend not in friends:
+                ouser.friends.add(userfriend)
+                return HttpResponseRedirect("../friends")
+    print(notfriends)
+    return render_to_response('addfriend.html', {'user': ouser, 'notfriends': friends, 'allusers': allusers,'friends':friends},
+                              context_instance=RequestContext(request))
+
 
 
 @login_required(login_url='/plan')
@@ -619,6 +649,14 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
         if not location and not sector and not moment and not sDate and not eDate and not val and not isFree and not isPromoted:
             results.append(a)
     return results
+
+
+def term(request):
+    return render_to_response('terms.html',context_instance=RequestContext(request))
+
+
+def contact(request):
+    return render_to_response('contact.html',context_instance=RequestContext(request))
 
 
 ########### ALGORYTHM ###############
