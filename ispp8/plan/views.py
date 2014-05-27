@@ -131,7 +131,7 @@ def signin(request, from_path):
 
                 login(request, UserAccount)
                 # Llevar a la vista principal
-                return HttpResponseRedirect('/' + from_path)
+                return HttpResponseRedirect(from_path)
             else:
                 # Cuenta no activada
 
