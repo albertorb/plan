@@ -20,7 +20,7 @@
                     <td class="panel follow" style="padding: 1%">
                                 <div>
                                     <a href="{% url 'activity_info' activity_id=a.id %}">
-                                        <img  src="{{ activity.photo }}"
+                                        <img  src="{{ MEDIA_URL }}{{ a.photo }}"
                                              style="height: 120px;width: 120px;"/>
                                     </a>
                                  {{ a.name }}
@@ -35,7 +35,7 @@
         <h4>This plan have been shared to:</h4>
             {% for s in elem.sharedTo.all %}
                 <a href="/profile/{{ s.id }}">
-                <img src="{{ MEDIA_URL }}{{ s.image }}" class="img-xs-custom img-rounded">
+                <img src="/media/{{ s.image }}" class="img-xs-custom img-rounded">
                 </a>
                     {{ s.djangoUser }}<br>
                 {% empty %}
@@ -65,7 +65,7 @@
                <td>
 
                    <div>
-                       <img src="{{ MEDIA_URL }}{{ p.image }}" class="img-xs-custom img-rounded">
+                       <img src="/media/{{ p.image }}" class="img-xs-custom img-rounded">
                        {{ p.djangoUser }} <input type="checkbox" name="user" value="{{ p.pk }}">
                    </div>
                 {% endif %}

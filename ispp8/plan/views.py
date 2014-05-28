@@ -640,7 +640,7 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
             results.append(a)
         if sDate and eDate and sDate <= a.startDate and eDate >= a.endDate:
             results.append(a)
-        if val and a.valoration >= val:
+        if val and a.valoration >= int(val):
             results.append(a)
         if isFree and a.isFree == isFree:
             results.append(a)

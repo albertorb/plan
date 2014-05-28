@@ -8,7 +8,7 @@
         <form method="post" class="form-horizontal">{% csrf_token %}
         <div class="panel col-md-2 follow text-center" style="margin-left: 5%;margin-right: 5%">
             <input type="hidden" name="friend" value="{{ elem.id }}">
-          <img src="{{ MEDIA_URL }}{{ elem.image }}" class="img-circle img-xs-custom  ">
+          <img src="/media/{{ elem.image }}" class="img-circle img-xs-custom  ">
           <div>{{ elem.djangoUser }}</div>
           <div>Register in:{{ elem.birthday }}</div>
           <input type="submit" name="borrar" class="btn btn-danger" value="Unfollow" />
