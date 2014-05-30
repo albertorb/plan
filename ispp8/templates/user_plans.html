@@ -9,14 +9,18 @@
     {% for elem in userplans %}
         <table>
         <tr>
-             <h5>Plan done in location</h5>
-                <h6>Activities</h6>
+             <h2>{{ elem.location }}</h2>
+                <h4>{{ elem.name }}
+                 <a href="/planinfo/{{ elem.id }}" class="glyphicon glyphicon-search text-darkorange "></a>
+        <a data-toggle="modal" data-target="#myModal{{ elem.pk }}"  class="glyphicon glyphicon-share text-darkorange "></a>
+        <a href="/mod_plan/{{ elem.id }}" class="glyphicon glyphicon-edit text-darkorange"></a>
+                </h4>
                {% for a in elem.activities.all  %}
 
-                    <td class="panel" style="padding: 3%">
+                    <td class="panel follow" style="padding: 1%">
                                 <div>
                                     <a href="{% url 'activity_info' activity_id=a.id %}">
-                                        <img  src="{{ activity.photo }}"
+                                        <img  src="{{ MEDIA_URL }}{{ a.photo }}"
                                              style="height: 120px;width: 120px;"/>
                                     </a>
                                  {{ a.name }}
@@ -26,17 +30,70 @@
                                 </div>
                 </td>
                {% endfor %}
-
+            <td>
+                <div class=" col-md-8">
+        <h4>This plan have been shared to:</h4>
+            {% for s in elem.sharedTo.all %}
+                <a href="/profile/{{ s.id }}">
+                <img src="/media/{{ s.image }}" class="img-xs-custom img-rounded">
+                </a>
+                    {{ s.djangoUser }}<br>
+                {% empty %}
+                    Nobody! Share it now!<br>
+            {% endfor %}
+        </div>
+            </td>
         </tr>
 
         </table>
-         <a href="/getplan/{{ elem.id }}" class="btn button-orange-plan ">View Plan</a>
-        <a href="/shareplan/{{ elem.id }}" class="btn button-orange-plan ">Share Plan</a>
-        <a href="/mod_plan/{{ elem.id }}" class="btn button-orange-plan ">Edit Plan</a>
+
+    <div class="modal fade" id="myModal{{ elem.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">{{ elem.name }}</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" action="" method="post">{% csrf_token %}
+         <input type="hidden" name="plan" value="{{ elem.pk }}">
+        Select the friends to share
+      <table>
+          {% for p in friends %}
+              {% if p not in elem.sharedTo.all %}
+               <tr>
+               <td>
+
+                   <div>
+                       <img src="/media/{{ p.image }}" class="img-xs-custom img-rounded">
+                       {{ p.djangoUser }} <input type="checkbox" name="user" value="{{ p.pk }}">
+                   </div>
+                {% endif %}
+                   {% empty %}
+                   <p>You don´t have friends to share this plan</p>
+               </td>
+               </tr>
+          {% endfor %}
+      </table>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary"  value="Share" name="share">
+      </div>
+
+         </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>
     {% endfor %}
 
 </div>
 
 </div>
+<!-- Modal -->
+
+
 
 {% endblock %}

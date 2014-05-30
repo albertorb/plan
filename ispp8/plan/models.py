@@ -23,7 +23,6 @@ class Moment(models.Model):
 #INSERT INTO `ispp.db_development`.`plan_moment` (`id`, `name`) VALUES ('3', 'night');
 
 
-
 class Activity(models.Model):
     PRICE = (("f", "free"), ("n", "nonfree"),)
     location = models.CharField(max_length=80, null=False)
@@ -45,18 +44,19 @@ class Activity(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class ActivitySortedManager(models.Manager):
     def create_activity_sorted(self, act, pos):
         activity = self.create(activity=act, position=pos)
          # do something with the book
         return activity
 
+
 # we need it in order to avoid Django's default sorting of model objects
 class ActivitySorted(models.Model):
-    activity = models.ManyToManyField(Activity, null=False)
+    activity = models.OneToOneField(Activity, null=False)
     position = models.IntegerField()
     objects = ActivitySortedManager()
-
 
 
 class Taste(models.Model):
@@ -90,7 +90,7 @@ class Plan(models.Model):
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
     voted = models.BooleanField()
-    activities = models.ManyToManyField(ActivitySorted)
+    activities = models.ManyToManyField(Activity)
     user = models.ForeignKey(OurUser, related_name='OurUser_content_type')
     sharedTo = models.ManyToManyField(OurUser, blank=True, null=False)
     done = models.BooleanField()

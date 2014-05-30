@@ -15,6 +15,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth
 from django.contrib.auth.hashers import make_password, pbkdf2
 import random
+from random import shuffle
 from django.views.decorators.http import require_http_methods
 from django.utils.translation import ugettext as _
 
@@ -131,7 +132,7 @@ def signin(request, from_path):
 
                 login(request, UserAccount)
                 # Llevar a la vista principal
-                return HttpResponseRedirect('/' + from_path)
+                return HttpResponseRedirect(from_path)
             else:
                 # Cuenta no activada
 
@@ -182,6 +183,65 @@ def register(request):
 
 #@login_required(login_url="/login/")
 def automatic_plan(request):
+    user = request.user.ouruser
+    tastes = user.tastes.all()
+    aux = Activity.objects.all()  # aux to store population filtered
+    res = []
+
+    ## init indiv
+    for elem in tastes:
+        # this two IF are excluding those activities that user will never want
+        if elem.attribute_name == 'valoration':
+            if elem.dregee == 0:
+                aux = aux.exclude(valoration=int(elem.attribute_value))
+        if elem.attribute_name == 'sector':
+            if elem.dregee == 0:
+                aux = aux.exclude(sector=Sector.objects.get(name=elem.attribute_value))
+
+                # Creating 100 people with some restrictions
+    breakfastSet = aux.filter(sector=Sector.objects.get(name='Coffe shop'))
+    lunchSet = aux.filter(
+        sector=Sector.objects.get(name='Restaurant'))  # Must be the same as dinnerSet to avoid restaurant duplication
+    loungeSet = aux.filter(sector=Sector.objects.get(name='Lounge'))
+    activities = aux.exclude(sector=Sector.objects.get(name='Coffe shop'))
+    activities = activities.exclude(sector=Sector.objects.get(name='Restaurant'))
+    activities = activities.exclude(sector=Sector.objects.get(name='Lounge'))
+    breakfastSet
+    for elem in breakfastSet:
+        print(elem.sector.name)
+
+
+    for pos in range(1):  #range(aux.count()-1):
+        if breakfastSet is not None:  ## checking if user do not want breakfast
+            res.append((breakfastSet[pos]))  # first activity must be breakfast
+        res.append((activities[pos + 1]))  # random activity
+        res.append((activities[pos + 2]))  # random activity 2
+        if lunchSet is not None:
+            res.append((lunchSet[pos + 1]))  # lunchtime
+        res.append((activities[pos + 3]))  #random activity 3
+        res.append((activities[pos + 4]))  #random activity 4
+        if lunchSet is not None:
+            res.append((lunchSet[pos + 2]))  # dinner time
+        if loungeSet is not None:
+            res.append((loungeSet[pos]))
+            ## end init indiv
+
+            ## persisting plan
+        # persisting activities as plan
+        planform = PlanForm()
+        plan = planform.save(commit=False)
+        plan.voted = False
+        plan.done = False
+        plan.startDate = res[0].startDate
+        plan.endDate = res[2].endDate
+        plan.user = request.user.ouruser
+        plan.save()
+        print(res[0].sector.name)
+        for elem in res:
+            plan.activities.add(elem)
+
+
+
     # automatic plan
     #activities = Activity.objects.all()
     activities = Activity.objects.all()
@@ -261,8 +321,9 @@ def automatic_plan(request):
         else:
             # Login incorrecto
             loginw = True
+
             return render_to_response('automatic_plan.html',
-                                      {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
+                                      {'loginw': loginw, 'activities': activities,
                                        'userform': userform,
                                        'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3]},
                                       context_instance=RequestContext(request))
@@ -275,7 +336,7 @@ def automatic_plan(request):
                               {'loginw': loginw, 'activities': activities, 'ac1': ac1, 'ac2': ac2, 'ac3': ac3,
                                'userform': userform,
                                'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3],
-                               'comments': comments, 'plans': plans},
+                               'comments': comments, 'plans': plans,'plan':plan},
                               context_instance=RequestContext(request))
 
 
@@ -433,19 +494,28 @@ def pocketplans(request):
     ouser = OurUser.objects.get(djangoUser=loguser)
     plans=Plan.objects.all()
     userplans=plans.filter(user_id=ouser)
+    friends= ouser.friends.all()
+    if request.method == 'POST' and 'share' in request.POST:
+        ident = request.POST.get("plan")
+        plan = Plan.objects.filter(pk=ident).get()
+        shareTo = []
+        for toadd in request.POST['user']:
+            shareTo.append(OurUser.objects.get(pk=int(toadd)))
+        for p in shareTo:
+            if p not in plan.sharedTo.all():
+                plan.sharedTo.add(p)
+        return HttpResponseRedirect("../user_plans")
 
-    return render_to_response('user_plans.html', {'user': ouser, 'userplans': userplans},
+    return render_to_response('user_plans.html', {'user': ouser, 'userplans': userplans,'friends':friends},
                                   context_instance=RequestContext(request))
 
 
-def getplan(request,plan_id):
+def planinfo(request, plan_id):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
-    plans= Plan.objects.all()
-    plan=plans.filter(id=plan_id)
-    print(plan)
+    plan = Plan.objects.get(id=plan_id)
 
-    return render_to_response('getplan.html',{'user': ouser, 'plan': plan},
+    return render_to_response('planinfo.html',{'user': ouser, 'plan': plan},
                                   context_instance=RequestContext(request))
 
 def shareplan(request,plan_id):
@@ -511,6 +581,27 @@ def friends(request):
                               context_instance=RequestContext(request))
 
 
+def addfriend(request):
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    allusers=OurUser.objects.all()
+    friends = ouser.friends.all()
+    notfriends=[]
+    for a in allusers:
+        if a not in friends:
+            notfriends.append(a)
+    if 'añadir' in request.POST:
+            idfriend = request.POST.get('friend')
+            userfriend = OurUser.objects.get(id=idfriend)
+            if userfriend not in friends:
+                ouser.friends.add(userfriend)
+                return HttpResponseRedirect("../friends")
+    print(notfriends)
+    return render_to_response('addfriend.html', {'user': ouser, 'notfriends': friends, 'allusers': allusers,'friends':friends},
+                              context_instance=RequestContext(request))
+
+
+
 @login_required(login_url='/plan')
 def modify_plan(request, plan_id):
     plan = Plan.objects.get(pk=plan_id)
@@ -564,15 +655,38 @@ def profile(request):
     ouser = OurUser.objects.get(djangoUser=duser)
     return render_to_response('profile.html', {'user': ouser}, context_instance=RequestContext(request))
 
-
-def set_tastes(request):
-    #duser = request.user
-    #ouser = OurUser.objects.get(djangoUser=duser)
-    if request.method == 'POST':
-        print(request.POST)
+@login_required(login_url='/plan')
+def preferences(request):
+    duser = request.user
+    ouser = OurUser.objects.get(djangoUser=duser)
+    if request.method == 'POST' and 'preferences' in request.POST:
+        #a la espera de saber como se deberian guardar estas preferencias
+        print('pushed dummy button')
+        return HttpResponseRedirect("/preferences")
+    elif request.method == 'POST' and 'psector' in request.POST:
+        attribute_name = 'sector'
+        attribute_value = Sector.objects.get(pk=request.POST['sector']).name
+        degree = request.POST['degree']
+        taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
+        ouser.tastes.add(taste)
+        return HttpResponseRedirect("/preferences")
+    elif request.method == 'POST' and 'valoration' in request.POST:
+        attribute_name = 'valoration'
+        if request.POST['minvaloration'] != '':
+            attribute_value = request.POST['minvaloration']
+            degree = 3
+            taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
+            ouser.tastes.add(taste)
+        if request.POST['maxvaloration'] != '':
+            attribute_value = request.POST['maxvaloration']
+            degree = 3
+            taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
+            ouser.tastes.add(taste)
+        return HttpResponseRedirect("/preferences")
     else:
+        tastes = ouser.tastes
         sectors = Sector.objects.all()
-        return render_to_response('set_tastes.html', {'sectors': sectors}, context_instance=RequestContext(request))
+        return render_to_response('preferences.html', {'tastes': tastes, 'sectors': sectors}, context_instance=RequestContext(request))
 
 
 #funcion extra para no repetir codigo
@@ -587,7 +701,7 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
             results.append(a)
         if sDate and eDate and sDate <= a.startDate and eDate >= a.endDate:
             results.append(a)
-        if val and a.valoration >= val:
+        if val and a.valoration >= int(val):
             results.append(a)
         if isFree and a.isFree == isFree:
             results.append(a)
@@ -596,6 +710,14 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
         if not location and not sector and not moment and not sDate and not eDate and not val and not isFree and not isPromoted:
             results.append(a)
     return results
+
+
+def term(request):
+    return render_to_response('terms.html', context_instance=RequestContext(request))
+
+
+def contact(request):
+    return render_to_response('contact.html', context_instance=RequestContext(request))
 
 
 ########### ALGORYTHM ###############
@@ -660,8 +782,6 @@ def algorythm(request):
         print(res[0].sector.name)
         for elem in res:
             plan.activities.add(elem)
-
-
 
 
     ## end persisting plan

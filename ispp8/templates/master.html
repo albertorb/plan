@@ -32,8 +32,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a href="/plan">
                 <img style="height: 50px;width: 50px;" src="{{ STATIC_URL }}img/logo.png">
-
+                </a>
 
             </div>
 
@@ -43,7 +44,8 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search" action="/search" method="post">{% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="{% trans "Search" %}">
+                        <input type="text" name="search" class="form-control" placeholder="{% trans "Search" %}">
+
                     </div>
                     <button type="submit" class="btn btn-default"><span
                             class="glyphicon glyphicon-search text-darkorange"></span></button>
@@ -68,8 +70,8 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li {% if 'home' in request.path %} class="activecustom"{% endif %}><a href="/home"
-                            {% if 'home' in request.path %} class="a-activecustom" {% else %}
+                    <li {% if 'plan' in request.path %} class="activecustom"{% endif %}><a href="/plan"
+                            {% if 'plan' in request.path %} class="a-activecustom" {% else %}
                                                                                            class="nonactive-a"{% endif %}>
                         <text>{% trans "Home" %}</text>
                     </a></li>
@@ -90,10 +92,10 @@
 
                             <li>
 
-                                <a href="/profile">
+                                <a href="/pocket">
                                     <div class="">
                                         <img class="avatar-35 img-rounded"
-                                             src="{{ MEDIA_URL }}{{ request.user.ouruser.image }}">
+                                             src="/media/{{ request.user.ouruser.image }}">
                                         <b class="name">{{ request.user }}</b>
                                         <small class="metadata">{% trans "Profile" %}</small>
                                     </div>
@@ -102,9 +104,11 @@
 
                             </li>
                             <li class="divider"></li>
-                            <li><a href="/settings">{% trans "Settings" %}</a></li>
+                            <li><a href="/friends">{% trans "Friends" %}</a> </li>
+                            <li><a href="/user_plans">Pocket</a> </li>
                             <li class="divider"></li>
                             <li><a href="/logout">{% trans "Logout" %}</a></li>
+
                         </ul>
                     </li>
                 </ul>
@@ -137,7 +141,7 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search" action="/search" method="post">{% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="{% trans "Search" %}">
+                        <input type="text" name="search" class="form-control" placeholder="{% trans "Search" %}">
                     </div>
                     <button type="submit" class="btn btn-default"><span
                             class="glyphicon glyphicon-search text-darkorange"></span></button>
@@ -164,7 +168,7 @@
                                 class="glyphicon glyphicon-cog text-darkorange"></span></a>
                         <ul class="dropdown-menu">
 
-                            <li><a href="/signin">{% trans "Sign in" %}</a></li>
+                            <li><a href="/signin/{{ request.path }}/">{% trans "Sign in" %}</a></li>
                             <li class="divider"></li>
                             <li><a href="/register">{% trans "Register" %}</a></li>
                             <li class="divider"></li>
