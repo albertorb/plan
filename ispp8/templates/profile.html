@@ -1,0 +1,45 @@
+{% extends 'master.html' %}{% load i18n %}
+
+{% block content %}
+
+
+
+    <div class="scape-top-custom row container center-block">
+        <div class="col-md-6 col-centered">
+            <h2>{{ request.user.username }}</h2>
+            <img class="img-rounded" src="{{ MEDIA_URL }}{{ request.user.ouruser.image }}">
+        </div>
+
+     {% for elem in plans %}
+                        {% for activity in elem.activities.all %}
+                            {{ activity.name }}
+                        {% endfor %}
+                    {% endfor %}
+    </div>
+
+    <div class="row container center-block">
+        <div id="" class="col-md-4">
+
+            <ul class="nav nav-pills nav-justified" id="myTab">
+                <li class="active"><a href="#home" data-toggle="tab">Plans</a></li>
+                <li><a href="#map" data-toggle="tab">Map</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+
+                </div>
+                <div class="tab-pane" id="map">pebe</div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('#myTab a:last').tab('show')
+        })
+    </script>
+{% endblock %}
