@@ -628,7 +628,15 @@ def preferences(request):
         return render_to_response('preferences.html', {'tastes': tastes, 'sectors': sectors}, context_instance=RequestContext(request))
 
 
-#funcion extra para no repetir codigo
+def term(request):
+    return render_to_response('terms.html', context_instance=RequestContext(request))
+
+
+def contact(request):
+    return render_to_response('contact.html', context_instance=RequestContext(request))
+
+
+#FUNCIONES AUXILIARES - MANTENER LAS VISTAS POR ENCIMA DE ESTO
 def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted):
     results = []
     for a in Activity.objects.all():
@@ -636,7 +644,7 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
             results.append(a)
         if sector and a.sector.name == sector:
             results.append(a)
-        if moment and a.moment == moment:
+        if moment and a.moment.name == moment:
             results.append(a)
         if sDate and eDate and sDate <= a.startDate and eDate >= a.endDate:
             results.append(a)
@@ -651,79 +659,20 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
     return results
 
 
-def term(request):
-    return render_to_response('terms.html', context_instance=RequestContext(request))
+def saveToPlan(act, plan, order):
+    app = Appearance(activity=act, plan=plan, order=order)
+    app.save()
 
 
-def contact(request):
-    return render_to_response('contact.html', context_instance=RequestContext(request))
-
-
-########### ALGORYTHM ###############
-
-def algorythm(request):
-    user = request.user.ouruser
-    tastes = user.tastes.all()
-    aux = Activity.objects.all()  # aux to store population filtered
-    res = []
-
-    ## init indiv
-    for elem in tastes:
-        # this two IF are excluding those activities that user will never want
-        if elem.attribute_name == 'valoration':
-            if elem.dregee == 0:
-                aux = aux.exclude(valoration=int(elem.attribute_value))
-        if elem.attribute_name == 'sector':
-            if elem.dregee == 0:
-                aux = aux.exclude(sector=Sector.objects.get(name=elem.attribute_value))
-
-                # Creating 100 people with some restrictions
-    breakfastSet = aux.filter(sector=Sector.objects.get(name='Coffe shop'))
-    lunchSet = aux.filter(
-        sector=Sector.objects.get(name='Restaurant'))  # Must be the same as dinnerSet to avoid restaurant duplication
-    loungeSet = aux.filter(sector=Sector.objects.get(name='Lounge'))
-    activities = aux.exclude(sector=Sector.objects.get(name='Coffe shop'))
-    activities = activities.exclude(sector=Sector.objects.get(name='Restaurant'))
-    activities = activities.exclude(sector=Sector.objects.get(name='Lounge'))
-    for elem in breakfastSet:
-        print(elem.sector.name)
-
-    #random.shuffle(breakfastSet)
-    #random.shuffle(lunchSet)
-    #random.shuffle(activities)
-    #random.shuffle(loungeSet)
-
-    for pos in range(1):  #range(aux.count()-1):
-        if breakfastSet is not None:  ## checking if user do not want breakfast
-            res.append(ActivitySorted.objects.create_activity_sorted(breakfastSet[pos],0))  # first activity must be breakfast
-        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 1],1))  # random activity
-        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 2],2))  # random activity 2
-        if lunchSet is not None:
-            res.append(ActivitySorted.objects.create_activity_sorted(lunchSet[pos + 1],3))  # lunchtime
-        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 3],4))  #random activity 3
-        res.append(ActivitySorted.objects.create_activity_sorted(activities[pos + 4],5))  #random activity 4
-        if lunchSet is not None:
-            res.append(ActivitySorted.objects.create_activity_sorted(lunchSet[pos + 2],6))  # dinner time
-        if loungeSet is not None:
-            res.append(ActivitySorted.objects.create_activity_sorted(loungeSet[pos],7))
-            ## end init indiv
-
-            ## persisting plan
-        # persisting activities as plan
-        planform = PlanForm()
-        plan = planform.save(commit=False)
-        plan.voted = False
-        plan.done = False
-        plan.startDate = res[0].startDate
-        plan.endDate = res[2].endDate
-        plan.user = request.user.ouruser
-        plan.save()
-        print(res[0].sector.name)
-        for elem in res:
-            plan.activities.add(elem)
-
-
-
-
-    ## end persisting plan
-    return render_to_response('pruebaplan.html', {'plan': plan}, context_instance=RequestContext(request))
+def removeFromPlan(act, plan):
+    #sacamos las actividades del plan
+    activities = []
+    for a in plan.activities.all():
+        appearance = Appearance.objects.get(plan=plan, activity=act)
+        activities.append({'activity': a, 'order': appearance.order})
+    #limpiamos la relacion
+    plan.activities.clear()
+    #metemos todas las actividades menos la que no queremos
+    for elem in activities:
+        if elem['activity'].pk != act.pk:
+            saveToPlan(elem['activity'], plan, elem['order'])
