@@ -1,11 +1,16 @@
 __author__ = 'Mike'
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ispp8.settings")
-from plan.models import OurUser
-
-def show_tastes(user):
-    for taste in user.tastes.all():
-        print(taste.attribute_name, taste.attribute_value, taste.degree)
+from plan.models import *
 
 
-show_tastes(OurUser.objects.get(pk=2))
+def show():
+    print('Numero de actividades:')
+    print(len(Activity.objects.all()))
+    print('Numero de usuarios:')
+    print(len(OurUser.objects.all()))
+    print('Numero de planes:')
+    print(len(Plan.objects.all()))
+    print('Numero de Gustos:')
+    print(len(Taste.objects.all()))
+
