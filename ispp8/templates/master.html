@@ -32,8 +32,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a href="/plan">
                 <img style="height: 50px;width: 50px;" src="{{ STATIC_URL }}img/logo.png">
-
+                </a>
 
             </div>
 
@@ -91,10 +92,10 @@
 
                             <li>
 
-                                <a href="/profile">
+                                <a href="/pocket">
                                     <div class="">
                                         <img class="avatar-35 img-rounded"
-                                             src="{{ MEDIA_URL }}{{ request.user.ouruser.image }}">
+                                             src="/media/{{ request.user.ouruser.image }}">
                                         <b class="name">{{ request.user }}</b>
                                         <small class="metadata">{% trans "Profile" %}</small>
                                     </div>
@@ -103,9 +104,11 @@
 
                             </li>
                             <li class="divider"></li>
-                            <li><a href="/settings">{% trans "Settings" %}</a></li>
+                            <li><a href="/friends">{% trans "Friends" %}</a> </li>
+                            <li><a href="/user_plans">Pocket</a> </li>
                             <li class="divider"></li>
                             <li><a href="/logout">{% trans "Logout" %}</a></li>
+
                         </ul>
                     </li>
                 </ul>

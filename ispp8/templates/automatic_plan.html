@@ -18,8 +18,10 @@
                                     {% if forloop.counter == 1 %}
                                          {% for c in comments %}
                                 {% if c.activity == a1 %}
+                                    {% if forloop.counter == 1 %}
                                    <b class="textoderecha">" {{ c.text }} "</b>
                                     <img class="img-circle img-comment" src="media/{{ c.user.image }}" style="max-width: 15%;max-height: 15%;" />
+                                        {% endif %}
                                 {% endif %}
                                 {% endfor %}
                                         <img src="{{ MEDIA_URL }}{{ a1.location }}.jpg"
@@ -51,6 +53,7 @@
                                 </tr>
                                 </table>
                             </div>
+
                         {% endfor %}
                     </div>
                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -72,13 +75,13 @@
 
             <table class="table table-responsive">
                 <tr>
-                    {% for activity in activities %}
+                    {% for activity in plan.activities.all %}
 
-                        {% if forloop.counter <= 3 %}
+
                             <td class="panel">
                                 <div>
                                     <a href="{% url 'activity_info' activity_id=activity.id %}">
-                                        <img class="pull-left img-rounded" src="{{ activity.photo }}"
+                                        <img class="pull-left img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}"
                                              style="height: 120px;width: 120px;"/>
                                     </a>
                                 </div>
@@ -88,7 +91,7 @@
                                 </div>
                             </td>
 
-                        {% endif %}
+
 
                     {% endfor %}
                 </tr>
