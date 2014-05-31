@@ -45,20 +45,6 @@ class Activity(models.Model):
         return self.name
 
 
-class ActivitySortedManager(models.Manager):
-    def create_activity_sorted(self, act, pos):
-        activity = self.create(activity=act, position=pos)
-         # do something with the book
-        return activity
-
-
-# we need it in order to avoid Django's default sorting of model objects
-class ActivitySorted(models.Model):
-    activity = models.ManyToManyField(Activity, null=False)
-    position = models.IntegerField()
-    objects = ActivitySortedManager()
-
-
 class Taste(models.Model):
     attribute_name = models.CharField(max_length=20)
     attribute_value = models.CharField(max_length=200)
@@ -90,13 +76,19 @@ class Plan(models.Model):
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
     voted = models.BooleanField()
-    activities = models.ManyToManyField(Activity)
+    activities = models.ManyToManyField(Activity, through='Appearance')
     user = models.ForeignKey(OurUser, related_name='OurUser_content_type')
     sharedTo = models.ManyToManyField(OurUser, blank=True, null=False)
     done = models.BooleanField()
 
     def __unicode__(self):
         return "plan" + str(self.pk)
+
+
+class Appearance(models.Model):
+    activity = models.ForeignKey(Activity)
+    plan = models.ForeignKey(Plan)
+    order = models.IntegerField()
 
 
 class Company(models.Model):
