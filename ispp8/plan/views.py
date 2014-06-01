@@ -672,16 +672,10 @@ def preferences(request):
         return HttpResponseRedirect("/preferences")
     elif request.method == 'POST' and 'valoration' in request.POST:
         attribute_name = 'valoration'
-        if request.POST['minvaloration'] != '':
-            attribute_value = request.POST['minvaloration']
-            degree = 3
-            taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
-            ouser.tastes.add(taste)
-        if request.POST['maxvaloration'] != '':
-            attribute_value = request.POST['maxvaloration']
-            degree = 3
-            taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
-            ouser.tastes.add(taste)
+        attribute_value = request.POST['minvaloration']
+        degree = 0
+        taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
+        ouser.tastes.add(taste)
         return HttpResponseRedirect("/preferences")
     else:
         tastes = ouser.tastes
