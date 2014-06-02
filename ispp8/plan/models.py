@@ -45,20 +45,6 @@ class Activity(models.Model):
         return self.name
 
 
-class ActivitySortedManager(models.Manager):
-    def create_activity_sorted(self, act, pos):
-        activity = self.create(activity=act, position=pos)
-         # do something with the book
-        return activity
-
-
-# we need it in order to avoid Django's default sorting of model objects
-class ActivitySorted(models.Model):
-    activity = models.OneToOneField(Activity, null=False)
-    position = models.IntegerField()
-    objects = ActivitySortedManager()
-
-
 class Taste(models.Model):
     attribute_name = models.CharField(max_length=20)
     attribute_value = models.CharField(max_length=200)
