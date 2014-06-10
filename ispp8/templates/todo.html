@@ -2,7 +2,7 @@
 {% block content %}
 
     <div class=" row scape-top-custom container center-block">
-        <h1 class="text-darkorange"> Wishlist</h1>
+        <h1 class="text-darkorange"> {% trans "Wishlist" %}</h1>
         {% for plan in plans %}
             {% for activity in plan.activities.all %}
                 <div class="col-md-4">
@@ -37,10 +37,10 @@
                 <form method="get">
                     <ul class="pager">
                         {% if plans.has_previous %}
-                            <li><a href="?page={{ plans.previous_page_number }}">Previous</a></li>
+                            <li><a href="?page={{ plans.previous_page_number }}">{% trans "Previous" %}</a></li>
                         {% endif %}
                         {% if plans.has_next %}
-                            <li><a href="?page={{ plans.next_page_number }}">Next</a></li>
+                            <li><a href="?page={{ plans.next_page_number }}">{% trans "Next" %}</a></li>
                         {% endif %}
                     </ul>
                 </form>

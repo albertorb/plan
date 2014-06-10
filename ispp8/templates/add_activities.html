@@ -2,7 +2,7 @@
 {% block content %}
 <div id="div1" class="scape-top-custom container text-center">
     {% if results %}
-        <comment>Please select the activities to add:</comment>
+        <comment>{% trans "Please select the activities to add:" %}</comment>
         <form class="form-horizontal" action="" method="post">{% csrf_token %}
                 <input type="hidden" name="add" value="add">
                 <div class="form-group">
@@ -24,11 +24,11 @@
     {% endfor %}
                 </div>
     <div class="form-group">
-        <input type="submit" class="btn button-orange" name="custom" value="Add To Plan">
+        <input type="submit" class="btn button-orange" name="custom" value="{% trans "Add To Plan" %}">
     </div>
     </form>
 </div>
     {% else %}
-        <h3>Sorry, there are no activities matching your preferences.</h3>
+        <h3>{% trans "Sorry, there are no activities matching your preferences." %}</h3>
     {% endif %}
 {% endblock %}

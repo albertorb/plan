@@ -3,7 +3,7 @@
 <div class=" scape-top-custom row ">
 
 <div class=" row container center-block ">
-<h3>All registered users</h3>
+<h3>{% trans "All registered users" %}</h3>
     {% for elem in allusers %}
         {% if elem != user and elem not in friends %}
         <form method="post" class="form-horizontal">{% csrf_token %}
@@ -11,8 +11,8 @@
             <input type="hidden" name="friend" value="{{ elem.id }}">
           <img src="/media/{{ elem.image }}" class="img-circle img-xs-custom  ">
           <div>{{ elem.djangoUser }}</div>
-          <div>Register in:{{ elem.birthday }}</div>
-          <input type="submit" name="añadir" class="btn btn-success" value="Follow" />
+          <div>{% trans "Register in:" %}{{ elem.birthday }}</div>
+          <input type="submit" name="añadir" class="btn btn-success" value="{% trans "Follow" %}" />
         </div>
         </form>
         {% endif %}

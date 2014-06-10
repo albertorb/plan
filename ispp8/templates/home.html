@@ -10,9 +10,9 @@
         {% for plan in recentplans %}
             {% if forloop.counter == 0 %}
                 <div class="text-center alert alert-info" style="margin-top: 8%">
-                    <p>How were your activities <strong>{{ request.user }}</strong>?</p>
+                    <p>{% trans "How were your activities" %} <strong>{{ request.user }}</strong>?</p>
 
-                    <p>Please, just take a second and rate what you did</p>
+                    <p>{% trans "Please, just take a second and rate what you did" %}</p>
 
                 </div>
             {% endif %}
@@ -42,9 +42,8 @@
             {% endfor %}
         {% endfor %}
     </div>
-    <div class="alert alert-success alert-dismissable text-center">Here you are <strong>{{ request.user }}</strong>!
-        Your plan for
-        today!
+    <div class="alert alert-success alert-dismissable text-center">{% trans "Here you are" %} <strong>{{ request.user }}</strong>!
+        {% trans "Your plan for today!" %}
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     </div>
     <div class=" row div-card-plan-whole">
@@ -83,8 +82,8 @@
     <div class=" well-lg text-center ">
 
 
-        <a href="{% url 'plan_info' activity_id=ac1.id activity_id2=ac2.id activity_id3=ac3.id %}" class="btn button-orange-plan">I want this plan</a>
-        <a href="../filterloged" class=" btn button-orange-plan" data-toggle="modal">Filter to obtain another plan</a>
+        <a href="{% url 'plan_info' activity_id=ac1.id activity_id2=ac2.id activity_id3=ac3.id %}" class="btn button-orange-plan">{% trans "I want this plan" %}</a>
+        <a href="../filterloged" class=" btn button-orange-plan" data-toggle="modal">{% trans "Filter to obtain another plan" %}</a>
 
 
     </div>

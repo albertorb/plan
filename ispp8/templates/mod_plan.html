@@ -1,7 +1,7 @@
 {% extends 'master.html' %}
 {% block content %}
 <div class="content center-block container scape-top-custom row">
-    <h3>Choose the activities to remove, delete the whole plan or customize it!</h3>
+    <h3>{% trans "Choose the activities to remove, delete the whole plan or customize it!" %}</h3>
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
                 <input type="hidden" name="remove" value="remove">
                 <div class="form-group">
@@ -23,17 +23,17 @@
         {% endfor %}
                 </div>
     <div class="form-group">
-        <input type="submit" class="btn button-orange-plan" name="remove" value="Remove">
+        <input type="submit" class="btn button-orange-plan" name="remove" value="{% trans "Remove" %}">
     </div>
     </form>
 
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
                 <input type="hidden" name="delete" value="delete">
         <div class="form-group">
-        <input type="submit" name="custom" class="btn button-orange" value="Delete Plan">
+        <input type="submit" name="custom" class="btn button-orange" value="{% trans "Delete Plan" %}">
     </div>
     </form>
-    <a href="/addto_plan/{{ plan.pk }}/"><button class="btn button-orange">Add Activities</button></a>
+    <a href="/addto_plan/{{ plan.pk }}/"><button class="btn button-orange">{% trans "Add Activities" %}</button></a>
     </div>
 
 {% endblock %}

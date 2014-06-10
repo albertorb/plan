@@ -4,8 +4,7 @@
     <div class="row scape-top-custom container center-block">
         <div class="padding-left-25 padding-right-25">
             <div class="panel col-lg-12 ">
-                <h5 class="help-block text-center">skip the form signing with your social
-                    accounts</h5>
+                <h5 class="help-block text-center">{% trans "skip the form signing with your social accounts" %}</h5>
                 <br>
 
                 <div class="form-group text-center">
@@ -17,33 +16,29 @@
                 <form class="form-signup-custom" action="/register" role="form" enctype="multipart/form-data"
                       method="post"> {% csrf_token %}
                     <div id="divUsername" class=" ">
-                        <label for="username">Username</label>
+                        <label for="username">{% trans "Username" %}</label>
                         <input type="text" class="form-control" id="username" name="username"
-                               placeholder="Enter username" onblur="validateusr(false)">
+                               placeholder="{% trans "Enter username" %}" onblur="validateusr(false)">
                         <span id="spantick" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
                         <span id="spantickerror" class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
 
-                        <div id="alertusn" class="hidden alert alert-danger">Sorry, username in use. Please try another
-                            one
-                        </div>
+                        <div id="alertusn" class="hidden alert alert-danger">{% trans "Sorry, username in use. Please try another one" %}</div>
                     </div>
 
                     <div id="divEmail" class="form-group has-feedback">
-                        <label for="email">Email address</label>
+                        <label for="email">{% trans "Email address" %}</label>
                         <input type="email" class="form-control" id="email" name="email" onblur="validatemail(false)"
-                               placeholder="Enter email">
+                               placeholder="{% trans "Enter email" %}">
                         <span id="spantick1" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
                         <span id="spantickerror1"
                               class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
 
-                        <div id="alertema" class="hidden alert alert-danger">Sorry, email in use. Please try another
-                            one
-                        </div>
+                        <div id="alertema" class="hidden alert alert-danger">{% trans "Sorry, email in use. Please try another one" %}</div>
                     </div>
                     <div class="form-group ">
-                        <label for="password">Password</label>
+                        <label for="password">{% trans "Password" %}</label>
                         <input type="password" class="form-control" id="password" name="password"
-                               placeholder="Password" onkeyup="passWeakness()">
+                               placeholder="{% trans "Password" %}" onkeyup="passWeakness()">
 
                         <div class="progress">
                             <div id="progressBar" class="progress-bar active" role="progressbar" aria-valuenow="0"
@@ -55,27 +50,26 @@
 
                     </div>
                     <div class="form-group ">
-                        <label for="birthday">Birthday</label>
-                        <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Birthday">
+                        <label for="birthday">{% trans "Birthday" %}"</label>
+                        <input type="date" class="form-control" id="birthday" name="birthday" placeholder="{% trans "Birthday" %}">
                     </div>
                     <div class="form-group select-custom">
-                        <label for="option1">Gender</label>
+                        <label for="option1">{% trans "Gender" %}"</label>
                         <select id="gender" name="gender" class="form-control select-custom">
-                            <option id="option1" value="f">Female</option>
-                            <option id="option2" value="m">Male</option>
+                            <option id="option1" value="f">{% trans "Female" %}</option>
+                            <option id="option2" value="m">{% trans "Male" %}</option>
                         </select>
                     </div>
 
                     <div id="profileimage" class="form-group">
-                        <label for="profileimage">Profile image</label>
+                        <label for="profileimage">{% trans "Profile image" %}</label>
                         <input id="picture" name="picture" type="file">
                     </div>
                     <div class="help-block ">
-                        <p class="help-block text-center">By submit this form you accept our <a href="/terms">terms &
-                            cons</a>.</p>
+                        <p class="help-block text-center">{% trans "By submit this form you accept our"%} <a href="/terms">{% trans "terms & cons" %}</a>.</p>
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" name="submit" class="btn button-orange">Start planning</button>
+                        <button type="submit" name="submit" class="btn button-orange">{% trans "Start planning" %}</button>
                     </div>
 
                     <div class="hidden">

@@ -7,116 +7,379 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-23 03:03+0200\n"
+"POT-Creation-Date: 2014-06-10 14:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
-#: ispp8/settings.py:196
-msgid "Spanish"
-msgstr ""
-
-#: ispp8/settings.py:197
+#: .\ispp8\settings.py:197
 msgid "English"
-msgstr ""
+msgstr "Ingles"
 
-#: templates/filter.html:5
+#: .\ispp8\settings.py:198
+msgid "Spanish"
+msgstr "Español"
+
+#: .\templates\404.html:60
+msgid "Sorry, but the page you were trying to view does not exist."
+msgstr "Lo sentimos, pero la página que estas intentando ver no existe"
+
+#: .\templates\activity.html:23
+msgid "Friends that were here"
+msgstr "Amigos que estuvieron aquí"
+
+#: .\templates\activity.html:32
+msgid "Reviews"
+msgstr "Análisis"
+
+#: .\templates\activity.html:64
+msgid "Make your comment:"
+msgstr "Haz tu comentario"
+
+#: .\templates\activity.html:70
+msgid "Comment"
+msgstr "Comentarios"
+
+#: .\templates\add_activities.html:5
+msgid "Please select the activities to add:"
+msgstr "Por favor, seleccione las actividades a añadir"
+
+#: .\templates\add_activities.html:27
+msgid "Add To Plan"
+msgstr "Añadir al plan"
+
+#: .\templates\add_activities.html:32 .\templates\customplan.html:48
+msgid "Sorry, there are no activities matching your preferences."
+msgstr "Lo sentimos, no hay actividades que correspondan con sus preferencias"
+
+#: .\templates\addfriend.html:6
+msgid "All registered users"
+msgstr "Todos los usuarios registrados"
+
+#: .\templates\addfriend.html:14
+#, fuzzy
+msgid "Register in:"
+msgstr "Registrarse"
+
+#: .\templates\addfriend.html:15
+msgid "Follow"
+msgstr "Seguir"
+
+#: .\templates\automatic_plan.html:6
+msgid "Trending cities"
+msgstr "Tendencia en ciudades"
+
+#: .\templates\automatic_plan.html:73
+msgid "Hey! What about that plan!?"
+msgstr "Hey! Que tal ese plan?!"
+
+#: .\templates\automatic_plan.html:107 .\templates\home.html:85
+msgid "I want this plan"
+msgstr "Quiero este plan"
+
+#: .\templates\automatic_plan.html:109
+msgid "Try a custom search"
+msgstr "Prueba una búsqueda personalizada "
+
+#: .\templates\automatic_plan.html:115
+msgid "Featured Activities"
+msgstr "Actividades destacadas "
+
+#: .\templates\automatic_plan.html:127
+msgid "Most Rated Activities"
+msgstr "Actividades mejor valoradas"
+
+#: .\templates\contact.html:8
+msgid "About us"
+msgstr "Sobre nosotros"
+
+#: .\templates\contact.html:9
+msgid ""
+"Nowasti emerged as a solution to the problem of lost time to organize "
+"activities when we want to take a trip or arrange a day. The objective of "
+"our application is that using an algorithm that takes user preferences, "
+"organize activities to be performed throughout the day or the amount of time "
+"indicated by the user. We also offer the ability to save these plans, to "
+"then be able to share with users. We also offer the possibility of modifying "
+"plans to model saved to your taste, even the option of creating new plans to "
+"filter through our activities"
+msgstr ""
+"La idea de Nowasti surgió del problema de la pérdida de tiempo al organizar "
+"las actividades a la hora de realizar un viaje o querer organizarte el día. "
+"El objetivo de nuestra aplicación es que mediante un algoritmo que toma las "
+"preferencias del usuario,  organizarle las actividades a realizar durante "
+"todo el día o la cantidad de tiempo indicada por el usuario. También "
+"ofrecemos la posibilidad de guardar estos planes, para , posteriormente "
+"poder compartirlos con los usuarios. También ofrecemos la posibilidad de "
+"modificar planes guardados para modelarlos a tu gusto, incluso la opción de "
+"crear planes nuevos, a través de nuestro filtro de actividades"
+
+#: .\templates\contact.html:14
+msgid "Help us"
+msgstr "Ayúdanos"
+
+#: .\templates\contact.html:15
+msgid ""
+"In Nowasti your opinion matters and we want you to indicate the things that "
+"you consider we can improve, from mistakes of the page itself, to ideas for "
+"improvement. Thus, to ensure that the user experience is as pleasant as "
+"possible."
+msgstr ""
+"Desde Nowasti nos importa tu opinión y queremos que nos indiques las cosas "
+"que consideres que podemos mejorar, desde errores de la propia página, a "
+"ideas para mejorarla. De este modo, poder conseguir que la experiencia del "
+"usuario sea lo más placentera posible."
+
+#: .\templates\contact.html:21
+msgid "Send Email"
+msgstr "Enviar Email"
+
+#: .\templates\customplan.html:6
+msgid "Please select the activities for your plan:"
+msgstr "Por favor seleccione las actividades para su plan"
+
+#: .\templates\customplan.html:43
+msgid "Save Plan"
+msgstr "Guardar Plan"
+
+#: .\templates\filter.html:5
 msgid "Customize"
 msgstr "Personaliza tu plan"
 
-#: templates/master.html:46 templates/master.html.py:140
+#: .\templates\filter.html:6 .\templates\filter_to_modify.html:6
+msgid ""
+"Please, fulfill the following fields in order to offer the bests activities. "
+"Leave blank the fields that you don't want to use."
+msgstr ""
+
+#: .\templates\filter.html:12 .\templates\filter_to_modify.html:10
+msgid "Location: "
+msgstr "Localización: "
+
+#: .\templates\filter.html:12 .\templates\filter_to_modify.html:10
+msgid "City to search in"
+msgstr "Ciudad en la que buscar"
+
+#: .\templates\filter.html:15 .\templates\filter_to_modify.html:13
+msgid "Leisure sector"
+msgstr "Sector de ocio"
+
+#: .\templates\filter.html:18
+msgid "Moment of the day: "
+msgstr "Momento del día"
+
+#: .\templates\filter.html:19 .\templates\filter_to_modify.html:17
+msgid "Morning"
+msgstr "Mañana"
+
+#: .\templates\filter.html:20 .\templates\filter_to_modify.html:18
+msgid "Evening"
+msgstr "Tarde"
+
+#: .\templates\filter.html:21 .\templates\filter_to_modify.html:19
+msgid "Night"
+msgstr "Noche"
+
+#: .\templates\filter.html:25 .\templates\filter_to_modify.html:23
+msgid "From date: "
+msgstr "Desde la fecha"
+
+#: .\templates\filter.html:26 .\templates\filter_to_modify.html:24
+msgid "To date: "
+msgstr "Hasta la fecha"
+
+#: .\templates\filter.html:29 .\templates\filter_to_modify.html:27
+msgid "Valoration: "
+msgstr "Valoración"
+
+#: .\templates\filter.html:29 .\templates\filter_to_modify.html:27
+msgid "Minimun Rating"
+msgstr "Valoración mínima"
+
+#: .\templates\filter.html:30 .\templates\filter_to_modify.html:28
+msgid "Cost:"
+msgstr "Coste:"
+
+#: .\templates\filter.html:31 .\templates\filter_to_modify.html:29
+#, fuzzy
+msgid "Free"
+msgstr "Gratuito"
+
+#: .\templates\filter.html:32 .\templates\filter_to_modify.html:30
+msgid "Not free"
+msgstr "No gratuito"
+
+#: .\templates\filter.html:35
+msgid "Promotion: "
+msgstr "Promoción: "
+
+#: .\templates\filter.html:36 .\templates\filter_to_modify.html:34
+msgid "Promoted"
+msgstr "Promocionado"
+
+#: .\templates\filter.html:37 .\templates\filter_to_modify.html:35
+msgid "Not promoted"
+msgstr "No promocionado"
+
+#: .\templates\filter.html:40 .\templates\filter_to_modify.html:38
+#, fuzzy
+msgid "Search!"
+msgstr "Buscar"
+
+#: .\templates\filter_to_modify.html:5
+#, fuzzy
+msgid "Customize your plan"
+msgstr "Personaliza tu plan"
+
+#: .\templates\filter_to_modify.html:13
+msgid "Sector:"
+msgstr "Sector: "
+
+#: .\templates\filter_to_modify.html:16
+msgid "Moment of the day:"
+msgstr "Momento del día"
+
+#: .\templates\filter_to_modify.html:33
+msgid "Promotion:"
+msgstr "Promoción:"
+
+#: .\templates\friends.html:6
+msgid "Follower List"
+msgstr "Lista de seguidores"
+
+#: .\templates\friends.html:13
+#, fuzzy
+msgid "Register in: "
+msgstr "Registrarse"
+
+#: .\templates\friends.html:14
+msgid "Unfollow"
+msgstr "Dejar de seguir"
+
+#: .\templates\friends.html:15
+msgid "Info"
+msgstr "Información"
+
+#: .\templates\friends.html:23
+msgid "Follow People"
+msgstr "Seguir Gente"
+
+#: .\templates\home.html:13
+msgid "How were your activities"
+msgstr "Como fueron tus actividades"
+
+#: .\templates\home.html:15
+msgid "Please, just take a second and rate what you did"
+msgstr "Por favor, dedica tan solo un segundo para valorar lo que hiciste"
+
+#: .\templates\home.html:45
+msgid "Here you are"
+msgstr "Aquí tiene"
+
+#: .\templates\home.html:46
+msgid "Your plan for today!"
+msgstr "Su plan para hoy"
+
+#: .\templates\home.html:86
+msgid "Filter to obtain another plan"
+msgstr "Filtrar para obtener otro plan"
+
+#: .\templates\master.html:47 .\templates\master.html.py:144
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/master.html:74
+#: .\templates\master.html:76
 msgid "Home"
 msgstr "Principal"
 
-#: templates/master.html:79
+#: .\templates\master.html:81
 msgid "Timeline"
 msgstr "Amigos"
 
-#: templates/master.html:84
+#: .\templates\master.html:86
 msgid "Wish"
 msgstr "Deseados"
 
-#: templates/master.html:98
+#: .\templates\master.html:100
 msgid "Profile"
 msgstr "Perfil"
 
-#: templates/master.html:105
-msgid "Settings"
-msgstr "Configuración"
+#: .\templates\master.html:107
+msgid "Friends"
+msgstr "Amigos"
 
-#: templates/master.html:107
+#: .\templates\master.html:110
 msgid "Logout"
 msgstr "Salir"
 
-#: templates/master.html:167
+#: .\templates\master.html:171 .\templates\welcome.html:116
 msgid "Sign in"
 msgstr "Entrar"
 
-#: templates/master.html:169
+#: .\templates\master.html:173
 msgid "Register"
 msgstr "Registrarse"
 
-#: templates/master.html:205
+#: .\templates\master.html:209 .\templates\register.html:7
 msgid "skip the form signing with your social accounts"
 msgstr "Saltate el formulario registrandote"
 
-#: templates/master.html:217
+#: .\templates\master.html:221 .\templates\register.html:19
 msgid "Username"
 msgstr "Nombre de Usuario"
 
-#: templates/master.html:223
+#: .\templates\master.html:227 .\templates\register.html:25
 msgid "Sorry, username in use. Please try another one"
 msgstr "Lo sentimos, nombre de usuario en uso. Por favor inténtalo con otro"
 
-#: templates/master.html:228
+#: .\templates\master.html:232 .\templates\register.html:29
+#: .\templates\welcome.html:107
 msgid "Email address"
 msgstr "Correo electrónico"
 
-#: templates/master.html:235
+#: .\templates\master.html:239 .\templates\register.html:36
 msgid "Sorry, email in use. Please try another one"
 msgstr "Lo sentimos, email en uso. Por favor inténtalo con otro"
 
-#: templates/master.html:239
+#: .\templates\master.html:243 .\templates\register.html:39
+#: .\templates\register.html.py:41 .\templates\welcome.html:113
 msgid "Password"
 msgstr "Contraseña"
 
-#: templates/master.html:253
+#: .\templates\master.html:257 .\templates\register.html:53
+#: .\templates\register.html.py:54
 msgid "Birthday"
 msgstr "Fecha de nacimiento"
 
-#: templates/master.html:257
+#: .\templates\master.html:261 .\templates\register.html:57
 msgid "Gender"
 msgstr "Genero"
 
-#: templates/master.html:259
+#: .\templates\master.html:263 .\templates\register.html:59
 msgid "Female"
 msgstr "Femenino"
 
-#: templates/master.html:260
+#: .\templates\master.html:264 .\templates\register.html:60
 msgid "Male"
 msgstr "Masculino"
 
-#: templates/master.html:265
+#: .\templates\master.html:269 .\templates\register.html:65
 msgid "Profile image"
 msgstr "Imagen de perfil"
 
-#: templates/master.html:269
+#: .\templates\master.html:273 .\templates\register.html:69
 msgid "By submit this form you accept our"
 msgstr "Al enviar este formulario aceptas nuestros"
 
-#: templates/master.html:269
+#: .\templates\master.html:273 .\templates\register.html:69
 msgid "terms & cons"
 msgstr "Terminos & Condiciones"
 
-#: templates/master.html:300
+#: .\templates\master.html:304
 msgid ""
 "You are about to discover a new way to enjoy your travels and share it with "
 "your friends"
@@ -124,10 +387,273 @@ msgstr ""
 "Estas apunto de descubrir una nueva forma de disfrutar tus viajes y "
 "compartirlos con tus amigos"
 
-#: templates/master.html:301
+#: .\templates\master.html:305
 msgid "A journey plan on a single click"
 msgstr "Un plan de viaje en un solo click"
 
-#: templates/master.html:307
+#: .\templates\master.html:311 .\templates\signin.html:23
+#: .\templates\welcome.html:55
 msgid "Wrong credentials"
 msgstr "Credenciales incorrectas"
+
+#: .\templates\mod_plan.html:4
+msgid "Choose the activities to remove, delete the whole plan or customize it!"
+msgstr ""
+"Elegir actividades para eliminar, borrar todo el plan o personalizarlo!"
+
+#: .\templates\mod_plan.html:26
+msgid "Remove"
+msgstr "Eliminar"
+
+#: .\templates\mod_plan.html:33
+msgid "Delete Plan"
+msgstr "Borrar Plan"
+
+#: .\templates\mod_plan.html:36
+msgid "Add Activities"
+msgstr "Añadir Actividades"
+
+#: .\templates\plan.html:6 .\templates\planinfo.html:6
+msgid "Plan overview"
+msgstr "Información del Plan"
+
+#: .\templates\plan.html:22 .\templates\planinfo.html:21
+#: .\templates\shareplan.html:21
+msgid "Location:"
+msgstr "Localización:"
+
+#: .\templates\plan.html:23 .\templates\shareplan.html:22
+msgid "Web Page:"
+msgstr "Página Web:"
+
+#: .\templates\plan.html:33 .\templates\planinfo.html:29
+#: .\templates\shareplan.html:32
+msgid "Send plan to email"
+msgstr "Enviar plan por email"
+
+#: .\templates\plan.html:35 .\templates\planinfo.html:31
+#: .\templates\shareplan.html:34
+msgid "Print your plan"
+msgstr "Imprimir plan"
+
+#: .\templates\planinfo.html:22
+msgid "Web Page: "
+msgstr "Página Web: "
+
+#: .\templates\preferences.html:7
+msgid "Please select your preferences: "
+msgstr "Por favor seleccione sus preferencias: "
+
+#: .\templates\preferences.html:9
+msgid "Eat at the hotel"
+msgstr "Comer en el hotel"
+
+#: .\templates\preferences.html:12
+msgid "Rest after eating"
+msgstr "Descansar después de comer"
+
+#: .\templates\preferences.html:15
+msgid "Do not include food related activities"
+msgstr "No incluir actividades relacionadas con la comida"
+
+#: .\templates\preferences.html:18
+msgid "Rest before eating"
+msgstr "Descansara antes de comer"
+
+#: .\templates\preferences.html:21 .\templates\preferences.html.py:58
+#: .\templates\preferences.html:70
+msgid "Save"
+msgstr "Guardar"
+
+#: .\templates\preferences.html:27
+msgid "State a preference about a sector"
+msgstr "Seleccione preferencias sobre un sector"
+
+#: .\templates\preferences.html:29
+msgid "Select a sector to refer your preference:"
+msgstr "Elija un sector al que referir sus preferencias"
+
+#: .\templates\preferences.html:35
+msgid "How often do you wish to do activities from this sector:"
+msgstr "Con qué frecuencia desea realizar actividades de este sector:"
+
+#: .\templates\preferences.html:38
+msgid "Never"
+msgstr "Nunca"
+
+#: .\templates\preferences.html:43
+msgid "Rarely"
+msgstr "Raramente"
+
+#: .\templates\preferences.html:48
+msgid "Sometimes"
+msgstr "Algunas veces"
+
+#: .\templates\preferences.html:53
+msgid "Often"
+msgstr "A menudo"
+
+#: .\templates\preferences.html:65
+msgid "State a minimal valoration for your activities:"
+msgstr "Seleccione valoración mínima para las actividades"
+
+#: .\templates\preferences.html:67
+msgid "Minimal valoration: "
+msgstr "Valoración mínima"
+
+#: .\templates\register.html:21 .\templates\welcome.html:108
+#, fuzzy
+msgid "Enter username"
+msgstr "Nombre de Usuario"
+
+#: .\templates\register.html:31
+msgid "Enter email"
+msgstr "Entrar email"
+
+#: .\templates\register.html:72
+msgid "Start planning"
+msgstr "Empezar a planificar"
+
+#: .\templates\repetedplan.html:5
+msgid "Opps"
+msgstr "Opps"
+
+#: .\templates\repetedplan.html:6
+msgid "You already have this plan stores, Check it on your pocket."
+msgstr "Ya tiene este plan guardado, revise sus planes."
+
+#: .\templates\search_result.html:12
+msgid "Sorry, no results matching your query were found."
+msgstr "Lo sentimos, no hay resultados para esa búsqueda"
+
+#: .\templates\shareplan.html:6
+msgid "Share plan"
+msgstr "Compartir plan"
+
+#: .\templates\shareplan.html:7
+msgid "Select the friend to share the following plan"
+msgstr "Seleccione un amigo para compartir el siguiente plan"
+
+#: .\templates\shareplan.html:51 .\templates\user_plans.html:80
+msgid "Share"
+msgstr "Compartir"
+
+#: .\templates\signin.html:12 .\templates\signin.html.py:43
+#, fuzzy
+msgid "Log in"
+msgstr "Entrar"
+
+#: .\templates\signin.html:28 .\templates\welcome.html:60
+#, fuzzy
+msgid "username"
+msgstr "Nombre de Usuario"
+
+#: .\templates\signin.html:35 .\templates\welcome.html:67
+#, fuzzy
+msgid "password"
+msgstr "Contraseña"
+
+#: .\templates\signin.html:55
+#, fuzzy
+msgid ""
+"You are about to discover a new way to enjoy your travels and share it with "
+"your friends. A whole plan on a single click"
+msgstr ""
+"Estas apunto de descubrir una nueva forma de disfrutar tus viajes y "
+"compartirlos con tus amigos"
+
+#: .\templates\timeline.html:9
+msgid "This plan has been done by your friend: "
+msgstr ""
+
+#: .\templates\todo.html:5
+#, fuzzy
+msgid "Wishlist"
+msgstr "Deseados"
+
+#: .\templates\todo.html:40
+msgid "Previous"
+msgstr "Anterior"
+
+#: .\templates\todo.html:43
+msgid "Next"
+msgstr "Siguiente"
+
+#: .\templates\user_plans.html:7
+msgid "Pocket plans"
+msgstr "Planes guardados"
+
+#: .\templates\user_plans.html:35
+msgid "This plan have been shared to: "
+msgstr "Este plan ha sido compartido con: "
+
+#: .\templates\user_plans.html:42
+msgid "Nobody! Share it now!"
+msgstr "Nadie! Compártalo ahora"
+
+#: .\templates\user_plans.html:60
+msgid "Select the friends to share"
+msgstr "Seleccione amigos para compartir"
+
+#: .\templates\user_plans.html:73
+msgid "You don´t have friends to share this plan"
+msgstr "No tiene amigos a quien pueda compartir el plan"
+
+#: .\templates\user_plans.html:79
+msgid "Close"
+msgstr "Cerrar"
+
+#: .\templates\welcome.html:35
+msgid "Download our android app for a better experience"
+msgstr "Descaguese nuestra app android para una mejor experiencia"
+
+#: .\templates\welcome.html:76
+msgid "Enter without log in"
+msgstr "Entrar sin registrarse"
+
+#: .\templates\welcome.html:118
+msgid "remember me"
+msgstr "recordarme"
+
+#: .\templates\welcome.html:119
+msgid "create new account"
+msgstr "crear nueva cuenta"
+
+#: .\templates\welcome.html:126
+msgid "Get a plan with just a click"
+msgstr "Consiga un plan con un solo click"
+
+#: .\templates\welcome.html:129
+msgid "Let's start"
+msgstr "Empecemos"
+
+#: .\templates\welcome.html:146
+msgid "Get amazing plans and share them with your friends"
+msgstr "Consiga planes geniales y compártalos con sus amigos"
+
+#: .\templates\welcome.html:152
+msgid "Stop wasting hours finding lots of activities reviews"
+msgstr "Deje de perder horas encontrando análisis de actividades"
+
+#: .\templates\welcome.html:159
+msgid "Get what you want with just a click"
+msgstr "Consiga lo que quiere con un solo click"
+
+#: .\templates\welcome.html:165
+msgid "Try our automatic system to get plans or make your custom searching"
+msgstr "Pruebe nuestro sistema automatico para conseguir planes o realice su propia búsqueda"
+
+#: .\templates\welcome.html:171
+msgid "Share what you have done to your friends"
+msgstr "Comparta los planes que ha realizado con sus amigos"
+
+#: .\templates\welcome.html:178
+msgid "Rate the activities you have done to give feedback"
+msgstr "Valore actividades que ha realizado para ayudar a otras personas"
+
+#: .\templates\welcome.html:181
+msgid "free register to get all this"
+msgstr "registro gratis para obtener todo esto"
+
+#~ msgid "Settings"
+#~ msgstr "Configuración"

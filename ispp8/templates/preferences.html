@@ -4,70 +4,70 @@
     <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
         <form class="form-horizontal" action="" method="post">{% csrf_token %}
             <input type="hidden" name="preferences" value="preferences">
-            <h3>Please select your preferences:</h3>
+            <h3>{% trans "Please select your preferences: " %}</h3>
         <div class="checkbox">
-            <label><input type="checkbox" class="radio checkbox-inline" name="1" value=1>Eat at the hotel</label>
+            <label><input type="checkbox" class="radio checkbox-inline" name="1" value=1>{% trans "Eat at the hotel" %}</label>
         </div>
         <div class="checkbox">
-            <label><input type="checkbox" class="radio checkbox-inline" name="2" value=2>Rest after eating</label>
+            <label><input type="checkbox" class="radio checkbox-inline" name="2" value=2>{% trans "Rest after eating" %}</label>
         </div>
         <div class="checkbox">
-            <label><input type="checkbox" class="radio checkbox-inline" name="3" value=3>Do not include food related activities</label>
+            <label><input type="checkbox" class="radio checkbox-inline" name="3" value=3>{% trans "Do not include food related activities" %}</label>
         </div>
         <div class="checkbox">
-            <label><input type="checkbox" class="radio checkbox-inline" name="4" value=4>Rest before eating</label>
+            <label><input type="checkbox" class="radio checkbox-inline" name="4" value=4>{% trans "Rest before eating" %}</label>
         </div>
             <br>
-            <input type="submit" name="set_preferences" class="button-orange btn" value="Save">
+            <input type="submit" name="set_preferences" class="button-orange btn" value="{% trans "Save" %}">
     </form>
     </div>
     <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
     <input type="hidden" name="psector" value="psector">
-    <h3>State a preference about a sector</h3>
+    <h3>{% trans "State a preference about a sector" %}</h3>
         <div class="form-group">
-        <label>Select a sector to refer your preference:</label>
+        <label>{% trans "Select a sector to refer your preference:" %}</label>
             <select class="form-control" name="sector">
               {% for sector in sectors.all %}<option value="{{ sector.pk }}">{{ sector.name }}</option>{% endfor %}
             </select>
         </div>
         <div class="form-group">
-            <label>How often do you wish to do activities from this sector:</label>
+            <label>{% trans "How often do you wish to do activities from this sector:" %}</label>
             <div class="radio">
               <label>
-                <input type="radio" name="degree" value=0> Never
+                <input type="radio" name="degree" value=0> {% trans "Never" %}
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="degree" value=1> Rarely
+                <input type="radio" name="degree" value=1> {% trans "Rarely" %}
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="degree" value=2> Sometimes
+                <input type="radio" name="degree" value=2> {% trans "Sometimes" %}
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="degree" value=3> Often
+                <input type="radio" name="degree" value=3> {% trans "Often" %}
               </label>
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" name="prefsector" class="button-orange btn" value="Save">
+            <input type="submit" name="prefsector" class="button-orange btn" value="{% trans "Save" %}">
         </div>
     </form>
     </div>
     <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
     <input type="hidden" name="valoration" value="valoration">
-        <h3>State a minimal valoration for your activities:</h3>
+        <h3>{% trans "State a minimal valoration for your activities:" %}</h3>
         <div class="form-group">
-            <label>Minimal valoration: <input type="number" class="form-control" placeholder="0.0" name="minvaloration"></label>
+            <label>{% trans "Minimal valoration: " %}<input type="number" class="form-control" placeholder="0.0" name="minvaloration"></label>
         </div>
     <div class="form-group">
-            <input type="submit" name="val" class="button-orange btn" value="Save">
+            <input type="submit" name="val" class="button-orange btn" value="{% trans "Save" %}">
         </div>
     </form>
     </div>

@@ -3,7 +3,7 @@
 
     <div class="quitamargen">
         <div class="row container center-block">
-            <h4>Trending cities</h4>
+            <h4>{% trans "Trending cities" %}</h4>
 
             <div class="col-md-10">
                 <div id="carousel-example-generic" class="carousel slide " data-ride="carousel">
@@ -70,7 +70,7 @@
             <div class="row container center-block">
             <div class=" col-md-9" style="display: table; position: relative">
             <div class=" col-lg-12 alert alert-success text-center">
-                <p>Hey! What about that plan!?</p>
+                <p>{% trans "Hey! What about that plan!?" %}</p>
             </div>
 
             <table class="table table-responsive">
@@ -104,15 +104,15 @@
                 <br/>
             </div>
             <a href="{% url 'plan_info' activity_id=ac1.id activity_id2=ac2.id activity_id3=ac3.id %}">
-                <button type="button" class="btn btn-warning">I want this plan</button>
+                <button type="button" class="btn btn-warning">{% trans "I want this plan" %}</button>
             </a>
-            <a href="../filter" class="btn btn-info" data-toggle="modal">Try a custom search</a>
+            <a href="../filter" class="btn btn-info" data-toggle="modal">{% trans "Try a custom search" %}</a>
         {% endif %}
 
         </div>
         <div class="col-md-3 pull-right">
             <div class="panel">
-                <h2>Featured Activities</h2>
+                <h2>{% trans "Featured Activities" %}</h2>
                 {% for a in activities %}
                     {% if a.isPromoted == 1 %}
                         <ul>
@@ -124,7 +124,7 @@
                 {% endfor %}
             </div>
 
-            <h4 class="">Most Rated Activities</h4>
+            <h4 class="">{% trans "Most Rated Activities" %}</h4>
 
             <div class="  panel">
                 <table class="table">

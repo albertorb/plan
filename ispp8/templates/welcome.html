@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,7 @@
 <!-- small devices -->
 <div class="visible-xs">
     <div class="padding-top-5 padding-right-25 padding-left-25">
-          <div class="alert alert-success">Download our android app for a better experience </div>
+          <div class="alert alert-success">{% trans "Download our android app for a better experience" %} </div>
           <div class="text-center padding-bottom-5">
                     <img src="{{ STATIC_URL }}img/badge_android.png">
                 </div>
@@ -52,20 +53,19 @@
 
 
                             <form id="formulario2" class="form-signup" method="post" action="">{% csrf_token %}
-                                <div id="wrongCredentials" class="text-center alert alert-danger hidden"> Wrong
-                                    credentials
+                                <div id="wrongCredentials" class="text-center alert alert-danger hidden"> {% trans "Wrong credentials" %}
                                 </div>
                                 <div class="input-group col-xs-6 col-centered">
 
                                     <input id="usernamex" type="text" name="usernamelogin" class="form-control"
-                                           placeholder="username">
+                                           placeholder="{% trans "username" %}">
                                 </div>
                                 <br>
 
                                 <div class="input-group col-xs-6 col-centered">
 
                                     <input id="passwordx" type="password" name="passwordlogin" class="form-control"
-                                           placeholder="password">
+                                           placeholder="{% trans "password" %}">
                                 </div>
 
 
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class=" padding-top-5 padding-bottom-5 text-center">
                                     <input type=submit value="Log in" class="btn button-orange"/>
-                                    <a href="/plan" class="">Enter without log in</a>
+                                    <a href="/plan" class="">{% trans "Enter without log in" %}</a>
 
                                 </div>
 
@@ -105,29 +105,29 @@
 
         <form class="form-inline pull-right" method="post" role="form" action="/">{% csrf_token %}
             <div class="form-group">
-                <label class="sr-only" for="InputEmail2">Email address</label>
-                <input type="text" class="form-control" id="InputName2" placeholder="Enter username"
+                <label class="sr-only" for="InputEmail2">{% trans "Email address" %}</label>
+                <input type="text" class="form-control" id="InputName2" placeholder="{% trans "Enter username" %}"
                        name="usernamelogin">
             </div>
             <div class="form-group">
                 <label class="sr-only" for="InputPassword2">Password</label>
-                <input type="password" class="form-control" id="InputPassword2" placeholder="Password"
+                <input type="password" class="form-control" id="InputPassword2" placeholder="{% trans "Password" %}"
                        name="passwordlogin">
             </div>
-            <input type="submit" class="btn btn-warning" name="log" value="Sign in"/>
+            <input type="submit" class="btn btn-warning" name="log" value="{% trans "Sign in" %}"/>
 
-            <div class="col-md-5 checkbox text-darkorange text-xs"><input type="checkbox"> remember me</div>
-            <div class="col-md-5 text-xs"><a class="text-darkorange" href="/register">create new account </a></div>
+            <div class="col-md-5 checkbox text-darkorange text-xs"><input type="checkbox"> {% trans "remember me" %}</div>
+            <div class="col-md-5 text-xs"><a class="text-darkorange" href="/register">{% trans "create new account" %} </a></div>
 
         </form>
     </div>
     <div class="row escape-top-welcome-custom background-custom"
          style="background-image: url('{{ STATIC_URL }}img/welcome.jpg'); background-size:cover;">
         <div class="col-md-12">
-            <h1 class="text-center text-white-custom">Get a plan with just a click</h1>
+            <h1 class="text-center text-white-custom">{% trans "Get a plan with just a click" %}</h1>
         </div>
         <div class="col-md-12 text-center" style="z-index:3;">
-            <p><a href="/plan" class="btn btn-lg btn-warning" role="button">Let's start</a>
+            <p><a href="/plan" class="btn btn-lg btn-warning" role="button">{% trans "Let's start" %}</a>
         </div>
 
         <div class="col-md-5 pull-right">
@@ -144,43 +144,42 @@
             <div class=" overlap-panel-custom col-sm-4 col-md-5 ">
                 <div class="thumbnail">
                     <div class="caption">
-                        <h3 class="text-orange">Get amazing plans and share them with your friends</h3>
+                        <h3 class="text-orange">{% trans "Get amazing plans and share them with your friends" %}</h3>
 
                         <div class="row disabled center-block">
                             <button type="button" class="btn btn-default btn-lg">
                                 <span class="glyphicon glyphicon-time"></span>
                             </button>
-                            <em class="col-md-10 pull-right">Stop wasting hours finding lots of activities reviews</em>
+                            <em class="col-md-10 pull-right">{% trans "Stop wasting hours finding lots of activities reviews" %}</em>
                         </div>
                         <div class="row disabled center-block">
                             <button type="button" class="btn btn-default btn-lg">
                                 <span class="glyphicon glyphicon- glyphicon-hand-up"></span>
 
                             </button>
-                            <em class="col-md-10 pull-right">Get what you want with just a click</em>
+                            <em class="col-md-10 pull-right">{% trans "Get what you want with just a click" %}</em>
                         </div>
                         <div class="row disabled center-block">
                             <button type="button" class="btn btn-default btn-lg">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
-                            <em class="col-md-10 pull-right"> Try our automatic system to get plans or make your custom
-                                searching</em>
+                            <em class="col-md-10 pull-right">{% trans "Try our automatic system to get plans or make your custom searching" %}</em>
                         </div>
                         <div class="row disabled center-block">
                             <button type="button" class="btn btn-default btn-lg">
                                 <span class="glyphicon glyphicon-share"></span>
                             </button>
-                            <em class="col-md-10 pull-right"> Share what you have done to your friends</em>
+                            <em class="col-md-10 pull-right">{% trans "Share what you have done to your friends" %}</em>
                         </div>
 
                         <div class="row disabled center-block">
                             <button type="button" class="btn btn-default btn-lg">
                                 <span class="glyphicon glyphicon-thumbs-up"></span>
                             </button>
-                            <em class="col-md-10 pull-right"> Rate the activities you have done to give feedback</em>
+                            <em class="col-md-10 pull-right">{% trans "Rate the activities you have done to give feedback" %}</em>
                         </div>
                         <div class="row disabled text-center">
-                            <a href="/register" class="btn btn-warning">free register to get all this</a>
+                            <a href="/register" class="btn btn-warning">{% trans "free register to get all this" %}</a>
                         </div>
                     </div>
                 </div>

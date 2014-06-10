@@ -4,7 +4,7 @@
 
 <div class="row center-block container scape-top-custom ">
 
-    <h1>Pocket plans</h1>
+    <h1>{% trans "Pocket plans" %}</h1>
 
     {% for elem in userplans %}
         <table>
@@ -32,14 +32,14 @@
                {% endfor %}
             <td>
                 <div class=" col-md-8">
-        <h4>This plan have been shared to:</h4>
+        <h4>{% trans "This plan have been shared to: " %}</h4>
             {% for s in elem.sharedTo.all %}
                 <a href="/profile/{{ s.id }}">
                 <img src="/media/{{ s.image }}" class="img-xs-custom img-rounded">
                 </a>
                     {{ s.djangoUser }}<br>
                 {% empty %}
-                    Nobody! Share it now!<br>
+                    {% trans "Nobody! Share it now!" %}<br>
             {% endfor %}
         </div>
             </td>
@@ -57,7 +57,7 @@
       <div class="modal-body">
         <form class="form-horizontal" action="" method="post">{% csrf_token %}
          <input type="hidden" name="plan" value="{{ elem.pk }}">
-        Select the friends to share
+        {% trans "Select the friends to share" %}
       <table>
           {% for p in friends %}
               {% if p not in elem.sharedTo.all %}
@@ -70,14 +70,14 @@
                    </div>
                 {% endif %}
                    {% empty %}
-                   <p>You don´t have friends to share this plan</p>
+                   <p>{% trans "You don´t have friends to share this plan" %}</p>
                </td>
                </tr>
           {% endfor %}
       </table>
         <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-primary"  value="Share" name="share">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        <input type="submit" class="btn btn-primary"  value="{% trans "Share" %}" name="share">
       </div>
 
          </form>

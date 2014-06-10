@@ -3,7 +3,7 @@
 
 
     <div class="row container center-block scape-top-custom">
-        <h1 class="text-default text-center">Plan overview</h1>
+        <h1 class="text-default text-center">{% trans "Plan overview" %}</h1>
 
         <div class="panel col-md-12">
             <table class="table table-responsive">
@@ -19,8 +19,8 @@
                     <div id="address" class="col-md-4 container center-block text-center">
                         <address>
                            <p> <strong>{{ activity.name}}</strong></p>
-                          <p>  Location:{{ activity.location }}</p>
-                            <abbr title="Phone">Web Page:</abbr> {{ activity.url }}
+                          <p>  {% trans "Location:" %}{{ activity.location }}</p>
+                            <abbr title="Phone">{% trans "Web Page:" %}</abbr> {{ activity.url }}
                         </address>
                     </div>
                 </div>
@@ -30,9 +30,9 @@
                 </div>
             </div>
 
-            <span id="email" data-toggle="tooltip" data-placement="left" title="Send plan to email"
+            <span id="email" data-toggle="tooltip" data-placement="left" title="{% trans "Send plan to email" %}"
                   class="glyphicon glyphicon-envelope glyphicon-topright" onclick="send();"></span>
-            <span id="print" data-toggle="tooltip" data-placement="left" title="Print your plan"
+            <span id="print" data-toggle="tooltip" data-placement="left" title="{% trans "Print your plan" %}"
                   class="glyphicon glyphicon-envelope glyphicon-topright2 glyphicon-print" onclick="pr();"></span>
         </tr>
         </table>
