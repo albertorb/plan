@@ -1,0 +1,181 @@
+{% load i18n %}
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Nowasti</title>
+    <!-- Font Awesome -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ STATIC_URL }}css/custom.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header padding-left-15">
+
+            <a class="navbar-brand" href="#">Nowasti</a>
+        </div>
+
+        <small class="navbar-text">about us</small>
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+    </div>
+    <!-- /.container-fluid  -->
+</nav>
+
+<body class="padding-top-15" data-spy="scroll" data-target="#scrollspy">
+
+
+<div class="row container-fluid center-block">
+
+    <div id="scrollspy" class="col-xs-3" data-offset-top="0" data-offset-bottom="10">
+        <ul class="nav nav-tabs nav-stacked" data-spy="affix">
+            <li class="active"><a href="#pamab">PAMAB</a> </li>
+            <li class=""><a href="#one">Quienes somos</a></li>
+            <li class=""><a href="#two">A qué nos dedicamos</a></li>
+            <li class=""><a href="#three">Nowasti </a></li>
+        </ul>
+    </div>
+
+    <div class="col-xs-9">
+        <h1 id="pamab">PAMAB</h1>
+        <hr>
+        <h4 id>
+            <small>Agrupando ilusiones y espiritu de trabajo</small>
+        </h4>
+            <p>
+
+                La startup PAMAB nace con el objetivo de mantener a flote el proyecto Nowasti ideado por los integrantes de un grupo de trabajo de la Universidad de Sevilla.
+            </p>
+
+        <h1 id="one">Quienes somos</h1>
+        <hr>
+        <h4 id>
+            <small>Estudiantes de Ingeniería informática, emprendedores y entusiastas de las nuevas tecnologías</small>
+        </h4>
+        <div class="row">
+            <div class="col-xs-4 col-md-3">
+                <button class="btn btn-xs btn-default" style="color:limegreen">
+                    Developer
+                </button>
+
+
+                <span class="fa fa-google-plus-square pull-right" style="color:red" data-toggle="tooltip"
+                      data-original-title="@alearcfer" data-placement="right"
+                      title="+AlejandroArciniegaFernández"></span>
+                <a href="#" class="thumbnail">
+
+                    <img src="{{ STATIC_URL }}img/alejandro.png" alt="Image not found">
+
+                </a>
+
+                <h3 class="text-darkorange">Alejandro Arciniega</h3>
+
+            </div>
+
+            <div class="col-xs-4 col-md-3">
+
+                <button class="btn btn-xs btn-default" style="color:limegreen">
+                    Developer
+                </button>
+                <span class="fa fa-google-plus-square pull-right" style="color:red" data-toggle="tooltip"
+                      data-original-title="+BadrEddineAreqti" data-placement="right"
+                      title="+PedroGonzalezGordillo"></span>
+                <a href="#" class="thumbnail">
+                    <img src="{{ STATIC_URL }}img/badr.png" alt="Image not found">
+                </a>
+
+                <h3 class="text-darkorange">Badr Eddine</h3>
+            </div>
+
+
+            <div class="col-xs-4 col-md-3">
+
+                <button class="btn btn-xs btn-default" style="color:limegreen">
+                    Developer
+                </button>
+                <span class="fa fa-google-plus-square pull-right" style="color:red" data-toggle="tooltip"
+                      data-original-title="+PedroGonzalezGordillo" data-placement="right"
+                      title="+PedroGonzalezGordillo"></span>
+                <a href="#" class="thumbnail">
+                    <img src="{{ STATIC_URL }}img/pedro.png" alt="Image not found">
+                </a>
+
+                <h3 class="text-darkorange">Pedro González</h3>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+
+            <div class="col-xs-4 col-md-3">
+                <button class="btn btn-xs btn-default" style="color:#075698">
+                    Dev & Tech Leader
+                </button>
+                <span class="fa fa-google-plus-square pull-right" style="color:red" data-toggle="tooltip"
+                      data-original-title="+MiguelSilvaVazquez" data-placement="right"
+                      title="+MiguelSilvaVazquez"></span>
+                <a href="#" class="thumbnail">
+                    <img src="{{ STATIC_URL }}img/miguel.png" alt="Image not found">
+                </a>
+
+                <h3 class="text-darkorange">Miguel Silva</h3>
+            </div>
+
+            <div class="col-xs-4 col-md-3">
+                <button class="btn btn-xs btn-default" style="color:darkgoldenrod">
+                    Project leader
+                </button>
+
+
+                <span class="fa fa-linkedin-square  text-info pull-right" data-toggle="tooltip"
+                      data-original-title="Alberto Rincón Borreguero" data-placement="right"
+                      title="Alberto Rincón Borreguero"></span>
+                <span class="fa fa-google-plus-square pull-right" style="color:red" data-toggle="tooltip"
+                      data-original-title="+AlbertoRinconBorreguero" data-placement="right"
+                      title="+AlbertoRinconBorreguero"></span>
+                <a href="#" class="thumbnail">
+                    <img src="{{ STATIC_URL }}img/alberto.png" alt="Image not found">
+                </a>
+
+                <h3 class="text-darkorange">Alberto Rincón</h3>
+            </div>
+
+
+        </div>
+        <h2 id="two">A qué nos dedicamos</h2>
+        <h4 id>
+            <small>El objetivo de nuestro trabajo es permitirte emplear tu tiempo libre en lo que mas te importa
+            </small>
+        </h4>
+        <hr>
+
+    </div>
+
+    <script>
+        $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+
+    </script>
+
+
+</body>
+</html>

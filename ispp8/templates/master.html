@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Nowasti</title>
 
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ STATIC_URL }}css/custom.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -33,7 +38,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="/plan">
-                <img style="height: 50px;width: 50px;" src="{{ STATIC_URL }}img/logo.png">
+                    <img style="height: 50px;width: 50px;" src="{{ STATIC_URL }}img/logowhite.png">
                 </a>
 
             </div>
@@ -52,42 +57,42 @@
                 </form>
                 <!-- i18n selector -->
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                                class="glyphicon glyphicon-tags text-darkorange"></span></a>
-                        <ul class="dropdown-menu">
-                        {% for lang in LANGUAGES %}
-	                        <li>
-                                <form name="setLang{{ lang.1}}" action="/i18n/setlang/" method="POST">{% csrf_token %}
-                                    <input name="next" type="hidden" value="" />
-                                    <input type="hidden" name="language" value="{{ lang.0 }}" />
-                                    <a href="" onclick="document.setLang{{ lang.1 }}.submit(); return false;">{{ lang.1 }}</a>
-                                </form>
-                            </li>
-                        {% endfor %}
-                        </ul>
-
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                        class="glyphicon glyphicon-tags text-darkorange"></span></a>
+                <ul class="dropdown-menu">
+                    {% for lang in LANGUAGES %}
+                        <li>
+                            <form name="setLang{{ lang.1 }}" action="/i18n/setlang/" method="POST">{% csrf_token %}
+                                <input name="next" type="hidden" value=""/>
+                                <input type="hidden" name="language" value="{{ lang.0 }}"/>
+                                <a href=""
+                                   onclick="document.setLang{{ lang.1 }}.submit(); return false;">{{ lang.1 }}</a>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
 
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li {% if 'plan' in request.path %} class="activecustom"{% endif %}><a href="/plan"
-                            {% if 'plan' in request.path %} class="a-activecustom" {% else %}
-                                                                                           class="nonactive-a"{% endif %}>
+                    <li {% if 'plan' in request.path %} class="active"{% endif %}><a href="/plan"
+                            {% if 'plan' in request.path %} class="" {% else %}
+                                                                                     class=""{% endif %}>
                         <text>{% trans "Home" %}</text>
                     </a></li>
-                    <li {% if 'timeline' in request.path %} class="activecustom"{% endif %}><a href="/timeline"
-                            {% if 'timeline' in request.path %} class="a-activecustom" {% else %}
-                                                                                               class="nonactive-a"{% endif %}>
+                    <li {% if 'timeline' in request.path %} class="active"{% endif %}><a href="/timeline"
+                            {% if 'timeline' in request.path %} class="" {% else %}
+                                                                                         class=""{% endif %}>
                         <text>{% trans "Timeline" %}</text>
                     </a></li>
-                    <li {% if 'todo' in request.path %} class="activecustom"{% endif %}><a href="/todo"
-                            {% if 'todo' in request.path %} class="a-activecustom" {% else %}
-                                                                                           class="nonactive-a"{% endif %}>
+                    <li {% if 'todo' in request.path %} class="active"{% endif %}><a href="/todo"
+                            {% if 'todo' in request.path %} class="" {% else %}
+                                                                                     class=""{% endif %}>
                         <text>{% trans "Wish" %}</text>
                     </a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                                class="glyphicon glyphicon-cog text-darkorange"></span></a>
+                                class="glyphicon glyphicon-cog text-white-custom"></span></a>
                         <ul class="dropdown-menu">
 
                             <li>
@@ -104,8 +109,8 @@
 
                             </li>
                             <li class="divider"></li>
-                            <li><a href="/friends">{% trans "Friends" %}</a> </li>
-                            <li><a href="/user_plans">Pocket</a> </li>
+                            <li><a href="/friends">{% trans "Friends" %}</a></li>
+                            <li><a href="/user_plans">Pocket</a></li>
                             <li class="divider"></li>
                             <li><a href="/logout">{% trans "Logout" %}</a></li>
 
@@ -130,7 +135,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img style="height: 50px;width: 50px;" src="{{ STATIC_URL }}img/logo.png">
+                <img style="height: 50px;width: 50px;" src="{{ STATIC_URL }}img/logowhite.png">
 
 
             </div>
@@ -148,24 +153,25 @@
                 </form>
                 <!-- i18n selector -->
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                                class="glyphicon glyphicon-tags text-darkorange"></span></a>
-                        <ul class="dropdown-menu">
-                        {% for lang in LANGUAGES %}
-	                        <li>
-                                <form name="setLang{{ lang.1}}" action="/i18n/setlang/" method="POST">{% csrf_token %}
-                                    <input name="next" type="hidden" value="/plan" />
-                                    <input type="hidden" name="language" value="{{ lang.0 }}" />
-                                    <a href="#" onclick="document.setLang{{ lang.1 }}.submit();return false;">{{ lang.1 }}</a>
-                                </form>
-                            </li>
-                        {% endfor %}
-                        </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                        class="glyphicon glyphicon-tags"></span></a>
+                <ul class="dropdown-menu">
+                    {% for lang in LANGUAGES %}
+                        <li>
+                            <form name="setLang{{ lang.1 }}" action="/i18n/setlang/" method="POST">{% csrf_token %}
+                                <input name="next" type="hidden" value="/plan"/>
+                                <input type="hidden" name="language" value="{{ lang.0 }}"/>
+                                <a href="#"
+                                   onclick="document.setLang{{ lang.1 }}.submit();return false;">{{ lang.1 }}</a>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                                class="glyphicon glyphicon-cog text-darkorange"></span></a>
+                                class="glyphicon glyphicon-cog"></span></a>
                         <ul class="dropdown-menu">
 
                             <li><a href="/signin/{{ request.path }}/">{% trans "Sign in" %}</a></li>
@@ -190,7 +196,7 @@
 
 {% endblock %}
 
-<body onload="clickButton();">
+<body onload="clickButton();" style="padding-top: 70px;">
 {% block content %}
 
 {% endblock %}
@@ -206,7 +212,8 @@
             </div>
 
             <div class="modal-body">
-                <h5 class="help-block text-center" id="myModalLabelx">{% trans "skip the form signing with your social accounts" %}</h5>
+                <h5 class="help-block text-center"
+                    id="myModalLabelx">{% trans "skip the form signing with your social accounts" %}</h5>
                 <br>
 
                 <div class="form-group text-center">
@@ -224,7 +231,8 @@
                         <span id="spantick" class="hidden glyphicon glyphicon-ok form-control-feedback"></span>
                         <span id="spantickerror" class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
 
-                        <div id="alertusn" class="hidden alert alert-danger">{% trans "Sorry, username in use. Please try another one" %}
+                        <div id="alertusn"
+                             class="hidden alert alert-danger">{% trans "Sorry, username in use. Please try another one" %}
                         </div>
                     </div>
 
@@ -236,7 +244,8 @@
                         <span id="spantickerror1"
                               class="hidden glyphicon glyphicon-remove form-control-feedback"></span>
 
-                        <div id="alertema" class="hidden alert alert-danger">{% trans "Sorry, email in use. Please try another one" %}
+                        <div id="alertema"
+                             class="hidden alert alert-danger">{% trans "Sorry, email in use. Please try another one" %}
                         </div>
                     </div>
                     <div class="form-group ">
@@ -270,7 +279,8 @@
                         <input id="picture" name="picture" type="file">
                     </div>
                     <div class="help-block ">
-                        <p class="help-block text-center">{% trans "By submit this form you accept our" %} <a href="/terms">{% trans "terms & cons" %}</a>.</p>
+                        <p class="help-block text-center">{% trans "By submit this form you accept our" %} <a
+                                href="/terms">{% trans "terms & cons" %}</a>.</p>
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn button-orange">Submit</button>
@@ -302,13 +312,14 @@
             </div>
             <div class="modal-body pull-right col-lg-6">
                 <p class="help-block">{% trans "You are about to discover a new way to enjoy your travels and share it with your friends" %}.<br>
-                    {% trans  "A journey plan on a single click" %}</p>
+                    {% trans "A journey plan on a single click" %}</p>
             </div>
             <div class="modal-body   modal-sm  form-signup  ">
 
 
                 <form id="formulario2" class="form-signup" method="post" action="">{% csrf_token %}
-                    <div id="wrongCredentials" class="text-center alert alert-danger hidden"> {% trans "Wrong credentials" %}</div>
+                    <div id="wrongCredentials"
+                         class="text-center alert alert-danger hidden"> {% trans "Wrong credentials" %}</div>
                     <div class="input-group col-xs-12 ">
 
                         <input id="usernamex" type="text" name="usernamelogin" class="form-control"

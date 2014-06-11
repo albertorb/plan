@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-from django.utils.translation import ugettext as _
+#from django.utils.translation import ugettext
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -89,8 +89,7 @@ DATABASES = {
 }
 
 # Internationalization
-LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),
-		)
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'es-es'
@@ -193,8 +192,8 @@ LOGGING = {
         },
     }
 }
-
+ugettext = lambda s: s
 LANGUAGES = (
-    ('es', _('Spanish')),
-    ('en', _('English')),
-)
+    ('en', ugettext('English')),
+    ('es', ugettext('Spanish')),
+    )
