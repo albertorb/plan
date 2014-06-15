@@ -714,6 +714,18 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
     return results
 
 
+def getActivitiesFrom(plan):
+    plan_activities = Activity.objects.filter(plan__pk=plan.pk)
+    aux = {}
+    for ac in plan_activities:
+        order_activity = Appearance.objects.get(plan=plan, activity=ac).order
+        aux[order_activity] = ac
+    sol = []
+    for i in range(len(aux)):
+        sol.append(aux[i])
+    return sol
+
+
 def saveToPlan(act, plan, order):
     app = Appearance(activity=act, plan=plan, order=order)
     app.save()
