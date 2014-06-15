@@ -1,14 +1,14 @@
 {% extends 'master.html' %}
 {% load i18n %}
 {% block content %}
+    {% load socialaccount %}
     <div class="row scape-top-custom container center-block">
         <div class="padding-left-25 padding-right-25">
             <div class="panel col-lg-12 ">
                 <h5 class="help-block text-center">{% trans "skip the form signing with your social accounts" %}</h5>
                 <br>
-
                 <div class="form-group text-center">
-                    <div class="btn btn-primary">facebook</div>
+                    <a href="{% provider_login_url "facebook" method="js_sdk" %}"><div class="btn btn-primary">Facebook</div></a>
                     <div class="btn btn-twitter">twitter</div>
                     <div class="btn btn-danger">Google +</div>
                 </div>
@@ -79,6 +79,7 @@
             </div>
         </div>
     </div>
+    {% providers_media_js %}
 {% endblock %}
 
 
