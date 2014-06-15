@@ -368,66 +368,28 @@ def filter_activities(request):
 @login_required(login_url='/plan')
 def timeline(request):
     duser = request.user
-    print('getting django user')
-    print(duser)
     ouser = OurUser.objects.get(djangoUser=duser)
-    print('getting our user')
-    print(ouser)
     friends = ouser.friends.all()
-    print('checking number of friends')
-    print(len(friends))
     data = []
     for friend in friends:
-        planesRealizados = Plan.objects.filter(user=friend)
-        print('checking number of done planes: ' + str(len(planesRealizados)))
-        planesVotados = Plan.objects.filter(user=friend, voted=True)
-        print('checking number of voted plans: ' + str(len(planesVotados)))
-        planesCompartidos = Plan.objects.exclude(sharedTo__isnull=True)
-        print('checking number of shared plans: ' + str(len(planesCompartidos)))
-        data.append({'friend': friend, 'donePlans': planesRealizados, 'votedPlans': planesVotados,
-                     'sharedPlans': planesCompartidos})
+        planesRealizados = []
+        planes = Plan.objects.filter(user=friend)
+        for p in planes:
+            actividades = getActivitiesFrom(p)
+            planesRealizados.append({'plan': p, 'activities': actividades})
+        data.append({'friend': friend, 'donePlans': planesRealizados})
     return render_to_response('timeline.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
-
-
-@login_required(login_url='/plan')
-def user_plans(request):
-    loguser = request.user
-    ouser = OurUser.objects.get(djangoUser=loguser)
-    if request.method == 'POST':
-        ident = request.POST.get("plan")
-        plan = Plan.objects.filter(pk=ident).get()
-        shareTo = []
-        for toadd in request.POST['user']:
-            shareTo.append(OurUser.objects.get(pk=int(toadd)))
-        for p in shareTo:
-            plan.sharedTo.add(p)
-        return HttpResponseRedirect("../user_plans")
-    else:
-        plans = Plan.objects.filter(user=ouser).all()
-        friends = ouser.friends.all()
-        data = []
-        print(plans)
-        for plan in plans:
-            sharedTo = plan.sharedTo.all()
-            toShare = []
-            share = True
-            for friend in friends:
-                for s in sharedTo:
-                    if s == friend:
-                        share = False
-                if share:
-                    toShare.append(friend)
-            data.append({'plan': plan, 'sharedTo': sharedTo, 'toShare': toShare, 'plans': plans})
-        return render_to_response('user_plans.html', {'user': ouser, 'data': data},
-                                  context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')
 def pocketplans(request):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
-    plans = Plan.objects.all()
-    userplans = plans.filter(user_id=ouser)
+    userplans = []
+    plans = Plan.objects.filter(user_id=ouser)
+    for plan in plans:
+        activities = getActivitiesFrom(plan)
+        userplans.append({'plan': plan, 'activities': activities})
     friends = ouser.friends.all()
     if request.method == 'POST' and 'share' in request.POST:
         ident = request.POST.get("plan")
@@ -438,7 +400,7 @@ def pocketplans(request):
         for p in shareTo:
             if p not in plan.sharedTo.all():
                 plan.sharedTo.add(p)
-        return HttpResponseRedirect("../user_plans")
+        return HttpResponseRedirect("/user_plans")
 
     return render_to_response('user_plans.html', {'user': ouser, 'userplans': userplans, 'friends': friends},
                               context_instance=RequestContext(request))
@@ -448,33 +410,33 @@ def planinfo(request, plan_id):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
     plan = Plan.objects.get(id=plan_id)
-
-    return render_to_response('planinfo.html', {'user': ouser, 'plan': plan},
+    activities = getActivitiesFrom(plan)
+    return render_to_response('planinfo.html', {'user': ouser, 'plan': plan, 'activities': activities},
                               context_instance=RequestContext(request))
 
 
 def shareplan(request, plan_id):
     loguser = request.user
     ouser = OurUser.objects.get(djangoUser=loguser)
-    plans = Plan.objects.all()
-    plan = plans.filter(id=plan_id)
-
-    return render_to_response('shareplan.html', {'user': ouser, 'plan': plan}, context_instance=RequestContext(request))
+    plan = Plan.objects.filter(id=plan_id)
+    activities = getActivitiesFrom(plan)
+    return render_to_response('shareplan.html', {'user': ouser, 'plan': plan, 'activities': activities}, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')
 def todo(request):
     duser = request.user
-    print('getting django user')
-    print(duser)
     ouser = OurUser.objects.get(djangoUser=duser)
-    print('getting our user')
     if request.method == 'POST':
         ident = request.POST.get("id")
         Plan.objects.filter(pk=ident).update(done=True)
-        return HttpResponseRedirect("../todo")
+        return HttpResponseRedirect("/todo")
     else:
-        plans = Plan.objects.filter(user=ouser, done=False).all()
+        planes = Plan.objects.filter(user=ouser, done=False)
+        plans = []
+        for plan in planes:
+            activities = getActivitiesFrom(plan)
+            plans.append({'plan': plan, 'activities': activities})
         paginator = Paginator(plans, 2)
 
         page = request.GET.get('page')
@@ -541,17 +503,20 @@ def modify_plan(request, plan_id):
     plan = Plan.objects.get(pk=plan_id)
     duser = request.user
     ouser = OurUser.objects.get(djangoUser=duser)
+    activities = getActivitiesFrom(plan)
     if request.method == 'POST' and 'remove' in request.POST:
         for key, value in request.POST.items():
             if request.POST[key].isdigit():
                 act = Activity.objects.get(pk=int(value))
-                plan.activities.remove(act)
+                removeFromPlan(act, plan)
         return HttpResponseRedirect("/mod_plan/" + str(plan_id) + '/')
     if request.method == 'POST' and 'delete' in request.POST:
+        for a in activities:
+            removeFromPlan(a, plan)
         plan.delete()
         return HttpResponseRedirect("/user_plans")
     else:
-        return render_to_response('mod_plan.html', {'user': ouser, 'plan': plan},
+        return render_to_response('mod_plan.html', {'user': ouser, 'plan': plan, 'activities': activities},
                                   context_instance=RequestContext(request))
 
 
@@ -576,7 +541,9 @@ def add_activities_to_given_plan(request, plan_id):
         for key, value in request.POST.items():
             if request.POST[key].isdigit():
                 act = Activity.objects.get(pk=int(value))
-                plan.activities.add(act)
+                actividades = getActivitiesFrom(plan)
+                last_index = Appearance.objects.get(plan=plan, activity=actividades[len(actividades)-1]).order
+                saveToPlan(act, plan, last_index+1)
         return HttpResponseRedirect("/user_plans")
     else:
         return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan},
@@ -669,13 +636,13 @@ def saveToPlan(act, plan, order):
 
 def removeFromPlan(act, plan):
     # sacamos las actividades del plan
-    activities = []
-    for a in plan.activities.all():
-        appearance = Appearance.objects.get(plan=plan, activity=act)
-        activities.append({'activity': a, 'order': appearance.order})
+    activities = getActivitiesFrom(plan)
     # limpiamos la relacion
     plan.activities.clear()
-    # metemos todas las actividades menos la que no queremos
+    #sacamos de la lista la actividad que no queremos guardar
+    activities.remove(act)
+    #guardamos las actividades con los indices de aparicion actualizados
+    i = 0
     for elem in activities:
-        if elem['activity'].pk != act.pk:
-            saveToPlan(elem['activity'], plan, elem['order'])
+        saveToPlan(elem, plan, i)
+        i += 1

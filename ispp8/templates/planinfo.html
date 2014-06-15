@@ -8,17 +8,17 @@
 
         <div class="panel col-md-12">
             <table class="table table-responsive">
-            {% for a in sorted.all %}
+            {% for a in activities %}
                 <tr>
                 <td>
                 <div class="">
                     <div class="  col-md-2">
-                        <img class="scape-top-custom img-export img-rounded" src="{{ MEDIA_URL }}{{ a.activity.photo }}"/>
+                        <img class="scape-top-custom img-export img-rounded" src="{{ MEDIA_URL }}{{ a.photo }}"/>
                     </div>
 
                     <div id="address" class="col-md-4 container center-block text-center">
                         <address>
-                           <p> <strong>{{ a.activity.name}}</strong></p>
+                           <p> <strong>{{ a.name}}</strong></p>
                           <p>  {% trans "Location:" %}{{ a.location }}</p>
                             <abbr title="Phone">{% trans "Web Page: " %}</abbr> {{ a.url }}
                         </address>

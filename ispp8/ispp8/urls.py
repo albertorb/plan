@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     url(r'^contacto$','plan.views.contact'),
     url(r'^profile','plan.views.profile'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^accounts/', include('allauth.urls')),
     # Uncomment the next line to enable the admin:
     url(r'^admin', include(admin.site.urls)),
     url(r'^$', 'plan.views.welcome'),

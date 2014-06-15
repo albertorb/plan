@@ -9,13 +9,13 @@
     {% for elem in userplans %}
         <table>
         <tr>
-             <h2>{{ elem.location }}</h2>
-                <h4>{{ elem.name }}
-                 <a href="/planinfo/{{ elem.id }}" class="glyphicon glyphicon-search text-darkorange "></a>
-        <a data-toggle="modal" data-target="#myModal{{ elem.pk }}"  class="glyphicon glyphicon-share text-darkorange "></a>
-        <a href="/mod_plan/{{ elem.id }}" class="glyphicon glyphicon-edit text-darkorange"></a>
+             <h2>{{ elem.plan.location }}</h2>
+                <h4>{{ elem.plan.name }}
+                 <a href="/planinfo/{{ elem.plan.id }}" class="glyphicon glyphicon-search text-darkorange "></a>
+        <a data-toggle="modal" data-target="#myModal{{ elem.plan.pk }}"  class="glyphicon glyphicon-share text-darkorange "></a>
+        <a href="/mod_plan/{{ elem.plan.id }}" class="glyphicon glyphicon-edit text-darkorange"></a>
                 </h4>
-               {% for a in elem.activities.all  %}
+               {% for a in elem.activities  %}
 
                     <td class="panel follow" style="padding: 1%">
                                 <div>
@@ -33,7 +33,7 @@
             <td>
                 <div class=" col-md-8">
         <h4>{% trans "This plan have been shared to: " %}</h4>
-            {% for s in elem.sharedTo.all %}
+            {% for s in elem.plan.sharedTo.all %}
                 <a href="/profile/{{ s.id }}">
                 <img src="/media/{{ s.image }}" class="img-xs-custom img-rounded">
                 </a>
