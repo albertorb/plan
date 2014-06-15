@@ -1,92 +1,81 @@
 {% extends 'master.html' %}
 {% block content %}
+    <div class="row" style="margin-top:-2%">
+        <div class="col-xs-12">
+            <div class=" panel-black">
+                <div class="panel-heading text-center">
+                    <span class="text-white-custom h2"> Obten tu plan </span>
+                    <span class="text-white-custom h5"> Elige una ciudad y una fecha, nosotros nos encargamos de ofrecerte el mejor planning de viaje</span>
+                </div>
 
+                <div class="row container center-block">
 
-    <div class="row container center-block">
+                    <form class="form" method="post" action="/planfromlocation/">
+                        <div class="col-xs-4">
 
+                            <div class="form-group">
 
-        <div class="col-md-offset-1 col-md-10">
+                                <select class="form-control">
+                                    <option>Barcelona</option>
+                                    <option>Londres</option>
+                                </select>
 
-
-            <div id="carousel-example-generic" class="carousel slide " data-ride="carousel">
-                <!-- Indicators -->
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-
-                    {% for a in plans %}
-
-                        <div class="{% if forloop.counter0 == 0 %}item active{% else %}item{% endif %}">
-                            {% for a1 in a.activities.all %}
-                                {% if forloop.counter == 1 %}
-                                    {% for c in comments %}
-                                        {% if c.activity == a1 %}
-                                            {% if forloop.counter == 1 %}
-                                                <b class="textoderecha">" {{ c.text }} "</b>
-                                                <img class="img-circle img-comment" src="media/{{ c.user.image }}"
-                                                     style="max-width: 15%;max-height: 15%;"/>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
-                                    <img src="{{ MEDIA_URL }}{{ a1.location }}.jpg"
-                                         style="width: 100%; max-height: 35%;"/>
-                                    <b class="textociudad">{{ a1.location|title }}</b>
-                                    <table class="table">
-                                    <tr>
-                                {% endif %}
-
-
-
-                                <td style="max-width: 120px;">
-
-                                <a href="{% url 'activity_info' activity_id=a1.id %}">
-                                    <img class=" img-rounded"
-                                         src="{{ MEDIA_URL }}{{ a1.photo }}"
-                                         style="height: 120px;width: 100%;"/>
-                                </a>
-                                <!--{{ a1.name }} -->
-
-                            {% endfor %}
-                            </tr>
-                            </table>
+                            </div>
                         </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <input type="date" class="form-control" placeholder="dd/mm/yyyy fecha de inicio">
 
-                    {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">
+
+
+                                <input type="number" class="form-control" placeholder="Numero de dias">
+
+                            </div>
+                        </div>
+                        <div class="col-xs-1">
+                            <div class="form-group">
+
+                                <button type="submit" class=" btn btn-default text-darkorange"><span
+                                        class="glyphicon glyphicon-calendar"></span></button>
+
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
             </div>
-
         </div>
 
-        <div class="row">
-            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
-                <span class="fa fa-fire text-danger fa-2x pull-right"></span>
 
-                <h2 class="">Hot offers</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
+        <div class="row padding-top-10 padding-bottom-5">
+            <div class="col-xs-offset-4 col-xs-12 ">
 
-                <small class="h4 text-warning">You may have not heard about such offers in that places</small>
+                <h2 class="">¡ Mira que ofertas !
+                    <small>incluyelas en tu plan</small>
+                </h2>
+
             </div>
 
         </div>
 
 
-        <div class="row padding-bottom-5">
+        <div class="row container center-block padding-bottom-5">
 
 
             {% for a in featured %}
                 {% if a.isPromoted == 1 %}
                     <div class="col-xs-4">
-                        <div class="panel panel-danger">
-                            <div class="panel-body"
-                                 style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                <img src="{{ MEDIA_URL }}{{ a.photo }}" style="width: 60px;height: 60px;"/>
+                        <img class="img-rounded" src="{{ MEDIA_URL }}{{ a.photo }}" style="width: 260px;height: 260px;"/>
 
-                                <span>{{ a.name }}</span>
-                            </div>
+                        <div class=" panel-black absolute-offer-info text-white-custom"
+                             style="width: 255px;height: 30px;">
+                            <span class="bottom-custom">{{ a.name }}</span>
                         </div>
+
                     </div>
 
                 {% endif %}
@@ -94,50 +83,12 @@
 
         </div>
 
-        <div class="row">
-            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
-                <h2 class="">Trip planning
-                    <small>faster than you ever thought</small>
-                </h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
 
-                <small class="h4 text-warning">click some city and select your dates</small>
-            </div>
+        <div class="row padding-top-10">
+            <div class="col-xs-offset-4 col-xs-12 ">
 
-        </div>
-
-        <div class="row padding-bottom-5 container center-block">
-            <div class="col-xs-6">
-                <img class="img-rounded" style="width:350px; height:350px;" src="{{ MEDIA_URL }}Londres,jpg">
-            </div>
-            <div class="col-xs-6">
-                <img class="img-rounded" style="width:350px; height:350px;" src="{{ MEDIA_URL }}Madrid.jpg">
-            </div>
-
-
-        </div>
-
-
-        <div class="row padding-bottom-5 container center-block">
-
-            <div class="col-xs-6">
-                <img class="img-rounded" style="width:350px; height:350px;" src="{{ MEDIA_URL }}Sevilla.jpg">
-            </div>
-
-            <div class="col-xs-6">
-                <img class="img-rounded" style="width:350px; height:350px;" src="{{ MEDIA_URL }}roma.jpg">
-            </div>
-        </div>
-
-
-        <div class="row container center-block">
-            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
-
-                <h2 class="">Most rated
-                    <small>by users <span class="fa fa-user fa-2x text-orange"></span></small>
+                <h2 class=""> Las mejor valoradas
+                    <small>por nuestros usuarios</small>
                 </h2>
 
             </div>

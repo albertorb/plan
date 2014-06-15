@@ -27,6 +27,10 @@
     padding-top: 5%;
 }
 
+.padding-top-10 {
+    padding-top: 10%;
+}
+
 .padding-top-15 {
     padding-top: 15%;
 }
@@ -223,10 +227,10 @@ body {
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    color: #ffffff;
+    color: darkorange;
     font-size: 16px;
     font-weight: 500;
-    background-color: darkorange;
+    background-color: #ffffff;
 }
 
 .navbar-default {
@@ -235,7 +239,7 @@ body {
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: #ffffff;
+    color: darkorange;
 }
 
 .activecustom {
@@ -292,7 +296,7 @@ body {
 }
 
 .navbar-custom {
-    background-color: #f0ad4e;
+    background-color: #ffffff;
     /*border-bottom-color: darkorange;*/
     border-bottom-style: none;
 
@@ -300,7 +304,7 @@ body {
 
 .nav-tabs-custom {
     margin-top: 5%;
-    background-color: #f0ad4e;
+    background-color: #ffffff;
     border-bottom-style: none;
 
 }
@@ -752,7 +756,7 @@ ul.nav-tabs.affix {
 
 ul.nav-tabs li.active a {
     background-color: darkorange;
-    color: #ffffff;
+    color: darkorange;
 }
 
 li a {
@@ -760,8 +764,8 @@ li a {
 }
 
 nav.navbar {
-    background-color: darkorange;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 nav.navbar small.navbar-text {
@@ -771,4 +775,24 @@ nav.navbar small.navbar-text {
 .img-about {
     width: 120;
     height: 120;
+}
+
+.panel-black {
+    background-color: #5a5d61 ;
+}
+
+.panel-orangelight {
+    background-color: #FE9A2E ;
+}
+
+.absolute-offer-info{
+    position: absolute;
+    background-color: #000000;
+    opacity: 0.8;
+    left:5%;
+    bottom:0;
+}
+
+.top-getplan{
+
 }

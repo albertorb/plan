@@ -18,6 +18,7 @@ import random
 from random import shuffle
 from django.views.decorators.http import require_http_methods
 from django.utils.translation import ugettext as _
+import algorithm
 
 
 def search(request):
@@ -181,9 +182,17 @@ def register(request):
     return render_to_response('register.html', context_instance=RequestContext(request))
 
 
+def planfromlocation(request):
+    if request.user.is_authenticated():
+        list_of_plans = algorithm.algorithm(request.user, request.POST['location'], numero_actividades_plan, 10)
+    else:
+        list_of_plans = algorithm.algorithm(None, request.POST['location'], numero_actividades_plan, 10)
+    proposed_plan = list_of_plans[0]
+    return render_to_response('planx.html', {'plan': proposed_plan}, context_instance=RequestContext(request))
+
+
 # @login_required(login_url="/login/")
 def automatic_plan(request):
-
     plans = Plan.objects.all()
     # featured
     featured = Activity.objects.filter(isPromoted=True)
@@ -261,7 +270,7 @@ def automatic_plan(request):
                               {'loginw': loginw,
                                'userform': userform,
                                'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3],
-                               'comments': comments, 'plans': plans},
+                               'plans': plans},
                               context_instance=RequestContext(request))
 
 
@@ -666,7 +675,7 @@ def removeFromPlan(act, plan):
         activities.append({'activity': a, 'order': appearance.order})
     # limpiamos la relacion
     plan.activities.clear()
-    #metemos todas las actividades menos la que no queremos
+    # metemos todas las actividades menos la que no queremos
     for elem in activities:
         if elem['activity'].pk != act.pk:
             saveToPlan(elem['activity'], plan, elem['order'])
