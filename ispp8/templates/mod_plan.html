@@ -6,13 +6,13 @@
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
                 <input type="hidden" name="remove" value="remove">
                 <div class="form-group">
-        {% for activity in plan.activities.all %}
+        {% for activity in activities %}
         <div class="col-sm-6 col-md-4">
                     <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert" aria-hidden="true">
                         <strong>&times</strong>
                     </button>
                 <input type="checkbox" class="radio" name="{{ activity.pk }}" value="{{ activity.pk }}">
-                    <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail" style="background-image:url('{{ MEDIA_URL }}{{ a.photo }}')">
+                    <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail" style="background-image:url('{{ MEDIA_URL }}{{ activity.photo }}')">
                         <div id="info{{ forloop.counter }}" style="display: none" class="well div-card-plan-info">
                                     {{ activity.description }}
                         </div>

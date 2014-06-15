@@ -5,7 +5,7 @@
     <div class=" row scape-top-custom container center-block">
         <h1 class="text-darkorange"> {% trans "Wishlist" %}</h1>
         {% for plan in plans %}
-            {% for activity in plan.activities.all %}
+            {% for activity in plan.activities %}
                 <div class="col-md-4">
 
                     <div class="">
