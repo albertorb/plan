@@ -1,156 +1,181 @@
 {% extends 'master.html' %}
-{% load i18n %}
 {% block content %}
 
-    <div class="quitamargen">
-        <div class="row container center-block">
-            <h4>{% trans "Trending cities" %}</h4>
 
-            <div class="col-md-10">
-                <div id="carousel-example-generic" class="carousel slide " data-ride="carousel">
-                    <!-- Indicators -->
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
+    <div class="row container center-block">
 
-                        {% for a in plans %}
 
-                            <div class="{% if forloop.counter0 == 0 %}item active{% else %}item{% endif %}">
-                                {% for a1 in a.activities.all %}
-                                    {% if forloop.counter == 1 %}
-                                         {% for c in comments %}
-                                {% if c.activity == a1 %}
-                                    {% if forloop.counter == 1 %}
-                                   <b class="textoderecha">" {{ c.text }} "</b>
-                                    <img class="img-circle img-comment" src="media/{{ c.user.image }}" style="max-width: 15%;max-height: 15%;" />
+        <div class="col-md-offset-1 col-md-10">
+
+
+            <div id="carousel-example-generic" class="carousel slide " data-ride="carousel">
+                <!-- Indicators -->
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+
+                    {% for a in plans %}
+
+                        <div class="{% if forloop.counter0 == 0 %}item active{% else %}item{% endif %}">
+                            {% for a1 in a.activities.all %}
+                                {% if forloop.counter == 1 %}
+                                    {% for c in comments %}
+                                        {% if c.activity == a1 %}
+                                            {% if forloop.counter == 1 %}
+                                                <b class="textoderecha">" {{ c.text }} "</b>
+                                                <img class="img-circle img-comment" src="media/{{ c.user.image }}"
+                                                     style="max-width: 15%;max-height: 15%;"/>
+                                            {% endif %}
                                         {% endif %}
+                                    {% endfor %}
+                                    <img src="{{ MEDIA_URL }}{{ a1.location }}.jpg"
+                                         style="width: 100%; max-height: 35%;"/>
+                                    <b class="textociudad">{{ a1.location|title }}</b>
+                                    <table class="table">
+                                    <tr>
                                 {% endif %}
-                                {% endfor %}
-                                        <img src="{{ MEDIA_URL }}{{ a1.location }}.jpg"
-                                             style="width: 100%; max-height: 35%;"/>
-                                        <b class="textociudad">{{ a1.location|title }}</b>
-                                        <table class="table">
-                                        <tr>
-                                    {% endif %}
 
 
 
-                                    <td style="max-width: 120px;">
+                                <td style="max-width: 120px;">
 
-                                        <a href="{% url 'activity_info' activity_id=a1.id %}">
-                                            <img class=" img-rounded"
-                                                 src="{{ MEDIA_URL }}{{ a1.photo }}"
-                                                 style="height: 120px;width: 100%;"/>
-                                        </a>
-                                    {{ a1.name }}
-                                    </td>
+                                <a href="{% url 'activity_info' activity_id=a1.id %}">
+                                    <img class=" img-rounded"
+                                         src="{{ MEDIA_URL }}{{ a1.photo }}"
+                                         style="height: 120px;width: 100%;"/>
+                                </a>
+                                <!--{{ a1.name }} -->
 
+                            {% endfor %}
+                            </tr>
+                            </table>
+                        </div>
 
-
-
-
-
-
-                                {% endfor %}
-                                </tr>
-                                </table>
-                            </div>
-
-                        {% endfor %}
-                    </div>
-                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
+                    {% endfor %}
                 </div>
 
             </div>
-        </div>
-        {% if activities.count > 0 %}
-            <div class="row container center-block">
-            <div class=" col-md-9" style="display: table; position: relative">
-            <div class=" col-lg-12 alert alert-success text-center">
-                <p>{% trans "Hey! What about that plan!?" %}</p>
-            </div>
-
-            <table class="table table-responsive">
-                <tr>
-                    {% for activity in plan.activities.all %}
-
-
-                            <td class="panel">
-                                <div>
-                                    <a href="{% url 'activity_info' activity_id=activity.id %}">
-                                        <img class="pull-left img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}"
-                                             style="height: 120px;width: 120px;"/>
-                                    </a>
-                                </div>
-                                <div>
-                                    <comment><b>{{ activity.name }}</b></comment>
-
-                                </div>
-                            </td>
-
-
-
-                    {% endfor %}
-                </tr>
-
-            </table>
-
-
-            <div class="col-md-12  text-center">
-                <br/>
-                <br/>
-            </div>
-            <a href="{% url 'plan_info' activity_id=ac1.id activity_id2=ac2.id activity_id3=ac3.id %}">
-                <button type="button" class="btn btn-warning">{% trans "I want this plan" %}</button>
-            </a>
-            <a href="../filter" class="btn btn-info" data-toggle="modal">{% trans "Try a custom search" %}</a>
-        {% endif %}
 
         </div>
-        <div class="col-md-3 pull-right">
-            <div class="panel">
-                <h2>{% trans "Featured Activities" %}</h2>
-                {% for a in activities %}
-                    {% if a.isPromoted == 1 %}
-                        <ul>
-                            <img src="{{ MEDIA_URL }}{{ a.photo }}" style="width: 60px;height: 60px;"/>
-                            {{ a.name }}
 
-                        </ul>
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
+                <span class="fa fa-fire text-danger fa-2x pull-right"></span>
+
+                <h2 class="">Hot offers</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
+
+                <small class="h4 text-warning">You may have not heard about such offers in that places</small>
+            </div>
+
+        </div>
+
+
+        <div class="row padding-bottom-5">
+
+
+            {% for a in featured %}
+                {% if a.isPromoted == 1 %}
+                    <div class="col-xs-4">
+                        <div class="panel panel-danger">
+                            <div class="panel-body"
+                                 style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                <img src="{{ MEDIA_URL }}{{ a.photo }}" style="width: 60px;height: 60px;"/>
+
+                                <span>{{ a.name }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
+                <h2 class="">Trip planning
+                    <small>faster than you ever thought</small>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
+
+                <small class="h4 text-warning">click some city and select your dates</small>
+            </div>
+
+        </div>
+
+        <div class="row padding-bottom-5 container center-block">
+            <div class="col-xs-6">
+                <img class="img-rounded" style="width:350px; height:350px;" src="{{ MEDIA_URL }}Londres,jpg">
+            </div>
+            <div class="col-xs-6">
+                <img class="img-rounded" style="width:350px; height:350px;" src="{{ MEDIA_URL }}Madrid.jpg">
+            </div>
+
+
+        </div>
+
+
+        <div class="row padding-bottom-5 container center-block">
+
+            <div class="col-xs-6">
+                <img class="img-rounded" style="width:350px; height:350px;" src="{{ MEDIA_URL }}Sevilla.jpg">
+            </div>
+
+            <div class="col-xs-6">
+                <img class="img-rounded" style="width:350px; height:350px;" src="{{ MEDIA_URL }}roma.jpg">
+            </div>
+        </div>
+
+
+        <div class="row container center-block">
+            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
+
+                <h2 class="">Most rated
+                    <small>by users <span class="fa fa-user fa-2x text-orange"></span></small>
+                </h2>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 text-center panel panel-default">
+
+                <small class="h4 text-warning">People is amazed with that places, look at the points!</small>
+            </div>
+
+        </div>
+        <div class="row padding-bottom-5">
+
+            {% for a1 in activities %}
+                {% if a.valoration != 0 %}
+                    {% if forloop.counter <= 5 %}
+
+                        <div class="col-xs-4">
+                            <div class="panel panel-info">
+                                <div class="panel-body"
+                                     style="overflow: hidden; word-wrap: break-word; text-overflow: ellipsis; white-space: nowrap;">
+                                    <img src="{{ MEDIA_URL }}{{ a1.photo }}" style="width: 60px;height: 60px;"/>
+                                    <span>{{ a1.name }}</span>
+                                    <span class="h4 glyphicon glyphicon-star text-green"
+                                          style="position:absolute; right:8%">{{ a1.valoration }}</span>
+                                </div>
+
+
+                            </div>
+
+                        </div>
                     {% endif %}
-                {% endfor %}
-            </div>
-
-            <h4 class="">{% trans "Most Rated Activities" %}</h4>
-
-            <div class="  panel">
-                <table class="table">
-
-                    {% for a1 in activities %}
-                        {% if a.valoration != 0 %}
-                            {% if forloop.counter <= 5 %}
-                                <tr>
-                                    <td>
-
-                                        <img src="{{ MEDIA_URL }}{{ a1.photo }}" style="width: 60px;height: 60px;"/>
-                                        {{ a1.name }}
-
-
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-
-                </table>
-            </div>
-        </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
+
 
 {% endblock %}
 
