@@ -9,8 +9,7 @@
                 <br>
                 <div class="form-group text-center">
                     <a href="{% provider_login_url "facebook" method="js_sdk" %}"><div class="btn btn-primary">Facebook</div></a>
-                    <div class="btn btn-twitter">twitter</div>
-                    <div class="btn btn-danger">Google +</div>
+                    <a href="{% provider_login_url "twitter" method="js_sdk" %}"><div class="btn btn-twitter">Twitter</div></a>
                 </div>
 
                 <form class="form-signup-custom" action="/register" role="form" enctype="multipart/form-data"
