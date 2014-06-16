@@ -1,0 +1,44 @@
+{% extends 'master.html' %}
+{% block bodyless %}
+    <body class="" data-spy="scroll" data-target="#scrollspy">
+
+
+    <div class="row container-fluid center-block">
+
+        <div id="scrollspy" class="col-xs-3" data-offset-top="0" data-offset-bottom="10">
+            <ul class="nav nav-tabs nav-stacked" style="background-color:#ffffff;" data-spy="affix">
+                {% for i in plan %}
+
+                    <li class="{% if forloop.counter == 1 %}active{% else %} {% endif %}"><a
+                            href="#{{ forloop.counter }}">Dia {{ forloop.counter }}</a>
+                    </li>
+                {% endfor %}
+                
+            </ul>
+        </div>
+
+        <div class="col-xs-9">
+            {% for p in plan %}
+                <h1 id="{{ forloop.counter }}">Dia {{ forloop.counter }}</h1>
+                {% for activity in p %}
+                    <div class="row container center-block">
+                        <div class="col-xs-4">
+                            <img class=" img-lg-custom img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}"/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span>{{ activity.name }}</span>
+                            <span>{{ activity.description }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+        <script>
+            $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+
+        </script>
+
+
+    </body>
+{% endblock %}

@@ -19,6 +19,7 @@ from random import shuffle
 from django.views.decorators.http import require_http_methods
 from django.utils.translation import ugettext as _
 import algorithm
+import operator
 
 
 def search(request):
@@ -110,10 +111,10 @@ def activity(request, activity_id):
                 for plan in planesRealizados:
                     res.append(friend)
                     print(res)
-            return render_to_response('activity.html',
+            return render_to_response('actinfo.html',
                                       {'activity': obj, 'friendsDid': res, 'comments': comments, 'user': ourser},
                                       context_instance=RequestContext(request))
-        return render_to_response('activity.html', {'activity': obj, 'friendsDid': res, 'comments': comments},
+        return render_to_response('actinfo.html', {'activity': obj, 'friendsDid': res, 'comments': comments},
                                   context_instance=RequestContext(request))
 
 
@@ -184,7 +185,7 @@ def register(request):
 
 def planfromlocation(request):
     if request.user.is_authenticated():
-        list_of_plans = algorithm.algorithm(request.user, request.POST['location'], numero_actividades_plan, 10)
+        list_of_plans = algorithm.algorithm(request.user.ouruser, request.POST['location'], 6, 10)
     else:
         list_of_plans = algorithm.algorithm(None, request.POST['location'], numero_actividades_plan, 10)
     proposed_plan = list_of_plans[0]
@@ -193,7 +194,8 @@ def planfromlocation(request):
 
 # @login_required(login_url="/login/")
 def automatic_plan(request):
-    plans = Plan.objects.all()
+    ranking = Activity.objects.all().order_by('valoration')[:5]
+
     # featured
     featured = Activity.objects.filter(isPromoted=True)
 
@@ -270,7 +272,7 @@ def automatic_plan(request):
                               {'loginw': loginw,
                                'userform': userform,
                                'djangoform': djangoform, 'uservform': uservform, 'featured': featured[:3],
-                               'plans': plans},
+                               'activities': ranking},
                               context_instance=RequestContext(request))
 
 
@@ -422,7 +424,8 @@ def shareplan(request, plan_id):
     ouser = OurUser.objects.get(djangoUser=loguser)
     plan = Plan.objects.filter(id=plan_id)
     activities = getActivitiesFrom(plan)
-    return render_to_response('shareplan.html', {'user': ouser, 'plan': plan, 'activities': activities}, context_instance=RequestContext(request))
+    return render_to_response('shareplan.html', {'user': ouser, 'plan': plan, 'activities': activities},
+                              context_instance=RequestContext(request))
 
 
 @login_required(login_url='/plan')
@@ -544,8 +547,8 @@ def add_activities_to_given_plan(request, plan_id):
             if request.POST[key].isdigit():
                 act = Activity.objects.get(pk=int(value))
                 actividades = getActivitiesFrom(plan)
-                last_index = Appearance.objects.get(plan=plan, activity=actividades[len(actividades)-1]).order
-                saveToPlan(act, plan, last_index+1)
+                last_index = Appearance.objects.get(plan=plan, activity=actividades[len(actividades) - 1]).order
+                saveToPlan(act, plan, last_index + 1)
         return HttpResponseRedirect("/user_plans")
     else:
         return render_to_response('filter_to_modify.html', {'user': ouser, 'plan': plan},
@@ -644,9 +647,9 @@ def removeFromPlan(act, plan):
     activities = getActivitiesFrom(plan)
     # limpiamos la relacion
     plan.activities.clear()
-    #sacamos de la lista la actividad que no queremos guardar
+    # sacamos de la lista la actividad que no queremos guardar
     activities.remove(act)
-    #guardamos las actividades con los indices de aparicion actualizados
+    # guardamos las actividades con los indices de aparicion actualizados
     i = 0
     for elem in activities:
         saveToPlan(elem, plan, i)
