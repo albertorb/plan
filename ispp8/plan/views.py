@@ -187,9 +187,12 @@ def planfromlocation(request):
     if request.user.is_authenticated():
         list_of_plans = algorithm.algorithm(request.user.ouruser, request.POST['location'], 6, 10)
     else:
-        list_of_plans = algorithm.algorithm(None, request.POST['location'], numero_actividades_plan, 10)
-    proposed_plan = list_of_plans[0]
-    return render_to_response('plan.html', {'plan': proposed_plan}, context_instance=RequestContext(request))
+        list_of_plans = algorithm.algorithm(None, request.POST['location'], 6, 10)
+        if len(list_of_plans) < int(request.POST['days']):
+            list_of_plans = list_of_plans + algorithm.algorithm(request.ouruser, request.POST['location'], 6, 10)
+            print('chungo')
+    proposed_plan = list_of_plans[:int(request.POST['days'])]
+    return render_to_response('planx.html', {'plan': proposed_plan}, context_instance=RequestContext(request))
 
 
 # @login_required(login_url="/login/")
