@@ -11,9 +11,9 @@
         <tr>
              <h2>{{ elem.plan.location }}</h2>
                 <h4>{{ elem.plan.name }}
-                 <a href="/planinfo/{{ elem.plan.id }}" class="glyphicon glyphicon-search text-darkorange "></a>
-        <a data-toggle="modal" data-target="#myModal{{ elem.plan.pk }}"  class="glyphicon glyphicon-share text-darkorange "></a>
-        <a href="/mod_plan/{{ elem.plan.id }}" class="glyphicon glyphicon-edit text-darkorange"></a>
+                <a href="/planinfo/{{ elem.plan.id }}" class="glyphicon glyphicon-search text-darkorange "></a>
+                <a data-toggle="modal" data-target="#myModal{{ elem.plan.pk }}" class="glyphicon glyphicon-share text-darkorange"></a>
+                <a href="/mod_plan/{{ elem.plan.id }}" class="glyphicon glyphicon-edit text-darkorange"></a>
                 </h4>
                {% for a in elem.activities  %}
 
@@ -47,7 +47,7 @@
 
         </table>
 
-    <div class="modal fade" id="myModal{{ elem.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal{{ elem.plan.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -60,6 +60,7 @@
         {% trans "Select the friends to share" %}
       <table>
           {% for p in friends %}
+              {{ p.djangoUser }}
               {% if p not in elem.sharedTo.all %}
                <tr>
                <td>
@@ -91,7 +92,6 @@
 
 </div>
 
-</div>
 <!-- Modal -->
 
 

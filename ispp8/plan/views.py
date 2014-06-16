@@ -386,13 +386,13 @@ def timeline(request):
 @login_required(login_url='/plan')
 def pocketplans(request):
     loguser = request.user
-    ouser = OurUser.objects.get(djangoUser=loguser)
+    ourser = OurUser.objects.get(djangoUser=loguser)
     userplans = []
-    plans = Plan.objects.filter(user_id=ouser)
+    plans = Plan.objects.filter(user_id=ourser)
     for plan in plans:
         activities = getActivitiesFrom(plan)
         userplans.append({'plan': plan, 'activities': activities})
-    friends = ouser.friends.all()
+    friends = ourser.friends.all()
     if request.method == 'POST' and 'share' in request.POST:
         ident = request.POST.get("plan")
         plan = Plan.objects.filter(pk=ident).get()
@@ -404,7 +404,7 @@ def pocketplans(request):
                 plan.sharedTo.add(p)
         return HttpResponseRedirect("/user_plans")
 
-    return render_to_response('user_plans.html', {'user': ouser, 'userplans': userplans, 'friends': friends},
+    return render_to_response('user_plans.html', {'user': ourser, 'userplans': userplans, 'friends': friends},
                               context_instance=RequestContext(request))
 
 
