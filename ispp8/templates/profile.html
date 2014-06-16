@@ -2,14 +2,48 @@
 {% load i18n %}
 
 {% block content %}
-
-<div class="scape-top-custom">
-    <div class="panel panel-body">
+<div class="row container center-block scape-top-custom">
+    <div class="bs-example">
         <div class="col-md-4">
-
+            {% if request.user == user.djangoUser %}
+                <h3>This is your profile</h3>
+            {% else %}
+                <h3>You are watching {{ user.djangoUser }}'s profile</h3>
+            {% endif %}
+    <div class="media">
+            <div class="pull-left"><img src="/media/{{ user.image }}" class="img-rounded" alt="Rounded Image" height="125" width="125"></div>
+        <div class="media-body">
+        <h4 class="media-heading">{{ user.djangoUser }} <br> <i>Birthday on {{ user.birthday}}</i></h4>
+        {% if request.user == user.djangoUser %}
+            <a href="/preferences"><button class="btn text-orange">Add preferences</button></a>
+        {% endif %}
         </div>
     </div>
-</div>
+<br>
+        <h4 class="media-heading">Tastes set:</h4>
+            {% for taste in user.tastes.all %}
+                <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
+                {% if taste.attribute_name == 'sector' %}
+                    Sector: {{ taste.attribute_value }} <br>
+                    Preference:
+                    {% if taste.degree == 0 %}
+                        Never
+                    {% elif taste.degree == 1 %}
+                        Rarely
+                    {% elif taste.degree == 2 %}
+                        Sometimes
+                    {% elif taste.degree == 3 %}
+                        Often
+                    {% endif %}
+                    <br>
+                {% elif taste.attribute_name == 'valoration' %}
+                    Minimum rating for the activities: {{ taste.degree }}
+                {% endif %}
+                </div>
+            {% endfor %}
+        </div>
 
+    </div>
+</div>
 
 {% endblock %}

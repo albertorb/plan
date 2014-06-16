@@ -13,7 +13,7 @@
           <div>{{ elem.djangoUser }}</div>
           <div>{% trans "Register in: " %}{{ elem.birthday }}</div>
           <input type="submit" name="borrar" class="btn btn-danger" value="{% trans "Unfollow" %}" />
-          <a href="#" class="btn btn-success">{% trans "Info" %}</a>
+          <a href="/profile/{{ elem.pk }}" class="btn btn-success">{% trans "Info" %}</a>
         </div>
         </form>
     {% endfor %}

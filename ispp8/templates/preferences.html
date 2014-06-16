@@ -3,26 +3,6 @@
 {% block content %}
     <div class="row container center-block scape-top-custom">
     <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
-        <form class="form-horizontal" action="" method="post">{% csrf_token %}
-            <input type="hidden" name="preferences" value="preferences">
-            <h3>{% trans "Please select your preferences: " %}</h3>
-        <div class="checkbox">
-            <label><input type="checkbox" class="radio checkbox-inline" name="1" value=1>{% trans "Eat at the hotel" %}</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" class="radio checkbox-inline" name="2" value=2>{% trans "Rest after eating" %}</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" class="radio checkbox-inline" name="3" value=3>{% trans "Do not include food related activities" %}</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" class="radio checkbox-inline" name="4" value=4>{% trans "Rest before eating" %}</label>
-        </div>
-            <br>
-            <input type="submit" name="set_preferences" class="button-orange btn" value="{% trans "Save" %}">
-    </form>
-    </div>
-    <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
     <input type="hidden" name="psector" value="psector">
     <h3>{% trans "State a preference about a sector" %}</h3>
@@ -60,6 +40,7 @@
         </div>
     </form>
     </div>
+    {% if setmin %}
     <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
     <input type="hidden" name="valoration" value="valoration">
@@ -72,5 +53,6 @@
         </div>
     </form>
     </div>
+    {% endif %}
     </div>
 {% endblock %}
