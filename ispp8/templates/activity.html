@@ -106,9 +106,13 @@
     <script>
         var map;
         function initialize() {
+            var lat = '{{ activity.latitude }}';
+            var clat = lat.replace(",", ".");
+            var lon = '{{ activity.longitude }}';
+            var clon = lon.replace(",", ".");
             var mapOptions = {
-                zoom: 8,
-                center: new google.maps.LatLng({{ activity.latitude }}, {{ activity.longitude }})
+                zoom: 15,
+                center: new google.maps.LatLng(clat, clon)
             };
             map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
