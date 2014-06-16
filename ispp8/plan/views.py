@@ -188,7 +188,7 @@ def planfromlocation(request):
     else:
         list_of_plans = algorithm.algorithm(None, request.POST['location'], numero_actividades_plan, 10)
     proposed_plan = list_of_plans[0]
-    return render_to_response('planx.html', {'plan': proposed_plan}, context_instance=RequestContext(request))
+    return render_to_response('plan.html', {'plan': proposed_plan}, context_instance=RequestContext(request))
 
 
 # @login_required(login_url="/login/")
@@ -326,7 +326,7 @@ def filter_activities(request):
             isFree = request.POST.get('isFree', False)
             isPromoted = request.POST.get('isPromoted', False)
             results = filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isPromoted)
-            print(results)
+            print('results filtered')
             return render_to_response('customplan.html', {'user': ouser, 'results': results},
                                       context_instance=RequestContext(request))
         if request.method == 'POST' and 'custom' in request.POST:
@@ -341,8 +341,10 @@ def filter_activities(request):
             endDate = '3000-09-01T13:20:30+03:00'
             print('guardando plan')
             plan = Plan.objects.create(startDate=startDate, endDate=endDate, voted=False, user=ouser, done=False)
+            i = 0
             for a in activities:
-                plan.activities.add(a)
+                saveToPlan(a, plan, i)
+                i += 1
             return HttpResponseRedirect("/todo")
         else:
             print('seleccionando parametros')
