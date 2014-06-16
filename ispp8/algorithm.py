@@ -156,9 +156,13 @@ def recombination(to_recombine):
 def mutate(elem, activities_list):
     plan = elem['plan']
     #sustituimos una actividad aleatoria del plan con una aleatoria de la lista de actividades
-    plan[random.randint(0, len(plan)-1)] = activities_list[random.randint(0, len(activities_list)-1)]['activity']
-    ev = evaluate_plan(plan)
-    elem['posibility'] = ev
+    while True:
+        new_activity = activities_list[random.randint(0, len(activities_list)-1)]['activity']
+        if new_activity not in plan:
+            plan[random.randint(0, len(plan)-1)] = new_activity
+            ev = evaluate_plan(plan)
+            elem['posibility'] = ev
+            break
 
 
 def best_selection(to_work,population):
@@ -171,11 +175,11 @@ def best_selection(to_work,population):
             new_population.append(elem)
     return new_population
 
+
 def algorithm(user, location, planSize, iterations):
     #Inicialization
-    print('Creating working list of activities')
+    print('Starting algorithm')
     wl = create_working_list(user, location)
-    print('Generating initial population')
     population = []
     final = []
     while len(population) < 100:
@@ -183,40 +187,23 @@ def algorithm(user, location, planSize, iterations):
         #evaluacion
         ev = evaluate_plan(plan)
         population.append({'posibility': ev, 'plan': plan})
-    print('Initial population generated')
+    print('Calculating')
     generation = 0
     while generation < iterations:
-        print('Generation', generation)
         #seleccion de los elementos de la poblacion a recombinar
         to_work = selection(population)
         #recombinacion de los elementos seleccionados
-        print('Recombining')
         to_work = recombination(to_work)
         #posible mutacion de cada elemento
-        print('Mutating')
         for elem in to_work:
             if random.random() <= 0.1:
                 mutate(elem, wl)
         #reemplazo
-        print('Selecting new best plans')
-        population = best_selection(to_work,population)
+        population = best_selection(to_work, population)
         generation += 1
     #fin del algoritmo genetico, como solo nos interesan los mejores resultados filtramos
+    print('Filtering data')
     for elem in population:
         if elem['posibility'] == 1:
             final.append(elem['plan'])
     return final
-
-
-#Ejemplo de ejecucion del algoritmo
-#user = OurUser.objects.get(pk=1)
-#user = None
-#lista_planes = algorithm(user, 'barcelona', 9, 1)
-#Por ejemplo vamos a comprobar que el primer plan que nos da esta ordenada
-#i = 1
-#for actividad in lista_planes[0]:
-    #print('Momentos de la actividad', i)
-    #for m in actividad.moment.all():
-        #print(m.name)
-    #i += 1
-

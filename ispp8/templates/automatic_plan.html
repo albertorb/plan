@@ -10,14 +10,15 @@
 
                 <div class="row container center-block">
 
-                    <form class="form" method="post" action="/planfromlocation/">
+                    <form class="form" method="post" action="/getplan">{% csrf_token %}
                         <div class="col-xs-4">
 
                             <div class="form-group">
 
-                                <select class="form-control">
-                                    <option>Barcelona</option>
-                                    <option>Londres</option>
+                                <select class="form-control" name="location">
+                                    {% for location in locations %}
+                                        <option value="{{ location }}">{{ location }}</option>
+                                    {% endfor %}
                                 </select>
 
                             </div>
@@ -32,7 +33,7 @@
                             <div class="form-group">
 
 
-                                <input type="number" class="form-control" placeholder="Numero de dias">
+                                <input name="days" type="number" class="form-control" placeholder="Numero de dias">
 
                             </div>
                         </div>
