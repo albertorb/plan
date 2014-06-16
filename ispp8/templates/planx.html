@@ -21,7 +21,7 @@
             {% for p in plan %}
                 <h1 id="{{ forloop.counter }}">Dia {{ forloop.counter }}</h1>
                 {% for activity in p %}
-                    <div class="row container center-block">
+                    <div class="row container center-block padding-top-5">
                         <div class="col-xs-4">
                             <img class=" img-lg-custom img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}"/>
                         </div>

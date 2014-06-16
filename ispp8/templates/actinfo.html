@@ -1,0 +1,13 @@
+{% extends 'master.html' %}
+{% block content %}
+<div class="row container center-block">
+ <div class="col-md-4">
+     <img class=" img-lg-custom img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}"/>
+ </div>
+
+<div class="col-md-8"
+    <div class="col-xs-12 panel">
+        <h2><span>{{ activity.name }}</span></h2>
+    </div>
+</div>
+{% endblock %}
