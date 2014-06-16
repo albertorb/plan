@@ -793,6 +793,16 @@ nav.navbar small.navbar-text {
     bottom:0;
 }
 
+.absolute-valoration{
+    position:absolute;
+    top:0;
+    right:0;
+}
+
 .top-getplan{
 
+}
+
+.badge-green{
+    background-color:green;
 }
