@@ -602,7 +602,10 @@ def filtered_activities(location, sector, moment, sDate, eDate, val, isFree, isP
             results.append(a)
         if sector and a.sector.name == sector:
             results.append(a)
-        if moment and a.moment.name == moment:
+        moments = []
+        for m in a.moment.all():
+            moments.append(m.name)
+        if moment and moment in moments:
             results.append(a)
         if sDate and eDate and sDate <= a.startDate and eDate >= a.endDate:
             results.append(a)
