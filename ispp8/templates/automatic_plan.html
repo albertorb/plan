@@ -10,14 +10,15 @@
 
                 <div class="row container center-block">
 
-                    <form class="form" method="post" action="/getplan/">{% csrf_token %}
+                    <form class="form" method="post" action="/getplan">{% csrf_token %}
                         <div class="col-xs-4">
 
                             <div class="form-group">
 
-                                <select name="location" class="form-control">
-                                    <option value="Barcelona">Barcelona</option>
-                                    <option value="Londres">Londres</option>
+                                <select class="form-control" name="location">
+                                    {% for location in locations %}
+                                        <option value="{{ location }}">{{ location }}</option>
+                                    {% endfor %}
                                 </select>
 
                             </div>
