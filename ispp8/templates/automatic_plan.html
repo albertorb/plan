@@ -151,7 +151,7 @@
     <div class="modal fade " id="modalWait" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-sm">
-            <div class="modal-content">
+            <div class="modal-content padding-top-5 padding-bottom-5">
                 <div class="row container center-block"></div>
                 <h3 class="text-darkorange text-center">Creando tu plan...</h3>
                 <img class="center-block" src="{{ STATIC_URL }}img/loading.gif">
@@ -162,7 +162,8 @@
     <script>
         function waitforit() {
             $('#modalWait').modal({
-                keyboard: false
+                keyboard: false,
+                backdrop: 'static'
             })
             $('#modalWait').modal('show');
         }
