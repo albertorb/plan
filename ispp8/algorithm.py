@@ -209,14 +209,14 @@ def algorithm(user, location, planSize, iterations):
 
 
 #Ejemplo de ejecucion del algoritmo
-user = OurUser.objects.get(pk=1)
+#user = OurUser.objects.get(pk=1)
 #user = None
-lista_planes = algorithm(user, 'barcelona', 9, 1)
+#lista_planes = algorithm(user, 'barcelona', 9, 1)
 #Por ejemplo vamos a comprobar que el primer plan que nos da esta ordenada
-i = 1
-for actividad in lista_planes[0]:
-    print('Momentos de la actividad', i)
-    for m in actividad.moment.all():
-        print(m.name)
-    i += 1
+#i = 1
+#for actividad in lista_planes[0]:
+    #print('Momentos de la actividad', i)
+    #for m in actividad.moment.all():
+        #print(m.name)
+    #i += 1
 
