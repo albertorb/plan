@@ -1,58 +1,73 @@
 {% extends 'master.html' %}
 {% load i18n %}
 {% block content %}
-    <div class="row container center-block scape-top-custom">
-    <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
-    <form class="form-horizontal" action="" method="post">{% csrf_token %}
-    <input type="hidden" name="psector" value="psector">
-    <h3>{% trans "State a preference about a sector" %}</h3>
-        <div class="form-group">
-        <label>{% trans "Select a sector to refer your preference:" %}</label>
-            <select class="form-control" name="sector">
-              {% for sector in sectors.all %}<option value="{{ sector.pk }}">{{ sector.name }}</option>{% endfor %}
-            </select>
-        </div>
-        <div class="form-group">
-            <label>{% trans "How often do you wish to do activities from this sector:" %}</label>
-            <div class="radio">
-              <label>
-                <input type="radio" name="degree" value=0> {% trans "Never" %}
-              </label>
+
+    <div class="row container center-block">
+        <div class="col-md-offset-3 col-md-6 panel">
+            <h3 class="text-center">{% trans "State a preference about a sector" %}</h3>
+
+            <div class="col-xs-12">
+                <form class="form-horizontal" action="" method="post">{% csrf_token %}
+                    <input type="hidden" name="psector" value="psector">
+
+
+                    <div class="form-group">
+                        <label>{% trans "Select a sector to refer your preference:" %}</label>
+                        <select class="form-control" name="sector">
+                            {% for sector in sectors.all %}
+                                <option value="{{ sector.pk }}">{{ sector.name }}</option>{% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{% trans "How often do you wish to do activities from this sector:" %}</label>
+
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="degree" value=0> {% trans "Never" %}
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="degree" value=1> {% trans "Rarely" %}
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="degree" value=2> {% trans "Sometimes" %}
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="degree" value=3> {% trans "Often" %}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="prefsector" class="button-orange btn" value="{% trans "Save" %}">
+                    </div>
+                </form>
             </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="degree" value=1> {% trans "Rarely" %}
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="degree" value=2> {% trans "Sometimes" %}
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="degree" value=3> {% trans "Often" %}
-              </label>
-            </div>
+            {% if setmin %}
+                <div class="row container col-md-8"
+                     style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
+                    <form class="form-horizontal" action="" method="post">{% csrf_token %}
+                        <input type="hidden" name="valoration" value="valoration">
+
+                        <h3>{% trans "State a minimal valoration for your activities:" %}</h3>
+
+                        <div class="form-group">
+                            <label>{% trans "Minimal valoration: " %}<input type="number" class="form-control"
+                                                                            placeholder="0.0"
+                                                                            name="minvaloration"></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="val" class="button-orange btn" value="{% trans "Save" %}">
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
         </div>
-        <div class="form-group">
-            <input type="submit" name="prefsector" class="button-orange btn" value="{% trans "Save" %}">
-        </div>
-    </form>
-    </div>
-    {% if setmin %}
-    <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
-    <form class="form-horizontal" action="" method="post">{% csrf_token %}
-    <input type="hidden" name="valoration" value="valoration">
-        <h3>{% trans "State a minimal valoration for your activities:" %}</h3>
-        <div class="form-group">
-            <label>{% trans "Minimal valoration: " %}<input type="number" class="form-control" placeholder="0.0" name="minvaloration"></label>
-        </div>
-    <div class="form-group">
-            <input type="submit" name="val" class="button-orange btn" value="{% trans "Save" %}">
-        </div>
-    </form>
-    </div>
-    {% endif %}
-    </div>
+
+
+
 {% endblock %}

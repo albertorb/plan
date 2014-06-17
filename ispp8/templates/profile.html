@@ -2,48 +2,67 @@
 {% load i18n %}
 
 {% block content %}
-<div class="row container center-block scape-top-custom">
-    <div class="bs-example">
+    <div class="row container center-block ">
         <div class="col-md-4">
+            <img src="/media/{{ user.image }}" class="img-rounded" alt="Rounded Image"
+                 height="240" width="240">
+
             {% if request.user == user.djangoUser %}
-                <h3>This is your profile</h3>
-            {% else %}
-                <h3>You are watching {{ user.djangoUser }}'s profile</h3>
+                <div class="padding-top-5">
+                    <a href="/preferences">
+                        <button class="btn btn-default text-orange">Add preferences</button>
+                    </a>
+                </div>
             {% endif %}
-    <div class="media">
-            <div class="pull-left"><img src="/media/{{ user.image }}" class="img-rounded" alt="Rounded Image" height="125" width="125"></div>
-        <div class="media-body">
-        <h4 class="media-heading">{{ user.djangoUser }} <br> <i>Birthday on {{ user.birthday}}</i></h4>
-        {% if request.user == user.djangoUser %}
-            <a href="/preferences"><button class="btn text-orange">Add preferences</button></a>
-        {% endif %}
         </div>
-    </div>
-<br>
-        <h4 class="media-heading">Tastes set:</h4>
+        <div class="col-md-8">
+            <h3 class=""><span class="text-darkorange">{{ user.djangoUser }}</span></h3>
+            <h4 class="help-block">plan preferences</h4>
             {% for taste in user.tastes.all %}
-                <div class="row container col-md-8" style="margin-bottom: 10px; background-color: #fff; border-width: 1px; border-color: #ddd; border-radius: 4px 4px 0 0; box-shadow: none;">
-                {% if taste.attribute_name == 'sector' %}
-                    Sector: {{ taste.attribute_value }} <br>
-                    Preference:
-                    {% if taste.degree == 0 %}
-                        Never
-                    {% elif taste.degree == 1 %}
-                        Rarely
-                    {% elif taste.degree == 2 %}
-                        Sometimes
-                    {% elif taste.degree == 3 %}
-                        Often
-                    {% endif %}
-                    <br>
-                {% elif taste.attribute_name == 'valoration' %}
-                    Minimum rating for the activities: {{ taste.degree }}
-                {% endif %}
+                <div class="row">
+                    <div class="col-md-5 panel panel-success">
+                        {% if taste.attribute_name == 'sector' %}
+                            <div class="col-md-6">
+                                <span>{{ taste.attribute_value }} <br></span>
+                            </div>
+                            <div class="col-md-6">
+                            {% if taste.degree == 0 %}
+                                <span class="text-danger glyphicon glyphicon-thumbs-down"> Never </span>
+                            {% elif taste.degree == 1 %}
+                                <span class="text-danger glyphicon glyphicon-thumbs-down"> Rarely </span>
+                            {% elif taste.degree == 2 %}
+                                <span class="text-success glyphicon glyphicon-thumbs-up"> Sometimes </span>
+                            {% elif taste.degree == 3 %}
+                                <span class="text-success glyphicon glyphicon-thumbs-up"> Often </span>
+                            {% endif %}
+                            <br>
+                        {% elif taste.attribute_name == 'valoration' %}
+                            <span>Activities rating greater than <span class="{% if taste.degree > 4.9 %}text-success {% else %}text-danger {% endif %}">{{ taste.degree }} <span class="glyphicon glyphicon-star"></span></span></span>
+                        {% endif %}
+
+                        </div>
+
+
+                    </div>
                 </div>
             {% endfor %}
         </div>
 
+        <div class="bs-example">
+            <div class="col-md-4">
+
+                <div class="media">
+                    <div class="pull-left"></div>
+                    <div class="media-body">
+
+
+                    </div>
+                </div>
+                <br>
+
+            </div>
+
+        </div>
     </div>
-</div>
 
 {% endblock %}
