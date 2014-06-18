@@ -184,15 +184,41 @@ def register(request):
 
 
 def planfromlocation(request):
-    if request.user.is_authenticated():
-        list_of_plans = algorithm.algorithm(request.user.ouruser, request.POST['location'], 4, 10)
+    save = request.POST.get('save', False)
+    if request.method == 'POST' and save:
+        plans = []
+        print(request.POST)
+        for i in range(len(request.POST)):
+            to_save = request.POST.get('plan'+str(i), False)
+            if to_save:
+                act = []
+                for j in range(len(request.POST)):
+                    index = request.POST.get(to_save + str(j), False)
+                    if index:
+                        act.append(request.POST[to_save + str(j)])
+                plans.append(act)
+        for elem in plans:
+            startDate = '2000-09-01T13:20:30+03:00'
+            endDate = '3000-09-01T13:20:30+03:00'
+            print('guardando plan')
+            plan = Plan.objects.create(startDate=startDate, endDate=endDate, voted=False, user=request.user.ouruser, done=False)
+            i = 0
+            for a in elem:
+                act = Activity.objects.get(pk=a)
+                print(act)
+                saveToPlan(act, plan, i)
+                i += 1
+        return HttpResponseRedirect('/user_plans')
     else:
-        list_of_plans = algorithm.algorithm(None, request.POST['location'], 4, 10)
-    if len(list_of_plans) < int(request.POST['days']):
-        list_of_plans = list_of_plans + algorithm.algorithm(request.ouruser, request.POST['location'], 4, 10)
-        print('faltan planes')
-    proposed_plan = list_of_plans[:int(request.POST['days'])]
-    return render_to_response('planx.html', {'plan': proposed_plan}, context_instance=RequestContext(request))
+        if request.user.is_authenticated():
+            list_of_plans = algorithm.algorithm(request.user.ouruser, request.POST['location'], 4, 10)
+        else:
+            list_of_plans = algorithm.algorithm(None, request.POST['location'], 4, 10)
+        if len(list_of_plans) < int(request.POST['days']):
+            list_of_plans = list_of_plans + algorithm.algorithm(request.ouruser, request.POST['location'], 4, 10)
+            print('faltan planes')
+        proposed_plan = list_of_plans[:int(request.POST['days'])]
+        return render_to_response('planx.html', {'plan': proposed_plan}, context_instance=RequestContext(request))
 
 
 # @login_required(login_url="/login/")

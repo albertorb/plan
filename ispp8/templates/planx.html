@@ -24,9 +24,12 @@
             <button class="btn btn-default hidden-print"><span id="print" data-toggle="tooltip" data-placement="left" title="Imprimir"
                   class="glyphicon glyphicon-print text-darkorange" onclick="pr();"></span></button>
 
+        <form class="form-horizontal" action="" method="post">{% csrf_token %}
+
             {% for p in plan %}
                 <h1 id="{{ forloop.counter }}">Dia {{ forloop.counter }}</h1>
                 {% for activity in p %}
+                    <input type="hidden" name="{{ forloop.parentloop.counter0 }}{{ forloop.counter0 }}" value="{{ activity.pk }}">
             <div class="bs-example padding-top-5">
                 <div class="media">
                     <a href="#" class="pull-left">
@@ -39,11 +42,21 @@
                 </div>
             </div>
                 {% endfor %}
+                <label><h4>Me quedo con el plan</h4><input type="checkbox" class="radio" name="plan{{ forloop.counter0 }}" value="{{ forloop.counter0 }}"></label>
             {% endfor %}
+
+        <div class="form-group">
+        <input type="submit" class="btn button-orange-plan" name="save" value="Guardar planes">
+    </div>
+    </form>
+
         </div>
 <div class="col-xs-2 hidden-print" style="top: 60px"><img src="{{ STATIC_URL }}img/banner.gif"></div>
         <script>
             $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+            $(".radio").onclick(function(){
+                this.val('')
+            })
 
         </script>
 </div>
