@@ -20,6 +20,16 @@ def show():
         print(sector.name)
 
 
+def repeated(plan):
+    rep = False
+    for i in range(len(plan)-1):
+        for j in range(i+1, len(plan)):
+            if plan[i] == plan[j]:
+                rep = True
+                break
+    return rep
+
+
 def create_working_list(user, location):
     #obtencion de las preferencias del usuario si existe
     activityList = []
@@ -146,10 +156,16 @@ def recombination(to_recombine):
             plan_uno[index_uno] = act_dos
             plan_dos[index_dos] = act_uno
         #damos formato correcto a los planes para juntarlos con el resto de la ploblacion
-        ev = evaluate_plan(plan_uno)
-        res.append({'posibility': ev, 'plan': plan_uno})
-        ev = evaluate_plan(plan_dos)
-        res.append({'posibility': ev, 'plan': plan_dos})
+        if repeated(plan_uno) or repeated(plan_dos):
+            ev = evaluate_plan(to_recombine[plan_index])
+            res.append({'posibility': ev, 'plan': to_recombine[plan_index]})
+            ev = evaluate_plan(to_recombine[plan_index])
+            res.append({'posibility': ev, 'plan': to_recombine[plan_index]})
+        else:
+            ev = evaluate_plan(plan_uno)
+            res.append({'posibility': ev, 'plan': plan_uno})
+            ev = evaluate_plan(plan_dos)
+            res.append({'posibility': ev, 'plan': plan_dos})
     return res
 
 
@@ -165,7 +181,7 @@ def mutate(elem, activities_list):
             break
 
 
-def best_selection(to_work,population):
+def best_selection(to_work, population):
     new_population = []
     for elem in to_work:
         if elem['posibility'] >= 0.5:
@@ -204,6 +220,6 @@ def algorithm(user, location, planSize, iterations):
     #fin del algoritmo genetico, como solo nos interesan los mejores resultados filtramos
     print('Filtering data')
     for elem in population:
-        if elem['posibility'] == 1:
+        if elem['posibility'] == 1 and not repeated(elem['plan']):
             final.append(elem['plan'])
     return final
