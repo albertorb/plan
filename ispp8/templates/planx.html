@@ -1,4 +1,5 @@
 {% extends 'master.html' %}
+{% load i18n %}
 {% block bodyless %}
     <body class="" data-spy="scroll" data-target="#scrollspy">
 
@@ -9,7 +10,7 @@
                 {% for i in plan %}
 
                     <li class="{% if forloop.counter == 1 %}active{% else %} {% endif %}"><a
-                            href="#{{ forloop.counter }}">Dia {{ forloop.counter }}</a>
+                            href="#{{ forloop.counter }}">{% trans "Day" %} {{ forloop.counter }}</a>
                     </li>
                 {% endfor %}
 
@@ -21,7 +22,7 @@
             <form class="form-horizontal" action="" method="post">{% csrf_token %}
 
                 {% for p in plan %}
-                    <h1 id="{{ forloop.counter }}">Dia {{ forloop.counter }}</h1>
+                    <h1 id="{{ forloop.counter }}">{% trans "Day" %} {{ forloop.counter }}</h1>
                     {% for activity in p %}
                         <input type="hidden" name="{{ forloop.parentloop.counter0 }}{{ forloop.counter0 }}"
                                value="{{ activity.pk }}">
@@ -49,7 +50,7 @@
                 {% endfor %}
 
                 <div class="form-group">
-                    <input type="submit" class="btn button-orange-plan" name="save" value="Guardar planes">
+                    <input type="submit" class="btn button-orange-plan" name="save" value="{% trans "Save Plans" %}">
                 </div>
             </form>
 
