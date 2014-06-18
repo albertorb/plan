@@ -29,7 +29,6 @@ def repeated(plan):
                 break
     return rep
 
-
 def create_working_list(user, location):
     #obtencion de las preferencias del usuario si existe
     activityList = []
@@ -111,13 +110,19 @@ def evaluate_plan(plan):
             else:
                 check_eat = False
                 break
+    #chequear que no hay actividades de comer pegadas
+    check_pegadas = True
+    for i in range(len(plan)-1):
+        if plan[i].sector.name == 'Restaurant' or plan[i].sector.name == 'Coffe shop':
+            if plan[i+1].sector.name == 'Restaurant' or plan[i+1].sector.name == 'Coffe shop':
+                check_pegadas = False
+
     #que no sea comer y hacer deporte
     check_sport = True
     for i in range(0, len(plan)-2):
         if (plan[i].sector.name == 'Restaurant' or plan[i].sector.name == 'Coffe shop') and plan[i+1].sector.name == 'Sport':
             check_sport = False
-    #que no se pisen las horas (esto con los datos actuales, no chuta)
-    return (check_momentos*5 + check_sport + check_eat*2 + check_same_sectors*2)/10
+    return (check_momentos*5 + check_sport + check_eat + check_pegadas + check_same_sectors*2)/10
 
 
 def get_perfect_plans(population):
@@ -192,6 +197,16 @@ def best_selection(to_work, population):
     return new_population
 
 
+def acsNotRep(plan_list, plan):
+    check = True
+    for ac in plan:
+        for elem in plan_list:
+            if ac in elem:
+                check = False
+                break
+    return check
+
+
 def algorithm(user, location, planSize, iterations):
     #Inicialization
     print('Starting algorithm')
@@ -220,6 +235,8 @@ def algorithm(user, location, planSize, iterations):
     #fin del algoritmo genetico, como solo nos interesan los mejores resultados filtramos
     print('Filtering data')
     for elem in population:
-        if elem['posibility'] == 1 and not repeated(elem['plan']):
-            final.append(elem['plan'])
+        if elem['posibility'] == 1:
+            if not repeated(elem['plan']):
+                if acsNotRep(final, elem['plan']):
+                    final.append(elem['plan'])
     return final
