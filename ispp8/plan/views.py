@@ -201,7 +201,8 @@ def planfromlocation(request):
             startDate = '2000-09-01T13:20:30+03:00'
             endDate = '3000-09-01T13:20:30+03:00'
             print('guardando plan')
-            plan = Plan.objects.create(startDate=startDate, endDate=endDate, voted=False, user=request.user.ouruser, done=False)
+            loc = Activity.objects.get(pk=elem[0]).location
+            plan = Plan.objects.create(location=loc, startDate=startDate, endDate=endDate, voted=False, user=request.user.ouruser, done=False)
             i = 0
             for a in elem:
                 act = Activity.objects.get(pk=a)
@@ -376,8 +377,9 @@ def filter_activities(request):
                     activities.append(Activity.objects.get(pk=int(value)))
             startDate = '2000-09-01T13:20:30+03:00'
             endDate = '3000-09-01T13:20:30+03:00'
+            loc = activities[0].location
             print('guardando plan')
-            plan = Plan.objects.create(startDate=startDate, endDate=endDate, voted=False, user=ouser, done=False)
+            plan = Plan.objects.create(location=loc, startDate=startDate, endDate=endDate, voted=False, user=ouser, done=False)
             i = 0
             for a in activities:
                 saveToPlan(a, plan, i)
@@ -606,14 +608,14 @@ def preferences(request):
         degree = request.POST['degree']
         taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
         ouser.tastes.add(taste)
-        return HttpResponseRedirect("/profile")
+        return HttpResponseRedirect("/profile/"+str(request.user.ouruser.id)+'/')
     elif request.method == 'POST' and 'valoration' in request.POST:
         attribute_name = 'valoration'
         attribute_value = request.POST['minvaloration']
         degree = 0
         taste = Taste.objects.create(attribute_name=attribute_name, attribute_value=attribute_value, degree=degree)
         ouser.tastes.add(taste)
-        return HttpResponseRedirect("/profile")
+        return HttpResponseRedirect("/profile/"+str(request.user.ouruser.id)+'/')
     else:
         tastes = ouser.tastes.all()
         setmin = True

@@ -1,40 +1,47 @@
 {% extends 'master.html' %}
 {% load i18n %}
 {% block content %}
-<div class="content center-block container scape-top-custom row">
-    <h3>{% trans "Choose the activities to remove, delete the whole plan or customize it!" %}</h3>
-    <form class="form-horizontal" action="" method="post">{% csrf_token %}
-                <input type="hidden" name="remove" value="remove">
-                <div class="form-group">
-        {% for activity in activities %}
-        <div class="col-sm-6 col-md-4">
-                    <button id="cross" type="button" class="close div-card-plan-quit" data-dismiss="alert" aria-hidden="true">
-                        <strong>&times</strong>
-                    </button>
-                <input type="checkbox" class="radio" name="{{ activity.pk }}" value="{{ activity.pk }}">
-                    <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail" style="background-image:url('{{ MEDIA_URL }}{{ activity.photo }}')">
-                        <div id="info{{ forloop.counter }}" style="display: none" class="well div-card-plan-info">
-                                    {{ activity.description }}
+    <div class="row center-block container ">
+        <h3>{% trans "Choose the activities to remove, delete the whole plan or customize it!" %}</h3>
+         <form class="form-inline pull-right" action="" method="post">{% csrf_token %}
+            <input type="hidden" name="delete" value="delete">
+
+            <div class="form-group">
+                <input type="submit" name="custom" class="btn-xs btn btn-danger text-white-custom" value="{% trans "Delete Plan" %}">
+            </div>
+
+        </form>
+        <form class="form-horizontal" action="" method="post">{% csrf_token %}
+        <div class="form-group">
+                <input type="submit" class="btn btn-default text-darkorange" name="remove" value="{% trans "Remove selected" %}">
+            </div>
+            <input type="hidden" name="remove" value="remove">
+            <div class="form-group">
+                {% for activity in activities %}
+                    <div class="col-sm-6 col-md-4">
+                        <input type="checkbox" class="radio" name="{{ activity.pk }}" value="{{ activity.pk }}">
+
+                        <div id="thumb{{ forloop.counter }}" class="thumbnail div-card-plan-thumbnail"
+                             style="background-image:url('{{ MEDIA_URL }}{{ activity.photo }}')">
+                            <div id="info{{ forloop.counter }}" style="display: none" class="well div-card-plan-info">
+                                {{ activity.description }}
+                            </div>
+                        </div>
+                        <div class="text-center panel div-card-plan-actiname">
+                            <h4>{{ activity.name }}</h4>
                         </div>
                     </div>
-                    <div class="text-center panel div-card-plan-actiname">
-                        <h4>{{ activity.name }}</h4>
-                    </div>
-                </div>
-        {% endfor %}
-                </div>
-    <div class="form-group">
-        <input type="submit" class="btn button-orange-plan" name="remove" value="{% trans "Remove" %}">
-    </div>
-    </form>
+                {% endfor %}
+             <a href="/addto_plan/{{ plan.pk }}/">
+            <span class="h1 glyphicon glyphicon-plus text-orange"><!--{% trans "Add Activities"  %}--></span>
+        </a>
+            </div>
 
-    <form class="form-horizontal" action="" method="post">{% csrf_token %}
-                <input type="hidden" name="delete" value="delete">
-        <div class="form-group">
-        <input type="submit" name="custom" class="btn button-orange" value="{% trans "Delete Plan" %}">
-    </div>
-    </form>
-    <a href="/addto_plan/{{ plan.pk }}/"><button class="btn button-orange">{% trans "Add Activities" %}</button></a>
+        </form>
+
+
+
+
     </div>
 
 {% endblock %}
