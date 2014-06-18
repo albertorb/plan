@@ -12,69 +12,73 @@
                             href="#{{ forloop.counter }}">Dia {{ forloop.counter }}</a>
                     </li>
                 {% endfor %}
-                
+
             </ul>
         </div>
 
         <div class="col-xs-8">
-            <button class="btn btn-default hidden-print"><span id="print" data-toggle="tooltip" data-placement="left" title="Imprimir"
-                  class="glyphicon glyphicon-print text-darkorange" onclick="pr();"></span></button>
 
-        <form class="form-horizontal" action="" method="post">{% csrf_token %}
+            <form class="form-horizontal" action="" method="post">{% csrf_token %}
 
-            {% for p in plan %}
-                <h1 id="{{ forloop.counter }}">Dia {{ forloop.counter }}</h1>
-                {% for activity in p %}
-                    <input type="hidden" name="{{ forloop.parentloop.counter0 }}{{ forloop.counter0 }}" value="{{ activity.pk }}">
-            <div class="bs-example padding-top-5">
-                <div class="media">
-                    <a href="#" class="pull-left">
-                        <img class=" img-lg-custom img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}"/>
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">{{ activity.name }}<p><small><i>{{ activity.location }}</i></small></p></h4>
-                        <p>{{ activity.description }}</p>
-                    </div>
-                </div>
-            </div>
+                {% for p in plan %}
+                    <h1 id="{{ forloop.counter }}">Dia {{ forloop.counter }}</h1>
+                    {% for activity in p %}
+                        <input type="hidden" name="{{ forloop.parentloop.counter0 }}{{ forloop.counter0 }}"
+                               value="{{ activity.pk }}">
+                        <div class="bs-example padding-top-5">
+                            <div class="media">
+                                <a href="{% url 'activity_info' activity_id=activity.id %}" class="pull-left">
+                                    <img class=" img-lg-custom img-rounded" src="{{ MEDIA_URL }}{{ activity.photo }}"/>
+                                </a>
+
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ activity.name }}
+                                    <p>
+                                    <small><i>{{ activity.location }}</i></small>
+                                    </p>
+                                    </h4>
+                                    <p>{{ activity.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <label class="checkbox-inline"><input type="checkbox" class="radio"
+                                                          name="plan{{ forloop.counter0 }}"
+                                                          value="{{ forloop.counter0 }}"><h4>Quiero este plan</h4>
+                    </label>
                 {% endfor %}
-                    <label class="checkbox-inline"><input type="checkbox" class="radio" name="plan{{ forloop.counter0 }}" value="{{ forloop.counter0 }}"><h4>Quiero este plan</h4></label>
-            {% endfor %}
 
-        <div class="form-group">
-        <input type="submit" class="btn button-orange-plan" name="save" value="Guardar planes">
-    </div>
-    </form>
+                <div class="form-group">
+                    <input type="submit" class="btn button-orange-plan" name="save" value="Guardar planes">
+                </div>
+            </form>
 
         </div>
-<div class="col-xs-2 hidden-print" style="top: 60px"><img src="{{ STATIC_URL }}img/banner.gif"></div>
+        <div class="col-xs-2 hidden-print" style="top: 60px"><img src="{{ STATIC_URL }}img/banner.gif"></div>
         <script>
             $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
-            $(".radio").onclick(function(){
+            $(".radio").onclick(function () {
                 this.val('')
             })
 
         </script>
-</div>
-
-
-
+    </div>
 
 
     <script>
-        function pr(){
+        function pr() {
 
 
             //$('#email').hide();
             //$('.img-export').hide();
             window.print();
-            $('#print').visible=true;
+            $('#print').visible = true;
             //$('#email').visible=true;
             //$('.img-export').visible=true;
 
         }
     </script>
-<script>
+    <script>
         var map;
         function initialize() {
             var mapOptions = {
@@ -86,6 +90,6 @@
         }
         google.maps.event.addDomListener(window, 'load', initialize);
         directionsDisplay.setMap(map);
-</script>
+    </script>
     </body>
 {% endblock %}

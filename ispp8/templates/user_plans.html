@@ -9,8 +9,8 @@
         {% for elem in userplans %}
             <table>
                 <tr>
-                    <h2>{{ elem.plan.location }}</h2>
-                    <h4>{{ elem.plan.name }}
+                    <h2>{{ elem.plan.name }}</h2>
+                    <h4>
                         <a href="/planinfo/{{ elem.plan.id }}" class="glyphicon glyphicon-search text-darkorange "></a>
                         <a data-toggle="modal" data-target="#myModal{{ elem.plan.pk }}"
                            class="glyphicon glyphicon-share text-darkorange"></a>
@@ -22,7 +22,7 @@
                             <div>
                                 <a href="{% url 'activity_info' activity_id=a.id %}">
                                     <img src="{{ MEDIA_URL }}{{ a.photo }}"
-                                         style="height: 120px;width: 120px;"/>
+                                         style="height: 220px;width: 220px;"/>
                                 </a>
                             </div>
                         </td>

@@ -384,7 +384,7 @@ def filter_activities(request):
             for a in activities:
                 saveToPlan(a, plan, i)
                 i += 1
-            return HttpResponseRedirect("/todo")
+            return HttpResponseRedirect("/user_plans")
         else:
             print('seleccionando parametros')
             return render_to_response('filter.html', {'user': ouser}, context_instance=RequestContext(request))
