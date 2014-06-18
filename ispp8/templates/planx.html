@@ -2,10 +2,9 @@
 {% block bodyless %}
     <body class="" data-spy="scroll" data-target="#scrollspy">
 
-
     <div class="row container-fluid center-block">
 
-        <div id="scrollspy" class="col-xs-2" data-offset-top="0" data-offset-bottom="10">
+        <div id="scrollspy" class="col-xs-2 hidden-print" data-offset-top="0" data-offset-bottom="10">
             <ul class="nav nav-tabs nav-stacked" style="background-color:#ffffff;" data-spy="affix">
                 {% for i in plan %}
 
@@ -17,11 +16,16 @@
             </ul>
         </div>
 
-
         <div class="col-xs-8">
+        <button class="btn btn-default hidden-print"><span id="email" data-toggle="tooltip" data-placement="left" title="Guardar en pocket"
+                  class="glyphicon glyphicon-floppy-disk text-darkorange" onclick="save();"></span></button>
+        <button class="btn btn-default hidden-print"><span id="email" data-toggle="tooltip" data-placement="left" title="Enviar por email"
+                  class="glyphicon glyphicon-envelope text-darkorange" onclick="send();"></span></button>
+            <button class="btn btn-default hidden-print"><span id="print" data-toggle="tooltip" data-placement="left" title="Imprimir"
+                  class="glyphicon glyphicon-print text-darkorange" onclick="pr();"></span></button>
+
             {% for p in plan %}
                 <h1 id="{{ forloop.counter }}">Dia {{ forloop.counter }}</h1>
-
                 {% for activity in p %}
             <div class="bs-example padding-top-5">
                 <div class="media">
@@ -37,12 +41,42 @@
                 {% endfor %}
             {% endfor %}
         </div>
-<div class="col-xs-2" style="top: 60px">Aqui va un anuncio</div>
+<div class="col-xs-2 hidden-print" style="top: 60px"><img src="{{ STATIC_URL }}img/banner.gif"></div>
         <script>
             $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
 
         </script>
 </div>
 
+
+
+
+
+    <script>
+        function pr(){
+
+
+            //$('#email').hide();
+            //$('.img-export').hide();
+            window.print();
+            $('#print').visible=true;
+            //$('#email').visible=true;
+            //$('.img-export').visible=true;
+
+        }
+    </script>
+<script>
+        var map;
+        function initialize() {
+            var mapOptions = {
+                zoom: 8,
+                center: new google.maps.LatLng(-34.397, 150.644)
+            };
+            map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+        directionsDisplay.setMap(map);
+</script>
     </body>
 {% endblock %}
