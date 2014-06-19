@@ -104,7 +104,7 @@ def evaluate_plan(plan):
     check_eat = True
     eat_time = []
     for act in plan:
-        if act.sector.name == 'Restaurant' or act.sector.name == 'Coffe shop':
+        if act.sector.name == 'Restaurante' or act.sector.name == 'Cafeteria':
             if act.moment not in eat_time:
                 eat_time.append(act.moment)
             else:
@@ -113,14 +113,14 @@ def evaluate_plan(plan):
     #chequear que no hay actividades de comer pegadas
     check_pegadas = True
     for i in range(len(plan)-1):
-        if plan[i].sector.name == 'Restaurant' or plan[i].sector.name == 'Coffe shop':
-            if plan[i+1].sector.name == 'Restaurant' or plan[i+1].sector.name == 'Coffe shop':
+        if plan[i].sector.name == 'Restaurante' or plan[i].sector.name == 'Cafeteria':
+            if plan[i+1].sector.name == 'Restaurante' or plan[i+1].sector.name == 'Cafeteria':
                 check_pegadas = False
 
     #que no sea comer y hacer deporte
     check_sport = True
     for i in range(0, len(plan)-2):
-        if (plan[i].sector.name == 'Restaurant' or plan[i].sector.name == 'Coffe shop') and plan[i+1].sector.name == 'Sport':
+        if (plan[i].sector.name == 'Restaurante' or plan[i].sector.name == 'Cafeteria') and plan[i+1].sector.name == 'Deporte':
             check_sport = False
     return (check_momentos*5 + check_sport + check_eat + check_pegadas + check_same_sectors*2)/10
 
