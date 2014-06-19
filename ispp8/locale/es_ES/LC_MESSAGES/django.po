@@ -92,7 +92,6 @@ msgid "Look at these offers!"
 msgstr "Mira estas ofertas!"
 
 #: .\templates\automatic_plan.html:61
-#, fuzzy
 msgid "Put them in your plan"
 msgstr "Ponlas en tu plan"
 
@@ -105,12 +104,10 @@ msgid "Create now!"
 msgstr "Crear ahora!"
 
 #: .\templates\automatic_plan.html:105
-#, fuzzy
 msgid "Top rated"
 msgstr "Mejor valoradas"
 
 #: .\templates\automatic_plan.html:106
-#, fuzzy
 msgid "by our users"
 msgstr "por nuestros usuarios"
 
@@ -227,7 +224,6 @@ msgid "Cost:"
 msgstr "Coste:"
 
 #: .\templates\filter.html:31 .\templates\filter_to_modify.html:30
-#, fuzzy
 msgid "Free"
 msgstr "Gratuito"
 
@@ -248,12 +244,10 @@ msgid "Not promoted"
 msgstr "No promocionado"
 
 #: .\templates\filter.html:40 .\templates\filter_to_modify.html:39
-#, fuzzy
 msgid "Search!"
 msgstr "Buscar!"
 
 #: .\templates\filter_to_modify.html:6
-#, fuzzy
 msgid "Customize your plan"
 msgstr "Personaliza tu plan"
 
@@ -274,7 +268,6 @@ msgid "Follower List"
 msgstr "Lista de seguidores"
 
 #: .\templates\friends.html:14
-#, fuzzy
 msgid "Register in: "
 msgstr "Registrarse: "
 
@@ -468,7 +461,6 @@ msgid "Day"
 msgstr "Dia"
 
 #: .\templates\planx.html:53
-#, fuzzy
 msgid "Save Plans"
 msgstr "Guardar Plan"
 
@@ -513,7 +505,6 @@ msgid "Minimal valoration: "
 msgstr "Valoración mínima: "
 
 #: .\templates\register.html:20 .\templates\welcome.html:109
-#, fuzzy
 msgid "Enter username"
 msgstr "Nombre de Usuario"
 
@@ -550,22 +541,18 @@ msgid "Share"
 msgstr "Compartir"
 
 #: .\templates\signin.html:12 .\templates\signin.html.py:43
-#, fuzzy
 msgid "Log in"
 msgstr "Entrar"
 
 #: .\templates\signin.html:28 .\templates\welcome.html:61
-#, fuzzy
 msgid "username"
 msgstr "Nombre de Usuario"
 
 #: .\templates\signin.html:35 .\templates\welcome.html:68
-#, fuzzy
 msgid "password"
 msgstr "Contraseña"
 
 #: .\templates\signin.html:55
-#, fuzzy
 msgid ""
 "You are about to discover a new way to enjoy your travels and share it with "
 "your friends. A whole plan on a single click"
@@ -578,7 +565,6 @@ msgid "This plan has been done by your friend: "
 msgstr "Este plan ha sido realizado por tu amigo: "
 
 #: .\templates\todo.html:6
-#, fuzzy
 msgid "Wishlist"
 msgstr "Deseados"
 
