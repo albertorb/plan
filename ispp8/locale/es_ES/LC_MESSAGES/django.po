@@ -170,8 +170,8 @@ msgid ""
 "Please, fulfill the following fields in order to offer the bests activities. "
 "Leave blank the fields that you don't want to use."
 msgstr ""
-"Por facor, rellena los siguientes campos para que podamos ofrecerte las "
-"mejores actividadesDeja en blanco los campos que no quieras utilizar"
+"Por favor, rellena los siguientes campos para que podamos ofrecerte las mejores actividades. "
+"Deja en blanco los campos que no quieras utilizar"
 
 #: .\templates\filter.html:12 .\templates\filter_to_modify.html:11
 msgid "Location: "
