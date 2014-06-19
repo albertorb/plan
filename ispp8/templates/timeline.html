@@ -2,35 +2,52 @@
 {% load i18n %}
 {% block content %}
     <div class="content center-block container scape-top-custom row">
-<div class="row div-card-plan-whole">
-    {% for elem in data %}
-        <div class="container">
-        {% for p in elem.donePlans %}
-            <div class="panel div-card-plan-actiname">
-            <div class="text-center"><b>{% trans "This plan has been shared by your friend: " %}{{ p.plan.user.djangoUser }}</b>
-              </div>
+        <div class="row div-card-plan-whole">
+            {% for elem in data %}
+                <div class="container">
+                    {% for p in elem.donePlans %}
+                        <div class=" div-card-plan-actiname">
+                            <div class=""><b>
+                                {% comment %}{% trans "This plan has been shared by your friend: " %}{{ p.plan.user.djangoUser }}</b>{% endcomment %}
+                                <a href="/profile/{{ p.plan.user.id }}"> <img class="img-circle"
+                                                                       style="height:50px;width:50px;"
+                                                                       src="/media/{{ p.plan.user.image }}"
+                                                                       data-container="body"
+                                                                       data-toggle="popover" data-placement="left"
+                                                                       data-content="{{ p.plan.user.djangoUser }}"></a>
+                                <span>ha compartido contigo este plan</span>
 
-            </div>
-        {% for activity in p.activities %}
-            <div class="col-sm-10 col-md-4">
-        
-            <div  class="thumbnail div-card-plan-thumbnail" style="background-image:url('{{MEDIA_URL}}{{activity.photo}}')">
-                <div  style="display: none" class="well div-card-plan-info">
-                    {{activity.description}}
-                </div>
-            </div>
-            <div class="text-center panel div-card-plan-actiname">
-                <h4>{{activity.name}}</h4>
-            </div>
+                            </div>
+
+                        </div>
+                        {% for activity in p.activities %}
+                            <div class="col-sm-10 col-md-4">
+
+                                <div class="thumbnail div-card-plan-thumbnail"
+                                     style="background-image:url('{{ MEDIA_URL }}{{ activity.photo }}')">
+                                    <div style="display: none" class="well div-card-plan-info">
+                                        {{ activity.description }}
+                                    </div>
+                                </div>
+                                <div class="text-center panel div-card-plan-actiname">
+                                    <h4>{{ activity.name }}</h4>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        </div>
+                    {% endfor %}
+
+            {% endfor %}
         </div>
-        {% endfor %}
 
-            </div>
-        {% endfor %}
-
-    {% endfor %}
-</div>
-
-</div>
+    </div>
+    <script>
+        $('[data-toggle="popover"]').popover({
+            'placement': 'top',
+            'animation': true,
+            'trigger': 'hover'
+        });
+    </script>
 
 {% endblock %}
