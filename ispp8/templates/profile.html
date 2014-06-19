@@ -10,14 +10,14 @@
             {% if request.user == user.djangoUser %}
                 <div class="padding-top-5">
                     <a href="/preferences">
-                        <button class="btn btn-default text-orange">Add preferences</button>
+                        <button class="btn btn-default text-orange">{% trans "Add preferences" %}</button>
                     </a>
                 </div>
             {% endif %}
         </div>
         <div class="col-md-8">
             <h3 class=""><span class="text-darkorange">{{ user.djangoUser }}</span></h3>
-            <h4 class="help-block">plan preferences</h4>
+            <h4 class="help-block">{% trans "plan preferences" %}</h4>
             {% for taste in user.tastes.all %}
                 <div class="row">
                     <div class="col-md-5 panel panel-success">
@@ -27,17 +27,17 @@
                             </div>
                             <div class="col-md-6">
                             {% if taste.degree == 0 %}
-                                <span class="text-danger glyphicon glyphicon-thumbs-down"> Never </span>
+                                <span class="text-danger glyphicon glyphicon-thumbs-down"> {% trans "Never" %}</span>
                             {% elif taste.degree == 1 %}
-                                <span class="text-danger glyphicon glyphicon-thumbs-down"> Rarely </span>
+                                <span class="text-danger glyphicon glyphicon-thumbs-down"> {% trans "Rarely" %}</span>
                             {% elif taste.degree == 2 %}
-                                <span class="text-success glyphicon glyphicon-thumbs-up"> Sometimes </span>
+                                <span class="text-success glyphicon glyphicon-thumbs-up"> {% trans "Sometimes" %}</span>
                             {% elif taste.degree == 3 %}
-                                <span class="text-success glyphicon glyphicon-thumbs-up"> Often </span>
+                                <span class="text-success glyphicon glyphicon-thumbs-up"> {% trans "Often" %} </span>
                             {% endif %}
                             <br>
                         {% elif taste.attribute_name == 'valoration' %}
-                            <span>Activities rating greater than <span class="{% if taste.degree > 4.9 %}text-success {% else %}text-danger {% endif %}">{{ taste.degree }} <span class="glyphicon glyphicon-star"></span></span></span>
+                            <span>{% trans "Activities rating greater than" %} <span class="{% if taste.degree > 4.9 %}text-success {% else %}text-danger {% endif %}">{{ taste.degree }} <span class="glyphicon glyphicon-star"></span></span></span>
                         {% endif %}
 
                         </div>

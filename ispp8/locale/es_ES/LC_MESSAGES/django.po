@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 21:12+0200\n"
+"POT-Creation-Date: 2014-06-19 12:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,6 @@ msgid "All registered users"
 msgstr "Todos los usuarios registrados"
 
 #: .\templates\addfriend.html:15
-#, fuzzy
 msgid "Register in:"
 msgstr "Registrarse:"
 
@@ -70,14 +69,12 @@ msgid "Follow"
 msgstr "Seguir"
 
 #: .\templates\automatic_plan.html:8
-#, fuzzy
 msgid "Get your plan"
 msgstr "Obtener tu plan"
 
 #: .\templates\automatic_plan.html:9
 msgid "Select a city and a date, we will offer you the best planning"
-msgstr ""
-"Selecciona una ciudad y una fecha, nosotros te ofreceremos los mejores planes"
+msgstr "Selecciona una ciudad y una fecha, nosotros te ofreceremos los mejores planes"
 
 #: .\templates\automatic_plan.html:30
 msgid "dd/mm/yyyy start date"
@@ -97,7 +94,7 @@ msgstr "Ponlas en tu plan"
 
 #: .\templates\automatic_plan.html:95
 msgid "Better build a plan yourself"
-msgstr "Mejor crear un plan tu mismo"
+msgstr "Crea un plan manualmente"
 
 #: .\templates\automatic_plan.html:97
 msgid "Create now!"
@@ -173,8 +170,9 @@ msgid ""
 "Please, fulfill the following fields in order to offer the bests activities. "
 "Leave blank the fields that you don't want to use."
 msgstr ""
-"Por facor, rellena los siguientes campos para que podamos ofrecerte las mejores actividades"
-"Deja en blanco los campos que no quieras utilizar"
+"Por facor, rellena los siguientes campos para que podamos ofrecerte las "
+"mejores actividadesDeja en blanco los campos que no quieras utilizar"
+
 #: .\templates\filter.html:12 .\templates\filter_to_modify.html:11
 msgid "Location: "
 msgstr "Localización: "
@@ -414,8 +412,7 @@ msgstr "Credenciales incorrectas"
 
 #: .\templates\mod_plan.html:5
 msgid "Choose the activities to remove, delete the whole plan or customize it!"
-msgstr ""
-"Elegir actividades para eliminar, borrar todo el plan o personalizarlo!"
+msgstr "Elegir actividades para eliminar, borrar todo el plan o personalizarlo!"
 
 #: .\templates\mod_plan.html:10
 msgid "Delete Plan"
@@ -433,7 +430,7 @@ msgstr "Añadir Actividades"
 msgid "Plan overview"
 msgstr "Información del Plan"
 
-#: .\templates\plan.html:23 .\templates\planinfo.html:22
+#: .\templates\plan.html:23 .\templates\planinfo.html:23
 #: .\templates\shareplan.html:22
 msgid "Location:"
 msgstr "Localización:"
@@ -442,23 +439,23 @@ msgstr "Localización:"
 msgid "Web Page:"
 msgstr "Página Web:"
 
-#: .\templates\plan.html:34 .\templates\planinfo.html:30
+#: .\templates\plan.html:34 .\templates\planinfo.html:31
 #: .\templates\shareplan.html:33
 msgid "Send plan to email"
 msgstr "Enviar plan por email"
 
-#: .\templates\plan.html:36 .\templates\planinfo.html:32
+#: .\templates\plan.html:36 .\templates\planinfo.html:33
 #: .\templates\shareplan.html:35
 msgid "Print your plan"
 msgstr "Imprimir plan"
 
-#: .\templates\planinfo.html:23
+#: .\templates\planinfo.html:24
 msgid "Web Page: "
 msgstr "Página Web: "
 
 #: .\templates\planx.html:13 .\templates\planx.html.py:25
 msgid "Day"
-msgstr "Dia"
+msgstr "Día"
 
 #: .\templates\planx.html:53
 msgid "Save Plans"
@@ -476,19 +473,19 @@ msgstr "Elija un sector al que referir sus preferencias:"
 msgid "How often do you wish to do activities from this sector:"
 msgstr "Con qué frecuencia desea realizar actividades de este sector:"
 
-#: .\templates\preferences.html:26
+#: .\templates\preferences.html:26 .\templates\profile.html:30
 msgid "Never"
 msgstr "Nunca"
 
-#: .\templates\preferences.html:31
+#: .\templates\preferences.html:31 .\templates\profile.html:32
 msgid "Rarely"
 msgstr "Raramente"
 
-#: .\templates\preferences.html:36
+#: .\templates\preferences.html:36 .\templates\profile.html:34
 msgid "Sometimes"
 msgstr "Algunas veces"
 
-#: .\templates\preferences.html:41
+#: .\templates\preferences.html:41 .\templates\profile.html:36
 msgid "Often"
 msgstr "A menudo"
 
@@ -503,6 +500,18 @@ msgstr "Seleccione valoración mínima para las actividades:"
 #: .\templates\preferences.html:59
 msgid "Minimal valoration: "
 msgstr "Valoración mínima: "
+
+#: .\templates\profile.html:13
+msgid "Add preferences"
+msgstr "Añadir preferencias"
+
+#: .\templates\profile.html:20
+msgid "plan preferences"
+msgstr "preferencias sobre planes"
+
+#: .\templates\profile.html:40
+msgid "Activities rating greater than"
+msgstr "Valoración de las actividades mayor que"
 
 #: .\templates\register.html:20 .\templates\welcome.html:109
 msgid "Enter username"
@@ -561,7 +570,7 @@ msgstr ""
 "compartirlos con tus amigos"
 
 #: .\templates\timeline.html:10
-msgid "This plan has been done by your friend: "
+msgid "This plan has been shared by your friend: "
 msgstr "Este plan ha sido realizado por tu amigo: "
 
 #: .\templates\todo.html:6
@@ -645,6 +654,10 @@ msgstr "Valore actividades que ha realizado para ayudar a otras personas"
 #: .\templates\welcome.html:182
 msgid "free register to get all this"
 msgstr "registro gratis para obtener todo esto"
+
+#, fuzzy
+#~ msgid " sector.name"
+#~ msgstr "Nombre de Usuario"
 
 #~ msgid "Trending cities"
 #~ msgstr "Tendencia en ciudades"

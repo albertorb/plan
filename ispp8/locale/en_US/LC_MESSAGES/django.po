@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 21:12+0200\n"
+"POT-Creation-Date: 2014-06-19 12:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -420,7 +420,7 @@ msgstr ""
 msgid "Plan overview"
 msgstr ""
 
-#: .\templates\plan.html:23 .\templates\planinfo.html:22
+#: .\templates\plan.html:23 .\templates\planinfo.html:23
 #: .\templates\shareplan.html:22
 msgid "Location:"
 msgstr ""
@@ -429,17 +429,17 @@ msgstr ""
 msgid "Web Page:"
 msgstr ""
 
-#: .\templates\plan.html:34 .\templates\planinfo.html:30
+#: .\templates\plan.html:34 .\templates\planinfo.html:31
 #: .\templates\shareplan.html:33
 msgid "Send plan to email"
 msgstr ""
 
-#: .\templates\plan.html:36 .\templates\planinfo.html:32
+#: .\templates\plan.html:36 .\templates\planinfo.html:33
 #: .\templates\shareplan.html:35
 msgid "Print your plan"
 msgstr ""
 
-#: .\templates\planinfo.html:23
+#: .\templates\planinfo.html:24
 msgid "Web Page: "
 msgstr ""
 
@@ -463,19 +463,19 @@ msgstr ""
 msgid "How often do you wish to do activities from this sector:"
 msgstr ""
 
-#: .\templates\preferences.html:26
+#: .\templates\preferences.html:26 .\templates\profile.html:30
 msgid "Never"
 msgstr ""
 
-#: .\templates\preferences.html:31
+#: .\templates\preferences.html:31 .\templates\profile.html:32
 msgid "Rarely"
 msgstr ""
 
-#: .\templates\preferences.html:36
+#: .\templates\preferences.html:36 .\templates\profile.html:34
 msgid "Sometimes"
 msgstr ""
 
-#: .\templates\preferences.html:41
+#: .\templates\preferences.html:41 .\templates\profile.html:36
 msgid "Often"
 msgstr ""
 
@@ -489,6 +489,18 @@ msgstr ""
 
 #: .\templates\preferences.html:59
 msgid "Minimal valoration: "
+msgstr ""
+
+#: .\templates\profile.html:13
+msgid "Add preferences"
+msgstr ""
+
+#: .\templates\profile.html:20
+msgid "plan preferences"
+msgstr ""
+
+#: .\templates\profile.html:40
+msgid "Activities rating greater than"
 msgstr ""
 
 #: .\templates\register.html:20 .\templates\welcome.html:109
@@ -553,7 +565,7 @@ msgstr ""
 "your friends"
 
 #: .\templates\timeline.html:10
-msgid "This plan has been done by your friend: "
+msgid "This plan has been shared by your friend: "
 msgstr ""
 
 #: .\templates\todo.html:6
@@ -636,6 +648,10 @@ msgstr ""
 #: .\templates\welcome.html:182
 msgid "free register to get all this"
 msgstr ""
+
+#, fuzzy
+#~ msgid " sector.name"
+#~ msgstr "Username"
 
 #~ msgid "Wish"
 #~ msgstr "Wish"
