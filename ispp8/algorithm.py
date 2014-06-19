@@ -29,6 +29,7 @@ def repeated(plan):
                 break
     return rep
 
+
 def create_working_list(user, location):
     #obtencion de las preferencias del usuario si existe
     activityList = []
@@ -136,7 +137,8 @@ def get_perfect_plans(population):
 def selection(population):
     working_population = list(population)
     result = []
-    while len(result) < 50:
+    print(len(working_population))
+    while len(result) < 40:
         elem = working_population[random.randint(0, len(working_population)-1)]
         if random.random() >= elem['posibility']:
             result.append(elem['plan'])
@@ -213,7 +215,7 @@ def algorithm(user, location, planSize, iterations):
     wl = create_working_list(user, location)
     population = []
     final = []
-    while len(population) < 100:
+    while len(population) < 200:
         plan = create_plan(wl, planSize)
         #evaluacion
         ev = evaluate_plan(plan)
@@ -223,14 +225,18 @@ def algorithm(user, location, planSize, iterations):
     while generation < iterations:
         print('generation', generation)
         #seleccion de los elementos de la poblacion a recombinar
+        print('seleccionando poblacion para recombinar')
         to_work = selection(population)
         #recombinacion de los elementos seleccionados
+        print('recombinando')
         to_work = recombination(to_work)
         #posible mutacion de cada elemento
+        print('mutando')
         for elem in to_work:
             if random.random() <= 0.1:
                 mutate(elem, wl)
         #reemplazo
+        print('reemplazando')
         population = best_selection(to_work, population)
         generation += 1
     #fin del algoritmo genetico, como solo nos interesan los mejores resultados filtramos
