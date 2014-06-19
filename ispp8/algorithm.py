@@ -221,6 +221,7 @@ def algorithm(user, location, planSize, iterations):
     print('Calculating')
     generation = 0
     while generation < iterations:
+        print('generation', generation)
         #seleccion de los elementos de la poblacion a recombinar
         to_work = selection(population)
         #recombinacion de los elementos seleccionados
