@@ -7,8 +7,8 @@
         <div class="container">
         {% for p in elem.donePlans %}
             <div class="panel div-card-plan-actiname">
-            <div class="text-center"><b>{% trans "This plan has been done by your friend: " %}{{ p.plan.user.djangoUser }}</b>
-             <img class="img-circle" style="max-width:50px;min-width: 50px;" src="/media/{{p.plan.user.image}}">    </div>
+            <div class="text-center"><b>{% trans "This plan has been shared by your friend: " %}{{ p.plan.user.djangoUser }}</b>
+              </div>
 
             </div>
         {% for activity in p.activities %}

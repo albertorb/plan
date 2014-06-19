@@ -31,7 +31,7 @@
                         <div class=" col-md-8">
 
 
-                            <button  type="button" class="btn btn-default" data-container="body"
+                            <button type="button" class="btn btn-default" data-container="body"
                                     data-toggle="popover" data-placement="left"
                                     data-content=" {% for s in elem.plan.sharedTo.all %}
                                             {{ s.djangoUser }}, {% empty %} not shared
@@ -58,7 +58,7 @@
                             <form class="form-horizontal" action="" method="post">{% csrf_token %}
                                 <input type="hidden" name="plan" value="{{ elem.plan.pk }}">
                                 {% trans "Select the friends to share" %}
-                                <table>
+                                <table class="form-inline">
                                     {% for p in friends %}
                                         {% if p not in elem.plan.sharedTo.all %}
                                             <tr>
@@ -96,10 +96,10 @@
 
     <!-- Modal -->
 
-<script>
-$('[data-toggle="popover"]').popover({
-    'placement': 'top'
-});
-</script>
+    <script>
+        $('[data-toggle="popover"]').popover({
+            'placement': 'top'
+        });
+    </script>
 
 {% endblock %}

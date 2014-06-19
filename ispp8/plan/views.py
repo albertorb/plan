@@ -416,9 +416,10 @@ def timeline(request):
         planesRealizados = []
         planes = Plan.objects.filter(user=friend)
         for p in planes:
-            actividades = getActivitiesFrom(p)
-            planesRealizados.append({'plan': p, 'activities': actividades})
-        data.append({'friend': friend, 'donePlans': planesRealizados})
+            if request.user.ouruser in p.sharedTo.all():
+                actividades = getActivitiesFrom(p)
+                planesRealizados.append({'plan': p, 'activities': actividades})
+                data.append({'friend': friend, 'donePlans': planesRealizados})
     return render_to_response('timeline.html', {'user': ouser, 'data': data}, context_instance=RequestContext(request))
 
 

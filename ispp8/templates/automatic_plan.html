@@ -1,11 +1,12 @@
 {% extends 'master.html' %}
+{% load i18n %}
 {% block content %}
     <div class="row" style="margin-top:-2%">
         <div class="col-xs-12">
             <div class=" panel-orangelight">
                 <div class="panel-heading text-center">
-                    <span class="text-white-custom h2"> Obten tu plan </span>
-                    <span class="text-white-custom h5"> Elige una ciudad y una fecha, nosotros nos encargamos de ofrecerte el mejor planning de viaje</span>
+                    <span class="text-white-custom h2">{% trans "Get your plan" %} </span>
+                    <span class="text-white-custom h5"> {% trans "Select a city and a date, we will offer you the best planning" %}</span>
                 </div>
 
                 <div class="row container center-block">
@@ -26,7 +27,7 @@
                         <div class="col-xs-4">
                             <div class="form-group">
                                 <input name="date" type="date" class="form-control"
-                                       placeholder="dd/mm/yyyy fecha de inicio">
+                                       placeholder="{% trans "dd/mm/yyyy start date" %}">
 
                             </div>
                         </div>
@@ -34,7 +35,7 @@
                             <div class="form-group">
 
 
-                                <input name="days" type="number" class="form-control" placeholder="Numero de dias">
+                                <input name="days" type="number" class="form-control" placeholder="{% trans "Number of days" %}">
 
                             </div>
                         </div>
@@ -56,8 +57,8 @@
         <div class="row padding-top-10 padding-bottom-5">
             <div class="col-xs-offset-4 ">
 
-                <h2 class="">¡ Mira que ofertas !
-                    <small>incluyelas en tu plan</small>
+                <h2 class="">{% trans "Look at these offers!" %}
+                    <small>{% trans "Put them in your plan" %}</small>
                 </h2>
 
             </div>
@@ -91,9 +92,9 @@
 </div>
     <div class="row padding-top-1 padding-bottom-1">
             <div class="col-xs-offset-4 ">
-                <h2 class="">¿Prefieres crearte el plan tu mismo?</h2>
+                <h2 class="">{% trans "Better build a plan yourself" %}</h2>
                 <div class="col-xs-offset-2 ">
-                    <a href="/filter"><button class="btn btn-lg btn-default text-darkorange">Crear ahora!</button></a>
+                    <a href="/filter"><button class="btn btn-lg btn-default text-darkorange">{% trans "Create now!" %}</button></a>
                 </div>
             </div>
         </div>
@@ -101,8 +102,8 @@
         <div class="row padding-top-5 padding-bottom-5">
             <div class="col-xs-offset-4 ">
 
-                <h2 class=""> Las mejor valoradas
-                    <small>por nuestros usuarios</small>
+                <h2 class=""> {% trans "Top rated" %}
+                    <small>{% trans "by our users" %}</small>
                 </h2>
 
             </div>
