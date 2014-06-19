@@ -62,33 +62,40 @@
                                     {% for p in friends %}
                                         {% if p not in elem.plan.sharedTo.all %}
                                             <tr>
-                                            <td>
+                                                <td>
 
-                                            <div>
-                                                <img src="/media/{{ p.image }}" class="img-xs-custom img-rounded">
-                                                {{ p.djangoUser }} <input type="checkbox" name="user"
-                                                                          value="{{ p.pk }}">
+                                                    <div>
+                                                        <img src="/media/{{ p.image }}"
+                                                             class="img-xs-custom img-rounded"></div>
+                                                </td>
+                                                <td>
+
+                                                    <div> {{ p.djangoUser }}    </div>
+                                                </td>
+                                                <td><input type="checkbox" name="user"
+                                                           value="{{ p.pk }}">
                                             </div>
+                                            </td>
+                                            </tr>
                                         {% endif %}
                                     {% empty %}
-                                    <p>{% trans "You don´t have friends to share this plan" %}</p>
-                                    </td>
-                                    </tr>
-                                    {% endfor %}
-                                </table>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">{% trans "Close" %}</button>
-                                    <input type="submit" class="btn btn-primary" value="{% trans "Share" %}"
-                                           name="share">
-                                </div>
+                                        <p>{% trans "You don´t have friends to share this plan" %}</p>
 
-                            </form>
+                                    {% endfor %}
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">{% trans "Close" %}</button>
+                            <input type="submit" class="btn btn-primary" value="{% trans "Share" %}"
+                                   name="share">
                         </div>
 
-
+                        </form>
                     </div>
+
+
                 </div>
+            </div>
             </div>
         {% endfor %}
 
