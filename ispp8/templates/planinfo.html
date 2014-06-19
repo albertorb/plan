@@ -123,7 +123,7 @@
                     lonr = lon.replace(",", ".");
                     start = new google.maps.LatLng(latr, lonr);
                 {% elif forloop.last %}
-                    alert('ultimo')
+
                     lat = '{{ p.latitude }}';
                     lon = '{{ p.longitude }}';
                     latr = lat.replace(",", ".");
@@ -138,7 +138,7 @@
                     lonr = lon.replace(",", ".");
                     wp1 = new google.maps.LatLng(latr, lonr);
 
-                    wps.push({location:wp1});
+                    wps.push({location: wp1});
 
                 {% endif %}
 
