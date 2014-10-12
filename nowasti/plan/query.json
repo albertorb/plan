@@ -1,0 +1,175 @@
+[
+
+
+  {
+    "model": "plan.activity",
+    "pk": 1,
+    "fields": {
+      "location": "Madrid",
+      "name": "Santiago Bernabeu",
+      "latitude":"40.453226",
+      "longitude":"-3.688380",
+      "photo":"images/bernabeu_1.jpg",
+      "sector":"Sport Events",
+      "moment":"m",
+      "startDate":"2014-04-23 10:00:00",
+      "endDate":"2014-04-23 14:00:00",
+      "valoration":"0",
+      "isFree":"f",
+      "isPromoted":"0",
+      "description":"Guide tour in one of the best stadiums of the world"
+    }
+  },
+  {
+    "model": "plan.activity",
+    "pk": 2,
+    "fields": {
+      "location": "Madrid",
+      "name": "Restaurante New York Burguer",
+      "latitude":"40.456569",
+      "longitude":"-3.693082",
+      "photo":"images/new-york-burguer-madrid_1.jpg",
+      "sector":"Hostelry",
+      "moment":"e",
+      "startDate":"2014-04-23 14:00:00",
+      "endDate":"2014-04-23 14:54:27",
+      "valoration":"0",
+      "isFree":"n",
+      "isPromoted":"0",
+      "description":"Eat hamburguers like in America"
+    }
+  },
+  {
+    "model": "plan.activity",
+    "pk": 3,
+    "fields": {
+      "location": "Madrid",
+      "name": "Parque del retiro",
+      "latitude":"40.415660",
+      "longitude":"-3.684225",
+      "photo":"images/jacinto-benavente-parque-del-retiro_1.jpg",
+      "sector":"Parks",
+      "moment":"e",
+      "startDate":"2014-04-23 14:56:15",
+      "endDate":"2014-04-23 18:00:00",
+      "valoration":"0",
+      "isFree":"f",
+      "isPromoted":"0",
+      "description":"Visit one of the most beautiful parks of madrid"
+    }
+  },
+  {
+    "model": "plan.activity",
+    "pk": 4,
+    "fields": {
+      "location": "Madrid",
+      "name": "Visita al vicente calderon",
+      "latitude":"40.401994",
+      "longitude":"-3.720656",
+      "photo":"images/calderon.jpg",
+      "sector":"Sport Events",
+      "moment":"e",
+      "startDate":"2014-04-23 14:58:39",
+      "endDate":"2014-04-23 15:58:41",
+      "valoration":"0",
+      "isFree":"n",
+      "isPromoted":"0",
+      "description":"Guide tour in one of the best stadiums of madrid"
+    }
+  },
+  {
+    "model": "plan.activity",
+    "pk": 5,
+    "fields": {
+      "location": "Madrid",
+      "name": "Basilica san francisco el grande",
+      "latitude":"40.410695",
+      "longitude":"-3.714692",
+      "photo":"images/Basilica_de_San_Francisco_el_Grande_Madrid_04.jpg",
+      "sector":"Monument",
+      "moment":"e",
+      "startDate":"2014-04-23 15:01:26",
+      "endDate":"2014-04-23 17:00:00",
+      "valoration":"0",
+      "isFree":"f",
+      "isPromoted":"0",
+      "description":"Visit the basilic of san francisco el grande"
+    }
+  },
+  {
+    "model": "plan.activity",
+    "pk": 6,
+    "fields": {
+      "location": "Sevilla",
+      "name": "Parque de maria luisa",
+      "latitude":"37.374984",
+      "longitude":"-5.988244",
+      "photo":"images/museoarqueologico.jpg",
+      "sector":"Parks",
+      "moment":"e",
+      "startDate":"2014-04-23 15:04:04",
+      "endDate":"2014-04-23 17:04:05",
+      "valoration":"0",
+      "isFree":"f",
+      "isPromoted":"1",
+      "description":"Visit Maria Luisa Park"
+    }
+  },
+  {
+    "model": "plan.activity",
+    "pk": 7,
+    "fields": {
+      "location": "Sevilla",
+      "name": "100 Montaditos",
+      "latitude":"37.390346",
+      "longitude":"-5.960231",
+      "photo":"images/100monta.jpg",
+      "sector":"Hostelry",
+      "moment":"e",
+      "startDate":"2014-04-23 18:06:03",
+      "endDate":"2014-04-23 20:00:00",
+      "valoration":"0",
+      "isFree":"n",
+      "isPromoted":"1",
+      "description":"Eat in 100 montaditos"
+    }
+  },
+  {
+    "model": "plan.activity",
+    "pk": 8,
+    "fields": {
+      "location": "Sevilla",
+      "name": "8 apellidos vascos",
+      "latitude":"37.338976",
+      "longitude":"-5.935912",
+      "photo":"images/Ocho-apellidos-vascos_cartel_peli.jpg",
+      "sector":"Cine",
+      "moment":"n",
+      "startDate":"2014-04-22 22:00:00",
+      "endDate":"2014-04-23 00:08:42",
+      "valoration":"0",
+      "isFree":"n",
+      "isPromoted":"0",
+      "description":"See one the best spanish films right now"
+    }
+  },
+  {
+    "model": "plan.activity",
+    "pk": 9,
+    "fields": {
+      "location": "Madrid",
+      "name": "Cibeles",
+      "latitude":"40.419205",
+      "longitude":"-3.692154",
+      "photo":"images/Cibeles_con_Palacio_de_Linares_al_fondo.jpg",
+      "sector":"Monument",
+      "moment":"e",
+      "startDate":"2014-04-23 17:09:31",
+      "endDate":"2014-04-23 17:39:32",
+      "valoration":"0",
+      "isFree":"f",
+      "isPromoted":"0",
+      "description":"Visit Cibeles"
+    }
+  }
+]
